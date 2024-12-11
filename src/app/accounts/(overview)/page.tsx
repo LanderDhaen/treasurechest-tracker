@@ -1,4 +1,9 @@
 import BreadcrumbWrapper from "@/components/breadcrumb-wrapper";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Accounts",
+};
 
 export default function Page() {
   return (
