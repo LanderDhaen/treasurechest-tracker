@@ -22,12 +22,12 @@ export function ModeToggle() {
     >
       <Sun
         className={`h-[1.2rem] w-[1.2rem] transition-transform ${
-          theme === "dark" ? "rotate-90 scale-0" : "rotate-0 scale-100"
+          theme === "light" ? "rotate-90 scale-0" : "rotate-0 scale-100"
         }`}
       />
       <Moon
         className={`absolute h-[1.2rem] w-[1.2rem] transition-transform ${
-          theme === "dark" ? "rotate-0 scale-100" : "-rotate-90 scale-0"
+          theme === "light" ? "rotate-0 scale-100" : "-rotate-90 scale-0"
         }`}
       />
     </Button>
