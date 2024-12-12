@@ -1,3 +1,6 @@
+import { getAllAccounts } from "@/actions/account";
+import AccountTable from "@/components/accounts/account-table";
+import { columns } from "@/components/accounts/columns";
 import BreadcrumbWrapper from "@/components/breadcrumb-wrapper";
 import type { Metadata } from "next";
 
@@ -15,17 +18,16 @@ const breadcrumbs = [
   },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const accounts = await getAllAccounts();
+
+  console.log(accounts);
+
   return (
     <>
       <BreadcrumbWrapper breadcrumbs={breadcrumbs} />
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-        </div>
-        <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+      <div className="mx-4 rounded-3xl p-8 bg-container">
+        <AccountTable data={accounts} columns={columns} />
       </div>
     </>
   );
