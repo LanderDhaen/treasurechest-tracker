@@ -45,11 +45,12 @@ export default function AccountTable<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
     onColumnFiltersChange: setColumnFilters,
     globalFilterFn: "includesString",
-    state: {
+    initialState: {
       pagination: {
-        pageSize: 15,
-        pageIndex: 0,
+        pageSize: 10,
       },
+    },
+    state: {
       columnFilters,
     },
   });
