@@ -52,6 +52,8 @@ body {
     --active-foreground: 142.8 64.2% 24.1%;
     --inactive-background: 0 93.3% 94.1%;
     --inactive-foreground: 0 70% 35.3%;
+    --wars-background: 34.3 100% 91.8%;
+    --wars-foreground: 15 79.1% 33.7%;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -91,6 +93,8 @@ body {
     --active-foreground: 140.6 84.2% 92.5%;
     --inactive-background: 0 70% 35.3%;
     --inactive-foreground: 0 93.3% 94.1%;
+    --wars-background: 15 79.1% 33.7%;
+    --wars-foreground: 34.3 100% 91.8%;
   }
 }
 

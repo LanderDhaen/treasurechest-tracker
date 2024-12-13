@@ -69,6 +69,10 @@ const config: Config = {
           foreground: "hsl(var(--inactive-foreground))",
           background: "hsl(var(--inactive-background))",
         },
+        wars: {
+          foreground: "hsl(var(--wars-foreground))",
+          background: "hsl(var(--wars-background))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

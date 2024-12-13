@@ -1,7 +1,7 @@
 "use client";
 
 import { Table } from "@tanstack/react-table";
-import { Castle, Swords, Tractor, X } from "lucide-react";
+import { Castle, CircleX, Swords, Tractor, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
@@ -40,6 +40,11 @@ const statuses = [
     value: "Wars Only",
     icon: Swords,
   },
+  {
+    label: "Inactive",
+    value: "Inactive",
+    icon: CircleX,
+  },
 ];
 
 export function DataTableToolbar<TData>({
@@ -61,9 +66,9 @@ export function DataTableToolbar<TData>({
           options={clans}
         />
       )}
-      {table.getColumn("isActive") && (
+      {table.getColumn("status") && (
         <DataTableFacetedFilter
-          column={table.getColumn("isActive")}
+          column={table.getColumn("status")}
           title="Status"
           options={statuses}
         />

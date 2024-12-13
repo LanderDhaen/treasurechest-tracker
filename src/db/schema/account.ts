@@ -14,6 +14,12 @@ export const clanEnum = pgEnum("clan", [
   "Dutch Legion 4",
 ]);
 
+export const statusEnum = pgEnum("status", [
+  "Farming",
+  "Wars Only",
+  "Inactive",
+]);
+
 export const account = pgTable("account", {
   ID: uuid().defaultRandom().primaryKey().notNull(),
   createdAt: timestamp({
@@ -31,7 +37,7 @@ export const account = pgTable("account", {
     .notNull(),
   username: text().notNull(),
   clan: clanEnum().notNull(),
-  isActive: boolean().notNull().default(true),
+  status: statusEnum().notNull(),
   townhallID: uuid()
     .references(() => townhall.ID)
     .notNull(),

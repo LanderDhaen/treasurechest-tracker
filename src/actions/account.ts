@@ -11,7 +11,7 @@ export const getAllAccounts = async () => {
       ID: account.ID,
       username: account.username,
       clan: account.clan,
-      isActive: account.isActive,
+      status: account.status,
       townhall: {
         ID: townhall.ID,
         level: townhall.level,

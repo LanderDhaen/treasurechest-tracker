@@ -22,13 +22,12 @@ export const columns: ColumnDef<Account>[] = [
     },
   },
   {
-    accessorKey: "isActive",
-    accessorFn: (row) => (row.isActive ? "Farming" : "Wars Only"),
+    accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const isActive = row.original.isActive;
+      const status = row.original.status;
 
-      return <AccountStatus isActive={isActive} />;
+      return <AccountStatus status={status} />;
     },
   },
   {
