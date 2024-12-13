@@ -8,6 +8,7 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -21,6 +22,7 @@ import {
 } from "@/components/ui/table";
 import { DataTableToolbar } from "../data-table-toolbar";
 import { useState } from "react";
+import { DataTablePagination } from "../data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,12 +39,17 @@ export default function AccountTable<TData, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     onColumnFiltersChange: setColumnFilters,
     globalFilterFn: "includesString",
     state: {
+      pagination: {
+        pageSize: 15,
+        pageIndex: 0,
+      },
       columnFilters,
     },
   });
@@ -92,6 +99,7 @@ export default function AccountTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+      <DataTablePagination table={table} />
     </div>
   );
 }
