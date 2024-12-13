@@ -1,7 +1,16 @@
 "use client";
 
 import { Table } from "@tanstack/react-table";
-import { Castle, CircleX, Swords, Tractor, X } from "lucide-react";
+import {
+  Castle,
+  CircleX,
+  House,
+  Landmark,
+  Swords,
+  Tent,
+  Tractor,
+  X,
+} from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
@@ -13,19 +22,24 @@ interface DataTableToolbarProps<TData> {
 
 const clans = [
   {
-    label: "DL 3",
+    label: "Dutch Legion 3",
     value: "Dutch Legion 3",
     icon: Castle,
   },
   {
-    label: "DL CW",
+    label: "Dutch Legion CW",
     value: "Dutch Legion CW",
-    icon: Castle,
+    icon: Landmark,
   },
   {
-    label: "DL 4",
+    label: "Dutch Legion 4",
     value: "Dutch Legion 4",
-    icon: Castle,
+    icon: House,
+  },
+  {
+    label: "Lander's Legion",
+    value: "Lander's Legion",
+    icon: Tent,
   },
 ];
 

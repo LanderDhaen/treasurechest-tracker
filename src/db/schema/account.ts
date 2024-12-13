@@ -12,6 +12,7 @@ export const clanEnum = pgEnum("clan", [
   "Dutch Legion 3",
   "Dutch Legion CW",
   "Dutch Legion 4",
+  "Lander''s Legion",
 ]);
 
 export const statusEnum = pgEnum("status", [
