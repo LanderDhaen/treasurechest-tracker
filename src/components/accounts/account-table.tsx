@@ -5,6 +5,8 @@ import {
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -36,6 +38,8 @@ export default function AccountTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
     onColumnFiltersChange: setColumnFilters,
     globalFilterFn: "includesString",
     state: {
