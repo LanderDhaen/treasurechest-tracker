@@ -23,7 +23,7 @@ export const columns: ColumnDef<Account>[] = [
   },
   {
     accessorKey: "isActive",
-    accessorFn: (row) => (row.isActive ? "Farming" : "Wars only"),
+    accessorFn: (row) => (row.isActive ? "Farming" : "Wars Only"),
     header: "Status",
     cell: ({ row }) => {
       const isActive = row.original.isActive;

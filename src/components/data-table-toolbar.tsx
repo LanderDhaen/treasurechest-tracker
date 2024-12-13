@@ -48,38 +48,36 @@ export function DataTableToolbar<TData>({
   const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex flex-1 items-center space-x-2">
-        <Input
-          placeholder="Filter tasks..."
-          onChange={(e) => table.setGlobalFilter(e.target.value)}
-          className="h-8 w-[150px] lg:w-[250px]"
+    <div className="flex flex-1 items-center space-x-2">
+      <Input
+        placeholder="Filter accounts..."
+        onChange={(e) => table.setGlobalFilter(e.target.value)}
+        className="h-8 w-[150px] lg:w-[250px]"
+      />
+      {table.getColumn("clan") && (
+        <DataTableFacetedFilter
+          column={table.getColumn("clan")}
+          title="Clan"
+          options={clans}
         />
-        {table.getColumn("clan") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("clan")}
-            title="Clan"
-            options={clans}
-          />
-        )}
-        {table.getColumn("isActive") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("isActive")}
-            title="Status"
-            options={statuses}
-          />
-        )}
-        {isFiltered && (
-          <Button
-            variant="ghost"
-            onClick={() => table.resetColumnFilters()}
-            className="h-8 px-2 lg:px-3"
-          >
-            Reset
-            <X />
-          </Button>
-        )}
-      </div>
+      )}
+      {table.getColumn("isActive") && (
+        <DataTableFacetedFilter
+          column={table.getColumn("isActive")}
+          title="Status"
+          options={statuses}
+        />
+      )}
+      {isFiltered && (
+        <Button
+          variant="ghost"
+          onClick={() => table.resetColumnFilters()}
+          className="h-8 px-2 lg:px-3"
+        >
+          Reset
+          <X />
+        </Button>
+      )}
     </div>
   );
 }
