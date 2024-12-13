@@ -9,7 +9,7 @@ export default function AccountStatus({ isActive }: AccountStatusProps) {
     </span>
   ) : (
     <span className="rounded-3xl bg-inactive-background px-4 py-1 font-bold text-inactive-foreground">
-      Inactive
+      Wars Only
     </span>
   );
 }

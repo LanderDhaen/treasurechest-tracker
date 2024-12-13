@@ -21,8 +21,6 @@ const breadcrumbs = [
 export default async function Page() {
   const accounts = await getAllAccounts();
 
-  console.log(accounts);
-
   return (
     <>
       <BreadcrumbWrapper breadcrumbs={breadcrumbs} />

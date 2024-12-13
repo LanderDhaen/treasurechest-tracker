@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { account } from "@/db/schema/account";
 import { townhall } from "@/db/schema/townhall";
 
@@ -19,7 +19,8 @@ export const getAllAccounts = async () => {
       },
     })
     .from(account)
-    .innerJoin(townhall, eq(account.townhallID, townhall.ID));
+    .innerJoin(townhall, eq(account.townhallID, townhall.ID))
+    .orderBy(desc(townhall.level), desc(account.username));
 
   return accounts;
 };

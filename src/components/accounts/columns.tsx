@@ -23,6 +23,7 @@ export const columns: ColumnDef<Account>[] = [
   },
   {
     accessorKey: "isActive",
+    accessorFn: (row) => (row.isActive ? "Farming" : "Wars only"),
     header: "Status",
     cell: ({ row }) => {
       const isActive = row.original.isActive;
@@ -33,5 +34,8 @@ export const columns: ColumnDef<Account>[] = [
   {
     accessorKey: "clan",
     header: "Clan",
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
   },
 ];
