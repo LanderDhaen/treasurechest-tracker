@@ -10,8 +10,9 @@ import {
 
 import { getAllAccounts } from "@/actions/account";
 import { Badge } from "@/components/ui/badge";
+import TownhallBadge from "@/components/townhall-badge";
 
-export default async function DemoPage() {
+export default async function Page() {
   const data = await getAllAccounts();
 
   return (
@@ -30,13 +31,10 @@ export default async function DemoPage() {
             <TableRow key={account.ID}>
               <TableCell>#{account.tag}</TableCell>
               <TableCell className="flex items-center gap-2">
-                <Badge
-                  style={{
-                    backgroundColor: `#${account.townhall.color}`,
-                  }}
-                >
-                  TH{account.townhall.level}
-                </Badge>
+                <TownhallBadge
+                  level={account.townhall.level}
+                  color={account.townhall.color}
+                />
                 {account.name}
               </TableCell>
               <TableCell>{account.clan.name}</TableCell>
