@@ -30,7 +30,7 @@ export default async function Page() {
             <TableRow key={account.tag}>
               <TableCell>#{account.tag}</TableCell>
               <TableCell className="flex items-center gap-2">
-                <TownhallBadge level={account.townhall.level} />
+                <TownhallBadge level={account.townhall} />
                 {account.name}
               </TableCell>
               <TableCell>{account.clan.name}</TableCell>

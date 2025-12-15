@@ -4,12 +4,6 @@ import { Kysely } from "kysely";
 export const seed = async (db: Kysely<any>) => {
   await db.deleteFrom("account").execute();
 
-  const townhall = await db
-    .selectFrom("townhall")
-    .select("id")
-    .where("level", "=", 18)
-    .executeTakeFirstOrThrow();
-
   const clan = await db
     .selectFrom("clan")
     .select("id")
@@ -24,7 +18,7 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: "2025-12-14 15:00:00",
         name: "DL✨Lander",
         tag: "8RRG0LJR2",
-        townhallId: townhall.id,
+        townhall: 18,
         clanId: clan.id,
       },
     ])

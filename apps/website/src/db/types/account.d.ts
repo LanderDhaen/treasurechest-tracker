@@ -13,7 +13,7 @@ export interface AccountTable {
   isActive: ColumnType<boolean>;
   name: ColumnType<string>;
   tag: ColumnType<string>;
-  townhallId: ColumnType<number>;
+  townhall: ColumnType<number>;
   clanId: ColumnType<number>;
 }
 

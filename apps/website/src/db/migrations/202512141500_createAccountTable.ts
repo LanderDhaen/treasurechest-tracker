@@ -10,12 +10,10 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("is_active", "boolean", (c) => c.notNull().defaultTo(true))
     .addColumn("name", "varchar", (c) => c.notNull())
     .addColumn("tag", "varchar", (c) => c.notNull().unique())
+    .addColumn("townhall", "integer", (c) => c.notNull())
 
     // Foreign keys
 
-    .addColumn("townhall_id", "integer", (c) =>
-      c.references("townhall.id").notNull()
-    )
     .addColumn("clan_id", "integer", (c) => c.references("clan.id").notNull())
 
     .execute();
