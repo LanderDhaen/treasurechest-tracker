@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/table";
 
 import { getAllAccounts } from "@/actions/account";
-import { Badge } from "@/components/ui/badge";
 import TownhallBadge from "@/components/townhall-badge";
 
 export default async function Page() {
@@ -28,13 +27,10 @@ export default async function Page() {
         </TableHeader>
         <TableBody>
           {data.map((account) => (
-            <TableRow key={account.ID}>
+            <TableRow key={account.tag}>
               <TableCell>#{account.tag}</TableCell>
               <TableCell className="flex items-center gap-2">
-                <TownhallBadge
-                  level={account.townhall.level}
-                  color={account.townhall.color}
-                />
+                <TownhallBadge level={account.townhall.level} />
                 {account.name}
               </TableCell>
               <TableCell>{account.clan.name}</TableCell>

@@ -12,7 +12,6 @@ export interface TownhallTable {
   updatedAt: ColumnType<Date>;
   isActive: ColumnType<boolean>;
   level: ColumnType<number>;
-  color: ColumnType<string>;
   releasedAt: ColumnType<Date>;
 }
 

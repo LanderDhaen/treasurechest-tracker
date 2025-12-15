@@ -13,7 +13,7 @@ export const getAllAccounts = async () => {
       jsonObjectFrom(
         eb
           .selectFrom("townhall")
-          .select(["townhall.level", "townhall.level", "townhall.color"])
+          .select(["townhall.level", "townhall.level"])
           .whereRef("townhall.ID", "=", "account.townhallId")
       )
         .$notNull()
