@@ -13,6 +13,12 @@ export const seed = async (db: Kysely<any>) => {
         name: "Dutch Legion 3",
         tag: "28UYR0CVU",
       },
+      {
+        createdAt: "2025-12-14 14:30:00",
+        updatedAt: "2025-12-14 14:30:00",
+        name: "Dutch Legion CW",
+        tag: "29RPVGYU8",
+      },
     ])
     .execute();
 };

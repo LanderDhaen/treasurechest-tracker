@@ -5,6 +5,7 @@ export const getAllAccounts = async () => {
   return await db
     .selectFrom("account")
     .innerJoin("clan", "account.clanId", "clan.ID")
+    .orderBy("account.townhall", "desc")
     .select((eb) => [
       "account.ID",
       "account.name",
