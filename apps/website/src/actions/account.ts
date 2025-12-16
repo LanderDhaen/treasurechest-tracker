@@ -1,5 +1,4 @@
 import { db } from "@/db";
-import { count } from "console";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
 export const getAllAccounts = async () => {
@@ -15,7 +14,6 @@ export const getAllAccounts = async () => {
     .innerJoin("clan", "account.clanId", "clan.ID")
     .orderBy("account.townhall", "desc")
     .select((eb) => [
-      "account.ID",
       "account.name",
       "account.tag",
       "account.townhall",
