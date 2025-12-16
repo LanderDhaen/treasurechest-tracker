@@ -12,12 +12,12 @@ import { getAllAccounts } from "@/actions/account";
 import TownhallBadge from "@/components/townhall-badge";
 
 export default async function Page() {
-  const data = await getAllAccounts();
+  const { accounts, count } = await getAllAccounts();
 
   return (
     <div className="p-20">
       <Table>
-        <TableCaption>List of tracked accounts.</TableCaption>
+        <TableCaption>Currently tracking {count} accounts.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Tag</TableHead>
@@ -26,7 +26,7 @@ export default async function Page() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((account) => (
+          {accounts.map((account) => (
             <TableRow key={account.tag}>
               <TableCell>#{account.tag}</TableCell>
               <TableCell className="flex items-center gap-2">

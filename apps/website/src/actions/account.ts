@@ -1,9 +1,17 @@
 import { db } from "@/db";
+import { count } from "console";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
 export const getAllAccounts = async () => {
-  return await db
+  const baseQuery = db
     .selectFrom("account")
+    .where("account.isActive", "=", true);
+
+  const countQuery = await baseQuery
+    .select((eb) => eb.fn.countAll<number>().as("result"))
+    .executeTakeFirstOrThrow();
+
+  const accounts = await baseQuery
     .innerJoin("clan", "account.clanId", "clan.ID")
     .orderBy("account.townhall", "desc")
     .select((eb) => [
@@ -21,4 +29,9 @@ export const getAllAccounts = async () => {
         .as("clan"),
     ])
     .execute();
+
+  return {
+    accounts: accounts,
+    count: countQuery.result,
+  };
 };
