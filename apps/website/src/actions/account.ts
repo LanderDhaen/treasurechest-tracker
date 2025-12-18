@@ -11,7 +11,7 @@ export const getAllAccounts = async () => {
     .executeTakeFirstOrThrow();
 
   const accounts = await baseQuery
-    .innerJoin("clan", "account.clanId", "clan.ID")
+    .innerJoin("clan", "account.clanId", "clan.id")
     .orderBy("account.townhall", "desc")
     .select((eb) => [
       "account.name",
@@ -20,8 +20,8 @@ export const getAllAccounts = async () => {
       jsonObjectFrom(
         eb
           .selectFrom("clan")
-          .select(["clan.ID", "clan.name", "clan.tag"])
-          .whereRef("clan.ID", "=", "account.clanId")
+          .select(["clan.id", "clan.name", "clan.tag"])
+          .whereRef("clan.id", "=", "account.clanId")
       )
         .$notNull()
         .as("clan"),
