@@ -7,7 +7,7 @@ import {
 } from "kysely";
 
 export interface AccountTable {
-  ID: Generated<number>;
+  id: Generated<number>;
   createdAt: ColumnType<Date>;
   updatedAt: ColumnType<Date>;
   isActive: ColumnType<boolean>;
