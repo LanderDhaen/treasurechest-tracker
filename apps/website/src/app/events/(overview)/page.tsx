@@ -10,6 +10,7 @@ import {
 
 import { getAllEvents } from "@/actions/event";
 import StatusBadge from "@/components/status-badge";
+import { formatDate } from "@/lib/utils";
 
 export default async function Page() {
   const { events, count } = await getAllEvents();
@@ -35,8 +36,8 @@ export default async function Page() {
                 <StatusBadge status={event.status} />
                 {event.name}
               </TableCell>
-              <TableCell>{event.startDate.toDateString()}</TableCell>
-              <TableCell>{event.endDate.toDateString()}</TableCell>
+              <TableCell>{formatDate(event.startDate)}</TableCell>
+              <TableCell>{formatDate(event.endDate)}</TableCell>
               <TableCell>{event.maxChests}</TableCell>
             </TableRow>
           ))}
