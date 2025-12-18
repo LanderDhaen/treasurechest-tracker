@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 
 import { getAllEvents } from "@/actions/event";
+import StatusBadge from "@/components/status-badge";
 
 export default async function Page() {
   const { events, count } = await getAllEvents();
@@ -20,7 +21,6 @@ export default async function Page() {
         <TableHeader>
           <TableRow>
             <TableHead>Event</TableHead>
-            <TableHead>Status</TableHead>
             <TableHead>Start Date</TableHead>
             <TableHead>End Date</TableHead>
             <TableHead>Max Chests</TableHead>
@@ -29,8 +29,10 @@ export default async function Page() {
         <TableBody>
           {events.map((event) => (
             <TableRow key={event.name}>
-              <TableCell>{event.name}</TableCell>
-              <TableCell>{event.status}</TableCell>
+              <TableCell className="flex items-center gap-2">
+                <StatusBadge status={event.status} />
+                {event.name}
+              </TableCell>
               <TableCell>{event.startDate.toDateString()}</TableCell>
               <TableCell>{event.endDate.toDateString()}</TableCell>
               <TableCell>{event.maxChests}</TableCell>
