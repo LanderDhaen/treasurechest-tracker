@@ -25,7 +25,7 @@ export default async function Page() {
             <TableHead>Event</TableHead>
             <TableHead>Start Date</TableHead>
             <TableHead>End Date</TableHead>
-            <TableHead>Max Chests</TableHead>
+            <TableHead>Rewards</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -38,7 +38,9 @@ export default async function Page() {
               </TableCell>
               <TableCell>{formatDate(event.startDate)}</TableCell>
               <TableCell>{formatDate(event.endDate)}</TableCell>
-              <TableCell>{event.maxChests}</TableCell>
+              <TableCell>
+                {event.maxChests == 1 ? "1 Chest" : `${event.maxChests} Chests`}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
