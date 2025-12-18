@@ -30,7 +30,7 @@ export default async function Page() {
         </TableHeader>
         <TableBody>
           {events.map((event) => (
-            <TableRow key={event.name}>
+            <TableRow key={event.id}>
               <TableCell>{event.id}</TableCell>
               <TableCell className="flex items-center gap-2">
                 <StatusBadge status={event.status} />
