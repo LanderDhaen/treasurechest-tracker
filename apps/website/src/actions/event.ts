@@ -12,6 +12,7 @@ export const getAllEvents = async () => {
   const events = await baseQuery
     .orderBy("startDate", "desc")
     .select((eb) => [
+      "event.id",
       "event.name",
       "event.startDate",
       "event.endDate",

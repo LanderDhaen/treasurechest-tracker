@@ -20,6 +20,7 @@ export default async function Page() {
         <TableCaption>Currently tracking {count} events.</TableCaption>
         <TableHeader>
           <TableRow>
+            <TableHead>#</TableHead>
             <TableHead>Event</TableHead>
             <TableHead>Start Date</TableHead>
             <TableHead>End Date</TableHead>
@@ -29,6 +30,7 @@ export default async function Page() {
         <TableBody>
           {events.map((event) => (
             <TableRow key={event.name}>
+              <TableCell>{event.id}</TableCell>
               <TableCell className="flex items-center gap-2">
                 <StatusBadge status={event.status} />
                 {event.name}
