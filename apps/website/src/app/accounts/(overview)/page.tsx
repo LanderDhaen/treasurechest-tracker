@@ -15,7 +15,7 @@ export default async function Page() {
   const { accounts, count } = await getAllAccounts();
 
   return (
-    <div className="p-20">
+    <div className="p-4">
       <Table>
         <TableCaption>Currently tracking {count} accounts.</TableCaption>
         <TableHeader>
