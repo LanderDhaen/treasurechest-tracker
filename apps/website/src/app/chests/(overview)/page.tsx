@@ -1,4 +1,5 @@
 import { getAllChests } from "@/actions/chest";
+import RarityBadge from "@/components/rarity-badge";
 import {
   Table,
   TableBody,
@@ -21,9 +22,7 @@ export default async function Page() {
             <TableHead>#</TableHead>
             <TableHead>Account</TableHead>
             <TableHead>Event</TableHead>
-            <TableHead>Rarity</TableHead>
             <TableHead>Reward</TableHead>
-            <TableHead>Amount</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -32,9 +31,12 @@ export default async function Page() {
               <TableCell>{chest.id}</TableCell>
               <TableCell>{chest.account.name}</TableCell>
               <TableCell>{chest.event}</TableCell>
-              <TableCell>{chest.rarity}</TableCell>
-              <TableCell>{chest.reward}</TableCell>
-              <TableCell>{chest.amount}</TableCell>
+              <TableCell className="flex items-center gap-2">
+                <RarityBadge rarity={chest.rarity} />
+                {chest.amount === 1
+                  ? `${chest.reward}`
+                  : `${chest.amount.toLocaleString()} ${chest.reward}`}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
