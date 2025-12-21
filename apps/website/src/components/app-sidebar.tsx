@@ -1,91 +1,46 @@
 "use client";
 
 import {
-  Camera,
-  ChartBar,
   LayoutDashboard,
-  Database,
-  Folder,
-  Search,
-  Settings,
   Users,
   ChartNoAxesGantt,
+  Balloon,
+  Box,
 } from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/",
       icon: LayoutDashboard,
     },
     {
-      title: "Analytics",
-      url: "#",
-      icon: ChartBar,
+      title: "Treasure Chests",
+      url: "/chests",
+      icon: Box,
     },
     {
-      title: "Projects",
-      url: "#",
-      icon: Folder,
+      title: "Events",
+      url: "/events",
+      icon: Balloon,
     },
     {
-      title: "Team",
-      url: "#",
+      title: "Accounts",
+      url: "/accounts",
       icon: Users,
-    },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: Camera,
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings,
-    },
-
-    {
-      title: "Search",
-      url: "#",
-      icon: Search,
-    },
-  ],
-  documents: [
-    {
-      name: "Data Library",
-      url: "#",
-      icon: Database,
     },
   ],
 };
@@ -101,8 +56,23 @@ export function AppSidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent></SidebarContent>
-      <SidebarFooter></SidebarFooter>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupContent className="flex flex-col gap-2">
+            <SidebarMenu>
+              {data.navMain.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton tooltip={item.title} asChild>
+                    <Link href={item.url}>
+                      <item.icon /> {item.title}
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
     </Sidebar>
   );
 }
