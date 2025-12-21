@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { Header } from "@/components/header";
 
 const montserrat = Montserrat({
   weight: ["400", "700"],
@@ -24,7 +31,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(montserrat.className)}>{children}</body>
+      <body className={cn(montserrat.className)}>
+        <SidebarProvider>
+          <AppSidebar />
+          <SidebarInset>
+            <div className="flex flex-col flex-1 rounded-lg bg-white shadow-md">
+              <Header />
+              {children}
+            </div>
+          </SidebarInset>
+        </SidebarProvider>
+      </body>
     </html>
   );
 }
