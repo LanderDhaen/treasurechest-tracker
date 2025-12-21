@@ -1,0 +1,43 @@
+import { db } from "@/db";
+import { jsonObjectFrom } from "kysely/helpers/postgres";
+
+export const getAllChests = async () => {
+  const baseQuery = db.selectFrom("chest");
+
+  const countQuery = await baseQuery
+    .select((eb) => [
+      eb.fn.countAll<number>().as("chestCount"),
+      eb.fn.count<number>("chest.accountId").distinct().as("accountCount"),
+    ])
+    .executeTakeFirstOrThrow();
+
+  const chests = await baseQuery
+    .innerJoin("rarity", "chest.rarityId", "rarity.id")
+    .innerJoin("account", "chest.accountId", "account.id")
+    .innerJoin("event", "chest.eventId", "event.id")
+    .innerJoin("reward", "chest.rewardId", "reward.id")
+    .orderBy("chest.openedAt", "desc")
+    .select((eb) => [
+      "chest.id",
+      "chest.amount",
+      "chest.openedAt",
+      "rarity.name as rarity",
+      "event.name as event",
+      "reward.name as reward",
+      jsonObjectFrom(
+        eb
+          .selectFrom("account")
+          .select(["account.name", "account.townhall"])
+          .whereRef("account.id", "=", "chest.accountId")
+      )
+        .$notNull()
+        .as("account"),
+    ])
+    .execute();
+
+  return {
+    chests: chests,
+    chestCount: countQuery.chestCount,
+    accountCount: countQuery.accountCount,
+  };
+};

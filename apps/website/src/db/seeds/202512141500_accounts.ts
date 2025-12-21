@@ -6,13 +6,13 @@ export const seed = async (db: Kysely<any>) => {
 
   const dl3 = await db
     .selectFrom("clan")
-    .select("id")
+    .select(["id"])
     .where("tag", "=", "28UYR0CVU")
     .executeTakeFirstOrThrow();
 
   const dlcw = await db
     .selectFrom("clan")
-    .select("id")
+    .select(["id"])
     .where("tag", "=", "29RPVGYU8")
     .executeTakeFirstOrThrow();
 

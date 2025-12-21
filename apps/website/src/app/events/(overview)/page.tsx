@@ -29,20 +29,30 @@ export default async function Page() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {events.map((event) => (
-            <TableRow key={event.id}>
-              <TableCell>{event.id}</TableCell>
-              <TableCell className="flex items-center gap-2">
-                <StatusBadge status={event.status} />
-                {event.name}
-              </TableCell>
-              <TableCell>{formatDate(event.startDate)}</TableCell>
-              <TableCell>{formatDate(event.endDate)}</TableCell>
-              <TableCell>
-                {event.maxChests == 1 ? "1 Chest" : `${event.maxChests} Chests`}
+          {events.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={5} className="text-center italic">
+                No events found.
               </TableCell>
             </TableRow>
-          ))}
+          ) : (
+            events.map((event) => (
+              <TableRow key={event.id}>
+                <TableCell>{event.id}</TableCell>
+                <TableCell className="flex items-center gap-2">
+                  <StatusBadge status={event.status} />
+                  {event.name}
+                </TableCell>
+                <TableCell>{formatDate(event.startDate)}</TableCell>
+                <TableCell>{formatDate(event.endDate)}</TableCell>
+                <TableCell>
+                  {event.maxChests == 1
+                    ? "1 Chest"
+                    : `${event.maxChests} Chests`}
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     </div>
