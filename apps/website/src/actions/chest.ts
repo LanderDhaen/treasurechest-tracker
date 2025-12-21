@@ -1,12 +1,14 @@
 import { db } from "@/db";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
-import { json } from "stream/consumers";
 
 export const getAllChests = async () => {
   const baseQuery = db.selectFrom("chest");
 
   const countQuery = await baseQuery
-    .select((eb) => eb.fn.countAll<number>().as("result"))
+    .select((eb) => [
+      eb.fn.countAll<number>().as("chestCount"),
+      eb.fn.count<number>("chest.accountId").distinct().as("accountCount"),
+    ])
     .executeTakeFirstOrThrow();
 
   const chests = await baseQuery
@@ -35,6 +37,7 @@ export const getAllChests = async () => {
 
   return {
     chests: chests,
-    count: countQuery.result,
+    chestCount: countQuery.chestCount,
+    accountCount: countQuery.accountCount,
   };
 };

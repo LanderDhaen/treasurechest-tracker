@@ -12,12 +12,14 @@ import {
 import { formatDateTime } from "@/lib/utils";
 
 export default async function Page() {
-  const { chests, count } = await getAllChests();
+  const { chests, chestCount, accountCount } = await getAllChests();
 
   return (
     <div className="p-20">
       <Table>
-        <TableCaption>Currently opened {count} treasure chests.</TableCaption>
+        <TableCaption>
+          {`Currently opened ${chestCount} treasure chests across ${accountCount} accounts.`}
+        </TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>#</TableHead>
