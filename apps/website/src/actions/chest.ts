@@ -46,3 +46,17 @@ export const getAllChests = async () => {
     accountCount: countQuery.accountCount,
   };
 };
+
+export const getChestCountPerAccount = async () => {
+  const result = await db
+    .selectFrom("chest")
+    .innerJoin("account", "chest.accountId", "account.id")
+    .select((eb) => [
+      "account.name as account",
+      eb.fn.count<number>("chest.id").as("count"),
+    ])
+    .groupBy(["chest.accountId", "account.name"])
+    .execute();
+
+  return result;
+};

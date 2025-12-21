@@ -33,3 +33,12 @@ export const getAllAccounts = async () => {
     count: countQuery.result,
   };
 };
+
+export const getAccountsCount = async () => {
+  const query = await db
+    .selectFrom("account")
+    .select((eb) => eb.fn.countAll<number>().as("count"))
+    .executeTakeFirstOrThrow();
+
+  return query.count;
+};
