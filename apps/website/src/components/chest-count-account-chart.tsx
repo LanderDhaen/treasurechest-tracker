@@ -34,7 +34,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface ChestCountChartProps {
-  chestCounts: {
+  chestCountPerAccount: {
     account: string;
     count: number;
   }[];
@@ -42,7 +42,7 @@ interface ChestCountChartProps {
 }
 
 export function ChestCountAccountChart({
-  chestCounts,
+  chestCountPerAccount,
   accountCount,
 }: ChestCountChartProps) {
   return (
@@ -57,7 +57,7 @@ export function ChestCountAccountChart({
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
-            data={chestCounts}
+            data={chestCountPerAccount}
             layout="vertical"
             margin={{
               right: 16,
