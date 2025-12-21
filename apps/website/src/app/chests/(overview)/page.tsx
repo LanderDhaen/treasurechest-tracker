@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatDateTime } from "@/lib/utils";
 
 export default async function Page() {
   const { chests, count } = await getAllChests();
@@ -23,6 +24,7 @@ export default async function Page() {
             <TableHead>Account</TableHead>
             <TableHead>Event</TableHead>
             <TableHead>Reward</TableHead>
+            <TableHead>Opened At</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -44,6 +46,7 @@ export default async function Page() {
                     ? `${chest.reward}`
                     : `${chest.amount.toLocaleString()} ${chest.reward}`}
                 </TableCell>
+                <TableCell>{formatDateTime(chest.openedAt)}</TableCell>
               </TableRow>
             ))
           )}

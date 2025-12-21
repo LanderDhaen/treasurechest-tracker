@@ -8,10 +8,8 @@ import {
 
 export interface ChestTable {
   id: Generated<number>;
-  createdAt: ColumnType<Date>;
-  updatedAt: ColumnType<Date>;
-  isActive: ColumnType<boolean>;
   amount: ColumnType<number>;
+  openedAt: ColumnType<Date>;
   rarityId: ColumnType<number>;
   accountId: ColumnType<number>;
   eventId: ColumnType<number>;

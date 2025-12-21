@@ -6,6 +6,7 @@ export const up = async (db: Kysely<any>) => {
     .createTable("chest")
     .addColumn("id", "serial", (c) => c.primaryKey())
     .addColumn("amount", "integer", (c) => c.notNull().defaultTo(1))
+    .addColumn("openedAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
 
     // Foreign Keys
 

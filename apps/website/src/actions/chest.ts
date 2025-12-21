@@ -14,9 +14,11 @@ export const getAllChests = async () => {
     .innerJoin("account", "chest.accountId", "account.id")
     .innerJoin("event", "chest.eventId", "event.id")
     .innerJoin("reward", "chest.rewardId", "reward.id")
+    .orderBy("chest.openedAt", "desc")
     .select((eb) => [
       "chest.id",
       "chest.amount",
+      "chest.openedAt",
       "rarity.name as rarity",
       "event.name as event",
       "reward.name as reward",

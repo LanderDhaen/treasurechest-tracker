@@ -12,3 +12,13 @@ export function formatDate(date: Date) {
     year: "numeric",
   });
 }
+
+export function formatDateTime(date: Date) {
+  return date.toLocaleString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
