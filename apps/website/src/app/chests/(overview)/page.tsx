@@ -26,19 +26,27 @@ export default async function Page() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {chests.map((chest) => (
-            <TableRow key={chest.id}>
-              <TableCell>{chest.id}</TableCell>
-              <TableCell>{chest.account.name}</TableCell>
-              <TableCell>{chest.event}</TableCell>
-              <TableCell className="flex items-center gap-2">
-                <RarityBadge rarity={chest.rarity} />
-                {chest.amount === 1
-                  ? `${chest.reward}`
-                  : `${chest.amount.toLocaleString()} ${chest.reward}`}
+          {chests.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={4} className="text-center italic">
+                No treasure chests rewards found.
               </TableCell>
             </TableRow>
-          ))}
+          ) : (
+            chests.map((chest) => (
+              <TableRow key={chest.id}>
+                <TableCell>{chest.id}</TableCell>
+                <TableCell>{chest.account.name}</TableCell>
+                <TableCell>{chest.event}</TableCell>
+                <TableCell className="flex items-center gap-2">
+                  <RarityBadge rarity={chest.rarity} />
+                  {chest.amount === 1
+                    ? `${chest.reward}`
+                    : `${chest.amount.toLocaleString()} ${chest.reward}`}
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     </div>

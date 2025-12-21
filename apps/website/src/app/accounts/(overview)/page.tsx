@@ -26,16 +26,24 @@ export default async function Page() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {accounts.map((account) => (
-            <TableRow key={account.tag}>
-              <TableCell>#{account.tag}</TableCell>
-              <TableCell className="flex items-center gap-2">
-                <TownhallBadge level={account.townhall} />
-                {account.name}
+          {accounts.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={3} className="text-center italic">
+                No accounts found.
               </TableCell>
-              <TableCell>{account.clan.name}</TableCell>
             </TableRow>
-          ))}
+          ) : (
+            accounts.map((account) => (
+              <TableRow key={account.tag}>
+                <TableCell>#{account.tag}</TableCell>
+                <TableCell className="flex items-center gap-2">
+                  <TownhallBadge level={account.townhall} />
+                  {account.name}
+                </TableCell>
+                <TableCell>{account.clan.name}</TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     </div>
