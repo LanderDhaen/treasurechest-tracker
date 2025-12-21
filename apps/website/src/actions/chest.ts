@@ -13,8 +13,6 @@ export const getAllChests = async () => {
 
   const chests = await baseQuery
     .innerJoin("rarity", "chest.rarityId", "rarity.id")
-    .innerJoin("account", "chest.accountId", "account.id")
-    .innerJoin("event", "chest.eventId", "event.id")
     .innerJoin("reward", "chest.rewardId", "reward.id")
     .orderBy("chest.openedAt", "desc")
     .select((eb) => [
@@ -22,8 +20,15 @@ export const getAllChests = async () => {
       "chest.amount",
       "chest.openedAt",
       "rarity.name as rarity",
-      "event.name as event",
       "reward.name as reward",
+      jsonObjectFrom(
+        eb
+          .selectFrom("event")
+          .select(["event.name", "event.isGift"])
+          .whereRef("event.id", "=", "chest.eventId")
+      )
+        .$notNull()
+        .as("event"),
       jsonObjectFrom(
         eb
           .selectFrom("account")
