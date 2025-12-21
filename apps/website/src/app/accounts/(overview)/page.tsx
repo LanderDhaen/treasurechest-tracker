@@ -36,9 +36,11 @@ export default async function Page() {
             accounts.map((account) => (
               <TableRow key={account.tag}>
                 <TableCell>#{account.tag}</TableCell>
-                <TableCell className="flex items-center gap-2">
-                  <TownhallBadge level={account.townhall} />
-                  {account.name}
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <TownhallBadge level={account.townhall} />
+                    {account.name}
+                  </div>
                 </TableCell>
                 <TableCell>{account.clan.name}</TableCell>
               </TableRow>

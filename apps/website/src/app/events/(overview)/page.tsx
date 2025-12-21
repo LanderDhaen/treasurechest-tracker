@@ -40,10 +40,12 @@ export default async function Page() {
             events.map((event) => (
               <TableRow key={event.id}>
                 <TableCell>{event.id}</TableCell>
-                <TableCell className="flex items-center gap-2">
-                  <StatusBadge status={event.status} />
-                  {event.name}
-                  <GiftBadge isGift={event.isGift} />
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <StatusBadge status={event.status} />
+                    {event.name}
+                    <GiftBadge isGift={event.isGift} />
+                  </div>
                 </TableCell>
                 <TableCell>{formatDate(event.startDate)}</TableCell>
                 <TableCell>{formatDate(event.endDate)}</TableCell>
