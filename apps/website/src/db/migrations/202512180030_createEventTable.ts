@@ -12,6 +12,7 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("startDate", "date", (c) => c.notNull())
     .addColumn("endDate", "date", (c) => c.notNull())
     .addColumn("maxChests", "integer", (c) => c.notNull().defaultTo(0))
+    .addColumn("isGift", "boolean", (c) => c.notNull().defaultTo(false))
     .execute();
 };
 
