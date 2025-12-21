@@ -15,6 +15,7 @@ export interface EventTable {
   startDate: ColumnType<Date>;
   endDate: ColumnType<Date>;
   maxChests: ColumnType<number>;
+  isGift: ColumnType<boolean>;
 }
 
 export type Event = Selectable<EventTable>;

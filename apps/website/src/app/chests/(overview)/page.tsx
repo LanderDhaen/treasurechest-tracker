@@ -1,4 +1,5 @@
 import { getAllChests } from "@/actions/chest";
+import GiftBadge from "@/components/gift-badge";
 import RarityBadge from "@/components/rarity-badge";
 import {
   Table,
@@ -32,7 +33,7 @@ export default async function Page() {
         <TableBody>
           {chests.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={4} className="text-center italic">
+              <TableCell colSpan={5} className="text-center italic">
                 No treasure chests rewards found.
               </TableCell>
             </TableRow>
@@ -41,12 +42,18 @@ export default async function Page() {
               <TableRow key={chest.id}>
                 <TableCell>{chest.id}</TableCell>
                 <TableCell>{chest.account.name}</TableCell>
-                <TableCell>{chest.event}</TableCell>
-                <TableCell className="flex items-center gap-2">
-                  <RarityBadge rarity={chest.rarity} />
-                  {chest.amount === 1
-                    ? `${chest.reward}`
-                    : `${chest.amount.toLocaleString()} ${chest.reward}`}
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    {chest.event.name} <GiftBadge isGift={chest.event.isGift} />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <RarityBadge rarity={chest.rarity} />
+                    {chest.amount === 1
+                      ? `${chest.reward}`
+                      : `${chest.amount.toLocaleString()} ${chest.reward}`}
+                  </div>
                 </TableCell>
                 <TableCell>{formatDateTime(chest.openedAt)}</TableCell>
               </TableRow>

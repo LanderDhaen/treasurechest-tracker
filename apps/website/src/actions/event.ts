@@ -17,6 +17,7 @@ export const getAllEvents = async () => {
       "event.startDate",
       "event.endDate",
       "event.maxChests",
+      "event.isGift",
       eb
         .case()
         .when(sql`now() > ${eb.ref("event.endDate")}`)

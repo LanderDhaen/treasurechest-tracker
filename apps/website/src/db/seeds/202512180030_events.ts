@@ -15,6 +15,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2024-09-19",
         endDate: "2024-09-19",
         maxChests: 5,
+        isGift: true,
       },
       {
         createdAt: "2025-12-18 00:30:00",
@@ -42,6 +43,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2024-12-25",
         endDate: "2024-12-25",
         maxChests: 1,
+        isGift: true,
       },
       {
         createdAt: "2025-12-18 00:30:00",
@@ -60,6 +62,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-03-17",
         endDate: "2025-03-17",
         maxChests: 5,
+        isGift: true,
       },
       {
         createdAt: "2025-12-18 00:30:00",
@@ -78,6 +81,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-04-24",
         endDate: "2025-04-24",
         maxChests: 1,
+        isGift: true,
       },
       {
         createdAt: "2025-12-18 00:30:00",
@@ -105,6 +109,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-08-08",
         endDate: "2025-08-31",
         maxChests: 1,
+        isGift: true,
       },
       {
         createdAt: "2025-12-18 00:30:00",
