@@ -33,7 +33,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-interface ChestCountChartProps {
+interface ChestCountAccountChartProps {
   chestCountPerAccount: {
     account: string;
     count: number;
@@ -44,7 +44,7 @@ interface ChestCountChartProps {
 export function ChestCountAccountChart({
   chestCountPerAccount,
   accountCount,
-}: ChestCountChartProps) {
+}: ChestCountAccountChartProps) {
   return (
     <Card className="shadow-md">
       <CardHeader>
