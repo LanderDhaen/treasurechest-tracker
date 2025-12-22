@@ -53,9 +53,11 @@ export const getChestCountPerAccount = async () => {
     .innerJoin("account", "chest.accountId", "account.id")
     .select((eb) => [
       "account.name as account",
+      "account.townhall as townhall",
       eb.fn.count<number>("chest.id").as("count"),
     ])
-    .groupBy(["chest.accountId", "account.name"])
+    .groupBy(["chest.accountId", "account.name", "account.townhall"])
+    .orderBy("account.townhall", "desc")
     .execute();
 
   return result;
