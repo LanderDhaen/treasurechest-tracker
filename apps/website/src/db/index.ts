@@ -1,6 +1,10 @@
 import { Database } from "./types/database";
-import { Pool } from "pg";
+import { Pool, types } from "pg";
 import { CamelCasePlugin, Kysely, PostgresDialect } from "kysely";
+
+types.setTypeParser(20, (val) => {
+  return parseInt(val, 10);
+});
 
 export const dialect = new PostgresDialect({
   pool: new Pool({
