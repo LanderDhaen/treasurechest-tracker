@@ -77,23 +77,3 @@ export const getChestCountPerRarity = async () => {
 
   return result;
 };
-
-export const getChestCountPerYear = async (year: number) => {
-  const result = await db
-    .with("monthly_chests", (qb) =>
-      qb
-        .selectFrom("chest")
-        .select([
-          sql<string>`TO_CHAR("opened_at", 'FMMonth')`.as("month"),
-          sql<number>`EXTRACT(MONTH FROM "opened_at")`.as("month_number"),
-        ])
-        .where(sql<boolean>`EXTRACT(YEAR FROM "opened_at") = ${year}`)
-    )
-    .selectFrom("monthly_chests")
-    .select((eb) => ["month", eb.fn.countAll<number>().as("count")])
-    .groupBy(["month", "month_number"])
-    .orderBy("month_number") // order chronologically
-    .execute();
-
-  return result;
-};

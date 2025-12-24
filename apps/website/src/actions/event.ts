@@ -35,3 +35,13 @@ export const getAllEvents = async () => {
     count: countQuery.result,
   };
 };
+
+export const getEventCountPerCategory = async () => {
+  const result = await db
+    .selectFrom("event")
+    .select((eb) => ["event.isGift", eb.fn.countAll<number>().as("count")])
+    .groupBy(["event.isGift"])
+    .execute();
+
+  return result;
+};
