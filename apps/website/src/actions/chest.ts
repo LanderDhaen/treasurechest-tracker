@@ -1,5 +1,4 @@
 import { db } from "@/db";
-import { sql } from "kysely";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
 export const getAllChests = async () => {
