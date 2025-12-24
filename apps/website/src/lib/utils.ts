@@ -22,9 +22,3 @@ export function formatDateTime(date: Date) {
     minute: "2-digit",
   });
 }
-
-export function formatMonth(date: Date, isShort: boolean = true) {
-  return date.toLocaleString("en-GB", {
-    month: isShort ? "short" : "long",
-  });
-}

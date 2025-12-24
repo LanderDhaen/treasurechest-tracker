@@ -43,5 +43,7 @@ export const getEventCountPerCategory = async () => {
     .groupBy(["event.isGift"])
     .execute();
 
+  console.log(result);
+
   return result;
 };
