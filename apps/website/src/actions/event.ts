@@ -49,6 +49,7 @@ export const getChestCountPerEvent = async () => {
     .groupBy(["event.id", "event.name", "event.startDate"])
     .orderBy("event.startDate", "desc")
     .orderBy("event.endDate", "desc")
+    .limit(10)
     .execute();
 
   return result;

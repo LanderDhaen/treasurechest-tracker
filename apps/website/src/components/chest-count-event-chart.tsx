@@ -33,7 +33,7 @@ export function ChestCountEventChart({
       <CardHeader>
         <CardTitle>Events</CardTitle>
         <CardDescription>
-          Shows the number of treasure chests rewards per event
+          Shows the number of treasure chests openend from the last ten events
         </CardDescription>
       </CardHeader>
       <CardContent>
