@@ -78,7 +78,7 @@ export function ChestCountAccountChart({
       <CardHeader>
         <CardTitle>Accounts</CardTitle>
         <CardDescription>
-          Shows the number of treasure chests rewards per account
+          Shows the number of treasure chests opened per account
         </CardDescription>
       </CardHeader>
       <CardContent>

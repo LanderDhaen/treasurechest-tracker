@@ -57,7 +57,7 @@ export function ChestCountRarityChart({
       <CardHeader>
         <CardTitle>Rarities</CardTitle>
         <CardDescription>
-          Shows the number of treasure chest rewards per rarity
+          Shows the number of treasure chest opened per rarity
         </CardDescription>
       </CardHeader>
       <CardContent>
