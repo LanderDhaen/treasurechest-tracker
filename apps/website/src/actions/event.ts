@@ -35,3 +35,21 @@ export const getAllEvents = async () => {
     count: countQuery.result,
   };
 };
+
+export const getChestCountPerEvent = async () => {
+  const result = await db
+    .selectFrom("event")
+    .leftJoin("chest", "chest.eventId", "event.id")
+    .select((eb) => [
+      "event.id",
+      "event.name",
+      "event.isGift",
+      eb.fn.count<number>("chest.id").as("count"),
+    ])
+    .groupBy(["event.id", "event.name", "event.startDate"])
+    .orderBy("event.startDate", "desc")
+    .orderBy("event.endDate", "desc")
+    .execute();
+
+  return result;
+};
