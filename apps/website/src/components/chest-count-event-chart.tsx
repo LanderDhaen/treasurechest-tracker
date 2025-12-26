@@ -38,34 +38,32 @@ export function ChestCountEventChart({
       </CardHeader>
       <CardContent>
         <Table>
-          <Table>
-            <TableHeader>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="font-bold">#</TableHead>
+              <TableHead className="font-bold">Event</TableHead>
+              <TableHead className="font-bold">Chests</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {chestCountPerEvent.length === 0 ? (
               <TableRow>
-                <TableHead className="font-bold">#</TableHead>
-                <TableHead className="font-bold">Event</TableHead>
-                <TableHead className="font-bold">Chests</TableHead>
+                <TableCell colSpan={5} className="text-center italic">
+                  No events found.
+                </TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {chestCountPerEvent.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={5} className="text-center italic">
-                    No events found.
+            ) : (
+              chestCountPerEvent.map((event) => (
+                <TableRow key={event.id}>
+                  <TableCell>{event.id}</TableCell>
+                  <TableCell className="flex items-center gap-2">
+                    {event.name} <GiftBadge isGift={event.isGift} />
                   </TableCell>
+                  <TableCell>{event.count}</TableCell>
                 </TableRow>
-              ) : (
-                chestCountPerEvent.map((event) => (
-                  <TableRow key={event.id}>
-                    <TableCell>{event.id}</TableCell>
-                    <TableCell className="flex items-center gap-2">
-                      {event.name} <GiftBadge isGift={event.isGift} />
-                    </TableCell>
-                    <TableCell>{event.count}</TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
+              ))
+            )}
+          </TableBody>
         </Table>
       </CardContent>
     </Card>
