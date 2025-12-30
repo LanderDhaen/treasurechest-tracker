@@ -12,7 +12,5 @@ export const getChestCountPerRarity = async () => {
     .orderBy("rarity.chance", "desc")
     .execute();
 
-  console.log(result);
-
   return result;
 };
