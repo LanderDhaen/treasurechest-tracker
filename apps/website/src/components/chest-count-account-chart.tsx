@@ -1,21 +1,11 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
-  LabelList,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, Cell, LabelList, XAxis, YAxis } from "recharts";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -25,9 +15,6 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-import { getChestCountPerAccount } from "@/actions/chest";
-
-export const description = "A horizontal bar chart";
 
 const chartConfig = {
   count: {
@@ -88,41 +75,33 @@ export function ChestCountAccountChart({
             data={chestCountPerAccount}
             layout="vertical"
             margin={{
-              right: 16,
+              right: 20,
             }}
           >
-            <CartesianGrid horizontal={false} />
+            <XAxis type="number" dataKey="count" hide />
             <YAxis
               dataKey="account"
               type="category"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
-              hide
+              width={120}
             />
-            <XAxis dataKey="count" type="number" hide />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent indicator="line" />}
+              content={<ChartTooltipContent hideIndicator />}
             />
-            <Bar dataKey="count" layout="vertical" radius={24} fill="#a3a3a3">
+            <Bar dataKey="count" radius={24}>
               {chestCountPerAccount.map((entry, index) => (
-                <Cell key={index} fill={defineColor(entry.townhall)} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={defineColor(entry.townhall)}
+                />
               ))}
-              <LabelList
-                dataKey="account"
-                position="insideLeft"
-                offset={8}
-                className="fill-background font-semibold"
-                fontSize={12}
-              />
               <LabelList
                 dataKey="count"
                 position="right"
-                offset={8}
-                className="fill-foreground"
-                fontSize={12}
+                fill="var(--foreground)"
               />
             </Bar>
           </BarChart>
