@@ -1,6 +1,7 @@
 import { getChestCountPerAccount } from "@/actions/account";
 import { getHighestEvent } from "@/actions/event";
 import { getChestCountPerRarity } from "@/actions/rarity";
+import { getMostReceivedReward } from "@/actions/reward";
 import { ChestCountAccountChart } from "@/components/chest-count-account-chart";
 import { ChestCountRarityChart } from "@/components/chest-count-rarity-chart";
 import {
@@ -17,6 +18,7 @@ export default async function Dashboard() {
   const chestCountPerAccount = await getChestCountPerAccount();
   const chestCountPerRarity = await getChestCountPerRarity();
   const highestEvent = await getHighestEvent();
+  const mostReceivedReward = await getMostReceivedReward();
 
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -29,6 +31,17 @@ export default async function Dashboard() {
           <CardFooter className="text-sm text-muted-foreground">
             with {highestEvent.count} treasure chests opened・
             <i>{calculateWeeksAgo(new Date(highestEvent.endDate))}</i>
+          </CardFooter>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardDescription>Most Received Reward</CardDescription>
+            <CardTitle className="text-2xl">
+              {mostReceivedReward.name}
+            </CardTitle>
+          </CardHeader>
+          <CardFooter className="text-sm text-muted-foreground">
+            with {mostReceivedReward.count} times
           </CardFooter>
         </Card>
       </div>
