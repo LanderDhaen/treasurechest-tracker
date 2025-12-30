@@ -11,7 +11,6 @@ export const getMostReceivedCategory = async () => {
     ])
     .groupBy(["category.name"])
     .orderBy("count", "desc")
-    .limit(1)
     .executeTakeFirstOrThrow();
 
   return result;

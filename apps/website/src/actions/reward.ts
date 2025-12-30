@@ -10,7 +10,6 @@ export const getMostReceivedReward = async () => {
     ])
     .groupBy(["reward.name"])
     .orderBy("count", "desc")
-    .limit(1)
     .executeTakeFirstOrThrow();
 
   return result;
