@@ -22,3 +22,11 @@ export function formatDateTime(date: Date) {
     minute: "2-digit",
   });
 }
+
+export function calculateWeeksAgo(date: Date) {
+  const now = new Date();
+  const diffInMs = now.getTime() - date.getTime();
+  const weeks = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 7));
+
+  return weeks === 0 ? "This week" : `${weeks} week${weeks > 1 ? "s" : ""} ago`;
+}

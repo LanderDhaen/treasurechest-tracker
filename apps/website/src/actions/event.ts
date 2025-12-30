@@ -36,21 +36,18 @@ export const getAllEvents = async () => {
   };
 };
 
-export const getChestCountPerEvent = async () => {
+export const getHighestEvent = async () => {
   const result = await db
     .selectFrom("event")
     .leftJoin("chest", "chest.eventId", "event.id")
     .select((eb) => [
-      "event.id",
       "event.name",
-      "event.isGift",
+      "event.endDate",
       eb.fn.count<number>("chest.id").as("count"),
     ])
-    .groupBy(["event.id", "event.name", "event.startDate"])
-    .orderBy("event.startDate", "desc")
-    .orderBy("event.endDate", "desc")
-    .limit(10)
-    .execute();
+    .groupBy(["event.name", "event.endDate"])
+    .orderBy("count", "desc")
+    .executeTakeFirstOrThrow();
 
   return result;
 };
