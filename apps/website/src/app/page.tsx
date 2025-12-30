@@ -1,8 +1,6 @@
-import {
-  getChestCountPerAccount,
-  getChestCountPerRarity,
-} from "@/actions/chest";
+import { getChestCountPerAccount } from "@/actions/chest";
 import { getChestCountPerEvent } from "@/actions/event";
+import { getChestCountPerRarity } from "@/actions/rarity";
 import { ChestCountAccountChart } from "@/components/chest-count-account-chart";
 import { ChestCountEventChart } from "@/components/chest-count-event-chart";
 import { ChestCountRarityChart } from "@/components/chest-count-rarity-chart";

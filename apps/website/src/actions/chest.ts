@@ -62,17 +62,3 @@ export const getChestCountPerAccount = async () => {
 
   return result;
 };
-
-export const getChestCountPerRarity = async () => {
-  const result = await db
-    .selectFrom("chest")
-    .innerJoin("rarity", "chest.rarityId", "rarity.id")
-    .select((eb) => [
-      "rarity.name as rarity",
-      eb.fn.count<number>("chest.id").as("count"),
-    ])
-    .groupBy(["chest.rarityId", "rarity.name"])
-    .execute();
-
-  return result;
-};
