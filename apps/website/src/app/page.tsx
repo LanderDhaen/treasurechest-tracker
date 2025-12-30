@@ -1,4 +1,5 @@
 import { getChestCountPerAccount } from "@/actions/account";
+import { getMostReceivedCategory } from "@/actions/category";
 import { getHighestEvent } from "@/actions/event";
 import { getChestCountPerRarity } from "@/actions/rarity";
 import { getMostReceivedReward } from "@/actions/reward";
@@ -19,6 +20,7 @@ export default async function Dashboard() {
   const chestCountPerRarity = await getChestCountPerRarity();
   const highestEvent = await getHighestEvent();
   const mostReceivedReward = await getMostReceivedReward();
+  const mostReceivedCategory = await getMostReceivedCategory();
 
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -42,6 +44,17 @@ export default async function Dashboard() {
           </CardHeader>
           <CardFooter className="text-sm text-muted-foreground">
             with {mostReceivedReward.count} times
+          </CardFooter>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardDescription>Most Received Category</CardDescription>
+            <CardTitle className="text-2xl">
+              {mostReceivedCategory.name}
+            </CardTitle>
+          </CardHeader>
+          <CardFooter className="text-sm text-muted-foreground">
+            with {mostReceivedCategory.count} times
           </CardFooter>
         </Card>
       </div>
