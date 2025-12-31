@@ -45,9 +45,23 @@ export const seed = async (db: Kysely<any>) => {
     .where("tag", "=", "PVPV2U0JG")
     .executeTakeFirstOrThrow();
 
+  const lander = await db
+    .selectFrom("account")
+    .selectAll()
+    .where("tag", "=", "9UQGJYLCV")
+    .executeTakeFirstOrThrow();
+
   const events = await db
     .selectFrom("event")
     .select((eb) => [
+      jsonObjectFrom(
+        eb
+          .selectFrom("event")
+          .selectAll()
+          .where("event.name", "=", "Splash Bash")
+      )
+        .$notNull()
+        .as("splashBash"),
       jsonObjectFrom(
         eb
           .selectFrom("event")
@@ -1145,6 +1159,165 @@ export const seed = async (db: Kysely<any>) => {
         accountId: dlLanderTM.id,
         eventId: events.treasureHunt7.id,
         rewardId: rewards.builderBite.id,
+      },
+      // ───────────────────────────
+      // Chests for Lander (Splash Bash)
+      // ───────────────────────────
+      {
+        openedAt: "2025-08-22T18:00:00Z",
+        rarityId: rarities.epic.id,
+        accountId: lander.id,
+        eventId: events.splashBash.id,
+        rewardId: rewards.limitedDecorationHomeVillage.id,
+      },
+      // ───────────────────────────
+      // Chests for Lander (Clan Rush)
+      // ───────────────────────────
+      {
+        openedAt: "2025-12-19T01:02:00Z",
+        rarityId: rarities.rare.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.darkElixer.id,
+        amount: 26200,
+      },
+      {
+        openedAt: "2025-12-19T01:02:01Z",
+        rarityId: rarities.common.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.clanCastleCake.id,
+      },
+      {
+        openedAt: "2025-12-19T01:02:02Z",
+        rarityId: rarities.epic.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.limitedDecorationHomeVillage.id,
+      },
+      {
+        openedAt: "2025-12-19T01:03:00Z",
+        rarityId: rarities.common.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.builderBite.id,
+      },
+      {
+        openedAt: "2025-12-19T01:03:01Z",
+        rarityId: rarities.common.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.gold.id,
+        amount: 951000,
+      },
+      {
+        openedAt: "2025-12-19T01:03:02Z",
+        rarityId: rarities.rare.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.glowyOre.id,
+        amount: 69,
+      },
+      {
+        openedAt: "2025-12-19T01:03:03Z",
+        rarityId: rarities.epic.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.limitedDecorationHomeVillage.id,
+      },
+      {
+        openedAt: "2025-12-19T01:03:04Z",
+        rarityId: rarities.rare.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.researchPotion.id,
+      },
+      {
+        openedAt: "2025-12-19T01:03:05Z",
+        rarityId: rarities.common.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.mightyMorsel.id,
+      },
+      {
+        openedAt: "2025-12-19T01:03:06Z",
+        rarityId: rarities.common.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.clanCastleCake.id,
+      },
+      {
+        openedAt: "2025-12-19T01:04:07Z",
+        rarityId: rarities.rare.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.resourcePotion.id,
+      },
+      {
+        openedAt: "2025-12-19T01:04:08Z",
+        rarityId: rarities.common.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.builderBite.id,
+      },
+      {
+        openedAt: "2025-12-19T01:04:09Z",
+        rarityId: rarities.rare.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.wallRing.id,
+        amount: 2,
+      },
+      {
+        openedAt: "2025-12-19T01:04:10Z",
+        rarityId: rarities.common.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.gold.id,
+        amount: 794000,
+      },
+      {
+        openedAt: "2025-12-19T01:04:11Z",
+        rarityId: rarities.rare.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.powerPotion.id,
+      },
+      {
+        openedAt: "2025-12-19T01:04:12Z",
+        rarityId: rarities.common.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.clanCastleCake.id,
+      },
+      {
+        openedAt: "2025-12-19T01:04:13Z",
+        rarityId: rarities.common.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.builderElixer.id,
+      },
+      {
+        openedAt: "2025-12-19T01:04:14Z",
+        rarityId: rarities.common.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.builderBite.id,
+      },
+      {
+        openedAt: "2025-12-19T01:05:00Z",
+        rarityId: rarities.common.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.darkElixer.id,
+        amount: 10800,
+      },
+      {
+        openedAt: "2025-12-19T01:05:01Z",
+        rarityId: rarities.rare.id,
+        accountId: lander.id,
+        eventId: events.clanRush.id,
+        rewardId: rewards.petPotion.id,
       },
     ])
     .execute();

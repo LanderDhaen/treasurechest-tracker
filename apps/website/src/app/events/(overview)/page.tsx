@@ -17,7 +17,7 @@ export default async function Page() {
   const { events, count } = await getAllEvents();
 
   return (
-    <div className="p-20">
+    <div className="p-4">
       <Table>
         <TableCaption>Currently tracking {count} events.</TableCaption>
         <TableHeader>

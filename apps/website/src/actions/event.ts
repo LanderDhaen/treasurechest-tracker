@@ -35,3 +35,19 @@ export const getAllEvents = async () => {
     count: countQuery.result,
   };
 };
+
+export const getHighestEvent = async () => {
+  const result = await db
+    .selectFrom("event")
+    .leftJoin("chest", "chest.eventId", "event.id")
+    .select((eb) => [
+      "event.name",
+      "event.endDate",
+      eb.fn.count<number>("chest.id").as("count"),
+    ])
+    .groupBy(["event.name", "event.endDate"])
+    .orderBy("count", "desc")
+    .executeTakeFirstOrThrow();
+
+  return result;
+};

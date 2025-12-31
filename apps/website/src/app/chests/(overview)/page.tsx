@@ -16,7 +16,7 @@ export default async function Page() {
   const { chests, chestCount, accountCount } = await getAllChests();
 
   return (
-    <div className="p-20">
+    <div className="p-4">
       <Table>
         <TableCaption>
           {`Currently opened ${chestCount} treasure chests across ${accountCount} accounts.`}

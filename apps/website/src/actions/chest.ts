@@ -46,3 +46,62 @@ export const getAllChests = async () => {
     accountCount: countQuery.accountCount,
   };
 };
+
+export const getLastestChest = async () => {
+  const chest = await db
+    .selectFrom("chest")
+    .innerJoin("reward", "chest.rewardId", "reward.id")
+    .innerJoin("account", "chest.accountId", "account.id")
+    .select([
+      "chest.amount",
+      "reward.name as reward",
+      "account.name as account",
+      "chest.openedAt",
+    ])
+    .orderBy("chest.openedAt", "desc")
+    .executeTakeFirstOrThrow();
+
+  return chest;
+};
+
+export const getLastestLegendaryChest = async () => {
+  const chest = await db
+    .selectFrom("chest")
+    .innerJoin("reward", "chest.rewardId", "reward.id")
+    .innerJoin("account", "chest.accountId", "account.id")
+    .innerJoin("rarity", "chest.rarityId", "rarity.id")
+    .select([
+      "chest.amount",
+      "reward.name as reward",
+      "account.name as account",
+      "chest.openedAt",
+    ])
+    .where("rarity.name", "=", "Epic")
+    .orderBy("chest.openedAt", "desc")
+    .executeTakeFirstOrThrow();
+
+  return chest;
+};
+
+export const getHighestPerformingDay = async () => {
+  const result = await db
+    .selectFrom("chest")
+    .select([
+      db.fn<Date>("DATE", ["chest.openedAt"]).as("day"),
+      db.fn.countAll<number>().as("count"),
+    ])
+    .groupBy("day")
+    .orderBy("count", "desc")
+    .executeTakeFirstOrThrow();
+
+  return result;
+};
+
+export const getChestCount = async () => {
+  const result = await db
+    .selectFrom("chest")
+    .select(db.fn.countAll<number>().as("count"))
+    .executeTakeFirstOrThrow();
+
+  return result.count;
+};
