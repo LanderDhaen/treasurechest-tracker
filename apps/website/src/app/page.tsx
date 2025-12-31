@@ -1,6 +1,7 @@
 import { getChestCountPerAccount } from "@/actions/account";
 import { getMostReceivedCategory } from "@/actions/category";
 import {
+  getChestCount,
   // getHighestPerformingDay,
   getLastestChest,
   // getLastestLegendaryChest,
@@ -18,9 +19,14 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-import { calculateWeeksAgo, formatDate } from "@/lib/utils";
+import {
+  calculatePercentage,
+  calculateWeeksAgo,
+  formatDate,
+} from "@/lib/utils";
 
 export default async function Dashboard() {
+  const chestCount = await getChestCount();
   const chestCountPerAccount = await getChestCountPerAccount();
   const chestCountPerRarity = await getChestCountPerRarity();
   const mostReceivedReward = await getMostReceivedReward();
@@ -58,7 +64,9 @@ export default async function Dashboard() {
             </CardTitle>
           </CardHeader>
           <CardFooter className="text-sm text-muted-foreground">
-            with {mostReceivedReward.count} times
+            with {mostReceivedReward.count} times in {chestCount} treasure
+            chests・
+            <i>{calculatePercentage(mostReceivedReward.count, chestCount)}</i>
           </CardFooter>
         </Card>
 
@@ -70,7 +78,9 @@ export default async function Dashboard() {
             </CardTitle>
           </CardHeader>
           <CardFooter className="text-sm text-muted-foreground">
-            with {mostReceivedCategory.count} times
+            with {mostReceivedCategory.count} times in {chestCount} treasure
+            chests・
+            <i>{calculatePercentage(mostReceivedCategory.count, chestCount)}</i>
           </CardFooter>
         </Card>
 

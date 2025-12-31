@@ -30,3 +30,9 @@ export function calculateWeeksAgo(date: Date) {
 
   return weeks === 0 ? "This week" : `${weeks} week${weeks > 1 ? "s" : ""} ago`;
 }
+
+export function calculatePercentage(part: number, total: number) {
+  if (total === 0) return "0%";
+  const percentage = (part / total) * 100;
+  return `${percentage.toFixed(2)}%`;
+}
