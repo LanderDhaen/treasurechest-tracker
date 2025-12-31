@@ -46,3 +46,39 @@ export const getAllChests = async () => {
     accountCount: countQuery.accountCount,
   };
 };
+
+export const getLastestChest = async () => {
+  const chest = await db
+    .selectFrom("chest")
+    .innerJoin("reward", "chest.rewardId", "reward.id")
+    .innerJoin("account", "chest.accountId", "account.id")
+    .select([
+      "chest.amount",
+      "reward.name as reward",
+      "account.name as account",
+      "chest.openedAt",
+    ])
+    .orderBy("chest.openedAt", "desc")
+    .executeTakeFirstOrThrow();
+
+  return chest;
+};
+
+export const getLastestLegendaryChest = async () => {
+  const chest = await db
+    .selectFrom("chest")
+    .innerJoin("reward", "chest.rewardId", "reward.id")
+    .innerJoin("account", "chest.accountId", "account.id")
+    .innerJoin("rarity", "chest.rarityId", "rarity.id")
+    .select([
+      "chest.amount",
+      "reward.name as reward",
+      "account.name as account",
+      "chest.openedAt",
+    ])
+    .where("rarity.name", "=", "Epic")
+    .orderBy("chest.openedAt", "desc")
+    .executeTakeFirstOrThrow();
+
+  return chest;
+};

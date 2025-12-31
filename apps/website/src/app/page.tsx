@@ -1,5 +1,6 @@
 import { getChestCountPerAccount } from "@/actions/account";
 import { getMostReceivedCategory } from "@/actions/category";
+import { getLastestChest, getLastestLegendaryChest } from "@/actions/chest";
 import { getHighestEvent } from "@/actions/event";
 import { getChestCountPerRarity } from "@/actions/rarity";
 import { getMostReceivedReward } from "@/actions/reward";
@@ -21,10 +22,44 @@ export default async function Dashboard() {
   const highestEvent = await getHighestEvent();
   const mostReceivedReward = await getMostReceivedReward();
   const mostReceivedCategory = await getMostReceivedCategory();
+  const latestChest = await getLastestChest();
+  const latestLegendaryChest = await getLastestLegendaryChest();
 
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Card>
+          <CardHeader>
+            <CardDescription>Latest Treasure Chest</CardDescription>
+            <CardTitle className="flex gap-2 start text-2xl">
+              {latestChest.amount === 1
+                ? `${latestChest.reward}`
+                : `${latestChest.amount.toLocaleString()} ${
+                    latestChest.reward
+                  }`}
+            </CardTitle>
+          </CardHeader>
+          <CardFooter className="text-sm text-muted-foreground">
+            on {latestChest.account}・
+            <i>{calculateWeeksAgo(new Date(latestChest.openedAt))}</i>
+          </CardFooter>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardDescription>Latest Legendary</CardDescription>
+            <CardTitle className="flex gap-2 start text-2xl">
+              {latestLegendaryChest.amount === 1
+                ? `${latestLegendaryChest.reward}`
+                : `${latestLegendaryChest.amount.toLocaleString()} ${
+                    latestLegendaryChest.reward
+                  }`}
+            </CardTitle>
+          </CardHeader>
+          <CardFooter className="text-sm text-muted-foreground">
+            on {latestChest.account}・
+            <i>{calculateWeeksAgo(new Date(latestChest.openedAt))}</i>
+          </CardFooter>
+        </Card>
         <Card>
           <CardHeader>
             <CardDescription>Highest Performing Event</CardDescription>
