@@ -1,6 +1,10 @@
 import { getChestCountPerAccount } from "@/actions/account";
 import { getMostReceivedCategory } from "@/actions/category";
-import { getLastestChest, getLastestLegendaryChest } from "@/actions/chest";
+import {
+  getHighestPerformingDay,
+  getLastestChest,
+  getLastestLegendaryChest,
+} from "@/actions/chest";
 import { getHighestEvent } from "@/actions/event";
 import { getChestCountPerRarity } from "@/actions/rarity";
 import { getMostReceivedReward } from "@/actions/reward";
@@ -14,7 +18,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-import { calculateWeeksAgo } from "@/lib/utils";
+import { calculateWeeksAgo, formatDate } from "@/lib/utils";
 
 export default async function Dashboard() {
   const chestCountPerAccount = await getChestCountPerAccount();
@@ -24,6 +28,7 @@ export default async function Dashboard() {
   const mostReceivedCategory = await getMostReceivedCategory();
   const latestChest = await getLastestChest();
   const latestLegendaryChest = await getLastestLegendaryChest();
+  const highestPerformingDay = await getHighestPerformingDay();
 
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -90,6 +95,18 @@ export default async function Dashboard() {
           </CardHeader>
           <CardFooter className="text-sm text-muted-foreground">
             with {mostReceivedCategory.count} times
+          </CardFooter>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardDescription>Highest Performing Day</CardDescription>
+            <CardTitle className="text-2xl">
+              {formatDate(highestPerformingDay.day)}
+            </CardTitle>
+          </CardHeader>
+          <CardFooter className="text-sm text-muted-foreground">
+            with {highestPerformingDay.count} treasure chests opened・
+            <i>{calculateWeeksAgo(new Date(highestPerformingDay.day))}</i>
           </CardFooter>
         </Card>
       </div>

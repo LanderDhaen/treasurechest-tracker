@@ -82,3 +82,17 @@ export const getLastestLegendaryChest = async () => {
 
   return chest;
 };
+
+export const getHighestPerformingDay = async () => {
+  const result = await db
+    .selectFrom("chest")
+    .select([
+      db.fn<Date>("DATE", ["chest.openedAt"]).as("day"),
+      db.fn.countAll<number>().as("count"),
+    ])
+    .groupBy("day")
+    .orderBy("count", "desc")
+    .executeTakeFirstOrThrow();
+
+  return result;
+};
