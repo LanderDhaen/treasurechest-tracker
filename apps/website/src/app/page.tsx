@@ -31,8 +31,8 @@ export default async function Dashboard() {
   const highestPerformingDay = await getHighestPerformingDay();
 
   return (
-    <div className="flex flex-col gap-4 p-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="p-4 grid gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 subgrid">
         <Card>
           <CardHeader>
             <CardDescription>Latest Treasure Chest</CardDescription>
@@ -49,6 +49,7 @@ export default async function Dashboard() {
             <i>{calculateWeeksAgo(new Date(latestChest.openedAt))}</i>
           </CardFooter>
         </Card>
+
         <Card>
           <CardHeader>
             <CardDescription>Latest Legendary</CardDescription>
@@ -65,6 +66,7 @@ export default async function Dashboard() {
             <i>{calculateWeeksAgo(new Date(latestChest.openedAt))}</i>
           </CardFooter>
         </Card>
+
         <Card>
           <CardHeader>
             <CardDescription>Highest Performing Event</CardDescription>
@@ -75,6 +77,7 @@ export default async function Dashboard() {
             <i>{calculateWeeksAgo(new Date(highestEvent.endDate))}</i>
           </CardFooter>
         </Card>
+
         <Card>
           <CardHeader>
             <CardDescription>Most Received Reward</CardDescription>
@@ -86,6 +89,7 @@ export default async function Dashboard() {
             with {mostReceivedReward.count} times
           </CardFooter>
         </Card>
+
         <Card>
           <CardHeader>
             <CardDescription>Most Received Category</CardDescription>
@@ -97,6 +101,7 @@ export default async function Dashboard() {
             with {mostReceivedCategory.count} times
           </CardFooter>
         </Card>
+
         <Card>
           <CardHeader>
             <CardDescription>Highest Performing Day</CardDescription>
@@ -110,7 +115,8 @@ export default async function Dashboard() {
           </CardFooter>
         </Card>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 subgrid">
         <ChestCountAccountChart chestCountPerAccount={chestCountPerAccount} />
         <ChestCountRarityChart chestCountPerRarity={chestCountPerRarity} />
       </div>
