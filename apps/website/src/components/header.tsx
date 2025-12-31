@@ -9,7 +9,6 @@ export function Header() {
         orientation="vertical"
         className="mx-2 data-[orientation=vertical]:h-4"
       />
-      <span className="text-muted-foreground">Dashboard</span>
     </header>
   );
 }
