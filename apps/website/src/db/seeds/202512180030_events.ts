@@ -24,7 +24,7 @@ export const seed = async (db: Kysely<any>) => {
         name: "Treasure Hunt 1",
         startDate: "2024-09-19",
         endDate: "2024-10-09",
-        maxChests: 38,
+        maxChests: 30,
       },
       {
         createdAt: "2025-12-18 00:30:00",
