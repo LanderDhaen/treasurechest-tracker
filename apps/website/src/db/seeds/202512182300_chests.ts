@@ -4,13 +4,11 @@ import { Kysely } from "kysely";
 export const seed = async (db: Kysely<any>) => {
   await db.deleteFrom("chest").execute();
 
+  // DL✨Lander
+
   await db
     .insertInto("chest")
     .values([
-      // ───────────────────────────
-      // Chests for DL✨Lander (Meteor Catcher)
-      // ───────────────────────────
-
       {
         openedAt: "2025-11-04T17:27:00Z",
         rarityId: 2, // Rare
@@ -108,9 +106,6 @@ export const seed = async (db: Kysely<any>) => {
         eventId: 15, // Meteor Catcher
         rewardId: 6, // Gold
       },
-      // ───────────────────────────
-      // Chests for DL✨Lander (Treasure Hunt 7)
-      // ───────────────────────────
       {
         openedAt: "2025-11-28T14:07:00Z",
         rarityId: 2, // Rare
@@ -260,9 +255,14 @@ export const seed = async (db: Kysely<any>) => {
         eventId: 16, // Treasure Hunt 7
         rewardId: 3, // Power Pancakes
       },
-      // ───────────────────────────
-      // Chests for DL✨Lander™ (Meteor Catcher)
-      // ───────────────────────────
+    ])
+    .execute();
+
+  // DL✨Lander™
+
+  await db
+    .insertInto("chest")
+    .values([
       {
         openedAt: "2025-11-03T20:30:00Z",
         rarityId: 3, // Epic
@@ -359,9 +359,6 @@ export const seed = async (db: Kysely<any>) => {
         eventId: 15, // Meteor Catcher
         rewardId: 13, // Builder Potion
       },
-      // ───────────────────────────
-      // Chests for DL✨Lander™ (Treasure Hunt 7)
-      // ───────────────────────────
       {
         openedAt: "2025-11-30T23:31:00Z",
         rarityId: 1, // Common
@@ -516,9 +513,14 @@ export const seed = async (db: Kysely<any>) => {
         eventId: 16, // Treasure Hunt 7
         rewardId: 1, // Builder Bite,
       },
-      // ───────────────────────────
-      // Chests for Lander (Splash Bash)
-      // ───────────────────────────
+    ])
+    .execute();
+
+  // Lander
+
+  await db
+    .insertInto("chest")
+    .values([
       {
         openedAt: "2025-08-22T18:00:00Z",
         rarityId: 3, // Epic
@@ -526,9 +528,6 @@ export const seed = async (db: Kysely<any>) => {
         eventId: 11, // Splash Bash
         rewardId: 40, // Limited Decoration (Home Village)
       },
-      // ───────────────────────────
-      // Chests for Lander (Clan Rush)
-      // ───────────────────────────
       {
         openedAt: "2025-12-19T01:02:00Z",
         rarityId: 2, // Rare
