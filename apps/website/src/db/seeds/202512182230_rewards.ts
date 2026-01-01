@@ -1,5 +1,4 @@
 import { Kysely } from "kysely";
-import { jsonObjectFrom } from "kysely/helpers/postgres";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const seed = async (db: Kysely<any>) => {
