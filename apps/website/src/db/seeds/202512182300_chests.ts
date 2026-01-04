@@ -344,14 +344,14 @@ export const seed = async (db: Kysely<any>) => {
         rewardId: 41, // Shop Decoration (Home Village)
       },
       {
-        openedAt: "2024-12-11T10:00:01Z",
+        openedAt: "2024-12-10T10:00:01Z",
         rarityId: 2, // Rare
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
         rewardId: 20, // Hero Potion
       },
       {
-        openedAt: "2024-12-11T10:00:02Z",
+        openedAt: "2024-12-13T10:00:02Z",
         rarityId: 2, // Rare
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
@@ -359,7 +359,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 11200,
-        openedAt: "2024-12-12T10:00:01Z",
+        openedAt: "2024-12-14T10:00:01Z",
         rarityId: 1, // Common
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
@@ -367,7 +367,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 12000,
-        openedAt: "2024-12-12T10:00:02Z",
+        openedAt: "2024-12-15T10:00:02Z",
         rarityId: 1, // Common
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
@@ -375,28 +375,28 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 2590,
-        openedAt: "2024-12-12T10:00:03Z",
+        openedAt: "2024-12-15T10:00:03Z",
         rarityId: 2, // Rare
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
         rewardId: 12, // Capital Gold
       },
       {
-        openedAt: "2024-12-12T10:00:04Z",
+        openedAt: "2024-12-16T10:00:04Z",
         rarityId: 1, // Common
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
         rewardId: 1, // Training Treat
       },
       {
-        openedAt: "2024-12-12T10:00:05Z",
+        openedAt: "2024-12-16T10:00:05Z",
         rarityId: 1, // Common
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
         rewardId: 4, // Power Pancakes
       },
       {
-        openedAt: "2024-12-12T10:00:06Z",
+        openedAt: "2024-12-17T10:00:06Z",
         rarityId: 2, // Rare
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
@@ -404,7 +404,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 570000,
-        openedAt: "2024-12-12T10:00:07Z",
+        openedAt: "2024-12-17T10:00:07Z",
         rarityId: 1, // Common
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
@@ -412,7 +412,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 7840,
-        openedAt: "2024-12-13T10:00:01Z",
+        openedAt: "2024-12-17T10:00:01Z",
         rarityId: 1, // Common
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
