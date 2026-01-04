@@ -2207,35 +2207,35 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-19T12:20:00Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        eventId: 5, // Treasure Chest Launch
+        eventId: 1, // Treasure Chest Launch
         rewardId: 7, // Gold
       },
       {
         openedAt: "2024-09-19T12:20:01Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        eventId: 5, // Treasure Chest Launch
+        eventId: 1, // Treasure Chest Launch
         rewardId: 4, // Power Pancakes
       },
       {
         openedAt: "2024-09-19T12:20:02Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        eventId: 5, // Treasure Chest Launch
+        eventId: 1, // Treasure Chest Launch
         rewardId: 14, // Resource Potion
       },
       {
         openedAt: "2024-09-19T12:20:03Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        eventId: 5, // Treasure Chest Launch
+        eventId: 1, // Treasure Chest Launch
         rewardId: 13, // Training Potion
       },
       {
         openedAt: "2024-09-19T12:20:04Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        eventId: 5, // Treasure Chest Launch
+        eventId: 1, // Treasure Chest Launch
         rewardId: 13, // Training Potion
       },
 
@@ -2244,7 +2244,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-19T12:45:01Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        eventId: 6, // Treasure Hunt 1
+        eventId: 2, // Treasure Hunt 1
         rewardId: 39, // Glowy Ore
       },
       {
@@ -2252,14 +2252,14 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-20T16:15:00Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        eventId: 6, // Treasure Hunt 1
+        eventId: 2, // Treasure Hunt 1
         rewardId: 7, // Gold
       },
       {
         openedAt: "2024-09-21T01:42:00Z",
         rarityId: 3, // Epic
         accountId: 3, // DL✨Lander™
-        eventId: 6, // Treasure Hunt 1
+        eventId: 2, // Treasure Hunt 1
         rewardId: 25, // Book of Fighting
       },
       {
@@ -2267,14 +2267,14 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-21T11:31:00Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        eventId: 6, // Treasure Hunt 1
+        eventId: 2, // Treasure Hunt 1
         rewardId: 9, // Dark Elixer
       },
       {
         openedAt: "2024-09-22T18:08:00Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        eventId: 6, // Treasure Hunt 1
+        eventId: 2, // Treasure Hunt 1
         rewardId: 14, // Resource Potion
       },
       {
@@ -2282,7 +2282,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-23T00:48:00Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        eventId: 6, // Treasure Hunt 1
+        eventId: 2, // Treasure Hunt 1
         rewardId: 12, // Capital Gold
       },
       {
@@ -2290,14 +2290,14 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-23T10:19:00Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        eventId: 6, // Treasure Hunt 1
+        eventId: 2, // Treasure Hunt 1
         rewardId: 7, // Gold
       },
       {
         openedAt: "2024-09-24T10:20:00Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        eventId: 6, // Treasure Hunt 1
+        eventId: 2, // Treasure Hunt 1
         rewardId: 6, // Mighty Morsel
       },
 
