@@ -525,7 +525,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 1, // DL✨Lander
         eventId: 6, // Treasure Hunt 2
-        rewardId: 38, // Starry Ore
+        rewardId: 40, // Starry Ore
       },
       {
         openedAt: "2025-03-19T12:45:47Z",
@@ -800,12 +800,12 @@ export const seed = async (db: Kysely<any>) => {
       },
 
       {
-        amount: 11000,
+        amount: 34,
         openedAt: "2025-04-24T12:01:00Z",
         rarityId: 3, // Epic
         accountId: 1, // DL✨Lander
         eventId: 8, // WWE Chest
-        rewardId: 9, // Starry Ore
+        rewardId: 40, // Starry Ore
       },
 
       {
@@ -1350,7 +1350,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 1, // DL✨Lander
         eventId: 13, // Treasure Hunt 5
-        rewardId: 47, // Limited Clan House Roof
+        rewardId: 51, // Limited Clan House Roof
       },
       {
         openedAt: "2025-10-03T09:53:00Z",
@@ -2047,7 +2047,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 2, // DL Senne
         eventId: 16, // Treasure Hunt 7
-        rewardId: 47, // Limited Clan House Roof
+        rewardId: 49, // Limited Clan House Roof
       },
 
       {
@@ -2423,7 +2423,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 4, // Legendary
         accountId: 3, // DL✨Lander™
         eventId: 7, // Gold Rush
-        rewardId: 29, // Book of Everything
+        rewardId: 31, // Book of Everything
       },
       {
         openedAt: "2025-04-16T21:13:02Z",
@@ -3646,7 +3646,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 6, // Treasure Hunt 2
-        rewardId: 48, // Trader Clan House Floor,
+        rewardId: 51, // Trader Clan House Floor,
       },
       {
         openedAt: "2025-03-24T20:17:00Z",
@@ -4458,7 +4458,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 4, // Legendary
         accountId: 4, // Lander
         eventId: 15, // Meteor Catcher
-        rewardId: 55, // Battle Machine Skin
+        rewardId: 57, // Battle Machine Skin
       },
       {
         amount: 2720,
@@ -4527,7 +4527,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 16, // Treasure Hunt 7
-        rewardId: 48, // TraderClan House Decoration
+        rewardId: 48, // Trader Clan House Decoration
       },
       {
         amount: 13700,
@@ -4891,7 +4891,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 4, // Legendary
         accountId: 5, // DL✨Senne
         eventId: 16, // Treasure Hunt 7
-        rewardId: 31, // Hammer of Fighting
+        rewardId: 33, // Hammer of Fighting
       },
       {
         amount: 13800,
@@ -5044,7 +5044,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 5, // DL✨Senne
         eventId: 17, // Clan Rush
-        rewardId: 32, // Trader Clan House Roof
+        rewardId: 49, // Trader Clan House Roof
       },
       {
         openedAt: "2025-12-19T01:11:04Z",
@@ -5652,7 +5652,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 7, // Synx_Viiper
         eventId: 17, // Clan Rush
-        rewardId: 49, // Trader Clan House Roof
+        rewardId: 49, // Limited Clan House Roof
       },
       {
         amount: 563000,
@@ -6480,7 +6480,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 4, // Legendary
         accountId: 9, // Lvl.1 Lander
         eventId: 10, // Treasure Hunt 4
-        rewardId: 33, // Hammer of Heroes
+        rewardId: 35, // Hammer of Heroes
       },
       {
         amount: 773000,
@@ -6559,7 +6559,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 9, // Lvl.1 Lander
         eventId: 14, // Treasure Hunt 6
-        rewardId: 46, // Clan House Walls
+        rewardId: 46, // Trader Clan House Walls
       },
       {
         amount: 48,
@@ -6689,7 +6689,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 9, // Lvl.1 Lander
         eventId: 17, // Clan Rush
-        rewardId: 32, // Book of Fighting
+        rewardId: 25, // Book of Fighting
       },
       {
         amount: 3,
@@ -6758,7 +6758,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 4, // Legendary
         accountId: 9, // Lvl.1 Lander
         eventId: 17, // Clan Rush
-        rewardId: 51, // King Skin
+        rewardId: 53, // King Skin
       },
       {
         openedAt: "2025-12-19T01:34:02Z",
@@ -6772,7 +6772,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 9, // Lvl.1 Lander
         eventId: 17, // Clan Rush
-        rewardId: 32, // Book of Fighting
+        rewardId: 25, // Book of Fighting
       },
       {
         amount: 2,
