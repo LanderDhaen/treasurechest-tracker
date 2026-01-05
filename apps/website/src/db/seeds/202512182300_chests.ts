@@ -6937,31 +6937,38 @@ export const seed = async (db: Kysely<any>) => {
         eventId: 6, // Treasure Hunt 2
         rewardId: 8, // Elixer
       },
+    ])
+    .execute();
 
+  // Lvl.10 Lander
+
+  await db
+    .insertInto("chest")
+    .values([
       {
         amount: 6660,
-        openedAt: "2024-09-19T10:54:00Z",
+        openedAt: "2024-09-19T11:02:00Z",
         rarityId: 1, // Common
         accountId: 12, // Lvl.10 Lander
         eventId: 1, // Treasure Chest Launch
         rewardId: 9, // Dark Elixer
       },
       {
-        openedAt: "2024-09-19T10:54:01Z",
+        openedAt: "2024-09-19T11:02:01Z",
         rarityId: 2, // Rare
         accountId: 12, // Lvl.10 Lander
         eventId: 1, // Treasure Chest Launch
         rewardId: 14, // Resource Potion
       },
       {
-        openedAt: "2024-09-19T10:54:02Z",
+        openedAt: "2024-09-19T11:02:02Z",
         rarityId: 3, // Epic
         accountId: 12, // Lvl.10 Lander
         eventId: 1, // Treasure Chest Launch
         rewardId: 27, // Book of Heroes
       },
       {
-        openedAt: "2024-09-19T10:54:03Z",
+        openedAt: "2024-09-19T11:02:03Z",
         rarityId: 1, // Common
         accountId: 12, // Lvl.10 Lander
         eventId: 1, // Treasure Chest Launch
@@ -6969,7 +6976,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 2740,
-        openedAt: "2024-09-19T10:54:04Z",
+        openedAt: "2024-09-19T11:02:04Z",
         rarityId: 1, // Common
         accountId: 12, // Lvl.10 Lander
         eventId: 1, // Treasure Chest Launch
