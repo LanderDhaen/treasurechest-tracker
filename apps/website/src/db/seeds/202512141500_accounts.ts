@@ -98,9 +98,17 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-14 15:00:00",
         updatedAt: "2025-12-14 15:00:00",
+        name: "Lvl.10 Lander",
+        tag: "L2VP2C2P0",
+        townhall: 10,
+        clanId: 4, // DL Mini
+      },
+      {
+        createdAt: "2025-12-14 15:00:00",
+        updatedAt: "2025-12-14 15:00:00",
         name: "Peace",
         tag: "28U8RUVL",
-        townhall: 9,
+        townhall: 10,
         clanId: 4, // DL Mini
       },
       {

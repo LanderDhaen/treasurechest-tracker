@@ -6937,6 +6937,83 @@ export const seed = async (db: Kysely<any>) => {
         eventId: 6, // Treasure Hunt 2
         rewardId: 8, // Elixer
       },
+
+      {
+        amount: 6660,
+        openedAt: "2024-09-19T10:54:00Z",
+        rarityId: 1, // Common
+        accountId: 12, // Lvl.10 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2024-09-19T10:54:01Z",
+        rarityId: 2, // Rare
+        accountId: 12, // Lvl.10 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 14, // Resource Potion
+      },
+      {
+        openedAt: "2024-09-19T10:54:02Z",
+        rarityId: 3, // Epic
+        accountId: 12, // Lvl.10 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 27, // Book of Heroes
+      },
+      {
+        openedAt: "2024-09-19T10:54:03Z",
+        rarityId: 1, // Common
+        accountId: 12, // Lvl.10 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 2740,
+        openedAt: "2024-09-19T10:54:04Z",
+        rarityId: 1, // Common
+        accountId: 12, // Lvl.10 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 12, // Capital Gold
+      },
+
+      {
+        amount: 10200,
+        openedAt: "2025-03-17T13:28:00Z",
+        rarityId: 2, // Rare
+        accountId: 12, // Lvl.10 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 5140,
+        openedAt: "2025-03-17T13:28:01Z",
+        rarityId: 1, // Common
+        accountId: 12, // Lvl.10 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 36,
+        openedAt: "2025-03-17T13:28:02Z",
+        rarityId: 2, // Rare
+        accountId: 12, // Lvl.10 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 39, // Glowy Ore
+      },
+      {
+        openedAt: "2025-03-17T13:28:03Z",
+        rarityId: 1, // Common
+        accountId: 12, // Lvl.10 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        openedAt: "2025-03-17T13:28:04Z",
+        rarityId: 1, // Common
+        accountId: 12, // Lvl.10 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 4, // Power Pancakes
+      },
     ])
     .execute();
 };
