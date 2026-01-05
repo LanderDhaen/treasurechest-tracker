@@ -7023,4 +7023,511 @@ export const seed = async (db: Kysely<any>) => {
       },
     ])
     .execute();
+
+  // Peace
+
+  await db
+    .insertInto("chest")
+    .values([
+      {
+        amount: 6660,
+        openedAt: "2024-09-19T11:10:00Z",
+        rarityId: 1, // Common
+        accountId: 13, // Peace
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2024-09-19T11:10:01Z",
+        rarityId: 2, // Rare
+        accountId: 13, // Peace
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 14, // Resource Potion
+      },
+      {
+        openedAt: "2024-09-19T11:10:02Z",
+        rarityId: 3, // Epic
+        accountId: 13, // Peace
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 27, // Book of Heroes
+      },
+      {
+        openedAt: "2024-09-19T11:10:03Z",
+        rarityId: 1, // Common
+        accountId: 13, // Peace
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 2740,
+        openedAt: "2024-09-19T11:10:04Z",
+        rarityId: 1, // Common
+        accountId: 13, // Peace
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 12, // Capital Gold
+      },
+
+      {
+        amount: 10200,
+        openedAt: "2025-03-17T13:37:00Z",
+        rarityId: 2, // Rare
+        accountId: 13, // Peace
+        eventId: 5, // Content Creator Chests
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 5140,
+        openedAt: "2025-03-17T13:37:01Z",
+        rarityId: 1, // Common
+        accountId: 13, // Peace
+        eventId: 5, // Content Creator Chests
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 36,
+        openedAt: "2025-03-17T13:37:02Z",
+        rarityId: 2, // Rare
+        accountId: 13, // Peace
+        eventId: 5, // Content Creator Chests
+        rewardId: 39, // Glowy Ore
+      },
+      {
+        openedAt: "2025-03-17T13:37:03Z",
+        rarityId: 1, // Common
+        accountId: 13, // Peace
+        eventId: 5, // Content Creator Chests
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        openedAt: "2025-03-17T13:37:04Z",
+        rarityId: 1, // Common
+        accountId: 13, // Peace
+        eventId: 5, // Content Creator Chests
+        rewardId: 4, // Power Pancakes
+      },
+    ])
+    .execute();
+
+  // Lvl.9 Lander
+
+  await db
+    .insertInto("chest")
+    .values([
+      {
+        amount: 1260,
+        openedAt: "2024-09-19T11:17:00Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 12, // Capital Gold
+      },
+      {
+        amount: 517000,
+        openedAt: "2024-09-19T11:17:01Z",
+        rarityId: 2, // Rare
+        accountId: 14, // Lvl.9 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2024-09-19T11:17:02Z",
+        rarityId: 2, // Rare
+        accountId: 14, // Lvl.9 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 20, // Hero Potion
+      },
+      {
+        openedAt: "2024-09-19T11:17:03Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 1, // Training Treat
+      },
+      {
+        openedAt: "2024-09-19T11:17:04Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 1, // Training Treat
+      },
+
+      {
+        amount: 21,
+        openedAt: "2024-12-04T12:00:00Z",
+        rarityId: 3, // Epic
+        accountId: 14, // Lvl.9 Lander
+        eventId: 3, // Controllable Heroes
+        rewardId: 40, // Starry Ore
+      },
+      {
+        openedAt: "2024-12-05T12:00:00Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 3, // Controllable Heroes
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        openedAt: "2024-12-06T12:00:00Z",
+        rarityId: 3, // Epic
+        accountId: 14, // Lvl.9 Lander
+        eventId: 3, // Controllable Heroes
+        rewardId: 25, // Book of Fighting
+      },
+      {
+        amount: 362000,
+        openedAt: "2024-12-07T12:00:00Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 3, // Controllable Heroes
+        rewardId: 11, // Builder Elixer
+      },
+      {
+        openedAt: "2024-12-08T12:00:00Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 3, // Controllable Heroes
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 2,
+        openedAt: "2024-12-08T12:00:01Z",
+        rarityId: 2, // Rare
+        accountId: 14, // Lvl.9 Lander
+        eventId: 3, // Controllable Heroes
+        rewardId: 21, // Wall Ring
+      },
+      {
+        amount: 1180000,
+        openedAt: "2024-12-09T12:00:00Z",
+        rarityId: 2, // Rare
+        accountId: 14, // Lvl.9 Lander
+        eventId: 3, // Controllable Heroes
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 9630,
+        openedAt: "2024-12-09T12:00:01Z",
+        rarityId: 2, // Rare
+        accountId: 14, // Lvl.9 Lander
+        eventId: 3, // Controllable Heroes
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 627000,
+        openedAt: "2024-12-10T12:00:00Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 3, // Controllable Heroes
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2024-12-10T12:00:01Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 3, // Controllable Heroes
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 2,
+        openedAt: "2024-12-10T12:00:02Z",
+        rarityId: 2, // Rare
+        accountId: 14, // Lvl.9 Lander
+        eventId: 3, // Controllable Heroes
+        rewardId: 21, // Wall Ring
+      },
+
+      {
+        amount: 394000,
+        openedAt: "2025-03-17T13:45:00Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 463000,
+        openedAt: "2025-03-17T13:45:01Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2025-03-17T13:45:02Z",
+        rarityId: 2, // Rare
+        accountId: 14, // Lvl.9 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 14, // Resource Potion
+      },
+      {
+        openedAt: "2025-03-17T13:45:03Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 4880,
+        openedAt: "2025-03-17T13:45:04Z",
+        rarityId: 1, // Common
+        accountId: 14, // Lvl.9 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 9, // Dark Elixer
+      },
+    ])
+    .execute();
+
+  // Lander - TH8
+
+  await db
+    .insertInto("chest")
+    .values([
+      {
+        amount: 23700,
+        openedAt: "2024-09-19T11:25:00Z",
+        rarityId: 1, // Common
+        accountId: 15, // Lander - TH8
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 906000,
+        openedAt: "2024-09-19T11:25:01Z",
+        rarityId: 2, // Rare
+        accountId: 15, // Lander - TH8
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 425000,
+        openedAt: "2024-09-19T11:25:02Z",
+        rarityId: 1, // Common
+        accountId: 15, // Lander - TH8
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2024-09-19T11:25:03Z",
+        rarityId: 3, // Epic
+        accountId: 15, // Lander - TH8
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 47, // Trader Clan House Floor
+      },
+      {
+        openedAt: "2024-09-19T11:25:04Z",
+        rarityId: 1, // Common
+        accountId: 15, // Lander - TH8
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 2, // Builder Bite
+      },
+
+      {
+        amount: 19900,
+        openedAt: "2025-03-17T13:51:00Z",
+        rarityId: 1, // Common
+        accountId: 15, // Lander - TH8
+        eventId: 5, // Content Creator Chests
+        rewardId: 10, // Builder Gold
+      },
+      {
+        openedAt: "2025-03-17T13:51:01Z",
+        rarityId: 2, // Rare
+        accountId: 15, // Lander - TH8
+        eventId: 5, // Content Creator Chests
+        rewardId: 17, // Research Potion
+      },
+      {
+        openedAt: "2025-03-17T13:51:02Z",
+        rarityId: 1, // Common
+        accountId: 15, // Lander - TH8
+        eventId: 5, // Content Creator Chests
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        openedAt: "2025-03-17T13:51:03Z",
+        rarityId: 1, // Common
+        accountId: 15, // Lander - TH8
+        eventId: 5, // Content Creator Chests
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 2140,
+        openedAt: "2025-03-17T13:51:04Z",
+        rarityId: 2, // Rare
+        accountId: 15, // Lander - TH8
+        eventId: 5, // Content Creator Chests
+        rewardId: 12, // Capital Gold
+      },
+    ])
+    .execute();
+
+  // Lvl.8 Lander
+
+  await db
+    .insertInto("chest")
+    .values([
+      {
+        openedAt: "2024-09-19T11:33:00Z",
+        rarityId: 1, // Common
+        accountId: 16, // Lvl.8 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 460000,
+        openedAt: "2024-09-19T11:33:01Z",
+        rarityId: 1, // Common
+        accountId: 16, // Lvl.8 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 6390,
+        openedAt: "2024-09-19T11:33:02Z",
+        rarityId: 1, // Common
+        accountId: 16, // Lvl.8 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2024-09-19T11:33:03Z",
+        rarityId: 2, // Rare
+        accountId: 16, // Lvl.8 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 20, // Hero Potion
+      },
+      {
+        amount: 116,
+        openedAt: "2024-09-19T11:33:04Z",
+        rarityId: 3, // Epic
+        accountId: 16, // Lvl.8 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 39, // Glowy Ore
+      },
+
+      {
+        openedAt: "2025-03-17T13:59:00Z",
+        rarityId: 3, // Epic
+        accountId: 16, // Lvl.8 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 26, // Book of Spells
+      },
+      {
+        openedAt: "2025-03-17T13:59:01Z",
+        rarityId: 1, // Common
+        accountId: 16, // Lvl.8 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 1120,
+        openedAt: "2025-03-17T13:59:02Z",
+        rarityId: 3, // Epic
+        accountId: 16, // Lvl.8 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 38, // Shiny Ore
+      },
+      {
+        amount: 100,
+        openedAt: "2025-03-17T13:59:03Z",
+        rarityId: 3, // Epic
+        accountId: 16, // Lvl.8 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 39, // Glowy Ore
+      },
+      {
+        amount: 3610,
+        openedAt: "2025-03-17T13:59:04Z",
+        rarityId: 1, // Common
+        accountId: 16, // Lvl.8 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 9, // Dark Elixer
+      },
+    ])
+    .execute();
+
+  // Lvl.7 Lander
+
+  await db
+    .insertInto("chest")
+    .values([
+      // Treasure Chest Launch — Event 1
+      {
+        openedAt: "2024-09-19T11:41:00Z",
+        rarityId: 3, // Epic
+        accountId: 17, // Lvl.7 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 29, // Rune of Builder Gold
+      },
+      {
+        amount: 202000,
+        openedAt: "2024-09-19T11:41:01Z",
+        rarityId: 1, // Common
+        accountId: 17, // Lvl.7 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2024-09-19T11:41:02Z",
+        rarityId: 3, // Epic
+        accountId: 17, // Lvl.7 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 24, // Book of Building
+      },
+      {
+        openedAt: "2024-09-19T11:41:03Z",
+        rarityId: 1, // Common
+        accountId: 17, // Lvl.7 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 1, // Training Treat
+      },
+      {
+        amount: 40000,
+        openedAt: "2024-09-19T11:41:04Z",
+        rarityId: 1, // Common
+        accountId: 17, // Lvl.7 Lander
+        eventId: 1, // Treasure Chest Launch
+        rewardId: 10, // Builder Gold
+      },
+
+      {
+        openedAt: "2025-03-17T14:06:00Z",
+        rarityId: 1, // Common
+        accountId: 17, // Lvl.7 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 154000,
+        openedAt: "2025-03-17T14:06:01Z",
+        rarityId: 1, // Common
+        accountId: 17, // Lvl.7 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2025-03-17T14:06:02Z",
+        rarityId: 2, // Rare
+        accountId: 17, // Lvl.7 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 19, // Builder Star Jar
+      },
+      {
+        amount: 20500,
+        openedAt: "2025-03-17T14:06:03Z",
+        rarityId: 1, // Common
+        accountId: 17, // Lvl.7 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 1870,
+        openedAt: "2025-03-17T14:06:04Z",
+        rarityId: 1, // Common
+        accountId: 17, // Lvl.7 Lander
+        eventId: 5, // Content Creator Chests
+        rewardId: 9, // Dark Elixer
+      },
+    ])
+    .execute();
 };
