@@ -69,7 +69,7 @@ export function ChestCountAccountChart({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer config={chartConfig} className="min-h-50 w-full">
           <BarChart
             accessibilityLayer
             data={chestCountPerAccount}
@@ -85,7 +85,8 @@ export function ChestCountAccountChart({
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              width={120}
+              width={110}
+              interval={0}
             />
             <ChartTooltip
               cursor={false}

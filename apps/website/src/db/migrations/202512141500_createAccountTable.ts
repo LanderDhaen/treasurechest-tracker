@@ -14,7 +14,9 @@ export const up = async (db: Kysely<any>) => {
 
     // Foreign keys
 
-    .addColumn("clanId", "integer", (c) => c.references("clan.id").notNull())
+    .addColumn("clanId", "integer", (c) =>
+      c.references("clan.id").notNull().onDelete("restrict")
+    )
 
     .execute();
 };

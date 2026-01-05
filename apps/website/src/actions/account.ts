@@ -13,6 +13,7 @@ export const getAllAccounts = async () => {
   const accounts = await baseQuery
     .innerJoin("clan", "account.clanId", "clan.id")
     .orderBy("account.townhall", "desc")
+    .orderBy("account.name", "asc")
     .select((eb) => [
       "account.name",
       "account.tag",
@@ -45,6 +46,8 @@ export const getChestCountPerAccount = async () => {
     ])
     .groupBy(["account.name", "account.townhall"])
     .orderBy("count", "desc")
+    .orderBy("account.townhall", "desc")
+    .orderBy("account.name", "asc")
     .execute();
 
   return result;
