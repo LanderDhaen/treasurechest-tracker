@@ -46,8 +46,8 @@ export default function PageSelect({
   ];
 
   return (
-    <div className="flex gap-4">
-      <span className="flex items-center">
+    <div className="flex items-center gap-4">
+      <span>
         Page {currentPage} of {totalPages}
       </span>
       <div className="flex gap-2">

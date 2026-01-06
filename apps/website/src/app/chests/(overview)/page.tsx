@@ -2,7 +2,14 @@ import { getAllChests } from "@/actions/chest";
 import GiftBadge from "@/components/gift-badge";
 import Pagination from "@/components/pagination";
 import RarityBadge from "@/components/rarity-badge";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -29,6 +36,14 @@ export default async function Page({
 
   return (
     <Card className="shadow-md">
+      <CardHeader>
+        <CardTitle>Treasure Chests</CardTitle>
+        <CardDescription>
+          {`Currently opened ${chestCount} treasure chest${
+            chestCount !== 1 ? "s" : ""
+          } across ${accountCount} account${accountCount !== 1 ? "s" : ""}.`}
+        </CardDescription>
+      </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
@@ -73,12 +88,7 @@ export default async function Page({
           </TableBody>
         </Table>
       </CardContent>
-      <CardFooter className="flex gap-4 flex-col md:flex-row justify-between">
-        <span className="text-muted-foreground">
-          {`Currently opened ${chestCount} treasure chest${
-            chestCount !== 1 ? "s" : ""
-          } across ${accountCount} account${accountCount !== 1 ? "s" : ""}.`}
-        </span>
+      <CardFooter className="justify-end">
         <Pagination
           currentPage={page}
           currentPageSize={pageSize}

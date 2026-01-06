@@ -11,7 +11,14 @@ import { getAllEvents } from "@/actions/event";
 import StatusBadge from "@/components/status-badge";
 import { formatDate } from "@/lib/utils";
 import GiftBadge from "@/components/gift-badge";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Pagination from "@/components/pagination";
 
 export default async function Page({
@@ -30,12 +37,18 @@ export default async function Page({
 
   return (
     <Card className="shadow-md">
+      <CardHeader>
+        <CardTitle>Events</CardTitle>
+        <CardDescription>
+          {`Currently tracking ${count} event${count !== 1 ? "s" : ""}.`}
+        </CardDescription>
+      </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>#</TableHead>
-              <TableHead>Event</TableHead>
+              <TableHead>Name</TableHead>
               <TableHead>Start Date</TableHead>
               <TableHead>End Date</TableHead>
               <TableHead>Rewards</TableHead>
@@ -72,10 +85,7 @@ export default async function Page({
           </TableBody>
         </Table>
       </CardContent>
-      <CardFooter className="flex gap-4 flex-col md:flex-row justify-between">
-        <span className="text-muted-foreground">
-          {`Currently tracking ${count} event${count !== 1 ? "s" : ""}.`}
-        </span>
+      <CardFooter className="justify-end">
         <Pagination
           currentPage={page}
           currentPageSize={pageSize}

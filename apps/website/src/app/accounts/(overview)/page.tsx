@@ -8,7 +8,14 @@ import {
 } from "@/components/ui/table";
 import { getAllAccounts } from "@/actions/account";
 import TownhallBadge from "@/components/townhall-badge";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Pagination from "@/components/pagination";
 
 export default async function Page({
@@ -27,12 +34,18 @@ export default async function Page({
 
   return (
     <Card className="shadow-md">
+      <CardHeader>
+        <CardTitle>Accounts</CardTitle>
+        <CardDescription>
+          {`Currently tracking ${count} account${count !== 1 ? "s" : ""}.`}
+        </CardDescription>
+      </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Tag</TableHead>
-              <TableHead>Account</TableHead>
+              <TableHead>Name</TableHead>
               <TableHead>Clan</TableHead>
             </TableRow>
           </TableHeader>
@@ -61,10 +74,7 @@ export default async function Page({
         </Table>
       </CardContent>
 
-      <CardFooter className="flex gap-4 flex-col md:flex-row justify-between">
-        <span className="text-muted-foreground">
-          {`Currently tracking ${count} account${count !== 1 ? "s" : ""}.`}
-        </span>
+      <CardFooter className="justify-end">
         <Pagination
           currentPage={page}
           currentPageSize={pageSize}
