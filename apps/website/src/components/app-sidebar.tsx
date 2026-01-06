@@ -47,7 +47,7 @@ const data = {
 
 export function AppSidebar() {
   return (
-    <Sidebar collapsible="offcanvas" variant="inset">
+    <Sidebar collapsible="offcanvas" className="border-r-0">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem className="flex items-center gap-2 p-1.5">

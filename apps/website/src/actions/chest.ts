@@ -1,7 +1,13 @@
 import { db } from "@/db";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
-export const getAllChests = async () => {
+export const getAllChests = async ({
+  page,
+  pageSize,
+}: {
+  page: number;
+  pageSize: number;
+}) => {
   const baseQuery = db.selectFrom("chest");
 
   const countQuery = await baseQuery
@@ -38,12 +44,15 @@ export const getAllChests = async () => {
         .$notNull()
         .as("account"),
     ])
+    .offset((page - 1) * pageSize)
+    .limit(pageSize)
     .execute();
 
   return {
     chests: chests,
     chestCount: countQuery.chestCount,
     accountCount: countQuery.accountCount,
+    totalPages: Math.ceil(countQuery.chestCount / pageSize),
   };
 };
 

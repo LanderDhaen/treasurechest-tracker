@@ -1,7 +1,13 @@
 import { db } from "@/db";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
-export const getAllAccounts = async () => {
+export const getAllAccounts = async ({
+  page,
+  pageSize,
+}: {
+  page: number;
+  pageSize: number;
+}) => {
   const baseQuery = db
     .selectFrom("account")
     .where("account.isActive", "=", true);
@@ -27,11 +33,14 @@ export const getAllAccounts = async () => {
         .$notNull()
         .as("clan"),
     ])
+    .offset((page - 1) * pageSize)
+    .limit(pageSize)
     .execute();
 
   return {
     accounts: accounts,
     count: countQuery.result,
+    totalPages: Math.ceil(countQuery.result / pageSize),
   };
 };
 

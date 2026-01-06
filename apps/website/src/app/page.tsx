@@ -37,9 +37,9 @@ export default async function Dashboard() {
   // const highestPerformingDay = await getHighestPerformingDay();
 
   return (
-    <div className="p-4 grid gap-4">
+    <div className="grid gap-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 subgrid">
-        <Card>
+        <Card className="shadow-md">
           <CardHeader>
             <CardDescription>Latest Treasure Chest</CardDescription>
             <CardTitle className="flex gap-2 start text-2xl">
@@ -56,7 +56,7 @@ export default async function Dashboard() {
           </CardFooter>
         </Card>
 
-        <Card>
+        <Card className="shadow-md">
           <CardHeader>
             <CardDescription>Most Received Reward</CardDescription>
             <CardTitle className="text-2xl">
@@ -70,7 +70,7 @@ export default async function Dashboard() {
           </CardFooter>
         </Card>
 
-        <Card>
+        <Card className="shadow-md">
           <CardHeader>
             <CardDescription>Most Received Category</CardDescription>
             <CardTitle className="text-2xl">

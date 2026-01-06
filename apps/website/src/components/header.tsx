@@ -3,7 +3,7 @@ import { SidebarTrigger } from "./ui/sidebar";
 
 export function Header() {
   return (
-    <header className="flex h-12 items-center px-4 gap-2 border-b">
+    <header className="flex h-12 items-center gap-2">
       <SidebarTrigger />
       <Separator
         orientation="vertical"

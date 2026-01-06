@@ -2,7 +2,13 @@ import { db } from "@/db";
 import { sql } from "kysely";
 import { EventStatus } from "@/types/event-status";
 
-export const getAllEvents = async () => {
+export const getAllEvents = async ({
+  page,
+  pageSize,
+}: {
+  page: number;
+  pageSize: number;
+}) => {
   const baseQuery = db.selectFrom("event").where("event.isActive", "=", true);
 
   const countQuery = await baseQuery
@@ -28,11 +34,14 @@ export const getAllEvents = async () => {
         .end()
         .as("status"),
     ])
+    .offset((page - 1) * pageSize)
+    .limit(pageSize)
     .execute();
 
   return {
     events,
     count: countQuery.result,
+    totalPages: Math.ceil(countQuery.result / pageSize),
   };
 };
 
