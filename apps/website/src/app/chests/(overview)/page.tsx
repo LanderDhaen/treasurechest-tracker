@@ -1,11 +1,11 @@
 import { getAllChests } from "@/actions/chest";
 import GiftBadge from "@/components/gift-badge";
+import Pagination from "@/components/pagination";
 import RarityBadge from "@/components/rarity-badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -13,16 +13,24 @@ import {
 } from "@/components/ui/table";
 import { formatDateTime } from "@/lib/utils";
 
-export default async function Page() {
-  const { chests, chestCount, accountCount } = await getAllChests();
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
+  const page = Number(params.page) || 1;
+  const pageSize = Number(params.pageSize) || 10;
+
+  const { chests, chestCount, accountCount, totalPages } = await getAllChests({
+    page: page,
+    pageSize: pageSize,
+  });
 
   return (
     <Card className="shadow-md">
       <CardContent>
         <Table>
-          <TableCaption>
-            {`Currently opened ${chestCount} treasure chests across ${accountCount} accounts.`}
-          </TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead>#</TableHead>
@@ -65,6 +73,18 @@ export default async function Page() {
           </TableBody>
         </Table>
       </CardContent>
+      <CardFooter className="flex gap-4 flex-col md:flex-row justify-between">
+        <span className="text-muted-foreground">
+          {`Currently opened ${chestCount} treasure chest${
+            chestCount !== 1 ? "s" : ""
+          } across ${accountCount} account${accountCount !== 1 ? "s" : ""}.`}
+        </span>
+        <Pagination
+          currentPage={page}
+          currentPageSize={pageSize}
+          totalPages={totalPages}
+        />
+      </CardFooter>
     </Card>
   );
 }

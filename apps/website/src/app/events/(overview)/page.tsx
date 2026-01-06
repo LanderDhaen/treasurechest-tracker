@@ -1,7 +1,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -12,16 +11,27 @@ import { getAllEvents } from "@/actions/event";
 import StatusBadge from "@/components/status-badge";
 import { formatDate } from "@/lib/utils";
 import GiftBadge from "@/components/gift-badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import Pagination from "@/components/pagination";
 
-export default async function Page() {
-  const { events, count } = await getAllEvents();
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
+  const page = Number(params.page) || 1;
+  const pageSize = Number(params.pageSize) || 10;
+
+  const { events, count, totalPages } = await getAllEvents({
+    page,
+    pageSize,
+  });
 
   return (
     <Card className="shadow-md">
       <CardContent>
         <Table>
-          <TableCaption>Currently tracking {count} events.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead>#</TableHead>
@@ -62,6 +72,16 @@ export default async function Page() {
           </TableBody>
         </Table>
       </CardContent>
+      <CardFooter className="flex gap-4 flex-col md:flex-row justify-between">
+        <span className="text-muted-foreground">
+          {`Currently tracking ${count} event${count !== 1 ? "s" : ""}.`}
+        </span>
+        <Pagination
+          currentPage={page}
+          currentPageSize={pageSize}
+          totalPages={totalPages}
+        />
+      </CardFooter>
     </Card>
   );
 }
