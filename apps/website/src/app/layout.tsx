@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Header } from "@/components/header";
 
@@ -35,7 +31,7 @@ export default function RootLayout({
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
-            <div className="flex flex-col flex-1 rounded-lg bg-white shadow-md">
+            <div className="flex flex-col flex-1 px-4">
               <Header />
               {children}
             </div>
