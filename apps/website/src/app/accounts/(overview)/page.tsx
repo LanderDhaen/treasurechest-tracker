@@ -1,25 +1,36 @@
+import Link from "next/link";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
 import { getAllAccounts } from "@/actions/account";
 import TownhallBadge from "@/components/townhall-badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default async function Page() {
-  const { accounts, count } = await getAllAccounts();
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
+  const page = Number(params.page) || 1;
+  const pageSize = Number(params.pageSize) || 10;
+
+  const { accounts, count, pages } = await getAllAccounts({
+    page,
+    pageSize,
+  });
 
   return (
     <Card className="shadow-md">
       <CardContent>
         <Table>
-          <TableCaption>Currently tracking {count} accounts.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead>Tag</TableHead>
@@ -51,6 +62,30 @@ export default async function Page() {
           </TableBody>
         </Table>
       </CardContent>
+
+      <CardFooter className="flex justify-between">
+        <span className="text-sm text-muted-foreground">
+          {`Currently tracking ${count} account${count !== 1 ? "s" : ""}.`}
+        </span>
+        <div className="flex gap-2">
+          <Button asChild variant="outline" size="icon" disabled={page <= 1}>
+            <Link href={`?page=${page - 1}`}>
+              <ChevronLeft />
+            </Link>
+          </Button>
+
+          <Button
+            asChild
+            variant="outline"
+            size="icon"
+            disabled={page >= pages}
+          >
+            <Link href={`?page=${page + 1}`}>
+              <ChevronRight />
+            </Link>
+          </Button>
+        </div>
+      </CardFooter>
     </Card>
   );
 }
