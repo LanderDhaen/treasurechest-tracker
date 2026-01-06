@@ -1,61 +1,25 @@
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react";
-import { Button } from "./ui/button";
-import Link from "next/link";
+import PageSizeSelect from "./page-size-select";
+import PageSelect from "./page-select";
 
 interface PaginationProps {
   currentPage: number;
+  currentPageSize: number;
   totalPages: number;
 }
 
 export default function Pagination({
   currentPage,
+  currentPageSize,
   totalPages,
 }: PaginationProps) {
-  const buttons = [
-    {
-      key: "first",
-      disabled: currentPage <= 1,
-      href: `?page=1`,
-      icon: <ChevronsLeft />,
-    },
-    {
-      key: "prev",
-      disabled: currentPage <= 1,
-      href: `?page=${currentPage - 1}`,
-      icon: <ChevronLeft />,
-    },
-    {
-      key: "next",
-      disabled: currentPage >= totalPages,
-      href: `?page=${currentPage + 1}`,
-      icon: <ChevronRight />,
-    },
-    {
-      key: "last",
-      disabled: currentPage >= totalPages,
-      href: `?page=${totalPages}`,
-      icon: <ChevronsRight />,
-    },
-  ];
-
   return (
-    <div className="flex gap-2">
-      {buttons.map(({ key, disabled, href, icon }) =>
-        disabled ? (
-          <Button key={key} variant="outline" size="icon" disabled>
-            {icon}
-          </Button>
-        ) : (
-          <Button key={key} asChild variant="outline" size="icon">
-            <Link href={href}>{icon}</Link>
-          </Button>
-        )
-      )}
+    <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+      <PageSizeSelect currentPageSize={currentPageSize} />
+      <PageSelect
+        currentPage={currentPage}
+        currentPageSize={currentPageSize}
+        totalPages={totalPages}
+      />
     </div>
   );
 }

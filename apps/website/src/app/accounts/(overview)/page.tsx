@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -10,8 +9,6 @@ import {
 import { getAllAccounts } from "@/actions/account";
 import TownhallBadge from "@/components/townhall-badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import Pagination from "@/components/pagination";
 
 export default async function Page({
@@ -64,11 +61,15 @@ export default async function Page({
         </Table>
       </CardContent>
 
-      <CardFooter className="flex justify-between">
-        <span className="text-sm text-muted-foreground">
+      <CardFooter className="flex gap-2 justify-between">
+        <span className="text-muted-foreground">
           {`Currently tracking ${count} account${count !== 1 ? "s" : ""}.`}
         </span>
-        <Pagination currentPage={page} totalPages={totalPages} />
+        <Pagination
+          currentPage={page}
+          currentPageSize={pageSize}
+          totalPages={totalPages}
+        />
       </CardFooter>
     </Card>
   );
