@@ -12,6 +12,7 @@ import TownhallBadge from "@/components/townhall-badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Pagination from "@/components/pagination";
 
 export default async function Page({
   searchParams,
@@ -67,31 +68,7 @@ export default async function Page({
         <span className="text-sm text-muted-foreground">
           {`Currently tracking ${count} account${count !== 1 ? "s" : ""}.`}
         </span>
-        <div className="flex gap-2">
-          {page > 1 ? (
-            <Button asChild variant="outline" size="icon">
-              <Link href={`?page=${page - 1}`}>
-                <ChevronLeft />
-              </Link>
-            </Button>
-          ) : (
-            <Button variant="outline" size="icon" disabled>
-              <ChevronLeft />
-            </Button>
-          )}
-
-          {page < totalPages ? (
-            <Button asChild variant="outline" size="icon">
-              <Link href={`?page=${page + 1}`}>
-                <ChevronRight />
-              </Link>
-            </Button>
-          ) : (
-            <Button variant="outline" size="icon" disabled>
-              <ChevronRight />
-            </Button>
-          )}
-        </div>
+        <Pagination currentPage={page} totalPages={totalPages} />
       </CardFooter>
     </Card>
   );
