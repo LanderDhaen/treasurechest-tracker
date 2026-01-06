@@ -12,53 +12,56 @@ import { getAllEvents } from "@/actions/event";
 import StatusBadge from "@/components/status-badge";
 import { formatDate } from "@/lib/utils";
 import GiftBadge from "@/components/gift-badge";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default async function Page() {
   const { events, count } = await getAllEvents();
 
   return (
-    <div className="p-4">
-      <Table>
-        <TableCaption>Currently tracking {count} events.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>#</TableHead>
-            <TableHead>Event</TableHead>
-            <TableHead>Start Date</TableHead>
-            <TableHead>End Date</TableHead>
-            <TableHead>Rewards</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {events.length === 0 ? (
+    <Card className="shadow-md">
+      <CardContent>
+        <Table>
+          <TableCaption>Currently tracking {count} events.</TableCaption>
+          <TableHeader>
             <TableRow>
-              <TableCell colSpan={5} className="text-center italic">
-                No events found.
-              </TableCell>
+              <TableHead>#</TableHead>
+              <TableHead>Event</TableHead>
+              <TableHead>Start Date</TableHead>
+              <TableHead>End Date</TableHead>
+              <TableHead>Rewards</TableHead>
             </TableRow>
-          ) : (
-            events.map((event) => (
-              <TableRow key={event.id}>
-                <TableCell>{event.id}</TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-2">
-                    <StatusBadge status={event.status} />
-                    {event.name}
-                    <GiftBadge isGift={event.isGift} />
-                  </div>
-                </TableCell>
-                <TableCell>{formatDate(event.startDate)}</TableCell>
-                <TableCell>{formatDate(event.endDate)}</TableCell>
-                <TableCell>
-                  {event.maxChests == 1
-                    ? "1 Chest"
-                    : `${event.maxChests} Chests`}
+          </TableHeader>
+          <TableBody>
+            {events.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={5} className="text-center italic">
+                  No events found.
                 </TableCell>
               </TableRow>
-            ))
-          )}
-        </TableBody>
-      </Table>
-    </div>
+            ) : (
+              events.map((event) => (
+                <TableRow key={event.id}>
+                  <TableCell>{event.id}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <StatusBadge status={event.status} />
+                      {event.name}
+                      <GiftBadge isGift={event.isGift} />
+                    </div>
+                  </TableCell>
+                  <TableCell>{formatDate(event.startDate)}</TableCell>
+                  <TableCell>{formatDate(event.endDate)}</TableCell>
+                  <TableCell>
+                    {event.maxChests == 1
+                      ? "1 Chest"
+                      : `${event.maxChests} Chests`}
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
   );
 }
