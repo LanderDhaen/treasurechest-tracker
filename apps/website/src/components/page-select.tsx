@@ -46,18 +46,23 @@ export default function PageSelect({
   ];
 
   return (
-    <div className="flex gap-2">
-      {buttons.map(({ key, disabled, href, icon }) =>
-        disabled ? (
-          <Button key={key} variant="outline" size="icon" disabled>
-            {icon}
-          </Button>
-        ) : (
-          <Button key={key} asChild variant="outline" size="icon">
-            <Link href={href}>{icon}</Link>
-          </Button>
-        )
-      )}
+    <div className="flex gap-4">
+      <span className="flex items-center">
+        Page {currentPage} of {totalPages}
+      </span>
+      <div className="flex gap-2">
+        {buttons.map(({ key, disabled, href, icon }) =>
+          disabled ? (
+            <Button key={key} variant="outline" size="icon" disabled>
+              {icon}
+            </Button>
+          ) : (
+            <Button key={key} asChild variant="outline" size="icon">
+              <Link href={href}>{icon}</Link>
+            </Button>
+          )
+        )}
+      </div>
     </div>
   );
 }

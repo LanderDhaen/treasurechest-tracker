@@ -22,7 +22,7 @@ export default function PageSizeSelect({
 
   return (
     <div className="flex items-center gap-2">
-      <span className="hidden md:block">Rows per page:</span>
+      <span>Rows per page:</span>
       <Select
         onValueChange={(pageSize) => {
           navigation.replace(`?page=1&pageSize=${pageSize}`);
