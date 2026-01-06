@@ -61,7 +61,7 @@ export default async function Page({
         </Table>
       </CardContent>
 
-      <CardFooter className="flex gap-2 justify-between">
+      <CardFooter className="flex gap-4 flex-col md:flex-row justify-between">
         <span className="text-muted-foreground">
           {`Currently tracking ${count} account${count !== 1 ? "s" : ""}.`}
         </span>

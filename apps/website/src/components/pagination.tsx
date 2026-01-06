@@ -13,7 +13,7 @@ export default function Pagination({
   totalPages,
 }: PaginationProps) {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+    <div className="flex gap-4">
       <PageSizeSelect currentPageSize={currentPageSize} />
       <PageSelect
         currentPage={currentPage}
