@@ -1,4 +1,9 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
@@ -13,6 +18,12 @@ export default function Pagination({
 }: PaginationProps) {
   const buttons = [
     {
+      key: "first",
+      disabled: currentPage <= 1,
+      href: `?page=1`,
+      icon: <ChevronsLeft />,
+    },
+    {
       key: "prev",
       disabled: currentPage <= 1,
       href: `?page=${currentPage - 1}`,
@@ -23,6 +34,12 @@ export default function Pagination({
       disabled: currentPage >= totalPages,
       href: `?page=${currentPage + 1}`,
       icon: <ChevronRight />,
+    },
+    {
+      key: "last",
+      disabled: currentPage >= totalPages,
+      href: `?page=${totalPages}`,
+      icon: <ChevronsRight />,
     },
   ];
 
