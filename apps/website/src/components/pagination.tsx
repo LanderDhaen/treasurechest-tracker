@@ -11,30 +11,33 @@ export default function Pagination({
   currentPage,
   totalPages,
 }: PaginationProps) {
+  const buttons = [
+    {
+      key: "prev",
+      disabled: currentPage <= 1,
+      href: `?page=${currentPage - 1}`,
+      icon: <ChevronLeft />,
+    },
+    {
+      key: "next",
+      disabled: currentPage >= totalPages,
+      href: `?page=${currentPage + 1}`,
+      icon: <ChevronRight />,
+    },
+  ];
+
   return (
     <div className="flex gap-2">
-      {currentPage > 1 ? (
-        <Button asChild variant="outline" size="icon">
-          <Link href={`?page=${currentPage - 1}`}>
-            <ChevronLeft />
-          </Link>
-        </Button>
-      ) : (
-        <Button variant="outline" size="icon" disabled>
-          <ChevronLeft />
-        </Button>
-      )}
-
-      {currentPage < totalPages ? (
-        <Button asChild variant="outline" size="icon">
-          <Link href={`?page=${currentPage + 1}`}>
-            <ChevronRight />
-          </Link>
-        </Button>
-      ) : (
-        <Button variant="outline" size="icon" disabled>
-          <ChevronRight />
-        </Button>
+      {buttons.map(({ key, disabled, href, icon }) =>
+        disabled ? (
+          <Button key={key} variant="outline" size="icon" disabled>
+            {icon}
+          </Button>
+        ) : (
+          <Button key={key} asChild variant="outline" size="icon">
+            <Link href={href}>{icon}</Link>
+          </Button>
+        )
       )}
     </div>
   );
