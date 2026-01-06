@@ -22,7 +22,7 @@ export default async function Page({
   const page = Number(params.page) || 1;
   const pageSize = Number(params.pageSize) || 10;
 
-  const { accounts, count, pages } = await getAllAccounts({
+  const { accounts, count, totalPages } = await getAllAccounts({
     page,
     pageSize,
   });
@@ -68,22 +68,29 @@ export default async function Page({
           {`Currently tracking ${count} account${count !== 1 ? "s" : ""}.`}
         </span>
         <div className="flex gap-2">
-          <Button asChild variant="outline" size="icon" disabled={page <= 1}>
-            <Link href={`?page=${page - 1}`}>
+          {page > 1 ? (
+            <Button asChild variant="outline" size="icon">
+              <Link href={`?page=${page - 1}`}>
+                <ChevronLeft />
+              </Link>
+            </Button>
+          ) : (
+            <Button variant="outline" size="icon" disabled>
               <ChevronLeft />
-            </Link>
-          </Button>
+            </Button>
+          )}
 
-          <Button
-            asChild
-            variant="outline"
-            size="icon"
-            disabled={page >= pages}
-          >
-            <Link href={`?page=${page + 1}`}>
+          {page < totalPages ? (
+            <Button asChild variant="outline" size="icon">
+              <Link href={`?page=${page + 1}`}>
+                <ChevronRight />
+              </Link>
+            </Button>
+          ) : (
+            <Button variant="outline" size="icon" disabled>
               <ChevronRight />
-            </Link>
-          </Button>
+            </Button>
+          )}
         </div>
       </CardFooter>
     </Card>

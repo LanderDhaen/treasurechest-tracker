@@ -37,13 +37,10 @@ export const getAllAccounts = async ({
     .limit(pageSize)
     .execute();
 
-  console.log("Total count:", countQuery.result);
-  console.log("Total pages:", Math.ceil(countQuery.result / pageSize));
-
   return {
     accounts: accounts,
     count: countQuery.result,
-    pages: Math.ceil(countQuery.result / pageSize),
+    totalPages: Math.ceil(countQuery.result / pageSize),
   };
 };
 
