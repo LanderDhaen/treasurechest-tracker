@@ -26,7 +26,7 @@ interface Account {
 
 interface AccountTableProps {
   accounts: Account[];
-  orderBy: "tag" | "name" | "clan";
+  orderBy: "tag" | "townhall" | "name" | "clan";
   orderDirection: "asc" | "desc";
 }
 
@@ -37,14 +37,14 @@ const columns = [
     render: (row: Account) => <>#{row.tag}</>,
   },
   {
+    key: "townhall",
+    label: "Townhall",
+    render: (row: Account) => <TownhallBadge level={row.townhall} />,
+  },
+  {
     key: "name",
     label: "Name",
-    render: (row: Account) => (
-      <div className="flex items-center gap-2">
-        <TownhallBadge level={row.townhall} />
-        {row.name}
-      </div>
-    ),
+    render: (row: Account) => <>{row.name}</>,
   },
   {
     key: "clan",

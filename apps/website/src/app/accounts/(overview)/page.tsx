@@ -13,7 +13,7 @@ import AccountTable from "@/components/account-table";
 interface SearchParams {
   page?: number;
   pageSize?: number;
-  orderBy?: "tag" | "name" | "clan";
+  orderBy?: "tag" | "townhall" | "name" | "clan";
   orderDirection?: "asc" | "desc";
 }
 
@@ -25,8 +25,8 @@ export default async function Page({
   const params = await searchParams;
   const page = Number(params.page) || 1;
   const pageSize = Number(params.pageSize) || 10;
-  const orderBy = params.orderBy || "name";
-  const orderDirection = params.orderDirection || "asc";
+  const orderBy = params.orderBy || "townhall";
+  const orderDirection = params.orderDirection || "desc";
 
   const { accounts, count, totalPages } = await getAllAccounts({
     page,

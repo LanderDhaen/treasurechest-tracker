@@ -9,7 +9,7 @@ export const getAllAccounts = async ({
 }: {
   page: number;
   pageSize: number;
-  orderBy: "tag" | "name" | "clan";
+  orderBy: "tag" | "townhall" | "name" | "clan";
   orderDirection: "asc" | "desc";
 }) => {
   const baseQuery = db
@@ -35,9 +35,12 @@ export const getAllAccounts = async ({
         .$notNull()
         .as("clan"),
     ])
-    .$if(orderBy === "tag", (qb) => qb.orderBy(`account.tag`, orderDirection))
-    .$if(orderBy === "name", (qb) => qb.orderBy(`account.name`, orderDirection))
-    .$if(orderBy === "clan", (qb) => qb.orderBy("clan.name", orderDirection))
+    .$if(orderBy === "tag", (eb) => eb.orderBy(`account.tag`, orderDirection))
+    .$if(orderBy === "townhall", (eb) =>
+      eb.orderBy(`account.townhall`, orderDirection)
+    )
+    .$if(orderBy === "name", (eb) => eb.orderBy(`account.name`, orderDirection))
+    .$if(orderBy === "clan", (eb) => eb.orderBy("clan.name", orderDirection))
     .orderBy("account.id", "asc")
     .limit(pageSize)
     .offset((page - 1) * pageSize)
