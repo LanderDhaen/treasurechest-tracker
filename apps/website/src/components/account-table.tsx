@@ -82,7 +82,7 @@ export default function AccountTable({
     );
 
   return (
-    <div className="rounded-xl border overflow-hidden">
+    <div className="rounded-md border overflow-hidden">
       <Table>
         <TableHeader className="bg-muted">
           <TableRow>
@@ -113,10 +113,7 @@ export default function AccountTable({
             </TableRow>
           ) : (
             accounts.map((account) => (
-              <TableRow
-                key={account.tag}
-                className="hover:bg-muted/50 transition-colors"
-              >
+              <TableRow key={account.tag}>
                 {columns.map(({ key, render }) => (
                   <TableCell key={key}>{render(account)}</TableCell>
                 ))}
