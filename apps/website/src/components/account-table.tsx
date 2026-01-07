@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { AccountSearchParams } from "@/schemas/account";
 
 interface Account {
   name: string;
@@ -26,8 +27,8 @@ interface Account {
 
 interface AccountTableProps {
   accounts: Account[];
-  orderBy: "tag" | "townhall" | "name" | "clan";
-  orderDirection: "asc" | "desc";
+  orderBy: AccountSearchParams["orderBy"];
+  orderDirection: AccountSearchParams["orderDirection"];
 }
 
 const columns = [

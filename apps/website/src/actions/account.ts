@@ -1,4 +1,5 @@
 import { db } from "@/db";
+import { AccountSearchParams } from "@/schemas/account";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
 export const getAllAccounts = async ({
@@ -6,12 +7,7 @@ export const getAllAccounts = async ({
   pageSize,
   orderBy,
   orderDirection,
-}: {
-  page: number;
-  pageSize: number;
-  orderBy: "tag" | "townhall" | "name" | "clan";
-  orderDirection: "asc" | "desc";
-}) => {
+}: AccountSearchParams) => {
   const baseQuery = db
     .selectFrom("account")
     .where("account.isActive", "=", true);

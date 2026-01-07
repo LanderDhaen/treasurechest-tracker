@@ -9,14 +9,7 @@ import {
 } from "@/components/ui/card";
 import Pagination from "@/components/pagination";
 import AccountTable from "@/components/account-table";
-import * as z from "zod";
-
-const searchParamsSchema = z.object({
-  page: z.coerce.number().int().min(1).catch(1),
-  pageSize: z.coerce.number().int().catch(10),
-  orderBy: z.enum(["tag", "townhall", "name", "clan"]).catch("name"),
-  orderDirection: z.enum(["asc", "desc"]).catch("asc"),
-});
+import { accountSearchParamsSchema } from "@/schemas/account";
 
 export default async function Page({
   searchParams,
@@ -24,7 +17,7 @@ export default async function Page({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const rawParams = await searchParams;
-  const parsedParams = searchParamsSchema.parse(rawParams);
+  const parsedParams = accountSearchParamsSchema.parse(rawParams);
   const { page, pageSize, orderBy, orderDirection } = parsedParams;
 
   const { accounts, count, totalPages } = await getAllAccounts({
