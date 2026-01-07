@@ -31,9 +31,26 @@ interface AccountTableProps {
 }
 
 const columns = [
-  { key: "tag", label: "Tag" },
-  { key: "name", label: "Name" },
-  { key: "clan", label: "Clan" },
+  {
+    key: "tag",
+    label: "Tag",
+    render: (row: Account) => <>#{row.tag}</>,
+  },
+  {
+    key: "name",
+    label: "Name",
+    render: (row: Account) => (
+      <div className="flex items-center gap-2">
+        <TownhallBadge level={row.townhall} />
+        {row.name}
+      </div>
+    ),
+  },
+  {
+    key: "clan",
+    label: "Clan",
+    render: (row: Account) => <>{row.clan.name}</>,
+  },
 ];
 
 export default function AccountTable({
@@ -45,13 +62,13 @@ export default function AccountTable({
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleSort = (column: string) => {
+  const handleSort = (columnKey: string) => {
     const params = new URLSearchParams(searchParams.toString());
     const nextDirection =
-      orderBy === column && orderDirection === "asc" ? "desc" : "asc";
+      orderBy === columnKey && orderDirection === "asc" ? "desc" : "asc";
 
     params.set("page", "1");
-    params.set("orderBy", column);
+    params.set("orderBy", columnKey);
     params.set("orderDirection", nextDirection);
 
     router.push(`${pathname}?${params.toString()}`);
@@ -96,15 +113,13 @@ export default function AccountTable({
             </TableRow>
           ) : (
             accounts.map((account) => (
-              <TableRow key={account.tag}>
-                <TableCell>#{account.tag}</TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-2">
-                    <TownhallBadge level={account.townhall} />
-                    {account.name}
-                  </div>
-                </TableCell>
-                <TableCell>{account.clan.name}</TableCell>
+              <TableRow
+                key={account.tag}
+                className="hover:bg-muted/50 transition-colors"
+              >
+                {columns.map(({ key, render }) => (
+                  <TableCell key={key}>{render(account)}</TableCell>
+                ))}
               </TableRow>
             ))
           )}
