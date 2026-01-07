@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Header } from "@/components/header";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const montserrat = Montserrat({
   weight: ["400", "700"],
@@ -28,15 +29,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(montserrat.className)}>
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarInset>
-            <div className="flex flex-col flex-1 px-4">
-              <Header />
-              {children}
-            </div>
-          </SidebarInset>
-        </SidebarProvider>
+        <NuqsAdapter>
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset>
+              <div className="flex flex-col flex-1 px-4">
+                <Header />
+                {children}
+              </div>
+            </SidebarInset>
+          </SidebarProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );
