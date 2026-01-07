@@ -4,9 +4,13 @@ import { jsonObjectFrom } from "kysely/helpers/postgres";
 export const getAllAccounts = async ({
   page,
   pageSize,
+  orderBy,
+  orderDirection,
 }: {
   page: number;
   pageSize: number;
+  orderBy: "tag" | "name" | "clan";
+  orderDirection: "asc" | "desc";
 }) => {
   const baseQuery = db
     .selectFrom("account")
@@ -18,8 +22,6 @@ export const getAllAccounts = async ({
 
   const accounts = await baseQuery
     .innerJoin("clan", "account.clanId", "clan.id")
-    .orderBy("account.townhall", "desc")
-    .orderBy("account.name", "asc")
     .select((eb) => [
       "account.name",
       "account.tag",
@@ -33,12 +35,16 @@ export const getAllAccounts = async ({
         .$notNull()
         .as("clan"),
     ])
-    .offset((page - 1) * pageSize)
+    .$if(orderBy === "tag", (qb) => qb.orderBy(`account.tag`, orderDirection))
+    .$if(orderBy === "name", (qb) => qb.orderBy(`account.name`, orderDirection))
+    .$if(orderBy === "clan", (qb) => qb.orderBy("clan.name", orderDirection))
+    .orderBy("account.id", "asc")
     .limit(pageSize)
+    .offset((page - 1) * pageSize)
     .execute();
 
   return {
-    accounts: accounts,
+    accounts,
     count: countQuery.result,
     totalPages: Math.ceil(countQuery.result / pageSize),
   };
