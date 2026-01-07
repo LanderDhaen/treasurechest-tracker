@@ -9,24 +9,23 @@ import {
 } from "@/components/ui/card";
 import Pagination from "@/components/pagination";
 import AccountTable from "@/components/account-table";
+import * as z from "zod";
 
-interface SearchParams {
-  page?: number;
-  pageSize?: number;
-  orderBy?: "tag" | "townhall" | "name" | "clan";
-  orderDirection?: "asc" | "desc";
-}
+const searchParamsSchema = z.object({
+  page: z.coerce.number().int().min(1).catch(1),
+  pageSize: z.coerce.number().int().catch(10),
+  orderBy: z.enum(["tag", "townhall", "name", "clan"]).catch("name"),
+  orderDirection: z.enum(["asc", "desc"]).catch("asc"),
+});
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<SearchParams>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const params = await searchParams;
-  const page = Number(params.page) || 1;
-  const pageSize = Number(params.pageSize) || 10;
-  const orderBy = params.orderBy || "townhall";
-  const orderDirection = params.orderDirection || "desc";
+  const rawParams = await searchParams;
+  const parsedParams = searchParamsSchema.parse(rawParams);
+  const { page, pageSize, orderBy, orderDirection } = parsedParams;
 
   const { accounts, count, totalPages } = await getAllAccounts({
     page,
