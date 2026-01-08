@@ -18,7 +18,7 @@ import {
   ChevronsRight,
 } from "lucide-react";
 
-const SIZES = ["5", "10", "20", "50", "100"];
+const SIZES = [5, 10, 20, 50, 100];
 
 interface PaginationProps {
   currentPage: number;
@@ -62,9 +62,9 @@ export default function Pagination({
   const navigation = useRouter();
   const pathName = usePathname();
 
-  const handlePageSizeChange = (pageSize: string | number) => {
+  const handlePageSizeChange = (pageSize: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("pageSize", pageSize.toString());
+    params.set("pageSize", pageSize);
     params.set("page", "1");
     navigation.push(`${pathName}?${params.toString()}`);
   };
