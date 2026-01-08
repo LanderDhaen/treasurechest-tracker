@@ -10,10 +10,16 @@ import {
 } from "@/components/ui/select";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Button } from "./ui/button";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 
 const SIZES = ["5", "10", "20", "50", "100"];
 
-import PageSelect from "./page-select";
 interface PaginationProps {
   currentPage: number;
   currentPageSize: number;
@@ -25,6 +31,33 @@ export default function Pagination({
   currentPageSize,
   totalPages,
 }: PaginationProps) {
+  const paginationButtons = [
+    {
+      key: "first",
+      disabled: currentPage <= 1,
+      page: 1,
+      icon: <ChevronsLeft />,
+    },
+    {
+      key: "prev",
+      disabled: currentPage <= 1,
+      page: currentPage - 1,
+      icon: <ChevronLeft />,
+    },
+    {
+      key: "next",
+      disabled: currentPage >= totalPages,
+      page: currentPage + 1,
+      icon: <ChevronRight />,
+    },
+    {
+      key: "last",
+      disabled: currentPage >= totalPages,
+      page: totalPages,
+      icon: <ChevronsRight />,
+    },
+  ];
+
   const searchParams = useSearchParams();
   const navigation = useRouter();
   const pathName = usePathname();
@@ -33,6 +66,12 @@ export default function Pagination({
     const params = new URLSearchParams(searchParams.toString());
     params.set("pageSize", pageSize.toString());
     params.set("page", "1");
+    navigation.push(`${pathName}?${params.toString()}`);
+  };
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
     navigation.push(`${pathName}?${params.toString()}`);
   };
 
@@ -59,11 +98,24 @@ export default function Pagination({
           </SelectContent>
         </Select>
       </div>
-      <PageSelect
-        currentPage={currentPage}
-        currentPageSize={currentPageSize}
-        totalPages={totalPages}
-      />
+      <div className="flex items-center gap-4">
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <div className="flex gap-2">
+          {paginationButtons.map((button) => (
+            <Button
+              key={button.key}
+              variant="outline"
+              size="icon"
+              disabled={button.disabled}
+              onClick={() => handlePageChange(button.page)}
+            >
+              {button.icon}
+            </Button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
