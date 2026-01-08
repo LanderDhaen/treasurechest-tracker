@@ -8,15 +8,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Button } from "./ui/button";
 import {
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
+import useQueryParams from "@/hooks/use-query-params";
+import { Button } from "./ui/button";
 
 const SIZES = [5, 10, 20, 50, 100];
 
@@ -58,21 +57,17 @@ export default function Pagination({
     },
   ];
 
-  const searchParams = useSearchParams();
-  const navigation = useRouter();
-  const pathName = usePathname();
+  const { searchParams, pushUrl } = useQueryParams();
 
   const handlePageSizeChange = (pageSize: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("pageSize", pageSize);
-    params.set("page", "1");
-    navigation.push(`${pathName}?${params.toString()}`);
+    searchParams.set("pageSize", pageSize);
+    searchParams.set("page", "1");
+    pushUrl(searchParams);
   };
 
   const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", page.toString());
-    navigation.push(`${pathName}?${params.toString()}`);
+    searchParams.set("page", page.toString());
+    pushUrl(searchParams);
   };
 
   return (

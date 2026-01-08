@@ -13,6 +13,7 @@ import {
   TableRow,
 } from "./ui/table";
 import { AccountSearchParams } from "@/schemas/account";
+import useQueryParams from "@/hooks/use-query-params";
 
 interface Account {
   name: string;
@@ -59,20 +60,17 @@ export default function AccountTable({
   orderBy,
   orderDirection,
 }: AccountTableProps) {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
+  const { searchParams, pushUrl } = useQueryParams();
 
   const handleSort = (columnKey: string) => {
-    const params = new URLSearchParams(searchParams.toString());
     const nextDirection =
       orderBy === columnKey && orderDirection === "asc" ? "desc" : "asc";
 
-    params.set("page", "1");
-    params.set("orderBy", columnKey);
-    params.set("orderDirection", nextDirection);
+    searchParams.set("page", "1");
+    searchParams.set("orderBy", columnKey);
+    searchParams.set("orderDirection", nextDirection);
 
-    router.push(`${pathname}?${params.toString()}`);
+    pushUrl(searchParams);
   };
 
   const SortIcon = () =>
