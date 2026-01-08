@@ -1,9 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChevronDown, ChevronUp } from "lucide-react";
-
-import TownhallBadge from "./townhall-badge";
 import {
   Table,
   TableBody,
@@ -40,8 +37,8 @@ const columns = [
   },
   {
     key: "townhall",
-    label: "Townhall",
-    render: (row: Account) => <TownhallBadge level={row.townhall} />,
+    label: "TH",
+    render: (row: Account) => <>{row.townhall}</>,
   },
   {
     key: "name",
