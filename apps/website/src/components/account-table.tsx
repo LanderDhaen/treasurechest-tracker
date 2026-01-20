@@ -11,6 +11,7 @@ import {
 } from "./ui/table";
 import { AccountSearchParams } from "@/schemas/account";
 import useQueryParams from "@/hooks/use-query-params";
+import SortIcon from "./sort-icon";
 
 interface Account {
   name: string;
@@ -70,13 +71,6 @@ export default function AccountTable({
     pushUrl(searchParams);
   };
 
-  const SortIcon = () =>
-    orderDirection === "asc" ? (
-      <ChevronUp size={16} />
-    ) : (
-      <ChevronDown size={16} />
-    );
-
   return (
     <div className="rounded-md border overflow-hidden">
       <Table>
@@ -90,7 +84,7 @@ export default function AccountTable({
               >
                 <div className="flex items-center gap-2">
                   {label}
-                  {orderBy === key && <SortIcon />}
+                  {orderBy === key && <SortIcon direction={orderDirection} />}
                 </div>
               </TableHead>
             ))}
