@@ -26,17 +26,17 @@ export const getAllAccounts = async ({
         eb
           .selectFrom("clan")
           .select(["clan.id", "clan.name", "clan.tag"])
-          .whereRef("clan.id", "=", "account.clanId")
+          .whereRef("clan.id", "=", "account.clanId"),
       )
         .$notNull()
         .as("clan"),
     ])
     .$if(orderBy === "tag", (eb) => eb.orderBy(`account.tag`, orderDirection))
     .$if(orderBy === "townhall", (eb) =>
-      eb.orderBy(`account.townhall`, orderDirection)
+      eb.orderBy(`account.townhall`, orderDirection),
     )
     .$if(orderBy === "name", (eb) => eb.orderBy(`account.name`, orderDirection))
-    .$if(orderBy === "clan", (eb) => eb.orderBy("clan.name", orderDirection))
+    .$if(orderBy === "clan", (eb) => eb.orderBy("clan.rank", orderDirection))
     .orderBy("account.id", "asc")
     .limit(pageSize)
     .offset((page - 1) * pageSize)
