@@ -13,11 +13,7 @@ import {
 import useQueryParams from "@/hooks/use-query-params";
 import { ButtonGroup } from "./ui/button-group";
 import { Button } from "./ui/button";
-import {
-  ArrowUpWideNarrow,
-  ArrowDownWideNarrow,
-  ArrowUpNarrowWide,
-} from "lucide-react";
+import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
 
 interface SortingProps {
   currentSort: string;
@@ -37,15 +33,15 @@ export default function Sorting({
 
   const handleButtonClick = () => {
     const newDirection = currentDirection === "asc" ? "desc" : "asc";
-    searchParams.set("orderBy", currentSort);
-    searchParams.set("orderDirection", newDirection);
+    searchParams.set("sortBy", currentSort);
+    searchParams.set("direction", newDirection);
     searchParams.set("page", "1");
     pushUrl(searchParams);
   };
 
   const handleValueChange = (value: string) => {
-    searchParams.set("orderBy", value);
-    searchParams.set("orderDirection", currentDirection);
+    searchParams.set("sortBy", value);
+    searchParams.set("direction", currentDirection);
     searchParams.set("page", "1");
 
     pushUrl(searchParams);
