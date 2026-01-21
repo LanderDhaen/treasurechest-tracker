@@ -16,8 +16,7 @@ import {
 } from "lucide-react";
 import useQueryParams from "@/hooks/use-query-params";
 import { Button } from "./ui/button";
-
-const SIZES = [5, 10, 20, 50, 100];
+import { PAGE_SIZES } from "@/constants/common";
 
 interface PaginationProps {
   currentPage: number;
@@ -84,7 +83,7 @@ export default function Pagination({
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {SIZES.map((size) => (
+              {PAGE_SIZES.map((size) => (
                 <SelectItem key={size} value={size.toString()}>
                   {size}
                 </SelectItem>
