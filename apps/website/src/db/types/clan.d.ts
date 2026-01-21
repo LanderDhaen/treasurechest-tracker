@@ -13,6 +13,7 @@ export interface ClanTable {
   isActive: ColumnType<boolean>;
   name: ColumnType<string>;
   tag: ColumnType<string>;
+  rank: ColumnType<number>;
 }
 
 export type Clan = Selectable<ClanTable>;

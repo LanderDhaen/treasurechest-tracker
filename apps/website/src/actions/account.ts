@@ -1,13 +1,13 @@
 import { db } from "@/db";
+import { AccountSearchParams } from "@/schemas/account";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
 export const getAllAccounts = async ({
   page,
   pageSize,
-}: {
-  page: number;
-  pageSize: number;
-}) => {
+  sortBy,
+  direction,
+}: AccountSearchParams) => {
   const baseQuery = db
     .selectFrom("account")
     .where("account.isActive", "=", true);
@@ -18,8 +18,6 @@ export const getAllAccounts = async ({
 
   const accounts = await baseQuery
     .innerJoin("clan", "account.clanId", "clan.id")
-    .orderBy("account.townhall", "desc")
-    .orderBy("account.name", "asc")
     .select((eb) => [
       "account.name",
       "account.tag",
@@ -28,17 +26,29 @@ export const getAllAccounts = async ({
         eb
           .selectFrom("clan")
           .select(["clan.id", "clan.name", "clan.tag"])
-          .whereRef("clan.id", "=", "account.clanId")
+          .whereRef("clan.id", "=", "account.clanId"),
       )
         .$notNull()
         .as("clan"),
     ])
-    .offset((page - 1) * pageSize)
+
+    // Sorting
+
+    .$if(sortBy === "townhall", (eb) =>
+      eb.orderBy(`account.townhall`, direction),
+    )
+    .$if(sortBy === "name", (eb) => eb.orderBy(`account.name`, direction))
+    .$if(sortBy === "clan", (eb) => eb.orderBy("clan.rank", direction))
+    .orderBy("account.id", "asc")
+
+    // Pagination
+
     .limit(pageSize)
+    .offset((page - 1) * pageSize)
     .execute();
 
   return {
-    accounts: accounts,
+    accounts,
     count: countQuery.result,
     totalPages: Math.ceil(countQuery.result / pageSize),
   };

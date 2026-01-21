@@ -1,35 +1,45 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { getAllAccounts } from "@/actions/account";
-import TownhallBadge from "@/components/townhall-badge";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import Pagination from "@/components/pagination";
+import AccountTable from "@/components/account-table";
+import { accountSearchParamsSchema } from "@/schemas/account";
+import SortingMenu from "@/components/sorting-menu";
+
+const SORTING_OPTIONS = [
+  {
+    label: "Townhall",
+    value: "townhall",
+  },
+  {
+    label: "Name",
+    value: "name",
+  },
+  {
+    label: "Clan",
+    value: "clan",
+  },
+];
 
 export default async function Page({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const params = await searchParams;
-  const page = Number(params.page) || 1;
-  const pageSize = Number(params.pageSize) || 10;
+  const rawParams = await searchParams;
+  const parsedParams = accountSearchParamsSchema.parse(rawParams);
+  const { page, pageSize, sortBy, direction } = parsedParams;
 
   const { accounts, count, totalPages } = await getAllAccounts({
     page,
     pageSize,
+    sortBy,
+    direction,
   });
 
   return (
@@ -40,47 +50,21 @@ export default async function Page({
           {`Currently tracking ${count} account${count !== 1 ? "s" : ""}.`}
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Tag</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Clan</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {accounts.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={3} className="text-center italic">
-                  No accounts found.
-                </TableCell>
-              </TableRow>
-            ) : (
-              accounts.map((account) => (
-                <TableRow key={account.tag}>
-                  <TableCell>#{account.tag}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <TownhallBadge level={account.townhall} />
-                      {account.name}
-                    </div>
-                  </TableCell>
-                  <TableCell>{account.clan.name}</TableCell>
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </CardContent>
-
-      <CardFooter className="justify-end">
+      <CardContent className="flex flex-col gap-4">
+        <div className="flex justify-end">
+          <SortingMenu
+            currentSort={sortBy}
+            currentDirection={direction}
+            sortingOptions={SORTING_OPTIONS}
+          />
+        </div>
+        <AccountTable accounts={accounts} />
         <Pagination
           currentPage={page}
           currentPageSize={pageSize}
           totalPages={totalPages}
         />
-      </CardFooter>
+      </CardContent>
     </Card>
   );
 }

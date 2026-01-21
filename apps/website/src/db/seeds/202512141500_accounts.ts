@@ -18,7 +18,7 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-14 15:00:00",
         updatedAt: "2025-12-14 15:00:00",
-        name: "DL Senne",
+        name: "DL✨Lander.",
         tag: "L00PRVC",
         townhall: 18,
         clanId: 2, // Dutch Legion CW

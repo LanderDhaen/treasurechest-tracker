@@ -1,5 +1,23 @@
-import PageSizeSelect from "./page-size-select";
-import PageSelect from "./page-select";
+"use client";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
+import useQueryParams from "@/hooks/use-query-params";
+import { Button } from "./ui/button";
+
+const SIZES = [5, 10, 20, 50, 100];
 
 interface PaginationProps {
   currentPage: number;
@@ -12,14 +30,87 @@ export default function Pagination({
   currentPageSize,
   totalPages,
 }: PaginationProps) {
+  const paginationButtons = [
+    {
+      key: "first",
+      disabled: currentPage <= 1,
+      page: 1,
+      icon: <ChevronsLeft />,
+    },
+    {
+      key: "prev",
+      disabled: currentPage <= 1,
+      page: currentPage - 1,
+      icon: <ChevronLeft />,
+    },
+    {
+      key: "next",
+      disabled: currentPage >= totalPages,
+      page: currentPage + 1,
+      icon: <ChevronRight />,
+    },
+    {
+      key: "last",
+      disabled: currentPage >= totalPages,
+      page: totalPages,
+      icon: <ChevronsRight />,
+    },
+  ];
+
+  const { searchParams, pushUrl } = useQueryParams();
+
+  const handlePageSizeChange = (pageSize: string) => {
+    searchParams.set("pageSize", pageSize);
+    searchParams.set("page", "1");
+    pushUrl(searchParams);
+  };
+
+  const handlePageChange = (page: number) => {
+    searchParams.set("page", page.toString());
+    pushUrl(searchParams);
+  };
+
   return (
-    <div className="flex w-full flex-col items-end md:flex-row md:items-center md:justify-end gap-4">
-      <PageSizeSelect currentPageSize={currentPageSize} />
-      <PageSelect
-        currentPage={currentPage}
-        currentPageSize={currentPageSize}
-        totalPages={totalPages}
-      />
+    <div className="flex flex-col items-end md:flex-row md:items-center md:justify-end gap-4">
+      <div className="flex items-center gap-2">
+        <span>Rows per page:</span>
+        <Select
+          onValueChange={(pageSize) => {
+            handlePageSizeChange(pageSize);
+          }}
+        >
+          <SelectTrigger className="w-20">
+            <SelectValue placeholder={`${currentPageSize}`} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {SIZES.map((size) => (
+                <SelectItem key={size} value={size.toString()}>
+                  {size}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="flex items-center gap-4">
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <div className="flex gap-2">
+          {paginationButtons.map((button) => (
+            <Button
+              key={button.key}
+              variant="outline"
+              size="icon"
+              disabled={button.disabled}
+              onClick={() => handlePageChange(button.page)}
+            >
+              {button.icon}
+            </Button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
