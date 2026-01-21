@@ -1,8 +1,8 @@
 import * as z from "zod";
+import { PaginationSchema } from "./common";
 
 export const accountSearchParamsSchema = z.object({
-  page: z.coerce.number().int().min(1).catch(1),
-  pageSize: z.coerce.number().int().catch(10),
+  ...PaginationSchema.shape,
   sortBy: z.enum(["townhall", "name", "clan"]).catch("name"),
   direction: z.enum(["asc", "desc"]).catch("asc"),
 });
