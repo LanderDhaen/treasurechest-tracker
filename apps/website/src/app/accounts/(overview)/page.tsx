@@ -51,8 +51,12 @@ export default async function Page({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <div className="flex gap-2 justify-end">
-          <SortingMenu currentSort={orderBy} sortingOptions={SORTING_OPTIONS} />
+        <div className="flex justify-end">
+          <SortingMenu
+            currentSort={orderBy}
+            currentDirection={orderDirection}
+            sortingOptions={SORTING_OPTIONS}
+          />
         </div>
         <AccountTable accounts={accounts} />
         <Pagination
