@@ -1,14 +1,14 @@
 import { db } from "@/db";
 import { sql } from "kysely";
 import { EventStatus } from "@/constants/event";
+import { EventSearchParams } from "@/schemas/event";
 
 export const getAllEvents = async ({
   page,
   pageSize,
-}: {
-  page: number;
-  pageSize: number;
-}) => {
+  sortBy,
+  direction,
+}: EventSearchParams) => {
   const baseQuery = db.selectFrom("event").where("event.isActive", "=", true);
 
   const countQuery = await baseQuery
@@ -16,7 +16,6 @@ export const getAllEvents = async ({
     .executeTakeFirstOrThrow();
 
   const events = await baseQuery
-    .orderBy("startDate", "desc")
     .select((eb) => [
       "event.id",
       "event.name",
@@ -34,6 +33,22 @@ export const getAllEvents = async ({
         .end()
         .as("status"),
     ])
+
+    // Sorting
+
+    .$if(sortBy === "status", (eb) => eb.orderBy("status", direction))
+    .$if(sortBy === "name", (eb) => eb.orderBy("event.name", direction))
+    .$if(sortBy === "startDate", (eb) =>
+      eb.orderBy("event.startDate", direction),
+    )
+    .$if(sortBy === "endDate", (eb) => eb.orderBy("event.endDate", direction))
+    .$if(sortBy === "maxChests", (eb) =>
+      eb.orderBy("event.maxChests", direction),
+    )
+    .orderBy("event.id", "asc")
+
+    // Pagination
+
     .offset((page - 1) * pageSize)
     .limit(pageSize)
     .execute();

@@ -57,7 +57,7 @@ export default function Sorting({
         )}
       </Button>
       <Select onValueChange={handleValueChange} value={currentSort}>
-        <SelectTrigger className="w-28">
+        <SelectTrigger className="w-32">
           <SelectValue />
         </SelectTrigger>
         <SelectContent position="popper">
