@@ -24,6 +24,7 @@ export default function EventTable({ events }: EventTableProps) {
         <TableHeader className="bg-muted">
           <TableRow>
             <TableHead className="font-bold w-12">#</TableHead>
+            <TableHead className="font-bold w-24">Status</TableHead>
             <TableHead className="font-bold">Name</TableHead>
             <TableHead className="font-bold">Start Date</TableHead>
             <TableHead className="font-bold">End Date</TableHead>
@@ -33,7 +34,7 @@ export default function EventTable({ events }: EventTableProps) {
         <TableBody>
           {events.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={5} className="text-center italic">
+              <TableCell colSpan={6} className="text-center italic">
                 No events found.
               </TableCell>
             </TableRow>
@@ -42,8 +43,10 @@ export default function EventTable({ events }: EventTableProps) {
               <TableRow key={event.id}>
                 <TableCell>{event.id}</TableCell>
                 <TableCell>
+                  <StatusBadge status={event.status} />
+                </TableCell>
+                <TableCell>
                   <div className="flex items-center gap-2">
-                    <StatusBadge status={event.status} />
                     {event.name}
                     <GiftBadge isGift={event.isGift} />
                   </div>
