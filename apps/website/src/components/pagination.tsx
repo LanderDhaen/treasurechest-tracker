@@ -71,7 +71,7 @@ export default function Pagination({
   };
 
   return (
-    <div className="flex w-full flex-col items-end md:flex-row md:items-center md:justify-end gap-4">
+    <div className="flex flex-col items-end md:flex-row md:items-center md:justify-end gap-4">
       <div className="flex items-center gap-2">
         <span>Rows per page:</span>
         <Select

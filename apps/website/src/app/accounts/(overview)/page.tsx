@@ -3,13 +3,13 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import Pagination from "@/components/pagination";
 import AccountTable from "@/components/account-table";
 import { accountSearchParamsSchema } from "@/schemas/account";
+import Sorting from "@/components/sorting";
 
 export default async function Page({
   searchParams,
@@ -35,20 +35,25 @@ export default async function Page({
           {`Currently tracking ${count} account${count !== 1 ? "s" : ""}.`}
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <AccountTable
-          accounts={accounts}
-          orderBy={orderBy}
-          orderDirection={orderDirection}
-        />
-      </CardContent>
-      <CardFooter className="justify-end">
+      <CardContent className="flex flex-col gap-4">
+        <div className="flex justify-end">
+          <Sorting
+            currentSort={orderBy}
+            currentDirection={orderDirection}
+            sortingOptions={[
+              { label: "Townhall", value: "townhall" },
+              { label: "Name", value: "name" },
+              { label: "Clan", value: "clan" },
+            ]}
+          />
+        </div>
+        <AccountTable accounts={accounts} />
         <Pagination
           currentPage={page}
           currentPageSize={pageSize}
           totalPages={totalPages}
         />
-      </CardFooter>
+      </CardContent>
     </Card>
   );
 }

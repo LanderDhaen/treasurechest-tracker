@@ -1,6 +1,5 @@
 "use client";
 
-import { ChevronDown, ChevronUp } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -9,9 +8,6 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { AccountSearchParams } from "@/schemas/account";
-import useQueryParams from "@/hooks/use-query-params";
-import SortIcon from "./sort-icon";
 
 interface Account {
   name: string;
@@ -26,87 +22,35 @@ interface Account {
 
 interface AccountTableProps {
   accounts: Account[];
-  orderBy: AccountSearchParams["orderBy"];
-  orderDirection: AccountSearchParams["orderDirection"];
 }
 
-const columns = [
-  {
-    key: "tag",
-    label: "Tag",
-    render: (row: Account) => <>#{row.tag}</>,
-  },
-  {
-    key: "townhall",
-    label: "TH",
-    render: (row: Account) => <>{row.townhall}</>,
-  },
-  {
-    key: "name",
-    label: "Name",
-    render: (row: Account) => <>{row.name}</>,
-  },
-  {
-    key: "clan",
-    label: "Clan",
-    render: (row: Account) => <>{row.clan.name}</>,
-  },
-];
-
-export default function AccountTable({
-  accounts,
-  orderBy,
-  orderDirection,
-}: AccountTableProps) {
-  const { searchParams, pushUrl } = useQueryParams();
-
-  const handleSort = (columnKey: string) => {
-    const nextDirection =
-      orderBy === columnKey && orderDirection === "asc" ? "desc" : "asc";
-
-    searchParams.set("page", "1");
-    searchParams.set("orderBy", columnKey);
-    searchParams.set("orderDirection", nextDirection);
-
-    pushUrl(searchParams);
-  };
-
+export default function AccountTable({ accounts }: AccountTableProps) {
   return (
     <div className="rounded-md border overflow-hidden">
       <Table>
         <TableHeader className="bg-muted">
           <TableRow>
-            {columns.map(({ key, label }) => (
-              <TableHead
-                key={key}
-                onClick={() => handleSort(key)}
-                className="cursor-pointer select-none font-bold"
-              >
-                <div className="flex items-center gap-2">
-                  {label}
-                  {orderBy === key && <SortIcon direction={orderDirection} />}
-                </div>
-              </TableHead>
-            ))}
+            <TableHead className="font-bold">Tag</TableHead>
+            <TableHead className="font-bold">Townhall</TableHead>
+            <TableHead className="font-bold">Name</TableHead>
+            <TableHead className="font-bold">Clan</TableHead>
           </TableRow>
         </TableHeader>
 
         <TableBody>
           {accounts.length === 0 ? (
             <TableRow>
-              <TableCell
-                colSpan={columns.length}
-                className="text-center italic"
-              >
+              <TableCell colSpan={4} className="text-center italic">
                 No accounts found.
               </TableCell>
             </TableRow>
           ) : (
             accounts.map((account) => (
               <TableRow key={account.tag}>
-                {columns.map(({ key, render }) => (
-                  <TableCell key={key}>{render(account)}</TableCell>
-                ))}
+                <TableCell>#{account.tag}</TableCell>
+                <TableCell>{account.townhall}</TableCell>
+                <TableCell>{account.name}</TableCell>
+                <TableCell>{account.clan.name}</TableCell>
               </TableRow>
             ))
           )}
