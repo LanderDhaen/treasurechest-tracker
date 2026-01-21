@@ -31,13 +31,18 @@ export const getAllAccounts = async ({
         .$notNull()
         .as("clan"),
     ])
-    .$if(sortBy === "tag", (eb) => eb.orderBy(`account.tag`, direction))
+
+    // Sorting
+
     .$if(sortBy === "townhall", (eb) =>
       eb.orderBy(`account.townhall`, direction),
     )
     .$if(sortBy === "name", (eb) => eb.orderBy(`account.name`, direction))
     .$if(sortBy === "clan", (eb) => eb.orderBy("clan.rank", direction))
     .orderBy("account.id", "asc")
+
+    // Pagination
+
     .limit(pageSize)
     .offset((page - 1) * pageSize)
     .execute();
