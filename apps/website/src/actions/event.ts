@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { sql } from "kysely";
-import { EventStatus } from "@/types/event";
+import { EventStatus } from "@/constants/event";
 
 export const getAllEvents = async ({
   page,

@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { EventStatus } from "@/types/event";
+import { EventStatus } from "@/constants/event";
 
 export default function StatusBadge({ status }: { status: EventStatus }) {
   const colorStatus = (status: EventStatus) => {
