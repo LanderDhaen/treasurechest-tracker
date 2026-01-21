@@ -9,11 +9,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import useQueryParams from "@/hooks/use-query-params";
 
 interface SortingProps {
   currentSort: string;
-  currentDirection?: "asc" | "desc";
   sortingOptions: {
     label: string;
     value: string;
@@ -33,7 +33,7 @@ export default function Sorting({ currentSort, sortingOptions }: SortingProps) {
   return (
     <Select onValueChange={handleValueChange} value={currentSort}>
       <SelectTrigger className="w-40">
-        <SelectValue placeholder={currentSort} />
+        <SelectValue />
       </SelectTrigger>
       <SelectContent position="popper">
         <SelectGroup>

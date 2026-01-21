@@ -9,7 +9,22 @@ import {
 import Pagination from "@/components/pagination";
 import AccountTable from "@/components/account-table";
 import { accountSearchParamsSchema } from "@/schemas/account";
-import Sorting from "@/components/sorting";
+import SortingMenu from "@/components/sorting-menu";
+
+const SORTING_OPTIONS = [
+  {
+    label: "Townhall",
+    value: "townhall",
+  },
+  {
+    label: "Name",
+    value: "name",
+  },
+  {
+    label: "Clan",
+    value: "clan",
+  },
+];
 
 export default async function Page({
   searchParams,
@@ -36,16 +51,8 @@ export default async function Page({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <div className="flex justify-end">
-          <Sorting
-            currentSort={orderBy}
-            currentDirection={orderDirection}
-            sortingOptions={[
-              { label: "Townhall", value: "townhall" },
-              { label: "Name", value: "name" },
-              { label: "Clan", value: "clan" },
-            ]}
-          />
+        <div className="flex gap-2 justify-end">
+          <SortingMenu currentSort={orderBy} sortingOptions={SORTING_OPTIONS} />
         </div>
         <AccountTable accounts={accounts} />
         <Pagination
