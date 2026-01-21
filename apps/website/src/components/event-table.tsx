@@ -11,20 +11,10 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { EventStatus } from "@/types/event-status";
-
-interface Event {
-  id: number;
-  status: EventStatus;
-  name: string;
-  isGift: boolean;
-  startDate: Date;
-  endDate: Date;
-  maxChests: number;
-}
+import { EventTableEntry } from "@/types/event";
 
 interface EventTableProps {
-  events: Event[];
+  events: EventTableEntry[];
 }
 
 export default function EventTable({ events }: EventTableProps) {

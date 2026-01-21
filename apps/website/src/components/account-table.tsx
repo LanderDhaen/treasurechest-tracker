@@ -1,5 +1,6 @@
 "use client";
 
+import { AccountTableEntry } from "@/types/account";
 import {
   Table,
   TableBody,
@@ -9,19 +10,8 @@ import {
   TableRow,
 } from "./ui/table";
 
-interface Account {
-  name: string;
-  tag: string;
-  townhall: number;
-  clan: {
-    id: number;
-    name: string;
-    tag: string;
-  };
-}
-
 interface AccountTableProps {
-  accounts: Account[];
+  accounts: AccountTableEntry[];
 }
 
 export default function AccountTable({ accounts }: AccountTableProps) {
