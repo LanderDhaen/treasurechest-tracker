@@ -65,7 +65,8 @@ export const getAllEvents = async ({
     .$if(sortBy === "maxChests", (eb) =>
       eb.orderBy("event.maxChests", direction),
     )
-    .orderBy("event.id", "asc")
+    // Tie-breaker by id
+    .orderBy("event.id", direction)
 
     // Pagination
 

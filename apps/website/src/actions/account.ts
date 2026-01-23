@@ -39,7 +39,8 @@ export const getAllAccounts = async ({
     )
     .$if(sortBy === "name", (eb) => eb.orderBy(`account.name`, direction))
     .$if(sortBy === "clan", (eb) => eb.orderBy("clan.rank", direction))
-    .orderBy("account.id", "asc")
+    // Tie-breaker by id
+    .orderBy("account.id", direction)
 
     // Pagination
 
