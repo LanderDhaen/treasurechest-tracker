@@ -31,8 +31,10 @@ export default function Sorting({
 }: SortingProps) {
   const { searchParams, pushUrl } = useQueryParams();
 
+  const isAscending = currentDirection === "asc";
+
   const handleButtonClick = () => {
-    const newDirection = currentDirection === "asc" ? "desc" : "asc";
+    const newDirection = isAscending ? "desc" : "asc";
     searchParams.set("sortBy", currentSort);
     searchParams.set("direction", newDirection);
     searchParams.set("page", "1");
@@ -50,11 +52,7 @@ export default function Sorting({
   return (
     <ButtonGroup>
       <Button onClick={handleButtonClick} variant="outline">
-        {currentDirection === "asc" ? (
-          <ArrowUpNarrowWide />
-        ) : (
-          <ArrowDownWideNarrow />
-        )}
+        {isAscending ? <ArrowUpNarrowWide /> : <ArrowDownWideNarrow />}
       </Button>
       <Select onValueChange={handleValueChange} value={currentSort}>
         <SelectTrigger className="w-32">
