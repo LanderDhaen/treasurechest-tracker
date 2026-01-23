@@ -36,7 +36,27 @@ export const getAllEvents = async ({
 
     // Sorting
 
-    .$if(sortBy === "status", (eb) => eb.orderBy("status", direction))
+    .$if(sortBy === "status", (eb) =>
+      // Custom sorting for status (finished, ongoing, upcoming or reversed)
+      eb
+        .orderBy(
+          (qb) =>
+            qb
+              .case()
+              .when(sql`now() > ${qb.ref("event.endDate")}`) // Finished
+              .then(1)
+              .when(sql`now() < ${qb.ref("event.startDate")}`) // Upcoming
+              .then(3)
+              .else(2) // Ongoing
+              .end(),
+          direction,
+        )
+        // Tie-breaker by startDate
+        .orderBy("event.startDate", direction)
+        // Tie-breaker by endDate
+        .orderBy("event.endDate", direction),
+    )
+
     .$if(sortBy === "name", (eb) => eb.orderBy("event.name", direction))
     .$if(sortBy === "startDate", (eb) =>
       eb.orderBy("event.startDate", direction),
