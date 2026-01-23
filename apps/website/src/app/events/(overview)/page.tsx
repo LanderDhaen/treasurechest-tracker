@@ -10,14 +10,7 @@ import Pagination from "@/components/pagination";
 import EventTable from "@/components/event-table";
 import { eventSearchParamsSchema } from "@/schemas/event";
 import SortingMenu from "@/components/sorting-menu";
-
-const SORT_OPTIONS = [
-  { label: "Status", value: "status" },
-  { label: "Name", value: "name" },
-  { label: "Start Date", value: "startDate" },
-  { label: "End Date", value: "endDate" },
-  { label: "Rewards", value: "maxChests" },
-];
+import { SORT_OPTIONS } from "@/constants/event";
 
 export default async function Page({
   searchParams,
