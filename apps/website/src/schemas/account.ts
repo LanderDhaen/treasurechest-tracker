@@ -1,10 +1,14 @@
 import * as z from "zod";
+import { paginationSearchParamsSchema } from "./common";
+import {
+  DEFAULT_SORT_DIRECTION,
+  DEFAULT_SORT_OPTION,
+} from "@/constants/account";
 
 export const accountSearchParamsSchema = z.object({
-  page: z.coerce.number().int().min(1).catch(1),
-  pageSize: z.coerce.number().int().catch(10),
-  sortBy: z.enum(["townhall", "name", "clan"]).catch("name"),
-  direction: z.enum(["asc", "desc"]).catch("asc"),
+  ...paginationSearchParamsSchema.shape,
+  sortBy: z.enum(["townhall", "name", "clan"]).catch(DEFAULT_SORT_OPTION),
+  direction: z.enum(["asc", "desc"]).catch(DEFAULT_SORT_DIRECTION),
 });
 
 export type AccountSearchParams = z.infer<typeof accountSearchParamsSchema>;

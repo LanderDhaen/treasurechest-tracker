@@ -10,21 +10,7 @@ import Pagination from "@/components/pagination";
 import AccountTable from "@/components/account-table";
 import { accountSearchParamsSchema } from "@/schemas/account";
 import SortingMenu from "@/components/sorting-menu";
-
-const SORTING_OPTIONS = [
-  {
-    label: "Townhall",
-    value: "townhall",
-  },
-  {
-    label: "Name",
-    value: "name",
-  },
-  {
-    label: "Clan",
-    value: "clan",
-  },
-];
+import { SORT_OPTIONS } from "@/constants/account";
 
 export default async function Page({
   searchParams,
@@ -55,7 +41,7 @@ export default async function Page({
           <SortingMenu
             currentSort={sortBy}
             currentDirection={direction}
-            sortingOptions={SORTING_OPTIONS}
+            sortingOptions={SORT_OPTIONS}
           />
         </div>
         <AccountTable accounts={accounts} />
