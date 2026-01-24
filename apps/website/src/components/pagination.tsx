@@ -74,12 +74,13 @@ export default function Pagination({
       <div className="flex items-center gap-2">
         <span>Rows per page:</span>
         <Select
+          value={currentPageSize.toString()}
           onValueChange={(pageSize) => {
             handlePageSizeChange(pageSize);
           }}
         >
           <SelectTrigger className="w-20">
-            <SelectValue placeholder={`${currentPageSize}`} />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
