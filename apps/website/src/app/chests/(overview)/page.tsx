@@ -1,6 +1,7 @@
 import { getAllChests } from "@/actions/chest";
 import ChestTable from "@/components/chest-table";
 import Pagination from "@/components/pagination";
+import SortingMenu from "@/components/sorting-menu";
 import {
   Card,
   CardContent,
@@ -8,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { SORT_OPTIONS } from "@/constants/chest";
 import { chestSearchParamsSchema } from "@/schemas/chest";
 
 export default async function Page({
@@ -17,11 +19,13 @@ export default async function Page({
 }) {
   const rawParams = await searchParams;
   const parsedParams = chestSearchParamsSchema.parse(rawParams);
-  const { page, pageSize } = parsedParams;
+  const { page, pageSize, sortBy, direction } = parsedParams;
 
   const { chests, chestCount, accountCount, totalPages } = await getAllChests({
     page: page,
     pageSize: pageSize,
+    sortBy: sortBy,
+    direction: direction,
   });
 
   return (
@@ -35,6 +39,13 @@ export default async function Page({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
+        <div className="flex justify-end">
+          <SortingMenu
+            currentSort={sortBy}
+            currentDirection={direction}
+            sortingOptions={SORT_OPTIONS}
+          />
+        </div>
         <ChestTable chests={chests} />
         <Pagination
           currentPage={page}

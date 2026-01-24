@@ -1,13 +1,13 @@
 import { db } from "@/db";
+import { ChestSearchParams } from "@/schemas/chest";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
 export const getAllChests = async ({
   page,
   pageSize,
-}: {
-  page: number;
-  pageSize: number;
-}) => {
+  sortBy,
+  direction,
+}: ChestSearchParams) => {
   const baseQuery = db.selectFrom("chest");
 
   const countQuery = await baseQuery
@@ -20,7 +20,6 @@ export const getAllChests = async ({
   const chests = await baseQuery
     .innerJoin("rarity", "chest.rarityId", "rarity.id")
     .innerJoin("reward", "chest.rewardId", "reward.id")
-    .orderBy("chest.openedAt", "desc")
     .select((eb) => [
       "chest.id",
       "chest.amount",
@@ -31,7 +30,7 @@ export const getAllChests = async ({
         eb
           .selectFrom("event")
           .select(["event.name", "event.isGift"])
-          .whereRef("event.id", "=", "chest.eventId")
+          .whereRef("event.id", "=", "chest.eventId"),
       )
         .$notNull()
         .as("event"),
@@ -39,11 +38,35 @@ export const getAllChests = async ({
         eb
           .selectFrom("account")
           .select(["account.name", "account.townhall"])
-          .whereRef("account.id", "=", "chest.accountId")
+          .whereRef("account.id", "=", "chest.accountId"),
       )
         .$notNull()
         .as("account"),
     ])
+
+    // Sorting
+
+    .$if(sortBy == "rarity", (qb) =>
+      // Invert sorting for rarity because lower chance means higher rarity
+      qb.orderBy("rarity.chance", direction == "asc" ? "desc" : "asc"),
+    )
+    .$if(sortBy == "reward", (qb) => qb.orderBy("reward.name", direction))
+    .$if(sortBy == "openedAt", (qb) => qb.orderBy("chest.openedAt", direction))
+    .$if(sortBy == "account", (qb) =>
+      qb
+        .innerJoin("account", "chest.accountId", "account.id")
+        .orderBy("account.name", direction),
+    )
+    .$if(sortBy == "event", (qb) =>
+      qb
+        .innerJoin("event", "chest.eventId", "event.id")
+        .orderBy("event.name", direction),
+    )
+    // Tie-breaker by id
+    .orderBy("chest.id", direction)
+
+    // Pagination
+
     .offset((page - 1) * pageSize)
     .limit(pageSize)
     .execute();
