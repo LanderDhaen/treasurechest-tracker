@@ -11,6 +11,7 @@ import AccountTable from "@/components/account-table";
 import { accountSearchParamsSchema } from "@/schemas/account";
 import SortingMenu from "@/components/sorting-menu";
 import { SORT_OPTIONS } from "@/constants/account";
+import SearchBar from "@/components/searchbar";
 
 export default async function Page({
   searchParams,
@@ -37,7 +38,8 @@ export default async function Page({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <div className="flex justify-end">
+        <div className="flex justify-between gap-2">
+          <SearchBar />
           <SortingMenu
             currentSort={sortBy}
             currentDirection={direction}
