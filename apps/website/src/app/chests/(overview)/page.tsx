@@ -1,4 +1,5 @@
 import { getAllChests } from "@/actions/chest";
+import ChestTable from "@/components/chest-table";
 import GiftBadge from "@/components/gift-badge";
 import Pagination from "@/components/pagination";
 import RarityBadge from "@/components/rarity-badge";
@@ -45,51 +46,7 @@ export default async function Page({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="rounded-md border overflow-hidden">
-          <Table>
-            <TableHeader>
-              <TableRow className="bg-muted">
-                <TableHead className="font-bold w-12">#</TableHead>
-                <TableHead className="font-bold w-24">Rarity</TableHead>
-                <TableHead className="font-bold">Reward</TableHead>
-                <TableHead className="font-bold">Opened At</TableHead>
-                <TableHead className="font-bold">Account</TableHead>
-                <TableHead className="font-bold">Event</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {chests.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={6} className="text-center italic">
-                    No treasure chests rewards found.
-                  </TableCell>
-                </TableRow>
-              ) : (
-                chests.map((chest) => (
-                  <TableRow key={chest.id}>
-                    <TableCell>{chest.id}</TableCell>
-                    <TableCell>
-                      <RarityBadge rarity={chest.rarity} />
-                    </TableCell>
-                    <TableCell>
-                      {chest.amount === 1
-                        ? `${chest.reward}`
-                        : `${chest.amount.toLocaleString()} ${chest.reward}`}
-                    </TableCell>
-                    <TableCell>{formatDateTime(chest.openedAt)}</TableCell>
-                    <TableCell>{chest.account.name}</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        {chest.event.name}{" "}
-                        <GiftBadge isGift={chest.event.isGift} />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
-        </div>
+        <ChestTable chests={chests} />
       </CardContent>
       <CardFooter className="justify-end">
         <Pagination
