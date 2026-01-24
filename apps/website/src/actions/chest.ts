@@ -50,8 +50,12 @@ export const getAllChests = async ({
       // Invert sorting for rarity because lower chance means higher rarity
       qb.orderBy("rarity.chance", direction == "asc" ? "desc" : "asc"),
     )
-    .$if(sortBy == "reward", (qb) => qb.orderBy("reward.name", direction))
-    .$if(sortBy == "openedAt", (qb) => qb.orderBy("chest.openedAt", direction))
+    .$if(sortBy == "reward", (qb) =>
+      qb
+        .orderBy("reward.name", direction)
+        // Tie-breaker by amount
+        .orderBy("chest.amount", direction),
+    )
     .$if(sortBy == "account", (qb) =>
       qb
         .innerJoin("account", "chest.accountId", "account.id")
@@ -62,6 +66,8 @@ export const getAllChests = async ({
         .innerJoin("event", "chest.eventId", "event.id")
         .orderBy("event.name", direction),
     )
+    // Tie-breaker by openedAt (also applies when sorting by openedAt)
+    .orderBy("chest.openedAt", direction)
     // Tie-breaker by id
     .orderBy("chest.id", direction)
 
