@@ -1,34 +1,23 @@
 import { getAllChests } from "@/actions/chest";
 import ChestTable from "@/components/chest-table";
-import GiftBadge from "@/components/gift-badge";
 import Pagination from "@/components/pagination";
-import RarityBadge from "@/components/rarity-badge";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { formatDateTime } from "@/lib/utils";
+import { chestSearchParamsSchema } from "@/schemas/chest";
 
 export default async function Page({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const params = await searchParams;
-  const page = Number(params.page) || 1;
-  const pageSize = Number(params.pageSize) || 10;
+  const rawParams = await searchParams;
+  const parsedParams = chestSearchParamsSchema.parse(rawParams);
+  const { page, pageSize } = parsedParams;
 
   const { chests, chestCount, accountCount, totalPages } = await getAllChests({
     page: page,
@@ -45,16 +34,14 @@ export default async function Page({
           } across ${accountCount} account${accountCount !== 1 ? "s" : ""}.`}
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-4">
         <ChestTable chests={chests} />
-      </CardContent>
-      <CardFooter className="justify-end">
         <Pagination
           currentPage={page}
           currentPageSize={pageSize}
           totalPages={totalPages}
         />
-      </CardFooter>
+      </CardContent>
     </Card>
   );
 }
