@@ -1,12 +1,15 @@
 "use client";
 
-import { SearchSearchParams } from "@/schemas/common";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 import { SearchIcon } from "lucide-react";
 import useQueryParams from "@/hooks/use-query-params";
 import { useDebouncedCallback } from "use-debounce";
 
-export default function SearchBar({ search }: SearchSearchParams) {
+interface SearchBarProps {
+  search: string | undefined;
+}
+
+export default function SearchBar({ search }: SearchBarProps) {
   const { searchParams, pushUrl } = useQueryParams();
 
   const handleChange = useDebouncedCallback((input: string) => {

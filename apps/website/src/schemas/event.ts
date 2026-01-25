@@ -1,9 +1,9 @@
 import * as z from "zod";
-import { paginationSearchParamsSchema } from "./common";
+import { paginationSchema } from "./common";
 import { DEFAULT_SORT_DIRECTION, DEFAULT_SORT_OPTION } from "@/constants/event";
 
 export const eventSearchParamsSchema = z.object({
-  ...paginationSearchParamsSchema.shape,
+  ...paginationSchema.shape,
   sortBy: z
     .enum(["status", "name", "startDate", "endDate", "maxChests"])
     .catch(DEFAULT_SORT_OPTION),
