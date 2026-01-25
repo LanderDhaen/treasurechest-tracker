@@ -4,6 +4,15 @@ import { EventStatus } from "@/constants/event";
 import { EventSearchParams } from "@/schemas/event";
 import { Database } from "@/db/types/database";
 
+export const getTotalActiveEvents = async () => {
+  const result = await db
+    .selectFrom("event")
+    .where("event.isActive", "=", true)
+    .select((eb) => eb.fn.countAll<number>().as("total"))
+    .executeTakeFirstOrThrow();
+  return result.total;
+};
+
 export const getAllEvents = async ({
   search,
   page,
@@ -84,7 +93,6 @@ export const getAllEvents = async ({
 
   return {
     events,
-    count: countQuery.result,
     totalPages: Math.ceil(countQuery.result / pageSize),
   };
 };

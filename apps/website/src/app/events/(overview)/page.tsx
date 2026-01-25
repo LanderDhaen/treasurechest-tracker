@@ -1,4 +1,4 @@
-import { getAllEvents } from "@/actions/event";
+import { getAllEvents, getTotalActiveEvents } from "@/actions/event";
 import {
   Card,
   CardContent,
@@ -22,13 +22,15 @@ export default async function Page({
   const parsedParams = eventSearchParamsSchema.parse(rawParams);
   const { search, page, pageSize, sortBy, direction } = parsedParams;
 
-  const { events, count, totalPages } = await getAllEvents({
+  const { events, totalPages } = await getAllEvents({
     search,
     page,
     pageSize,
     sortBy,
     direction,
   });
+
+  const count = await getTotalActiveEvents();
 
   return (
     <Card className="shadow-md">
