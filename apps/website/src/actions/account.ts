@@ -78,6 +78,7 @@ export const getAllAccounts = async ({
 
   return {
     accounts,
+    rows: countQuery.result,
     totalPages: Math.ceil(countQuery.result / pageSize),
   };
 };

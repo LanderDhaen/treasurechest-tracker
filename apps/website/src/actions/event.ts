@@ -93,6 +93,7 @@ export const getAllEvents = async ({
 
   return {
     events,
+    rows: countQuery.result,
     totalPages: Math.ceil(countQuery.result / pageSize),
   };
 };

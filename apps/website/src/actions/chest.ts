@@ -104,6 +104,7 @@ export const getAllChests = async ({
 
   return {
     chests,
+    rows: countQuery.result,
     totalPages: Math.ceil(countQuery.result / pageSize),
   };
 };

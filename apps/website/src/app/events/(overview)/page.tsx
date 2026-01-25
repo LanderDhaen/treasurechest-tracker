@@ -22,7 +22,7 @@ export default async function Page({
   const parsedParams = eventSearchParamsSchema.parse(rawParams);
   const { search, page, pageSize, sortBy, direction } = parsedParams;
 
-  const { events, totalPages } = await getAllEvents({
+  const { events, rows, totalPages } = await getAllEvents({
     search,
     page,
     pageSize,
@@ -42,7 +42,7 @@ export default async function Page({
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="flex justify-between gap-2">
-          <SearchBar currentSearch={search} />
+          <SearchBar currentSearch={search} rows={rows} />
           <SortingMenu
             currentSort={sortBy}
             currentDirection={direction}

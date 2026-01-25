@@ -22,7 +22,7 @@ export default async function Page({
   const parsedParams = accountSearchParamsSchema.parse(rawParams);
   const { search, page, pageSize, sortBy, direction } = parsedParams;
 
-  const { accounts, totalPages } = await getAllAccounts({
+  const { accounts, rows, totalPages } = await getAllAccounts({
     search,
     page,
     pageSize,
@@ -42,7 +42,7 @@ export default async function Page({
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="flex justify-between gap-2">
-          <SearchBar currentSearch={search} />
+          <SearchBar currentSearch={search} rows={rows} />
           <SortingMenu
             currentSort={sortBy}
             currentDirection={direction}

@@ -7,9 +7,10 @@ import { useDebouncedCallback } from "use-debounce";
 
 interface SearchBarProps {
   currentSearch: string | undefined;
+  rows: number;
 }
 
-export default function SearchBar({ currentSearch }: SearchBarProps) {
+export default function SearchBar({ currentSearch, rows }: SearchBarProps) {
   const { searchParams, pushUrl } = useQueryParams();
 
   const handleChange = useDebouncedCallback((search: string) => {
@@ -32,6 +33,11 @@ export default function SearchBar({ currentSearch }: SearchBarProps) {
       <InputGroupAddon align="inline-start">
         <SearchIcon />
       </InputGroupAddon>
+      {currentSearch && (
+        <InputGroupAddon align="inline-end">
+          {rows} result{rows !== 1 ? "s" : ""}
+        </InputGroupAddon>
+      )}
     </InputGroup>
   );
 }
