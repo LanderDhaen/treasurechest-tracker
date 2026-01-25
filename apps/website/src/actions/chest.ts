@@ -16,15 +16,48 @@ export const getAllChests = async ({
   sortBy,
   direction,
 }: ChestSearchParams) => {
-  const baseQuery = db.selectFrom("chest");
+  let query = db
+    .selectFrom("chest")
+    .innerJoin("rarity", "chest.rarityId", "rarity.id")
+    .innerJoin("reward", "chest.rewardId", "reward.id")
+    .innerJoin("event", "chest.eventId", "event.id")
+    .innerJoin("account", "chest.accountId", "account.id");
 
-  const countQuery = await baseQuery
+  const countQuery = await query
     .select(db.fn.countAll<number>().as("result"))
     .executeTakeFirstOrThrow();
 
-  const chests = await baseQuery
-    .innerJoin("rarity", "chest.rarityId", "rarity.id")
-    .innerJoin("reward", "chest.rewardId", "reward.id")
+  // Sorting
+
+  if (sortBy == "rarity") {
+    query = query.orderBy("rarity.chance", direction == "asc" ? "desc" : "asc"); // Invert sorting for rarity because lower chance means higher rarity
+  }
+
+  if (sortBy == "reward") {
+    query = query
+      .orderBy("reward.name", direction)
+      .orderBy("chest.amount", direction);
+  }
+
+  if (sortBy == "account") {
+    query = query.orderBy("account.name", direction);
+  }
+
+  if (sortBy == "event") {
+    query = query.orderBy("event.name", direction);
+  }
+
+  query = query
+    .orderBy("chest.openedAt", direction)
+    .orderBy("chest.id", direction); // Secondary sort to ensure consistent order
+
+  // Pagination
+
+  query = query.limit(pageSize).offset((page - 1) * pageSize);
+
+  // Selecting
+
+  const chests = await query
     .select((eb) => [
       "chest.id",
       "chest.amount",
@@ -48,42 +81,10 @@ export const getAllChests = async ({
         .$notNull()
         .as("account"),
     ])
-
-    // Sorting
-
-    .$if(sortBy == "rarity", (qb) =>
-      // Invert sorting for rarity because lower chance means higher rarity
-      qb.orderBy("rarity.chance", direction == "asc" ? "desc" : "asc"),
-    )
-    .$if(sortBy == "reward", (qb) =>
-      qb
-        .orderBy("reward.name", direction)
-        // Tie-breaker by amount
-        .orderBy("chest.amount", direction),
-    )
-    .$if(sortBy == "account", (qb) =>
-      qb
-        .innerJoin("account", "chest.accountId", "account.id")
-        .orderBy("account.name", direction),
-    )
-    .$if(sortBy == "event", (qb) =>
-      qb
-        .innerJoin("event", "chest.eventId", "event.id")
-        .orderBy("event.name", direction),
-    )
-    // Tie-breaker by openedAt (also applies when sorting by openedAt)
-    .orderBy("chest.openedAt", direction)
-    // Tie-breaker by id
-    .orderBy("chest.id", direction)
-
-    // Pagination
-
-    .offset((page - 1) * pageSize)
-    .limit(pageSize)
     .execute();
 
   return {
-    chests: chests,
+    chests,
     totalPages: Math.ceil(countQuery.result / pageSize),
   };
 };
