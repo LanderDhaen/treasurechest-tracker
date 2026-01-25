@@ -25,8 +25,6 @@ export const getAllAccounts = async ({
 
   // Filtering
 
-  console.log("Search:", search);
-
   if (search) {
     query = query.where((eb) =>
       eb.or([

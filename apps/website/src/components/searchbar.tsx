@@ -1,12 +1,7 @@
 "use client";
 
 import { SearchSearchParams } from "@/schemas/common";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from "./ui/input-group";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 import { SearchIcon } from "lucide-react";
 import useQueryParams from "@/hooks/use-query-params";
 import { useDebouncedCallback } from "use-debounce";
