@@ -11,6 +11,7 @@ import EventTable from "@/components/event-table";
 import { eventSearchParamsSchema } from "@/schemas/event";
 import SortingMenu from "@/components/sorting-menu";
 import { SORT_OPTIONS } from "@/constants/event";
+import SearchBar from "@/components/searchbar";
 
 export default async function Page({
   searchParams,
@@ -19,9 +20,10 @@ export default async function Page({
 }) {
   const rawParams = await searchParams;
   const parsedParams = eventSearchParamsSchema.parse(rawParams);
-  const { page, pageSize, sortBy, direction } = parsedParams;
+  const { search, page, pageSize, sortBy, direction } = parsedParams;
 
   const { events, count, totalPages } = await getAllEvents({
+    search,
     page,
     pageSize,
     sortBy,
@@ -37,7 +39,8 @@ export default async function Page({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <div className="flex justify-end">
+        <div className="flex justify-between gap-2">
+          <SearchBar search={search} />
           <SortingMenu
             currentSort={sortBy}
             currentDirection={direction}

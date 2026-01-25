@@ -4,18 +4,70 @@ import { EventStatus } from "@/constants/event";
 import { EventSearchParams } from "@/schemas/event";
 
 export const getAllEvents = async ({
+  search,
   page,
   pageSize,
   sortBy,
   direction,
 }: EventSearchParams) => {
-  const baseQuery = db.selectFrom("event").where("event.isActive", "=", true);
+  let query = db.selectFrom("event").where("event.isActive", "=", true);
 
-  const countQuery = await baseQuery
+  // Filtering
+
+  if (search) {
+    query = query.where((eb) =>
+      eb.or([eb("event.name", "ilike", `%${search}%`)]),
+    );
+  }
+
+  const countQuery = await query
     .select((eb) => eb.fn.countAll<number>().as("result"))
     .executeTakeFirstOrThrow();
 
-  const events = await baseQuery
+  // Sorting
+
+  if (sortBy === "status") {
+    // Custom sorting for status (finished, ongoing, upcoming or reversed)
+    query = query
+      .orderBy(
+        (eb) =>
+          eb
+            .case()
+            .when(sql`now()`, ">", eb.ref("event.endDate")) // Finished
+            .then(1)
+            .when(sql`now()`, "<", eb.ref("event.startDate")) // Upcoming
+            .then(3)
+            .else(2) // Ongoing
+            .end(),
+        direction,
+      )
+      .orderBy("event.startDate", direction)
+      .orderBy("event.endDate", direction);
+  }
+
+  if (sortBy === "name") {
+    query = query.orderBy("event.name", direction);
+  }
+
+  if (sortBy === "startDate") {
+    query = query.orderBy("event.startDate", direction);
+  }
+
+  if (sortBy === "endDate") {
+    query = query.orderBy("event.endDate", direction);
+  }
+
+  if (sortBy === "maxChests") {
+    query = query.orderBy("event.maxChests", direction);
+  }
+
+  query = query.orderBy("event.id", direction);
+
+  // Pagination
+
+  query = query.offset((page - 1) * pageSize).limit(pageSize);
+
+  const events = await query
     .select((eb) => [
       "event.id",
       "event.name",
@@ -25,53 +77,14 @@ export const getAllEvents = async ({
       "event.isGift",
       eb
         .case()
-        .when(sql`now() > ${eb.ref("event.endDate")}`)
+        .when(sql`now()`, ">", eb.ref("event.endDate"))
         .then(EventStatus.Finished)
-        .when(sql`now() < ${eb.ref("event.startDate")}`)
+        .when(sql`now()`, "<", eb.ref("event.startDate"))
         .then(EventStatus.Upcoming)
         .else(EventStatus.Ongoing)
         .end()
         .as("status"),
     ])
-
-    // Sorting
-
-    .$if(sortBy === "status", (eb) =>
-      // Custom sorting for status (finished, ongoing, upcoming or reversed)
-      eb
-        .orderBy(
-          (qb) =>
-            qb
-              .case()
-              .when(sql`now() > ${qb.ref("event.endDate")}`) // Finished
-              .then(1)
-              .when(sql`now() < ${qb.ref("event.startDate")}`) // Upcoming
-              .then(3)
-              .else(2) // Ongoing
-              .end(),
-          direction,
-        )
-        // Tie-breaker by startDate
-        .orderBy("event.startDate", direction)
-        // Tie-breaker by endDate
-        .orderBy("event.endDate", direction),
-    )
-
-    .$if(sortBy === "name", (eb) => eb.orderBy("event.name", direction))
-    .$if(sortBy === "startDate", (eb) =>
-      eb.orderBy("event.startDate", direction),
-    )
-    .$if(sortBy === "endDate", (eb) => eb.orderBy("event.endDate", direction))
-    .$if(sortBy === "maxChests", (eb) =>
-      eb.orderBy("event.maxChests", direction),
-    )
-    // Tie-breaker by id
-    .orderBy("event.id", direction)
-
-    // Pagination
-
-    .offset((page - 1) * pageSize)
-    .limit(pageSize)
     .execute();
 
   return {
