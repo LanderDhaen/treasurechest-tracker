@@ -44,7 +44,10 @@ export const getAllChests = async ({
   // Sorting
 
   if (sortBy == "rarity") {
-    query = query.orderBy("rarity.chance", direction == "asc" ? "desc" : "asc"); // Invert sorting for rarity because lower chance means higher rarity
+    query = query
+      .orderBy("rarity.chance", direction == "asc" ? "desc" : "asc") // Invert sorting for rarity because lower chance means higher rarity
+      .orderBy("reward.name", direction)
+      .orderBy("chest.amount", direction);
   }
 
   if (sortBy == "reward") {
@@ -54,7 +57,9 @@ export const getAllChests = async ({
   }
 
   if (sortBy == "account") {
-    query = query.orderBy("account.name", direction);
+    query = query
+      .orderBy("account.name", direction)
+      .orderBy("account.townhall", direction);
   }
 
   if (sortBy == "event") {
