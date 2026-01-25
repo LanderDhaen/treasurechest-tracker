@@ -1,7 +1,8 @@
 import { db } from "@/db";
-import { sql } from "kysely";
+import { Expression, expressionBuilder, sql } from "kysely";
 import { EventStatus } from "@/constants/event";
 import { EventSearchParams } from "@/schemas/event";
+import { Database } from "@/db/types/database";
 
 export const getAllEvents = async ({
   search,
@@ -75,15 +76,9 @@ export const getAllEvents = async ({
       "event.endDate",
       "event.maxChests",
       "event.isGift",
-      eb
-        .case()
-        .when(sql`now()`, ">", eb.ref("event.endDate"))
-        .then(EventStatus.Finished)
-        .when(sql`now()`, "<", eb.ref("event.startDate"))
-        .then(EventStatus.Upcoming)
-        .else(EventStatus.Ongoing)
-        .end()
-        .as("status"),
+      deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
+        "status",
+      ),
     ])
     .execute();
 
@@ -108,4 +103,20 @@ export const getHighestEvent = async () => {
     .executeTakeFirstOrThrow();
 
   return result;
+};
+
+export const deriveEventStatus = (
+  startDate: Expression<Date>,
+  endDate: Expression<Date>,
+) => {
+  const eb = expressionBuilder<Database, never>();
+
+  return eb
+    .case()
+    .when(sql`now()`, ">", endDate)
+    .then(EventStatus.Finished)
+    .when(sql`now()`, "<", startDate)
+    .then(EventStatus.Upcoming)
+    .else(EventStatus.Ongoing)
+    .end();
 };
