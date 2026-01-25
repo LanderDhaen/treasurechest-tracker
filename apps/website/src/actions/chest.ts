@@ -2,24 +2,81 @@ import { db } from "@/db";
 import { ChestSearchParams } from "@/schemas/chest";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
+export const getTotalChests = async () => {
+  const result = await db
+    .selectFrom("chest")
+    .select(db.fn.countAll<number>().as("count"))
+    .executeTakeFirstOrThrow();
+  return result.count;
+};
+
 export const getAllChests = async ({
+  search,
   page,
   pageSize,
   sortBy,
   direction,
 }: ChestSearchParams) => {
-  const baseQuery = db.selectFrom("chest");
-
-  const countQuery = await baseQuery
-    .select((eb) => [
-      eb.fn.countAll<number>().as("chestCount"),
-      eb.fn.count<number>("chest.accountId").distinct().as("accountCount"),
-    ])
-    .executeTakeFirstOrThrow();
-
-  const chests = await baseQuery
+  let query = db
+    .selectFrom("chest")
     .innerJoin("rarity", "chest.rarityId", "rarity.id")
     .innerJoin("reward", "chest.rewardId", "reward.id")
+    .innerJoin("event", "chest.eventId", "event.id")
+    .innerJoin("account", "chest.accountId", "account.id");
+
+  // Filtering
+
+  if (search) {
+    query = query.where((eb) =>
+      eb.or([
+        eb("rarity.name", "ilike", `%${search}%`),
+        eb("reward.name", "ilike", `%${search}%`),
+        eb("account.name", "ilike", `%${search}%`),
+        eb("event.name", "ilike", `%${search}%`),
+      ]),
+    );
+  }
+
+  const countQuery = await query
+    .select(db.fn.countAll<number>().as("result"))
+    .executeTakeFirstOrThrow();
+
+  // Sorting
+
+  if (sortBy == "rarity") {
+    query = query
+      .orderBy("rarity.chance", direction == "asc" ? "desc" : "asc") // Invert sorting for rarity because lower chance means higher rarity
+      .orderBy("reward.name", direction)
+      .orderBy("chest.amount", direction);
+  }
+
+  if (sortBy == "reward") {
+    query = query
+      .orderBy("reward.name", direction)
+      .orderBy("chest.amount", direction);
+  }
+
+  if (sortBy == "account") {
+    query = query
+      .orderBy("account.name", direction)
+      .orderBy("account.townhall", direction);
+  }
+
+  if (sortBy == "event") {
+    query = query.orderBy("event.name", direction);
+  }
+
+  query = query
+    .orderBy("chest.openedAt", direction)
+    .orderBy("chest.id", direction); // Secondary sort to ensure consistent order
+
+  // Pagination
+
+  query = query.limit(pageSize).offset((page - 1) * pageSize);
+
+  // Selecting
+
+  const chests = await query
     .select((eb) => [
       "chest.id",
       "chest.amount",
@@ -43,45 +100,12 @@ export const getAllChests = async ({
         .$notNull()
         .as("account"),
     ])
-
-    // Sorting
-
-    .$if(sortBy == "rarity", (qb) =>
-      // Invert sorting for rarity because lower chance means higher rarity
-      qb.orderBy("rarity.chance", direction == "asc" ? "desc" : "asc"),
-    )
-    .$if(sortBy == "reward", (qb) =>
-      qb
-        .orderBy("reward.name", direction)
-        // Tie-breaker by amount
-        .orderBy("chest.amount", direction),
-    )
-    .$if(sortBy == "account", (qb) =>
-      qb
-        .innerJoin("account", "chest.accountId", "account.id")
-        .orderBy("account.name", direction),
-    )
-    .$if(sortBy == "event", (qb) =>
-      qb
-        .innerJoin("event", "chest.eventId", "event.id")
-        .orderBy("event.name", direction),
-    )
-    // Tie-breaker by openedAt (also applies when sorting by openedAt)
-    .orderBy("chest.openedAt", direction)
-    // Tie-breaker by id
-    .orderBy("chest.id", direction)
-
-    // Pagination
-
-    .offset((page - 1) * pageSize)
-    .limit(pageSize)
     .execute();
 
   return {
-    chests: chests,
-    chestCount: countQuery.chestCount,
-    accountCount: countQuery.accountCount,
-    totalPages: Math.ceil(countQuery.chestCount / pageSize),
+    chests,
+    rows: countQuery.result,
+    totalPages: Math.ceil(countQuery.result / pageSize),
   };
 };
 

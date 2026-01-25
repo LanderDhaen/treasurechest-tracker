@@ -1,6 +1,7 @@
-import { getAllChests } from "@/actions/chest";
+import { getAllChests, getTotalChests } from "@/actions/chest";
 import ChestTable from "@/components/chest-table";
 import Pagination from "@/components/pagination";
+import SearchBar from "@/components/searchbar";
 import SortingMenu from "@/components/sorting-menu";
 import {
   Card,
@@ -19,27 +20,29 @@ export default async function Page({
 }) {
   const rawParams = await searchParams;
   const parsedParams = chestSearchParamsSchema.parse(rawParams);
-  const { page, pageSize, sortBy, direction } = parsedParams;
+  const { search, page, pageSize, sortBy, direction } = parsedParams;
 
-  const { chests, chestCount, accountCount, totalPages } = await getAllChests({
-    page: page,
-    pageSize: pageSize,
-    sortBy: sortBy,
-    direction: direction,
+  const { chests, rows, totalPages } = await getAllChests({
+    search,
+    page,
+    pageSize,
+    sortBy,
+    direction,
   });
+
+  const count = await getTotalChests();
 
   return (
     <Card className="shadow-md">
       <CardHeader>
         <CardTitle>Treasure Chests</CardTitle>
         <CardDescription>
-          {`Currently opened ${chestCount} treasure chest${
-            chestCount !== 1 ? "s" : ""
-          } across ${accountCount} account${accountCount !== 1 ? "s" : ""}.`}
+          {`Currently opened ${count} treasure chest${count !== 1 ? "s" : ""}.`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <div className="flex justify-end">
+        <div className="flex justify-between gap-2">
+          <SearchBar currentSearch={search} rows={rows} />
           <SortingMenu
             currentSort={sortBy}
             currentDirection={direction}
@@ -47,11 +50,13 @@ export default async function Page({
           />
         </div>
         <ChestTable chests={chests} />
-        <Pagination
-          currentPage={page}
-          currentPageSize={pageSize}
-          totalPages={totalPages}
-        />
+        {totalPages > 0 && (
+          <Pagination
+            currentPage={page}
+            currentPageSize={pageSize}
+            totalPages={totalPages}
+          />
+        )}
       </CardContent>
     </Card>
   );

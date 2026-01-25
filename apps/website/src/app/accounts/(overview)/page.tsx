@@ -1,4 +1,4 @@
-import { getAllAccounts } from "@/actions/account";
+import { getAllAccounts, getTotalAccounts } from "@/actions/account";
 import {
   Card,
   CardContent,
@@ -11,6 +11,7 @@ import AccountTable from "@/components/account-table";
 import { accountSearchParamsSchema } from "@/schemas/account";
 import SortingMenu from "@/components/sorting-menu";
 import { SORT_OPTIONS } from "@/constants/account";
+import SearchBar from "@/components/searchbar";
 
 export default async function Page({
   searchParams,
@@ -19,14 +20,17 @@ export default async function Page({
 }) {
   const rawParams = await searchParams;
   const parsedParams = accountSearchParamsSchema.parse(rawParams);
-  const { page, pageSize, sortBy, direction } = parsedParams;
+  const { search, page, pageSize, sortBy, direction } = parsedParams;
 
-  const { accounts, count, totalPages } = await getAllAccounts({
+  const { accounts, rows, totalPages } = await getAllAccounts({
+    search,
     page,
     pageSize,
     sortBy,
     direction,
   });
+
+  const count = await getTotalAccounts();
 
   return (
     <Card className="shadow-md">
@@ -37,7 +41,8 @@ export default async function Page({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <div className="flex justify-end">
+        <div className="flex justify-between gap-2">
+          <SearchBar currentSearch={search} rows={rows} />
           <SortingMenu
             currentSort={sortBy}
             currentDirection={direction}
@@ -45,11 +50,13 @@ export default async function Page({
           />
         </div>
         <AccountTable accounts={accounts} />
-        <Pagination
-          currentPage={page}
-          currentPageSize={pageSize}
-          totalPages={totalPages}
-        />
+        {totalPages > 0 && (
+          <Pagination
+            currentPage={page}
+            currentPageSize={pageSize}
+            totalPages={totalPages}
+          />
+        )}
       </CardContent>
     </Card>
   );

@@ -15,7 +15,7 @@ import { ButtonGroup } from "./ui/button-group";
 import { Button } from "./ui/button";
 import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
 
-interface SortingProps {
+interface SortingMenuProps {
   currentSort: string;
   currentDirection: "asc" | "desc";
   sortingOptions: {
@@ -24,11 +24,11 @@ interface SortingProps {
   }[];
 }
 
-export default function Sorting({
+export default function SortingMenu({
   currentSort,
   currentDirection,
   sortingOptions,
-}: SortingProps) {
+}: SortingMenuProps) {
   const { searchParams, pushUrl } = useQueryParams();
 
   const isAscending = currentDirection === "asc";
