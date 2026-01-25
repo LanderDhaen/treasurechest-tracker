@@ -2,6 +2,15 @@ import { db } from "@/db";
 import { AccountSearchParams } from "@/schemas/account";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
+export const getTotalActiveAccounts = async () => {
+  const result = await db
+    .selectFrom("account")
+    .where("account.isActive", "=", true)
+    .select((eb) => eb.fn.countAll<number>().as("total"))
+    .executeTakeFirstOrThrow();
+  return result.total;
+};
+
 export const getAllAccounts = async ({
   search,
   page,
@@ -54,7 +63,6 @@ export const getAllAccounts = async ({
 
   return {
     accounts,
-    count: countQuery.result,
     totalPages: Math.ceil(countQuery.result / pageSize),
   };
 };

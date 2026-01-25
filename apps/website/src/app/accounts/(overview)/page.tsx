@@ -1,4 +1,4 @@
-import { getAllAccounts } from "@/actions/account";
+import { getAllAccounts, getTotalActiveAccounts } from "@/actions/account";
 import {
   Card,
   CardContent,
@@ -22,13 +22,15 @@ export default async function Page({
   const parsedParams = accountSearchParamsSchema.parse(rawParams);
   const { search, page, pageSize, sortBy, direction } = parsedParams;
 
-  const { accounts, count, totalPages } = await getAllAccounts({
+  const { accounts, totalPages } = await getAllAccounts({
     search,
     page,
     pageSize,
     sortBy,
     direction,
   });
+
+  const count = await getTotalActiveAccounts();
 
   return (
     <Card className="shadow-md">
