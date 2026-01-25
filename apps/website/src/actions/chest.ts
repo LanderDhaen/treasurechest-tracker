@@ -11,6 +11,7 @@ export const getTotalChests = async () => {
 };
 
 export const getAllChests = async ({
+  search,
   page,
   pageSize,
   sortBy,
@@ -22,6 +23,19 @@ export const getAllChests = async ({
     .innerJoin("reward", "chest.rewardId", "reward.id")
     .innerJoin("event", "chest.eventId", "event.id")
     .innerJoin("account", "chest.accountId", "account.id");
+
+  // Filtering
+
+  if (search) {
+    query = query.where((eb) =>
+      eb.or([
+        eb("rarity.name", "ilike", `%${search}%`),
+        eb("reward.name", "ilike", `%${search}%`),
+        eb("account.name", "ilike", `%${search}%`),
+        eb("event.name", "ilike", `%${search}%`),
+      ]),
+    );
+  }
 
   const countQuery = await query
     .select(db.fn.countAll<number>().as("result"))

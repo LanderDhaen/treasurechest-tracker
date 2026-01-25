@@ -1,8 +1,9 @@
 import * as z from "zod";
-import { paginationSchema } from "./common";
+import { paginationSchema, searchSchema } from "./common";
 import { DEFAULT_SORT_DIRECTION, DEFAULT_SORT_OPTION } from "@/constants/chest";
 
 export const chestSearchParamsSchema = z.object({
+  ...searchSchema.shape,
   ...paginationSchema.shape,
   sortBy: z
     .enum(["rarity", "reward", "openedAt", "account", "event"])

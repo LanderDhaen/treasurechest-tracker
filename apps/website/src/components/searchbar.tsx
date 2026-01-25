@@ -6,15 +6,15 @@ import useQueryParams from "@/hooks/use-query-params";
 import { useDebouncedCallback } from "use-debounce";
 
 interface SearchBarProps {
-  search: string | undefined;
+  currentSearch: string | undefined;
 }
 
-export default function SearchBar({ search }: SearchBarProps) {
+export default function SearchBar({ currentSearch }: SearchBarProps) {
   const { searchParams, pushUrl } = useQueryParams();
 
-  const handleChange = useDebouncedCallback((input: string) => {
-    if (input) {
-      searchParams.set("search", input);
+  const handleChange = useDebouncedCallback((search: string) => {
+    if (search) {
+      searchParams.set("search", search);
     } else {
       searchParams.delete("search");
     }
@@ -25,7 +25,7 @@ export default function SearchBar({ search }: SearchBarProps) {
   return (
     <InputGroup>
       <InputGroupInput
-        defaultValue={search}
+        defaultValue={currentSearch}
         onChange={(e) => handleChange(e.target.value)}
         placeholder="Search..."
       />
