@@ -1,4 +1,4 @@
-import { getAllEvents, getTotalActiveEvents } from "@/actions/event";
+import { getAllEvents, getTotalEvents } from "@/actions/event";
 import {
   Card,
   CardContent,
@@ -30,7 +30,7 @@ export default async function Page({
     direction,
   });
 
-  const count = await getTotalActiveEvents();
+  const count = await getTotalEvents();
 
   return (
     <Card className="shadow-md">

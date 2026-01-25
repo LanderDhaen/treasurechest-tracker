@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { AccountSearchParams } from "@/schemas/account";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
-export const getTotalActiveAccounts = async () => {
+export const getTotalAccounts = async () => {
   const result = await db
     .selectFrom("account")
     .where("account.isActive", "=", true)

@@ -1,4 +1,4 @@
-import { getAllAccounts, getTotalActiveAccounts } from "@/actions/account";
+import { getAllAccounts, getTotalAccounts } from "@/actions/account";
 import {
   Card,
   CardContent,
@@ -30,7 +30,7 @@ export default async function Page({
     direction,
   });
 
-  const count = await getTotalActiveAccounts();
+  const count = await getTotalAccounts();
 
   return (
     <Card className="shadow-md">

@@ -4,7 +4,7 @@ import { EventStatus } from "@/constants/event";
 import { EventSearchParams } from "@/schemas/event";
 import { Database } from "@/db/types/database";
 
-export const getTotalActiveEvents = async () => {
+export const getTotalEvents = async () => {
   const result = await db
     .selectFrom("event")
     .where("event.isActive", "=", true)
