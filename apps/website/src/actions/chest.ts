@@ -2,6 +2,14 @@ import { db } from "@/db";
 import { ChestSearchParams } from "@/schemas/chest";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
+export const getTotalChests = async () => {
+  const result = await db
+    .selectFrom("chest")
+    .select(db.fn.countAll<number>().as("count"))
+    .executeTakeFirstOrThrow();
+  return result.count;
+};
+
 export const getAllChests = async ({
   page,
   pageSize,
@@ -11,10 +19,7 @@ export const getAllChests = async ({
   const baseQuery = db.selectFrom("chest");
 
   const countQuery = await baseQuery
-    .select((eb) => [
-      eb.fn.countAll<number>().as("chestCount"),
-      eb.fn.count<number>("chest.accountId").distinct().as("accountCount"),
-    ])
+    .select(db.fn.countAll<number>().as("result"))
     .executeTakeFirstOrThrow();
 
   const chests = await baseQuery
@@ -79,9 +84,7 @@ export const getAllChests = async ({
 
   return {
     chests: chests,
-    chestCount: countQuery.chestCount,
-    accountCount: countQuery.accountCount,
-    totalPages: Math.ceil(countQuery.chestCount / pageSize),
+    totalPages: Math.ceil(countQuery.result / pageSize),
   };
 };
 

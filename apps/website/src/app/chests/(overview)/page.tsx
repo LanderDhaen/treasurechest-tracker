@@ -1,4 +1,4 @@
-import { getAllChests } from "@/actions/chest";
+import { getAllChests, getTotalChests } from "@/actions/chest";
 import ChestTable from "@/components/chest-table";
 import Pagination from "@/components/pagination";
 import SortingMenu from "@/components/sorting-menu";
@@ -21,21 +21,21 @@ export default async function Page({
   const parsedParams = chestSearchParamsSchema.parse(rawParams);
   const { page, pageSize, sortBy, direction } = parsedParams;
 
-  const { chests, chestCount, accountCount, totalPages } = await getAllChests({
+  const { chests, totalPages } = await getAllChests({
     page: page,
     pageSize: pageSize,
     sortBy: sortBy,
     direction: direction,
   });
 
+  const count = await getTotalChests();
+
   return (
     <Card className="shadow-md">
       <CardHeader>
         <CardTitle>Treasure Chests</CardTitle>
         <CardDescription>
-          {`Currently opened ${chestCount} treasure chest${
-            chestCount !== 1 ? "s" : ""
-          } across ${accountCount} account${accountCount !== 1 ? "s" : ""}.`}
+          {`Currently opened ${count} treasure chest${count !== 1 ? "s" : ""}.`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
