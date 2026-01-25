@@ -31,10 +31,8 @@ export default function SearchBar({ search }: SearchSearchParams) {
         onChange={(e) => handleChange(e.target.value)}
         placeholder="Search..."
       />
-      <InputGroupAddon align="inline-end">
-        <InputGroupButton size="icon-xs" variant="ghost">
-          <SearchIcon />
-        </InputGroupButton>
+      <InputGroupAddon align="inline-start">
+        <SearchIcon />
       </InputGroupAddon>
     </InputGroup>
   );
