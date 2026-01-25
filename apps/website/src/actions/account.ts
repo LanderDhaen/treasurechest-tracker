@@ -18,19 +18,51 @@ export const getAllAccounts = async ({
   sortBy,
   direction,
 }: AccountSearchParams) => {
-  const baseQuery = db
+  let query = db
     .selectFrom("account")
-    .where("account.isActive", "=", true)
-    .$if(search !== undefined, (eb) =>
-      eb.where("account.name", "ilike", `%${search}%`),
-    );
+    .innerJoin("clan", "account.clanId", "clan.id")
+    .where("account.isActive", "=", true);
 
-  const countQuery = await baseQuery
+  // Filtering
+
+  console.log("Search:", search);
+
+  if (search) {
+    query = query.where((eb) =>
+      eb.or([
+        eb("account.name", "ilike", `%${search}%`),
+        eb("clan.name", "ilike", `%${search}%`),
+      ]),
+    );
+  }
+
+  const countQuery = await query
     .select((eb) => eb.fn.countAll<number>().as("result"))
     .executeTakeFirstOrThrow();
 
-  const accounts = await baseQuery
-    .innerJoin("clan", "account.clanId", "clan.id")
+  // Sorting
+
+  if (sortBy === "townhall") {
+    query = query.orderBy("account.townhall", direction);
+  }
+
+  if (sortBy === "name") {
+    query = query.orderBy("account.name", direction);
+  }
+
+  if (sortBy === "clan") {
+    query = query.orderBy("clan.rank", direction);
+  }
+
+  query = query.orderBy("account.id", direction); // Secondary sort to ensure consistent order
+
+  // Pagination
+
+  query = query.limit(pageSize).offset((page - 1) * pageSize);
+
+  // Selecting
+
+  const accounts = await query
     .select((eb) => [
       "account.name",
       "account.tag",
@@ -44,21 +76,6 @@ export const getAllAccounts = async ({
         .$notNull()
         .as("clan"),
     ])
-
-    // Sorting
-
-    .$if(sortBy === "townhall", (eb) =>
-      eb.orderBy(`account.townhall`, direction),
-    )
-    .$if(sortBy === "name", (eb) => eb.orderBy(`account.name`, direction))
-    .$if(sortBy === "clan", (eb) => eb.orderBy("clan.rank", direction))
-    // Tie-breaker by id
-    .orderBy("account.id", direction)
-
-    // Pagination
-
-    .limit(pageSize)
-    .offset((page - 1) * pageSize)
     .execute();
 
   return {
