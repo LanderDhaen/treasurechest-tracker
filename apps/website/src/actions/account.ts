@@ -3,6 +3,7 @@ import { AccountSearchParams } from "@/schemas/account";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
 export const getAllAccounts = async ({
+  search,
   page,
   pageSize,
   sortBy,
@@ -10,7 +11,10 @@ export const getAllAccounts = async ({
 }: AccountSearchParams) => {
   const baseQuery = db
     .selectFrom("account")
-    .where("account.isActive", "=", true);
+    .where("account.isActive", "=", true)
+    .$if(search !== undefined, (eb) =>
+      eb.where("account.name", "ilike", `%${search}%`),
+    );
 
   const countQuery = await baseQuery
     .select((eb) => eb.fn.countAll<number>().as("result"))

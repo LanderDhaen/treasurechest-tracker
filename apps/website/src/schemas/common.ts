@@ -1,6 +1,12 @@
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "@/constants/common";
 import * as z from "zod";
 
+export const searchSearchParamsSchema = z.object({
+  search: z.string().optional(),
+});
+
+export type SearchSearchParams = z.infer<typeof searchSearchParamsSchema>;
+
 export const paginationSearchParamsSchema = z.object({
   page: z.coerce.number().int().min(1).catch(DEFAULT_PAGE),
   pageSize: z.coerce.number().int().catch(DEFAULT_PAGE_SIZE),
