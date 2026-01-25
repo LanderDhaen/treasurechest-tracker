@@ -50,11 +50,13 @@ export default async function Page({
           />
         </div>
         <AccountTable accounts={accounts} />
-        <Pagination
-          currentPage={page}
-          currentPageSize={pageSize}
-          totalPages={totalPages}
-        />
+        {totalPages > 0 && (
+          <Pagination
+            currentPage={page}
+            currentPageSize={pageSize}
+            totalPages={totalPages}
+          />
+        )}
       </CardContent>
     </Card>
   );
