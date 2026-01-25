@@ -9,11 +9,12 @@ import {
 } from "./ui/input-group";
 import { SearchIcon } from "lucide-react";
 import useQueryParams from "@/hooks/use-query-params";
+import { useDebouncedCallback } from "use-debounce";
 
 export default function SearchBar({ search }: SearchSearchParams) {
   const { searchParams, pushUrl } = useQueryParams();
 
-  const handleChange = (input: string) => {
+  const handleChange = useDebouncedCallback((input: string) => {
     if (input) {
       searchParams.set("search", input);
     } else {
@@ -21,7 +22,7 @@ export default function SearchBar({ search }: SearchSearchParams) {
     }
     searchParams.set("page", "1");
     pushUrl(searchParams);
-  };
+  }, 300);
 
   return (
     <InputGroup>
