@@ -158,12 +158,3 @@ export const getHighestPerformingDay = async () => {
 
   return result;
 };
-
-export const getChestCount = async () => {
-  const result = await db
-    .selectFrom("chest")
-    .select(db.fn.countAll<number>().as("count"))
-    .executeTakeFirstOrThrow();
-
-  return result.count;
-};

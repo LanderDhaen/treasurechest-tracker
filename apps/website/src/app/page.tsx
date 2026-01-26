@@ -1,7 +1,7 @@
 import { getChestCountPerAccount } from "@/actions/account";
 import { getMostReceivedCategory } from "@/actions/category";
 import {
-  getChestCount,
+  getTotalChests,
   // getHighestPerformingDay,
   getLastestChest,
   // getLastestLegendaryChest,
@@ -26,7 +26,7 @@ import {
 } from "@/lib/utils";
 
 export default async function Dashboard() {
-  const chestCount = await getChestCount();
+  const chestCount = await getTotalChests();
   const chestCountPerAccount = await getChestCountPerAccount();
   const chestCountPerRarity = await getChestCountPerRarity();
   const mostReceivedReward = await getMostReceivedReward();
