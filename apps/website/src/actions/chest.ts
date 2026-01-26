@@ -126,23 +126,70 @@ export const getLastestChest = async () => {
   return chest;
 };
 
-export const getLastestLegendaryChest = async () => {
-  const chest = await db
-    .selectFrom("chest")
-    .innerJoin("reward", "chest.rewardId", "reward.id")
-    .innerJoin("account", "chest.accountId", "account.id")
-    .innerJoin("rarity", "chest.rarityId", "rarity.id")
-    .select([
-      "chest.amount",
-      "reward.name as reward",
-      "account.name as account",
-      "chest.openedAt",
-    ])
-    .where("rarity.name", "=", "Epic")
-    .orderBy("chest.openedAt", "desc")
-    .executeTakeFirstOrThrow();
+export const getLatestChests = async (tag: string) => {
+  const result = await db
+    .with("account_chests", (db) =>
+      db
+        .selectFrom("chest")
+        .innerJoin("reward", "chest.rewardId", "reward.id")
+        .innerJoin("event", "chest.eventId", "event.id")
+        .innerJoin("rarity", "chest.rarityId", "rarity.id")
+        .innerJoin("account", "chest.accountId", "account.id")
+        .where("account.tag", "=", tag)
+        .select([
+          "chest.amount",
+          "chest.openedAt",
+          "reward.name as reward",
+          "event.name as event",
+          "rarity.name as rarity",
+          "rarity.chance",
+        ]),
+    )
 
-  return chest;
+    .selectFrom("account_chests")
+    .select((eb) => [
+      jsonObjectFrom(
+        eb
+          .selectFrom("account_chests")
+          .selectAll()
+          .orderBy("openedAt", "desc")
+          .limit(1),
+      ).as("latest"),
+
+      jsonObjectFrom(
+        eb
+          .selectFrom("account_chests")
+          .where("rarity", "=", "Legendary")
+          .selectAll()
+          .orderBy("openedAt", "desc")
+          .limit(1),
+      ).as("legendary"),
+
+      jsonObjectFrom(
+        eb
+          .selectFrom("account_chests")
+          .where("rarity", "=", "Epic")
+          .selectAll()
+          .orderBy("openedAt", "desc")
+          .limit(1),
+      ).as("epic"),
+    ])
+
+    .executeTakeFirst();
+
+  if (!result) {
+    return {
+      latest: null,
+      latestLegendary: null,
+      latestEpic: null,
+    };
+  }
+
+  return {
+    latest: result.latest,
+    latestLegendary: result.legendary,
+    latestEpic: result.epic,
+  };
 };
 
 export const getHighestPerformingDay = async () => {
