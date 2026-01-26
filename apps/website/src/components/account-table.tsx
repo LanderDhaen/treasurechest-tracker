@@ -9,12 +9,19 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { useRouter } from "next/navigation";
 
 interface AccountTableProps {
   accounts: AccountTableEntry[];
 }
 
 export default function AccountTable({ accounts }: AccountTableProps) {
+  const router = useRouter();
+
+  const handeClick = (tag: string) => {
+    router.push(`/accounts/${tag}`);
+  };
+
   return (
     <div className="rounded-md border overflow-hidden">
       <Table>
@@ -36,7 +43,11 @@ export default function AccountTable({ accounts }: AccountTableProps) {
             </TableRow>
           ) : (
             accounts.map((account) => (
-              <TableRow key={account.tag}>
+              <TableRow
+                key={account.tag}
+                onClick={() => handeClick(account.tag)}
+                className="hover:cursor-pointer"
+              >
                 <TableCell>#{account.tag}</TableCell>
                 <TableCell>{account.townhall}</TableCell>
                 <TableCell>{account.name}</TableCell>
