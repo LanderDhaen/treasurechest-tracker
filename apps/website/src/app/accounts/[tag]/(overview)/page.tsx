@@ -6,8 +6,13 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-import { getLatestChest } from "@/actions/chest";
-import { calculateWeeksAgo } from "@/lib/utils";
+import {
+  getLatestChest,
+  getMostReceivedCategory,
+  getMostReceivedReward,
+  getTotalChests,
+} from "@/actions/chest";
+import { calculatePercentage, calculateWeeksAgo } from "@/lib/utils";
 import RarityBadge from "@/components/rarity-badge";
 
 export default async function Page({
@@ -18,6 +23,9 @@ export default async function Page({
   const { tag } = await params;
 
   const chest = await getLatestChest(tag);
+  const chestCount = await getTotalChests(tag);
+  const category = await getMostReceivedCategory(tag);
+  const reward = await getMostReceivedReward(tag);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -35,6 +43,27 @@ export default async function Page({
         </CardHeader>
         <CardFooter className="text-sm italic text-muted-foreground">
           {calculateWeeksAgo(new Date(chest.openedAt))}
+        </CardFooter>
+      </Card>
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardDescription>Most Received Reward</CardDescription>
+          <CardTitle className="text-2xl">{reward.name}</CardTitle>
+        </CardHeader>
+        <CardFooter className="text-sm text-muted-foreground">
+          with {reward.count} times in {chestCount} treasure chests・
+          <i>{calculatePercentage(reward.count, chestCount)}</i>
+        </CardFooter>
+      </Card>
+
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardDescription>Most Received Category</CardDescription>
+          <CardTitle className="text-2xl">{category.name}</CardTitle>
+        </CardHeader>
+        <CardFooter className="text-sm text-muted-foreground">
+          with {category.count} times in {chestCount} treasure chests・
+          <i>{calculatePercentage(category.count, chestCount)}</i>
         </CardFooter>
       </Card>
     </div>

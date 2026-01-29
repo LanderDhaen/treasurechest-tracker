@@ -2,9 +2,16 @@ import { db } from "@/db";
 import { ChestSearchParams } from "@/schemas/chest";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
-export const getTotalChests = async () => {
-  const result = await db
-    .selectFrom("chest")
+export const getTotalChests = async (tag?: string) => {
+  let query = db.selectFrom("chest");
+
+  if (tag) {
+    query = query
+      .innerJoin("account", "chest.accountId", "account.id")
+      .where("account.tag", "=", tag);
+  }
+
+  const result = await query
     .select(db.fn.countAll<number>().as("count"))
     .executeTakeFirstOrThrow();
   return result.count;
@@ -134,11 +141,19 @@ export const getLatestChest = async (tag?: string) => {
   return chest;
 };
 
-export const getMostReceivedCategory = async () => {
-  return db
+export const getMostReceivedCategory = async (tag?: string) => {
+  let query = db
     .selectFrom("chest")
     .innerJoin("reward", "chest.rewardId", "reward.id")
-    .innerJoin("category", "reward.category", "category.id")
+    .innerJoin("category", "reward.category", "category.id");
+
+  if (tag) {
+    query = query
+      .innerJoin("account", "chest.accountId", "account.id")
+      .where("account.tag", "=", tag);
+  }
+
+  const category = await query
     .select((eb) => [
       "category.name",
       eb.fn.count<number>("chest.id").as("count"),
@@ -146,12 +161,22 @@ export const getMostReceivedCategory = async () => {
     .groupBy("category.name")
     .orderBy("count", "desc")
     .executeTakeFirstOrThrow();
+
+  return category;
 };
 
-export const getMostReceivedReward = async () => {
-  const result = await db
+export const getMostReceivedReward = async (tag?: string) => {
+  let query = db
     .selectFrom("chest")
-    .innerJoin("reward", "chest.rewardId", "reward.id")
+    .innerJoin("reward", "chest.rewardId", "reward.id");
+
+  if (tag) {
+    query = query
+      .innerJoin("account", "chest.accountId", "account.id")
+      .where("account.tag", "=", tag);
+  }
+
+  const reward = await query
     .select((eb) => [
       "reward.name",
       eb.fn.count<number>("chest.id").as("count"),
@@ -160,7 +185,7 @@ export const getMostReceivedReward = async () => {
     .orderBy("count", "desc")
     .executeTakeFirstOrThrow();
 
-  return result;
+  return reward;
 };
 
 export const getHighestPerformingDay = async () => {
