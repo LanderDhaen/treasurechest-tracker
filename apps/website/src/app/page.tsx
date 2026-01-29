@@ -3,7 +3,7 @@ import { getMostReceivedCategory } from "@/actions/category";
 import {
   getTotalChests,
   // getHighestPerformingDay,
-  getLastestChest,
+  getLatestChest,
   // getLastestLegendaryChest,
 } from "@/actions/chest";
 // import { getHighestEvent } from "@/actions/event";
@@ -11,6 +11,7 @@ import { getChestCountPerRarity } from "@/actions/rarity";
 import { getMostReceivedReward } from "@/actions/reward";
 import { ChestCountAccountChart } from "@/components/chest-count-account-chart";
 import { ChestCountRarityChart } from "@/components/chest-count-rarity-chart";
+import RarityBadge from "@/components/rarity-badge";
 import {
   Card,
   CardHeader,
@@ -19,11 +20,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-import {
-  calculatePercentage,
-  calculateWeeksAgo,
-  formatDate,
-} from "@/lib/utils";
+import { calculatePercentage, calculateWeeksAgo } from "@/lib/utils";
 
 export default async function Dashboard() {
   const chestCount = await getTotalChests();
@@ -31,7 +28,7 @@ export default async function Dashboard() {
   const chestCountPerRarity = await getChestCountPerRarity();
   const mostReceivedReward = await getMostReceivedReward();
   const mostReceivedCategory = await getMostReceivedCategory();
-  const latestChest = await getLastestChest();
+  const latestChest = await getLatestChest();
   // const latestLegendaryChest = await getLastestLegendaryChest();
   // const highestEvent = await getHighestEvent();
   // const highestPerformingDay = await getHighestPerformingDay();
@@ -41,13 +38,14 @@ export default async function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 subgrid">
         <Card className="shadow-md">
           <CardHeader>
-            <CardDescription>Latest Treasure Chest</CardDescription>
-            <CardTitle className="flex gap-2 start text-2xl">
+            <CardDescription className="flex justify-between items-center">
+              Latest Treasure Chest
+              <RarityBadge rarity={latestChest.rarity} />
+            </CardDescription>
+            <CardTitle className="text-2xl">
               {latestChest.amount === 1
                 ? `${latestChest.reward}`
-                : `${latestChest.amount.toLocaleString()} ${
-                    latestChest.reward
-                  }`}
+                : `${latestChest.amount.toLocaleString()} ${latestChest.reward}`}
             </CardTitle>
           </CardHeader>
           <CardFooter className="text-sm text-muted-foreground">

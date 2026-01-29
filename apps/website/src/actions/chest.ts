@@ -109,14 +109,22 @@ export const getAllChests = async ({
   };
 };
 
-export const getLastestChest = async () => {
-  const chest = await db
+export const getLatestChest = async (tag?: string) => {
+  let query = db
     .selectFrom("chest")
     .innerJoin("reward", "chest.rewardId", "reward.id")
-    .innerJoin("account", "chest.accountId", "account.id")
+    .innerJoin("rarity", "chest.rarityId", "rarity.id")
+    .innerJoin("account", "chest.accountId", "account.id");
+
+  if (tag) {
+    query = query.where("account.tag", "=", tag);
+  }
+
+  const chest = await query
     .select([
       "chest.amount",
       "reward.name as reward",
+      "rarity.name as rarity",
       "account.name as account",
       "chest.openedAt",
     ])
@@ -124,72 +132,6 @@ export const getLastestChest = async () => {
     .executeTakeFirstOrThrow();
 
   return chest;
-};
-
-export const getLatestChests = async (tag: string) => {
-  const result = await db
-    .with("account_chests", (db) =>
-      db
-        .selectFrom("chest")
-        .innerJoin("reward", "chest.rewardId", "reward.id")
-        .innerJoin("event", "chest.eventId", "event.id")
-        .innerJoin("rarity", "chest.rarityId", "rarity.id")
-        .innerJoin("account", "chest.accountId", "account.id")
-        .where("account.tag", "=", tag)
-        .select([
-          "chest.amount",
-          "chest.openedAt",
-          "reward.name as reward",
-          "event.name as event",
-          "rarity.name as rarity",
-          "rarity.chance",
-        ]),
-    )
-
-    .selectFrom("account_chests")
-    .select((eb) => [
-      jsonObjectFrom(
-        eb
-          .selectFrom("account_chests")
-          .selectAll()
-          .orderBy("openedAt", "desc")
-          .limit(1),
-      ).as("latest"),
-
-      jsonObjectFrom(
-        eb
-          .selectFrom("account_chests")
-          .where("rarity", "=", "Legendary")
-          .selectAll()
-          .orderBy("openedAt", "desc")
-          .limit(1),
-      ).as("legendary"),
-
-      jsonObjectFrom(
-        eb
-          .selectFrom("account_chests")
-          .where("rarity", "=", "Epic")
-          .selectAll()
-          .orderBy("openedAt", "desc")
-          .limit(1),
-      ).as("epic"),
-    ])
-
-    .executeTakeFirst();
-
-  if (!result) {
-    return {
-      latest: null,
-      latestLegendary: null,
-      latestEpic: null,
-    };
-  }
-
-  return {
-    latest: result.latest,
-    latestLegendary: result.legendary,
-    latestEpic: result.epic,
-  };
 };
 
 export const getHighestPerformingDay = async () => {
