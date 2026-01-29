@@ -1,14 +1,14 @@
 import { getChestCountPerAccount } from "@/actions/account";
-import { getMostReceivedCategory } from "@/actions/category";
 import {
   getTotalChests,
   // getHighestPerformingDay,
   getLatestChest,
+  getMostReceivedReward,
+  getMostReceivedCategory,
   // getLastestLegendaryChest,
 } from "@/actions/chest";
 // import { getHighestEvent } from "@/actions/event";
 import { getChestCountPerRarity } from "@/actions/rarity";
-import { getMostReceivedReward } from "@/actions/reward";
 import { ChestCountAccountChart } from "@/components/chest-count-account-chart";
 import { ChestCountRarityChart } from "@/components/chest-count-rarity-chart";
 import RarityBadge from "@/components/rarity-badge";
