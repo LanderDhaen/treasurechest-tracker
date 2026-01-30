@@ -13,9 +13,18 @@ import {
   getMostReceivedReward,
   getTotalChests,
 } from "@/actions/chest";
-import { calculatePercentage, calculateWeeksAgo } from "@/lib/utils";
+import {
+  calculatePercentage,
+  calculateTimeAgo,
+  formatDateTime,
+} from "@/lib/utils";
 import RarityBadge from "@/components/rarity-badge";
 import { ChestCountRarityChart } from "@/components/chest-count-rarity-chart";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default async function Page({
   params,
@@ -44,8 +53,15 @@ export default async function Page({
               : `${chest.amount.toLocaleString()} ${chest.reward}`}
           </CardTitle>
         </CardHeader>
-        <CardFooter className="text-sm italic text-muted-foreground">
-          {calculateWeeksAgo(new Date(chest.openedAt))}
+        <CardFooter className="text-sm text-muted-foreground">
+          <Tooltip>
+            <TooltipTrigger className="italic">
+              {calculateTimeAgo(new Date(chest.openedAt))}
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              Opened on {formatDateTime(new Date(chest.openedAt))}
+            </TooltipContent>
+          </Tooltip>
         </CardFooter>
       </Card>
 

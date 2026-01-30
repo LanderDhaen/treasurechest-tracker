@@ -19,8 +19,17 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-import { calculatePercentage, calculateWeeksAgo } from "@/lib/utils";
+import {
+  calculatePercentage,
+  calculateTimeAgo,
+  formatDateTime,
+} from "@/lib/utils";
 
 export default async function Dashboard() {
   const chestCount = await getTotalChests();
@@ -50,7 +59,14 @@ export default async function Dashboard() {
           </CardHeader>
           <CardFooter className="text-sm text-muted-foreground">
             on {latestChest.account}・
-            <i>{calculateWeeksAgo(new Date(latestChest.openedAt))}</i>
+            <Tooltip>
+              <TooltipTrigger className="italic">
+                {calculateTimeAgo(new Date(latestChest.openedAt))}
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                Opened on {formatDateTime(new Date(latestChest.openedAt))}
+              </TooltipContent>
+            </Tooltip>
           </CardFooter>
         </Card>
 
