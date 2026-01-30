@@ -188,6 +188,29 @@ export const getMostReceivedReward = async (tag?: string) => {
   return reward;
 };
 
+export const getChestCountPerRarity = async (tag?: string) => {
+  let query = db
+    .selectFrom("chest")
+    .innerJoin("rarity", "chest.rarityId", "rarity.id");
+
+  if (tag) {
+    query = query
+      .innerJoin("account", "chest.accountId", "account.id")
+      .where("account.tag", "=", tag);
+  }
+
+  const rarities = await query
+    .select((eb) => [
+      "rarity.name",
+      eb.fn.count<number>("chest.id").as("count"),
+    ])
+    .groupBy(["rarity.name", "rarity.chance"])
+    .orderBy("rarity.chance", "desc")
+    .execute();
+
+  return rarities;
+};
+
 export const getHighestPerformingDay = async () => {
   const result = await db
     .selectFrom("chest")

@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 
 import {
+  getChestCountPerRarity,
   getLatestChest,
   getMostReceivedCategory,
   getMostReceivedReward,
@@ -14,6 +15,7 @@ import {
 } from "@/actions/chest";
 import { calculatePercentage, calculateWeeksAgo } from "@/lib/utils";
 import RarityBadge from "@/components/rarity-badge";
+import { ChestCountRarityChart } from "@/components/chest-count-rarity-chart";
 
 export default async function Page({
   params,
@@ -26,6 +28,7 @@ export default async function Page({
   const chestCount = await getTotalChests(tag);
   const category = await getMostReceivedCategory(tag);
   const reward = await getMostReceivedReward(tag);
+  const rarities = await getChestCountPerRarity(tag);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -45,6 +48,7 @@ export default async function Page({
           {calculateWeeksAgo(new Date(chest.openedAt))}
         </CardFooter>
       </Card>
+
       <Card className="shadow-md">
         <CardHeader>
           <CardDescription>Most Received Reward</CardDescription>
@@ -66,6 +70,9 @@ export default async function Page({
           <i>{calculatePercentage(category.count, chestCount)}</i>
         </CardFooter>
       </Card>
+      <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <ChestCountRarityChart rarities={rarities} />
+      </div>
     </div>
   );
 }
