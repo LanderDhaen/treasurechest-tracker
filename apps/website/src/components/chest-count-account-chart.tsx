@@ -30,7 +30,7 @@ interface ChestCountAccountChartProps {
   }[];
 }
 
-export function ChestCountAccountChart({
+export default function ChestCountAccountChart({
   accounts,
 }: ChestCountAccountChartProps) {
   const defineColor = (townhall: number) => {

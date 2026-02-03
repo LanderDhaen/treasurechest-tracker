@@ -31,7 +31,7 @@ interface ChestCountRarityChartProps {
   }[];
 }
 
-export function ChestCountRarityChart({
+export default function ChestCountRarityChart({
   rarities,
 }: ChestCountRarityChartProps) {
   return (

@@ -29,7 +29,7 @@ interface ChestCountCategoryChartProps {
   }[];
 }
 
-export function ChestCountCategoryChart({
+export default function ChestCountCategoryChart({
   categories,
 }: ChestCountCategoryChartProps) {
   return (
