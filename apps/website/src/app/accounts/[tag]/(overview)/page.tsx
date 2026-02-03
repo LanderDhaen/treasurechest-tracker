@@ -26,6 +26,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ChestCountCategoryChart } from "@/components/chest-count-category-chart";
+import { getTotalEvents } from "@/actions/event";
+import { getAccountByTag } from "@/actions/account";
 
 export default async function Page({
   params,
@@ -34,7 +36,9 @@ export default async function Page({
 }) {
   const { tag } = await params;
 
+  const account = await getAccountByTag(tag);
   const chest = await getLatestChest(tag);
+  const eventCount = await getTotalEvents();
   const chestCount = await getTotalChests(tag);
   const reward = await getMostReceivedReward(tag);
   const categories = await getChestCountPerCategory(tag);
@@ -44,10 +48,18 @@ export default async function Page({
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <Card className="shadow-md">
         <CardHeader>
-          <CardDescription className="flex justify-between items-center">
-            Latest Treasure Chest
-            <RarityBadge rarity={chest.rarity} />
-          </CardDescription>
+          <CardDescription>Total Treasure Chests</CardDescription>
+          <CardTitle className="text-2xl">
+            {chestCount.toLocaleString()}
+          </CardTitle>
+        </CardHeader>
+        <CardFooter className="text-sm text-muted-foreground">
+          on {account.name}・<i>{eventCount} events</i>
+        </CardFooter>
+      </Card>
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardDescription>Latest Treasure Chest</CardDescription>
           <CardTitle className="text-2xl">
             {chest.amount === 1
               ? `${chest.reward}`
@@ -55,6 +67,7 @@ export default async function Page({
           </CardTitle>
         </CardHeader>
         <CardFooter className="text-sm text-muted-foreground">
+          <RarityBadge rarity={chest.rarity} />・
           <Tooltip>
             <TooltipTrigger className="italic">
               {calculateTimeAgo(new Date(chest.openedAt))}
@@ -72,8 +85,8 @@ export default async function Page({
           <CardTitle className="text-2xl">{reward.name}</CardTitle>
         </CardHeader>
         <CardFooter className="text-sm text-muted-foreground">
-          with {reward.count} times in {chestCount} treasure chests・
-          <i>{calculatePercentage(reward.count, chestCount)}</i>
+          with {reward.count} times・
+          {calculatePercentage(reward.count, chestCount)}
         </CardFooter>
       </Card>
 
