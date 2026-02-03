@@ -141,30 +141,6 @@ export const getLatestChest = async (tag?: string) => {
   return chest;
 };
 
-export const getMostReceivedCategory = async (tag?: string) => {
-  let query = db
-    .selectFrom("chest")
-    .innerJoin("reward", "chest.rewardId", "reward.id")
-    .innerJoin("category", "reward.category", "category.id");
-
-  if (tag) {
-    query = query
-      .innerJoin("account", "chest.accountId", "account.id")
-      .where("account.tag", "=", tag);
-  }
-
-  const category = await query
-    .select((eb) => [
-      "category.name",
-      eb.fn.count<number>("chest.id").as("count"),
-    ])
-    .groupBy("category.name")
-    .orderBy("count", "desc")
-    .executeTakeFirstOrThrow();
-
-  return category;
-};
-
 export const getMostReceivedReward = async (tag?: string) => {
   let query = db
     .selectFrom("chest")
@@ -232,18 +208,4 @@ export const getChestCountPerRarity = async (tag?: string) => {
     .execute();
 
   return rarities;
-};
-
-export const getHighestPerformingDay = async () => {
-  const result = await db
-    .selectFrom("chest")
-    .select([
-      db.fn<Date>("DATE", ["chest.openedAt"]).as("day"),
-      db.fn.countAll<number>().as("count"),
-    ])
-    .groupBy("day")
-    .orderBy("count", "desc")
-    .executeTakeFirstOrThrow();
-
-  return result;
 };

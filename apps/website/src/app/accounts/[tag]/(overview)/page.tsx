@@ -10,7 +10,6 @@ import {
   getChestCountPerCategory,
   getChestCountPerRarity,
   getLatestChest,
-  getMostReceivedCategory,
   getMostReceivedReward,
   getTotalChests,
 } from "@/actions/chest";
@@ -37,7 +36,6 @@ export default async function Page({
 
   const chest = await getLatestChest(tag);
   const chestCount = await getTotalChests(tag);
-  const category = await getMostReceivedCategory(tag);
   const reward = await getMostReceivedReward(tag);
   const categories = await getChestCountPerCategory(tag);
   const rarities = await getChestCountPerRarity(tag);
@@ -79,16 +77,6 @@ export default async function Page({
         </CardFooter>
       </Card>
 
-      <Card className="shadow-md">
-        <CardHeader>
-          <CardDescription>Most Received Category</CardDescription>
-          <CardTitle className="text-2xl">{category.name}</CardTitle>
-        </CardHeader>
-        <CardFooter className="text-sm text-muted-foreground">
-          with {category.count} times in {chestCount} treasure chests・
-          <i>{calculatePercentage(category.count, chestCount)}</i>
-        </CardFooter>
-      </Card>
       <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-2 gap-4">
         <ChestCountRarityChart rarities={rarities} />
         <ChestCountCategoryChart categories={categories} />
