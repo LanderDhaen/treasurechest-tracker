@@ -163,18 +163,20 @@ export const getMostReceivedReward = async (tag?: string) => {
 
   return reward;
 };
-
 export const getChestCountPerCategory = async (tag?: string) => {
   let query = db
     .selectFrom("chest")
-    .innerJoin("reward", "chest.rewardId", "reward.id")
-    .innerJoin("category", "reward.category", "category.id");
+    .rightJoin("reward", "chest.rewardId", "reward.id")
+    .rightJoin("category", "reward.category", "category.id"); // Include all categories
 
   if (tag) {
-    query = query
-      .innerJoin("account", "chest.accountId", "account.id")
-      .where("account.tag", "=", tag);
+    query = query.leftJoin("account", (join) =>
+      join
+        .onRef("chest.accountId", "=", "account.id")
+        .on("account.tag", "=", tag),
+    );
   }
+
   const categories = await query
     .select((eb) => [
       "category.name",
@@ -186,6 +188,29 @@ export const getChestCountPerCategory = async (tag?: string) => {
 
   return categories;
 };
+
+// export const getChestCountPerCategory = async (tag?: string) => {
+//   let query = db
+//     .selectFrom("chest")
+//     .innerJoin("reward", "chest.rewardId", "reward.id")
+//     .innerJoin("category", "reward.category", "category.id");
+
+//   if (tag) {
+//     query = query
+//       .innerJoin("account", "chest.accountId", "account.id")
+//       .where("account.tag", "=", tag);
+//   }
+//   const categories = await query
+//     .select((eb) => [
+//       "category.name",
+//       eb.fn.count<number>("chest.id").as("count"),
+//     ])
+//     .groupBy("category.name")
+//     .orderBy("count", "desc")
+//     .execute();
+
+//   return categories;
+// };
 
 export const getChestCountPerRarity = async (tag?: string) => {
   let query = db
