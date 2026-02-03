@@ -6,10 +6,12 @@ import {
   getMostReceivedReward,
   getMostReceivedCategory,
   getChestCountPerRarity,
+  getChestCountPerCategory,
   // getLastestLegendaryChest,
 } from "@/actions/chest";
 // import { getHighestEvent } from "@/actions/event";
 import { ChestCountAccountChart } from "@/components/chest-count-account-chart";
+import { ChestCountCategoryChart } from "@/components/chest-count-category-chart";
 import { ChestCountRarityChart } from "@/components/chest-count-rarity-chart";
 import RarityBadge from "@/components/rarity-badge";
 import {
@@ -38,6 +40,7 @@ export default async function Dashboard() {
   const mostReceivedReward = await getMostReceivedReward();
   const mostReceivedCategory = await getMostReceivedCategory();
   const latestChest = await getLatestChest();
+  const categories = await getChestCountPerCategory();
   // const latestLegendaryChest = await getLastestLegendaryChest();
   // const highestEvent = await getHighestEvent();
   // const highestPerformingDay = await getHighestPerformingDay();
@@ -145,8 +148,9 @@ export default async function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 subgrid">
-        <ChestCountAccountChart chestCountPerAccount={chestCountPerAccount} />
         <ChestCountRarityChart rarities={chestCountPerRarity} />
+        <ChestCountCategoryChart categories={categories} />
+        <ChestCountAccountChart chestCountPerAccount={chestCountPerAccount} />
       </div>
     </div>
   );

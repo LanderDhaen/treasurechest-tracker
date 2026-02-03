@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 
 import {
+  getChestCountPerCategory,
   getChestCountPerRarity,
   getLatestChest,
   getMostReceivedCategory,
@@ -25,6 +26,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ChestCountCategoryChart } from "@/components/chest-count-category-chart";
 
 export default async function Page({
   params,
@@ -37,6 +39,7 @@ export default async function Page({
   const chestCount = await getTotalChests(tag);
   const category = await getMostReceivedCategory(tag);
   const reward = await getMostReceivedReward(tag);
+  const categories = await getChestCountPerCategory(tag);
   const rarities = await getChestCountPerRarity(tag);
 
   return (
@@ -88,6 +91,7 @@ export default async function Page({
       </Card>
       <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-2 gap-4">
         <ChestCountRarityChart rarities={rarities} />
+        <ChestCountCategoryChart categories={categories} />
       </div>
     </div>
   );
