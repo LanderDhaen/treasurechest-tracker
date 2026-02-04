@@ -86,7 +86,7 @@ export const getAllAccounts = async ({
 export const getAccountByTag = async (tag: string) => {
   const account = await db
     .selectFrom("account")
-    .select("account.name")
+    .select(["account.id", "account.name"])
     .where("account.isActive", "=", true)
     .where("account.tag", "=", tag)
     .executeTakeFirstOrThrow();

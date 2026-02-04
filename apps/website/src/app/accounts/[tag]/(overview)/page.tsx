@@ -21,12 +21,12 @@ export default async function Page({
   const { tag } = await params;
 
   const account = await getAccountByTag(tag);
-  const chest = await getLatestChest(tag);
+  const chest = await getLatestChest(account.id);
   const eventCount = await getTotalEvents();
-  const chestCount = await getTotalChests(tag);
-  const reward = await getMostReceivedReward(tag);
-  const categories = await getChestCountPerCategory(tag);
-  const rarities = await getChestCountPerRarity(tag);
+  const chestCount = await getTotalChests(account.id);
+  const reward = await getMostReceivedReward(account.id);
+  const categories = await getChestCountPerCategory(account.id);
+  const rarities = await getChestCountPerRarity(account.id);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">

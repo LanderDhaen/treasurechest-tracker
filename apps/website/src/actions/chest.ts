@@ -2,13 +2,11 @@ import { db } from "@/db";
 import { ChestSearchParams } from "@/schemas/chest";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
-export const getTotalChests = async (tag?: string) => {
+export const getTotalChests = async (accountId?: number) => {
   let query = db.selectFrom("chest");
 
-  if (tag) {
-    query = query
-      .innerJoin("account", "chest.accountId", "account.id")
-      .where("account.tag", "=", tag);
+  if (accountId) {
+    query = query.where("chest.accountId", "=", accountId);
   }
 
   const result = await query
@@ -116,15 +114,15 @@ export const getAllChests = async ({
   };
 };
 
-export const getLatestChest = async (tag?: string) => {
+export const getLatestChest = async (accountId?: number) => {
   let query = db
     .selectFrom("chest")
     .innerJoin("reward", "chest.rewardId", "reward.id")
     .innerJoin("rarity", "chest.rarityId", "rarity.id")
     .innerJoin("account", "chest.accountId", "account.id");
 
-  if (tag) {
-    query = query.where("account.tag", "=", tag);
+  if (accountId) {
+    query = query.where("chest.accountId", "=", accountId);
   }
 
   const chest = await query
@@ -141,15 +139,13 @@ export const getLatestChest = async (tag?: string) => {
   return chest;
 };
 
-export const getMostReceivedReward = async (tag?: string) => {
+export const getMostReceivedReward = async (accountId?: number) => {
   let query = db
     .selectFrom("chest")
     .innerJoin("reward", "chest.rewardId", "reward.id");
 
-  if (tag) {
-    query = query
-      .innerJoin("account", "chest.accountId", "account.id")
-      .where("account.tag", "=", tag);
+  if (accountId) {
+    query = query.where("chest.accountId", "=", accountId);
   }
 
   const reward = await query
@@ -163,18 +159,15 @@ export const getMostReceivedReward = async (tag?: string) => {
 
   return reward;
 };
-export const getChestCountPerCategory = async (tag?: string) => {
+
+export const getChestCountPerCategory = async (accountId?: number) => {
   let query = db
     .selectFrom("chest")
     .rightJoin("reward", "chest.rewardId", "reward.id")
     .rightJoin("category", "reward.category", "category.id"); // Include all categories
 
-  if (tag) {
-    query = query.leftJoin("account", (join) =>
-      join
-        .onRef("chest.accountId", "=", "account.id")
-        .on("account.tag", "=", tag),
-    );
+  if (accountId) {
+    query = query.where("chest.accountId", "=", accountId);
   }
 
   const categories = await query
@@ -189,38 +182,13 @@ export const getChestCountPerCategory = async (tag?: string) => {
   return categories;
 };
 
-// export const getChestCountPerCategory = async (tag?: string) => {
-//   let query = db
-//     .selectFrom("chest")
-//     .innerJoin("reward", "chest.rewardId", "reward.id")
-//     .innerJoin("category", "reward.category", "category.id");
-
-//   if (tag) {
-//     query = query
-//       .innerJoin("account", "chest.accountId", "account.id")
-//       .where("account.tag", "=", tag);
-//   }
-//   const categories = await query
-//     .select((eb) => [
-//       "category.name",
-//       eb.fn.count<number>("chest.id").as("count"),
-//     ])
-//     .groupBy("category.name")
-//     .orderBy("count", "desc")
-//     .execute();
-
-//   return categories;
-// };
-
-export const getChestCountPerRarity = async (tag?: string) => {
+export const getChestCountPerRarity = async (accountId?: number) => {
   let query = db
     .selectFrom("chest")
     .innerJoin("rarity", "chest.rarityId", "rarity.id");
 
-  if (tag) {
-    query = query
-      .innerJoin("account", "chest.accountId", "account.id")
-      .where("account.tag", "=", tag);
+  if (accountId) {
+    query = query.where("chest.accountId", "=", accountId);
   }
 
   const rarities = await query
