@@ -3,10 +3,10 @@ import {
   getTotalChests,
   getLatestChest,
   getMostReceivedReward,
-  getChestCountPerRarity,
   getChestCountPerCategory,
 } from "@/actions/chest";
 import { getTotalEvents } from "@/actions/event";
+import { getChestCountPerRarity } from "@/actions/rarity";
 import ChestCountAccountChart from "@/components/chest-count-account-chart";
 import ChestCountCategoryChart from "@/components/chest-count-category-chart";
 import ChestCountRarityChart from "@/components/chest-count-rarity-chart";
