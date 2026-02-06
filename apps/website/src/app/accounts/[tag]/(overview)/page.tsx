@@ -1,5 +1,4 @@
 import {
-  getChestCountPerCategory,
   getLatestChest,
   getMostReceivedReward,
   getTotalChests,
@@ -12,6 +11,7 @@ import LatestChestCard from "@/components/latest-chest-card";
 import MostReceivedRewardCard from "@/components/most-received-reward-card";
 import TotalChestCard from "@/components/total-chest-card";
 import { getChestCountPerRarity } from "@/actions/rarity";
+import { getChestCountPerCategory } from "@/actions/category";
 
 export default async function Page({
   params,

@@ -1,9 +1,9 @@
 import { getChestCountPerAccount, getTotalAccounts } from "@/actions/account";
+import { getChestCountPerCategory } from "@/actions/category";
 import {
   getTotalChests,
   getLatestChest,
   getMostReceivedReward,
-  getChestCountPerCategory,
 } from "@/actions/chest";
 import { getTotalEvents } from "@/actions/event";
 import { getChestCountPerRarity } from "@/actions/rarity";
