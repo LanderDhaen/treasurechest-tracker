@@ -113,6 +113,7 @@ export const getChestCountPerEvent = async (accountId?: number) => {
     })
 
     .select((eb) => [
+      "event.id",
       "event.name",
       "event.isGift",
       "event.maxChests",
@@ -122,6 +123,7 @@ export const getChestCountPerEvent = async (accountId?: number) => {
       eb.fn.count<number>("chest.id").as("count"),
     ])
     .groupBy([
+      "event.id",
       "event.name",
       "event.isGift",
       "event.maxChests",

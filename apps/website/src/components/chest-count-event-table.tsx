@@ -21,6 +21,7 @@ import EventProgress from "./event-progress";
 
 interface ChestCountEventTableProps {
   events: {
+    id: number;
     status: EventStatus;
     name: string;
     isGift: boolean;
@@ -45,14 +46,16 @@ export default function ChestCountEventTable({
           <Table>
             <TableHeader>
               <TableRow className="bg-muted">
-                <TableHead className="font-bold w-12">Status</TableHead>
+                <TableHead className="font-bold w-12">#</TableHead>
+                <TableHead className="font-bold w-24">Status</TableHead>
                 <TableHead className="font-bold">Event</TableHead>
                 <TableHead className="font-bold min-w-40">Progress</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {events.map((event) => (
-                <TableRow key={event.name}>
+                <TableRow key={event.id}>
+                  <TableCell>{event.id}</TableCell>
                   <TableCell>
                     <StatusBadge status={event.status} />
                   </TableCell>
