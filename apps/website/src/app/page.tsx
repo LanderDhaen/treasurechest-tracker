@@ -1,11 +1,12 @@
 import { getChestCountPerAccount, getTotalAccounts } from "@/actions/account";
 import { getChestCountPerCategory } from "@/actions/category";
 import { getTotalChests, getLatestChest } from "@/actions/chest";
-import { getTotalEvents } from "@/actions/event";
+import { getChestCountPerEvent, getTotalEvents } from "@/actions/event";
 import { getChestCountPerRarity } from "@/actions/rarity";
 import { getMostReceivedReward } from "@/actions/reward";
 import ChestCountAccountChart from "@/components/chest-count-account-chart";
 import ChestCountCategoryChart from "@/components/chest-count-category-chart";
+import ChestCountEventTable from "@/components/chest-count-event-table";
 import ChestCountRarityChart from "@/components/chest-count-rarity-chart";
 import LatestChestCard from "@/components/latest-chest-card";
 import MostReceivedRewardCard from "@/components/most-received-reward-card";
@@ -20,6 +21,7 @@ export default async function Dashboard() {
   const reward = await getMostReceivedReward();
   const chest = await getLatestChest();
   const categories = await getChestCountPerCategory();
+  const events = await getChestCountPerEvent();
 
   return (
     <div className="grid grid-cols-1 gap-4">
@@ -36,6 +38,7 @@ export default async function Dashboard() {
         <ChestCountCategoryChart categories={categories} />
       </div>
       <ChestCountAccountChart accounts={accounts} />
+      <ChestCountEventTable events={events} />
     </div>
   );
 }
