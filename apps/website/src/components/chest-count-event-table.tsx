@@ -14,10 +14,10 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { Progress } from "./ui/progress";
 import GiftBadge from "./gift-badge";
 import { EventStatus } from "@/constants/event";
 import StatusBadge from "./status-badge";
+import EventProgress from "./event-progress";
 
 interface ChestCountEventTableProps {
   events: {
@@ -64,13 +64,10 @@ export default function ChestCountEventTable({
                   </TableCell>
 
                   <TableCell>
-                    <div className="flex justify-between">
-                      {event.count} / {event.maxChests}
-                      <span className="text-muted-foreground">
-                        {((event.count / event.maxChests) * 100).toFixed(0)}%
-                      </span>
-                    </div>
-                    <Progress value={(event.count / event.maxChests) * 100} />
+                    <EventProgress
+                      count={event.count}
+                      maxChests={event.maxChests}
+                    />
                   </TableCell>
                 </TableRow>
               ))}
