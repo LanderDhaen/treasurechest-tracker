@@ -23,7 +23,7 @@ export default async function Page({
   const chestCount = await getTotalChests(account.id);
   const reward = await getMostReceivedReward(account.id);
   const categories = await getChestCountPerCategory(account.id);
-  const rarities2 = await getChestCountPerRarity(account.id);
+  const rarities = await getChestCountPerRarity(account.id);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -35,7 +35,7 @@ export default async function Page({
       <MostReceivedRewardCard reward={reward} total={chestCount} />
 
       <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <ChestCountRarityChart rarities={rarities2} />
+        <ChestCountRarityChart rarities={rarities} />
         <ChestCountCategoryChart categories={categories} />
       </div>
     </div>

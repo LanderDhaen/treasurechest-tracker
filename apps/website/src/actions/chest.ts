@@ -134,7 +134,7 @@ export const getLatestChest = async (accountId?: number) => {
       "chest.openedAt",
     ])
     .orderBy("chest.openedAt", "desc")
-    .executeTakeFirstOrThrow();
+    .executeTakeFirst();
 
   return chest;
 };
