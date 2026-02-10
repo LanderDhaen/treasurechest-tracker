@@ -17,9 +17,10 @@ export const getMostReceivedReward = async (accountId?: number) => {
       eb.fn.count<number>("chest.id").as("count"),
     ])
     .groupBy("reward.name")
+    .having((eb) => eb.fn.count<number>("chest.id"), ">", 0)
     .orderBy("count", "desc")
     .orderBy("reward.name", "asc")
-    .executeTakeFirstOrThrow();
+    .executeTakeFirst();
 
   return reward;
 };
