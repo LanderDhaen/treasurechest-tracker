@@ -98,6 +98,43 @@ export const getAllEvents = async ({
   };
 };
 
+export const getChestCountPerEvent = async (accountId?: number) => {
+  const events = await db
+    .selectFrom("event")
+
+    .leftJoin("chest", (join) => {
+      let query = join.onRef("chest.eventId", "=", "event.id");
+
+      if (accountId) {
+        query = query.on("chest.accountId", "=", accountId);
+      }
+
+      return query;
+    })
+
+    .select((eb) => [
+      "event.name",
+      "event.isGift",
+      "event.maxChests",
+      deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
+        "status",
+      ),
+      eb.fn.count<number>("chest.id").as("count"),
+    ])
+    .groupBy([
+      "event.name",
+      "event.isGift",
+      "event.maxChests",
+      "event.startDate",
+      "event.endDate",
+    ])
+    .orderBy("event.startDate", "desc")
+    .orderBy("event.endDate", "desc")
+    .execute();
+
+  return events;
+};
+
 export const deriveEventStatus = (
   startDate: Expression<Date>,
   endDate: Expression<Date>,
