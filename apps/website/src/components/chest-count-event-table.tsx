@@ -28,10 +28,12 @@ interface ChestCountEventTableProps {
     maxChests: number;
     count: number;
   }[];
+  accountCount?: number;
 }
 
 export default function ChestCountEventTable({
   events,
+  accountCount = 1,
 }: ChestCountEventTableProps) {
   return (
     <Card>
@@ -69,7 +71,7 @@ export default function ChestCountEventTable({
                   <TableCell>
                     <EventProgress
                       count={event.count}
-                      maxChests={event.maxChests}
+                      maxChests={event.maxChests * accountCount}
                     />
                   </TableCell>
                 </TableRow>

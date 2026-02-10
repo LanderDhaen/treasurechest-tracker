@@ -38,7 +38,7 @@ export default async function Dashboard() {
         <ChestCountCategoryChart categories={categories} />
       </div>
       <ChestCountAccountChart accounts={accounts} />
-      <ChestCountEventTable events={events} />
+      <ChestCountEventTable events={events} accountCount={accountCount} />
     </div>
   );
 }
