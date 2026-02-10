@@ -22,8 +22,8 @@ export default async function Dashboard() {
   const categories = await getChestCountPerCategory();
 
   return (
-    <div className="grid gap-4">
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 subgrid">
+    <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <TotalChestCard
           chestCount={chestCount}
           description={`across ${accountCount} accounts・${eventCount} events`}
@@ -31,12 +31,11 @@ export default async function Dashboard() {
         <LatestChestCard chest={chest} />
         <MostReceivedRewardCard reward={reward} total={chestCount} />
       </div>
-
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 subgrid">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <ChestCountRarityChart rarities={rarities} />
         <ChestCountCategoryChart categories={categories} />
-        <ChestCountAccountChart accounts={accounts} />
       </div>
+      <ChestCountAccountChart accounts={accounts} />
     </div>
   );
 }

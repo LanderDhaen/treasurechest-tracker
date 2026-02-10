@@ -28,21 +28,20 @@ export default async function Page({
   const events = await getChestCountPerEvent(account.id);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <TotalChestCard
-        chestCount={chestCount}
-        description={`on ${account.name}・${eventCount} events`}
-      />
-      <LatestChestCard chest={chest} />
-      <MostReceivedRewardCard reward={reward} total={chestCount} />
-
-      <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <TotalChestCard
+          chestCount={chestCount}
+          description={`on ${account.name}・${eventCount} events`}
+        />
+        <LatestChestCard chest={chest} />
+        <MostReceivedRewardCard reward={reward} total={chestCount} />
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <ChestCountRarityChart rarities={rarities} />
         <ChestCountCategoryChart categories={categories} />
       </div>
-      <div className="lg:col-span-3">
-        <ChestCountEventTable events={events} />
-      </div>
+      <ChestCountEventTable events={events} />
     </div>
   );
 }
