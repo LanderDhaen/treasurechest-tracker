@@ -83,13 +83,24 @@ export const getAllAccounts = async ({
   };
 };
 
+export const getAccountByTag = async (tag: string) => {
+  const account = await db
+    .selectFrom("account")
+    .select(["account.id", "account.name"])
+    .where("account.isActive", "=", true)
+    .where("account.tag", "=", tag)
+    .executeTakeFirstOrThrow();
+
+  return account;
+};
+
 export const getChestCountPerAccount = async () => {
-  const result = await db
+  const accounts = await db
     .selectFrom("account")
     .leftJoin("chest", "account.id", "chest.accountId")
     .select((eb) => [
-      "account.name as account",
-      "account.townhall as townhall",
+      "account.name",
+      "account.townhall",
       eb.fn.count<number>("chest.id").as("count"),
     ])
     .groupBy(["account.name", "account.townhall"])
@@ -98,5 +109,5 @@ export const getChestCountPerAccount = async () => {
     .orderBy("account.name", "asc")
     .execute();
 
-  return result;
+  return accounts;
 };

@@ -1,17 +1,26 @@
 import { db } from "@/db";
 
-export const getMostReceivedCategory = async () => {
-  const result = await db
+export const getChestCountPerCategory = async (accountId?: number) => {
+  const categories = await db
     .selectFrom("category")
-    .innerJoin("reward", "reward.category", "category.id")
-    .leftJoin("chest", "chest.rewardId", "reward.id")
+    .leftJoin("reward", "reward.category", "category.id")
+    .leftJoin("chest", (join) => {
+      let query = join.onRef("chest.rewardId", "=", "reward.id");
+
+      if (accountId) {
+        query = query.on("chest.accountId", "=", accountId);
+      }
+
+      return query;
+    })
     .select((eb) => [
       "category.name",
       eb.fn.count<number>("chest.id").as("count"),
     ])
-    .groupBy(["category.name"])
+    .groupBy("category.name")
     .orderBy("count", "desc")
-    .executeTakeFirstOrThrow();
+    .orderBy("category.name", "asc")
+    .execute();
 
-  return result;
+  return categories;
 };

@@ -1,139 +1,44 @@
-import { getChestCountPerAccount } from "@/actions/account";
-import { getMostReceivedCategory } from "@/actions/category";
-import {
-  getChestCount,
-  // getHighestPerformingDay,
-  getLastestChest,
-  // getLastestLegendaryChest,
-} from "@/actions/chest";
-// import { getHighestEvent } from "@/actions/event";
+import { getChestCountPerAccount, getTotalAccounts } from "@/actions/account";
+import { getChestCountPerCategory } from "@/actions/category";
+import { getTotalChests, getLatestChest } from "@/actions/chest";
+import { getChestCountPerEvent, getTotalEvents } from "@/actions/event";
 import { getChestCountPerRarity } from "@/actions/rarity";
 import { getMostReceivedReward } from "@/actions/reward";
-import { ChestCountAccountChart } from "@/components/chest-count-account-chart";
-import { ChestCountRarityChart } from "@/components/chest-count-rarity-chart";
-import {
-  Card,
-  CardHeader,
-  CardDescription,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card";
-
-import {
-  calculatePercentage,
-  calculateWeeksAgo,
-  formatDate,
-} from "@/lib/utils";
+import ChestCountAccountChart from "@/components/chest-count-account-chart";
+import ChestCountCategoryChart from "@/components/chest-count-category-chart";
+import ChestCountEventTable from "@/components/chest-count-event-table";
+import ChestCountRarityChart from "@/components/chest-count-rarity-chart";
+import LatestChestCard from "@/components/latest-chest-card";
+import MostReceivedRewardCard from "@/components/most-received-reward-card";
+import TotalChestCard from "@/components/total-chest-card";
 
 export default async function Dashboard() {
-  const chestCount = await getChestCount();
-  const chestCountPerAccount = await getChestCountPerAccount();
-  const chestCountPerRarity = await getChestCountPerRarity();
-  const mostReceivedReward = await getMostReceivedReward();
-  const mostReceivedCategory = await getMostReceivedCategory();
-  const latestChest = await getLastestChest();
-  // const latestLegendaryChest = await getLastestLegendaryChest();
-  // const highestEvent = await getHighestEvent();
-  // const highestPerformingDay = await getHighestPerformingDay();
+  const chestCount = await getTotalChests();
+  const accountCount = await getTotalAccounts();
+  const eventCount = await getTotalEvents();
+  const accounts = await getChestCountPerAccount();
+  const rarities = await getChestCountPerRarity();
+  const reward = await getMostReceivedReward();
+  const chest = await getLatestChest();
+  const categories = await getChestCountPerCategory();
+  const events = await getChestCountPerEvent();
 
   return (
-    <div className="grid gap-4">
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 subgrid">
-        <Card className="shadow-md">
-          <CardHeader>
-            <CardDescription>Latest Treasure Chest</CardDescription>
-            <CardTitle className="flex gap-2 start text-2xl">
-              {latestChest.amount === 1
-                ? `${latestChest.reward}`
-                : `${latestChest.amount.toLocaleString()} ${
-                    latestChest.reward
-                  }`}
-            </CardTitle>
-          </CardHeader>
-          <CardFooter className="text-sm text-muted-foreground">
-            on {latestChest.account}・
-            <i>{calculateWeeksAgo(new Date(latestChest.openedAt))}</i>
-          </CardFooter>
-        </Card>
-
-        <Card className="shadow-md">
-          <CardHeader>
-            <CardDescription>Most Received Reward</CardDescription>
-            <CardTitle className="text-2xl">
-              {mostReceivedReward.name}
-            </CardTitle>
-          </CardHeader>
-          <CardFooter className="text-sm text-muted-foreground">
-            with {mostReceivedReward.count} times in {chestCount} treasure
-            chests・
-            <i>{calculatePercentage(mostReceivedReward.count, chestCount)}</i>
-          </CardFooter>
-        </Card>
-
-        <Card className="shadow-md">
-          <CardHeader>
-            <CardDescription>Most Received Category</CardDescription>
-            <CardTitle className="text-2xl">
-              {mostReceivedCategory.name}
-            </CardTitle>
-          </CardHeader>
-          <CardFooter className="text-sm text-muted-foreground">
-            with {mostReceivedCategory.count} times in {chestCount} treasure
-            chests・
-            <i>{calculatePercentage(mostReceivedCategory.count, chestCount)}</i>
-          </CardFooter>
-        </Card>
-
-        {/* 
-        
-        TODO: Move these cards to dedicated statistics pages
-
-        <Card>
-          <CardHeader>
-            <CardDescription>Latest Legendary</CardDescription>
-            <CardTitle className="flex gap-2 start text-2xl">
-              {latestLegendaryChest.amount === 1
-                ? `${latestLegendaryChest.reward}`
-                : `${latestLegendaryChest.amount.toLocaleString()} ${
-                    latestLegendaryChest.reward
-                  }`}
-            </CardTitle>
-          </CardHeader>
-          <CardFooter className="text-sm text-muted-foreground">
-            on {latestChest.account}・
-            <i>{calculateWeeksAgo(new Date(latestChest.openedAt))}</i>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardDescription>Highest Performing Event</CardDescription>
-            <CardTitle className="text-2xl">{highestEvent.name}</CardTitle>
-          </CardHeader>
-          <CardFooter className="text-sm text-muted-foreground">
-            with {highestEvent.count} treasure chests opened・
-            <i>{calculateWeeksAgo(new Date(highestEvent.endDate))}</i>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardDescription>Highest Performing Day</CardDescription>
-            <CardTitle className="text-2xl">
-              {formatDate(highestPerformingDay.day)}
-            </CardTitle>
-          </CardHeader>
-          <CardFooter className="text-sm text-muted-foreground">
-            with {highestPerformingDay.count} treasure chests opened・
-            <i>{calculateWeeksAgo(new Date(highestPerformingDay.day))}</i>
-          </CardFooter>
-        </Card> */}
+    <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <TotalChestCard
+          chestCount={chestCount}
+          description={`across ${accountCount} accounts・${eventCount} events`}
+        />
+        <LatestChestCard chest={chest} />
+        <MostReceivedRewardCard reward={reward} total={chestCount} />
       </div>
-
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 subgrid">
-        <ChestCountAccountChart chestCountPerAccount={chestCountPerAccount} />
-        <ChestCountRarityChart chestCountPerRarity={chestCountPerRarity} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <ChestCountRarityChart rarities={rarities} />
+        <ChestCountCategoryChart categories={categories} />
       </div>
+      <ChestCountAccountChart accounts={accounts} />
+      <ChestCountEventTable events={events} accountCount={accountCount} />
     </div>
   );
 }

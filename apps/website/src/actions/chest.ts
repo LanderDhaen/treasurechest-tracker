@@ -2,9 +2,14 @@ import { db } from "@/db";
 import { ChestSearchParams } from "@/schemas/chest";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
-export const getTotalChests = async () => {
-  const result = await db
-    .selectFrom("chest")
+export const getTotalChests = async (accountId?: number) => {
+  let query = db.selectFrom("chest");
+
+  if (accountId) {
+    query = query.where("chest.accountId", "=", accountId);
+  }
+
+  const result = await query
     .select(db.fn.countAll<number>().as("count"))
     .executeTakeFirstOrThrow();
   return result.count;
@@ -109,61 +114,27 @@ export const getAllChests = async ({
   };
 };
 
-export const getLastestChest = async () => {
-  const chest = await db
+export const getLatestChest = async (accountId?: number) => {
+  let query = db
     .selectFrom("chest")
     .innerJoin("reward", "chest.rewardId", "reward.id")
-    .innerJoin("account", "chest.accountId", "account.id")
-    .select([
-      "chest.amount",
-      "reward.name as reward",
-      "account.name as account",
-      "chest.openedAt",
-    ])
-    .orderBy("chest.openedAt", "desc")
-    .executeTakeFirstOrThrow();
-
-  return chest;
-};
-
-export const getLastestLegendaryChest = async () => {
-  const chest = await db
-    .selectFrom("chest")
-    .innerJoin("reward", "chest.rewardId", "reward.id")
-    .innerJoin("account", "chest.accountId", "account.id")
     .innerJoin("rarity", "chest.rarityId", "rarity.id")
+    .innerJoin("account", "chest.accountId", "account.id");
+
+  if (accountId) {
+    query = query.where("chest.accountId", "=", accountId);
+  }
+
+  const chest = await query
     .select([
       "chest.amount",
       "reward.name as reward",
+      "rarity.name as rarity",
       "account.name as account",
       "chest.openedAt",
     ])
-    .where("rarity.name", "=", "Epic")
     .orderBy("chest.openedAt", "desc")
-    .executeTakeFirstOrThrow();
+    .executeTakeFirst();
 
   return chest;
-};
-
-export const getHighestPerformingDay = async () => {
-  const result = await db
-    .selectFrom("chest")
-    .select([
-      db.fn<Date>("DATE", ["chest.openedAt"]).as("day"),
-      db.fn.countAll<number>().as("count"),
-    ])
-    .groupBy("day")
-    .orderBy("count", "desc")
-    .executeTakeFirstOrThrow();
-
-  return result;
-};
-
-export const getChestCount = async () => {
-  const result = await db
-    .selectFrom("chest")
-    .select(db.fn.countAll<number>().as("count"))
-    .executeTakeFirstOrThrow();
-
-  return result.count;
 };

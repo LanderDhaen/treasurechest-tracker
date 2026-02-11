@@ -23,15 +23,15 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface ChestCountAccountChartProps {
-  chestCountPerAccount: {
-    account: string;
+  accounts: {
+    name: string;
     townhall: number;
     count: number;
   }[];
 }
 
-export function ChestCountAccountChart({
-  chestCountPerAccount,
+export default function ChestCountAccountChart({
+  accounts,
 }: ChestCountAccountChartProps) {
   const defineColor = (townhall: number) => {
     switch (townhall) {
@@ -72,7 +72,7 @@ export function ChestCountAccountChart({
         <ChartContainer config={chartConfig} className="min-h-50 w-full">
           <BarChart
             accessibilityLayer
-            data={chestCountPerAccount}
+            data={accounts}
             layout="vertical"
             margin={{
               right: 20,
@@ -80,7 +80,7 @@ export function ChestCountAccountChart({
           >
             <XAxis type="number" dataKey="count" hide />
             <YAxis
-              dataKey="account"
+              dataKey="name"
               type="category"
               tickLine={false}
               tickMargin={10}
@@ -93,10 +93,10 @@ export function ChestCountAccountChart({
               content={<ChartTooltipContent hideIndicator />}
             />
             <Bar dataKey="count" radius={24}>
-              {chestCountPerAccount.map((entry, index) => (
+              {accounts.map((account, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={defineColor(entry.townhall)}
+                  fill={defineColor(account.townhall)}
                 />
               ))}
               <LabelList

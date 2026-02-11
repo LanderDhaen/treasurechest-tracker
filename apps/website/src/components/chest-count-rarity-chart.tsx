@@ -25,14 +25,14 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface ChestCountRarityChartProps {
-  chestCountPerRarity: {
-    rarity: string;
+  rarities: {
+    name: string;
     count: number;
   }[];
 }
 
-export function ChestCountRarityChart({
-  chestCountPerRarity,
+export default function ChestCountRarityChart({
+  rarities,
 }: ChestCountRarityChartProps) {
   return (
     <Card className="shadow-md">
@@ -49,12 +49,12 @@ export function ChestCountRarityChart({
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Pie data={chestCountPerRarity} dataKey="count" nameKey="rarity">
-              {chestCountPerRarity.map((entry) => (
+            <Pie data={rarities} dataKey="count" nameKey="name">
+              {rarities.map((rarity) => (
                 <Cell
-                  key={entry.rarity}
+                  key={rarity.name}
                   fill={
-                    chartConfig[entry.rarity as keyof typeof chartConfig]?.color
+                    chartConfig[rarity.name as keyof typeof chartConfig]?.color
                   }
                 />
               ))}
@@ -67,7 +67,7 @@ export function ChestCountRarityChart({
                 fontSize={12}
               />
             </Pie>
-            <ChartLegend content={<ChartLegendContent nameKey="rarity" />} />
+            <ChartLegend content={<ChartLegendContent nameKey="name" />} />
           </PieChart>
         </ChartContainer>
       </CardContent>
