@@ -46,6 +46,7 @@ export const getChestCountPerRewardPerCategory = async () => {
             eb.fn.sum<number>("chest.amount").as("amount"),
           ])
           .whereRef("reward.category", "=", "category.id")
+          .orderBy("count", "desc")
           .groupBy(["reward.id", "reward.name"]),
       ).as("rewards"),
     ])
