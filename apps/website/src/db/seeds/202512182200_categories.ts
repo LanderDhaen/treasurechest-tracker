@@ -24,8 +24,36 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 22:00:00",
         updatedAt: "2025-12-18 22:00:00",
+        name: "Magic Potions",
+        minRarity: 2, // Rare
+        maxRarity: 3, // Epic
+      },
+      {
+        createdAt: "2025-12-18 22:00:00",
+        updatedAt: "2025-12-18 22:00:00",
         name: "Magic Items",
         minRarity: 2, // Rare
+        maxRarity: 3, // Epic
+      },
+      {
+        createdAt: "2025-12-18 22:00:00",
+        updatedAt: "2025-12-18 22:00:00",
+        name: "Magic Books",
+        minRarity: 3, // Epic
+        maxRarity: 4, // Legendary
+      },
+      {
+        createdAt: "2025-12-18 22:00:00",
+        updatedAt: "2025-12-18 22:00:00",
+        name: "Magic Runes",
+        minRarity: 3, // Epic
+        maxRarity: 4, // Legendary
+      },
+      {
+        createdAt: "2025-12-18 22:00:00",
+        updatedAt: "2025-12-18 22:00:00",
+        name: "Magic Hammers",
+        minRarity: 4, // Legendary
         maxRarity: 4, // Legendary
       },
       {
