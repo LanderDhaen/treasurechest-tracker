@@ -1,4 +1,5 @@
 import { db } from "@/db";
+import { jsonArrayFrom } from "kysely/helpers/postgres";
 
 export const getChestCountPerCategory = async (accountId?: number) => {
   const categories = await db
@@ -19,6 +20,36 @@ export const getChestCountPerCategory = async (accountId?: number) => {
     ])
     .groupBy("category.name")
     .orderBy("count", "desc")
+    .orderBy("category.name", "asc")
+    .execute();
+
+  return categories;
+};
+
+export const getChestCountPerRewardPerCategory = async () => {
+  const categories = await db
+    .selectFrom("category")
+    .leftJoin("reward", "reward.category", "category.id")
+    .leftJoin("chest", "chest.rewardId", "reward.id")
+    .select((eb) => [
+      "category.id",
+      "category.name",
+      eb.fn.count<number>("chest.id").as("count"),
+      jsonArrayFrom(
+        eb
+          .selectFrom("reward")
+          .leftJoin("chest", "chest.rewardId", "reward.id")
+          .select((eb) => [
+            "reward.id",
+            "reward.name",
+            eb.fn.count<number>("chest.id").as("count"),
+            eb.fn.sum<number>("chest.amount").as("amount"),
+          ])
+          .whereRef("reward.category", "=", "category.id")
+          .groupBy(["reward.id", "reward.name"]),
+      ).as("rewards"),
+    ])
+    .groupBy(["category.id", "category.name"])
     .orderBy("category.name", "asc")
     .execute();
 
