@@ -51,6 +51,8 @@ export const getChestCountPerRewardPerCategory = async () => {
       ).as("rewards"),
     ])
     .groupBy(["category.id", "category.name"])
+    .orderBy("category.minRarity", "asc")
+    .orderBy("category.maxRarity", "asc")
     .orderBy("category.name", "asc")
     .execute();
 

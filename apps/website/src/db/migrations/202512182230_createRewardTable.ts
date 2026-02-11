@@ -9,8 +9,9 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("updatedAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
     .addColumn("isActive", "boolean", (c) => c.notNull().defaultTo(true))
     .addColumn("name", "varchar", (c) => c.notNull())
+    .addColumn("isObtainable", "boolean", (c) => c.notNull().defaultTo(true))
     .addColumn("category", "integer", (c) =>
-      c.references("category.id").notNull().onDelete("restrict")
+      c.references("category.id").notNull().onDelete("restrict"),
     )
     .execute();
 };

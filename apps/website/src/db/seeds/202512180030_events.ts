@@ -10,7 +10,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Treasure Chest Launch",
         startDate: "2024-09-19",
         endDate: "2024-09-19",
@@ -20,7 +19,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Treasure Hunt 1",
         startDate: "2024-09-19",
         endDate: "2024-10-09",
@@ -29,7 +27,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Controllable Heroes",
         startDate: "2024-12-04",
         endDate: "2024-12-30",
@@ -38,7 +35,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Christmas Chest",
         startDate: "2024-12-25",
         endDate: "2024-12-25",
@@ -48,7 +44,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Content Creator Chests",
         startDate: "2025-03-17",
         endDate: "2025-03-17",
@@ -58,7 +53,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Treasure Hunt 2",
         startDate: "2025-03-17",
         endDate: "2025-03-25",
@@ -67,7 +61,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Gold Rush",
         startDate: "2025-04-14",
         endDate: "2025-04-21",
@@ -76,7 +69,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "WWE Chest",
         startDate: "2025-04-24",
         endDate: "2025-04-24",
@@ -86,7 +78,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Treasure Hunt 3",
         startDate: "2025-05-17",
         endDate: "2025-05-22",
@@ -95,7 +86,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Treasure Hunt 4",
         startDate: "2025-07-17",
         endDate: "2025-07-21",
@@ -104,7 +94,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Splash Bash",
         startDate: "2025-08-08",
         endDate: "2025-08-31",
@@ -114,7 +103,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Hero Rush",
         startDate: "2025-08-13",
         endDate: "2025-08-20",
@@ -123,7 +111,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Treasure Hunt 5",
         startDate: "2025-09-28",
         endDate: "2025-10-03",
@@ -132,7 +119,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Treasure Hunt 6",
         startDate: "2025-10-24",
         endDate: "2025-10-28",
@@ -141,7 +127,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Meteor Catcher",
         startDate: "2025-10-24",
         endDate: "2025-10-28",
@@ -150,7 +135,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Treasure Hunt 7",
         startDate: "2025-11-28",
         endDate: "2025-12-03",
@@ -159,7 +143,6 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        isActive: true,
         name: "Clan Rush",
         startDate: "2025-12-12",
         endDate: "2025-12-19",

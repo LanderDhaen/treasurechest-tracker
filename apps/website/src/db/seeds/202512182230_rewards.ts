@@ -10,8 +10,8 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        isActive: false,
         name: "Training Treat",
+        isObtainable: false,
         category: 1, // Magic Snacks
       },
       {
@@ -84,6 +84,7 @@ export const seed = async (db: Kysely<any>) => {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
         name: "Training Potion",
+        isObtainable: false,
         category: 3, // Magic Potions
       },
       {

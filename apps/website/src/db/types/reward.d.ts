@@ -12,6 +12,7 @@ export interface RewardTable {
   updatedAt: ColumnType<Date>;
   isActive: ColumnType<boolean>;
   name: ColumnType<string>;
+  isObtainable: ColumnType<boolean>;
   category: ColumnType<number>;
 }
 
