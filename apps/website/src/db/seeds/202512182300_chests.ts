@@ -172,7 +172,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 1, // DL✨Lander
         eventId: 2, // Treasure Hunt 1
-        rewardId: 52, // Limited Clan House Floor
+        rewardId: 52, // Floor (Limited)
       },
       {
         openedAt: "2024-10-01T01:58:26Z",
@@ -254,7 +254,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 1, // DL✨Lander
         eventId: 2, // Treasure Hunt 1
-        rewardId: 50, // Limited Clan House Roof
+        rewardId: 50, // Roof (Limited)
       },
       {
         openedAt: "2024-10-08T17:44:59Z",
@@ -341,7 +341,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
-        rewardId: 42, // Shop Decoration (Home Village)
+        rewardId: 42, // Home Village (Shop)
       },
       {
         openedAt: "2024-12-10T10:00:01Z",
@@ -1225,7 +1225,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 1, // DL✨Lander
         eventId: 12, // Hero Rush
-        rewardId: 53, // Limited Clan House Decoration
+        rewardId: 53, // Decoration (Limited)
       },
       {
         amount: 1180000,
@@ -1350,7 +1350,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 1, // DL✨Lander
         eventId: 13, // Treasure Hunt 5
-        rewardId: 52, // Limited Clan House Roof
+        rewardId: 52, // Roof (Limited)
       },
       {
         openedAt: "2025-10-03T09:53:00Z",
@@ -1414,7 +1414,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 1, // DL✨Lander
         eventId: 14, // Treasure Hunt 6
-        rewardId: 43, // Limited Decoration (Home Village)
+        rewardId: 43, // Home Village (Limited)
       },
       {
         openedAt: "2025-10-28T13:18:00Z",
@@ -1572,7 +1572,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 1, // DL✨Lander
         eventId: 15, // Meteor Catcher
-        rewardId: 49, // Trader Clan House Decoration
+        rewardId: 49, // Decoration (Trader)
       },
       {
         amount: 1080000,
@@ -1670,7 +1670,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 1, // DL✨Lander
         eventId: 16, // Treasure Hunt 7
-        rewardId: 49, // Trader Clan House Decoration
+        rewardId: 49, // Decoration (Trader)
       },
       {
         amount: 953000,
@@ -2047,7 +2047,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 2, // DL✨Lander.
         eventId: 16, // Treasure Hunt 7
-        rewardId: 50, // Limited Clan House Roof
+        rewardId: 50, // Roof (Limited)
       },
 
       {
@@ -2097,7 +2097,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 2, // DL✨Lander.
         eventId: 17, // Clan Rush
-        rewardId: 43, // Limited Decoration (Home Village)
+        rewardId: 43, // Home Village (Limited)
       },
       {
         openedAt: "2025-12-19T01:07:02Z",
@@ -2184,7 +2184,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 2, // DL✨Lander.
         eventId: 17, // Clan Rush
-        rewardId: 46, // Trader Clan House Roof
+        rewardId: 46, // Roof (Trader)
       },
       {
         amount: 775000,
@@ -2408,7 +2408,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 3, // DL✨Lander™
         eventId: 7, // Gold Rush
-        rewardId: 42, // Shop Decoration (Home Village)
+        rewardId: 42, // Home Village (Shop)
       },
       {
         amount: 12800,
@@ -2812,7 +2812,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 3, // DL✨Lander™
         eventId: 12, // Hero Rush
-        rewardId: 42, // Shop Decoration (Home Village)
+        rewardId: 42, // Home Village (Shop)
       },
       {
         amount: 741,
@@ -2927,7 +2927,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 3, // DL✨Lander™
         eventId: 13, // Treasure Hunt 5
-        rewardId: 50, // Limited Clan House Roof
+        rewardId: 50, // Roof (Limited)
       },
 
       {
@@ -2957,7 +2957,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 3, // DL✨Lander™
         eventId: 14, // Treasure Hunt 6
-        rewardId: 42, // Shop Decoration (Home Village)
+        rewardId: 42, // Home Village (Shop)
       },
       {
         amount: 1890000,
@@ -3025,7 +3025,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 3, // DL✨Lander™
         eventId: 15, // Meteor Catcher
-        rewardId: 42, // Shop Decoration (Home Village)
+        rewardId: 42, // Home Village (Shop)
       },
       {
         amount: 544,
@@ -3222,7 +3222,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 3, // DL✨Lander™
         eventId: 16, // Treasure Hunt 7
-        rewardId: 46, // Trader Clan House Roof
+        rewardId: 46, // Roof (Trader)
       },
       {
         amount: 598,
@@ -3646,7 +3646,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 6, // Treasure Hunt 2
-        rewardId: 52, // Trader Clan House Floor,
+        rewardId: 52, // Floor (Trader),
       },
       {
         openedAt: "2025-03-24T20:17:00Z",
@@ -3805,7 +3805,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 7, // Gold Rush
-        rewardId: 51, // Limited Clan House Walls
+        rewardId: 51, // Walls (Limited)
       },
       {
         amount: 760000,
@@ -3989,7 +3989,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 11, // Splash Bash
-        rewardId: 43, // Limited Decoration (Home Village)
+        rewardId: 43, // Home Village (Limited)
       },
 
       {
@@ -4035,7 +4035,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 12, // Hero Rush
-        rewardId: 43, // Limited Decoration (Home Village)
+        rewardId: 43, // Home Village (Limited)
       },
       {
         openedAt: "2025-08-15T00:06:01Z",
@@ -4285,7 +4285,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 13, // Treasure Hunt 5
-        rewardId: 46, // Trader Clan House Roof
+        rewardId: 46, // Roof (Trader)
       },
       {
         amount: 1030000,
@@ -4489,7 +4489,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 16, // Treasure Hunt 7
-        rewardId: 46, // Trader Clan House Roof
+        rewardId: 46, // Roof (Trader)
       },
       {
         amount: 1100000,
@@ -4527,7 +4527,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 16, // Treasure Hunt 7
-        rewardId: 49, // Trader Clan House Decoration
+        rewardId: 49, // Decoration (Trader)
       },
       {
         amount: 13700,
@@ -4655,7 +4655,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 17, // Clan Rush
-        rewardId: 43, // Limited Decoration (Home Village)
+        rewardId: 43, // Home Village (Limited)
       },
       {
         openedAt: "2025-12-19T01:03:00Z",
@@ -4685,7 +4685,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 17, // Clan Rush
-        rewardId: 43, // Limited Decoration (Home Village)
+        rewardId: 43, // Home Village (Limited)
       },
       {
         openedAt: "2025-12-19T01:03:04Z",
@@ -5044,7 +5044,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 5, // Lander.
         eventId: 17, // Clan Rush
-        rewardId: 50, // Trader Clan House Roof
+        rewardId: 50, // Roof (Trader)
       },
       {
         openedAt: "2025-12-19T01:11:04Z",
@@ -5300,7 +5300,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 7, // Synx_Viiper
         eventId: 11, // Splash Bash
-        rewardId: 49, // Trader Clan House Decoration
+        rewardId: 49, // Decoration (Trader)
       },
 
       {
@@ -5652,7 +5652,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 7, // Synx_Viiper
         eventId: 17, // Clan Rush
-        rewardId: 50, // Limited Clan House Roof
+        rewardId: 50, // Roof (Limited)
       },
       {
         amount: 563000,
@@ -6199,7 +6199,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 8, // DL Lander
         eventId: 17, // Clan Rush
-        rewardId: 46, // Trader Clan House Roof
+        rewardId: 46, // Roof (Trader)
       },
       {
         amount: 779000,
@@ -6559,7 +6559,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 9, // Lvl.1 Lander
         eventId: 14, // Treasure Hunt 6
-        rewardId: 47, // Trader Clan House Walls
+        rewardId: 47, // Walls (Trader)
       },
       {
         amount: 48,
@@ -7311,7 +7311,7 @@ export const seed = async (db: Kysely<any>) => {
         rarityId: 3, // Epic
         accountId: 15, // Lander - TH8
         eventId: 1, // Treasure Chest Launch
-        rewardId: 48, // Trader Clan House Floor
+        rewardId: 48, // Floor (Trader)
       },
       {
         openedAt: "2024-09-19T11:25:04Z",

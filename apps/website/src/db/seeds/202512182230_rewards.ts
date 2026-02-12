@@ -264,25 +264,25 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Shop Decoration (Home Village)",
+        name: "Home Village (Shop)",
         category: 9, // Decorations
       },
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Limited Decoration (Home Village)",
+        name: "Home Village (Limited)",
         category: 9, // Decorations
       },
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Shop Decoration (Builder Base)",
+        name: "Builder Base (Shop)",
         category: 9, // Decorations
       },
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Limited Decoration (Builder Base)",
+        name: "Builder Base (Limited)",
         category: 9, // Decorations
       },
 
@@ -291,49 +291,49 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Trader Clan House Roof",
+        name: "Roof (Trader)",
         category: 10, // Clan House
       },
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Trader Clan House Walls",
+        name: "Walls (Trader)",
         category: 10, // Clan House
       },
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Trader Clan House Floor",
+        name: "Floor (Trader)",
         category: 10, // Clan House
       },
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Trader Clan House Decoration",
+        name: "Decoration (Trader)",
         category: 10, // Clan House
       },
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Limited Clan House Roof",
+        name: "Roof (Limited)",
         category: 10, // Clan House
       },
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Limited Clan House Walls",
+        name: "Walls (Limited)",
         category: 10, // Clan House
       },
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Limited Clan House Floor",
+        name: "Floor (Limited)",
         category: 10, // Clan House
       },
       {
         createdAt: "2025-12-18 22:30:00",
         updatedAt: "2025-12-18 22:30:00",
-        name: "Limited Clan House Decoration",
+        name: "Decoration (Limited)",
         category: 10, // Clan House
       },
 
