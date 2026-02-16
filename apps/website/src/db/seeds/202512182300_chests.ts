@@ -1156,7 +1156,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         openedAt: "2025-08-15T00:14:04Z",
-        rarityId: 2, // Rare
+        rarityId: 1, // Common
         accountId: 1, // DL✨Lander
         eventId: 12, // Hero Rush
         rewardId: 3, // Study Soup
@@ -3303,7 +3303,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         openedAt: "2025-12-19T00:58:04Z",
-        rarityId: 2, // Rare
+        rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
         eventId: 17, // Clan Rush
         rewardId: 3, // Study Soup
@@ -6332,7 +6332,7 @@ export const seed = async (db: Kysely<any>) => {
       {
         amount: 477,
         openedAt: "2024-09-19T10:50:03Z",
-        rarityId: 1, // Common
+        rarityId: 2, // Rare
         accountId: 9, // Lvl.1 Lander
         eventId: 1, // Treasure Chest Launch
         rewardId: 39, // Shiny Ore
@@ -6564,7 +6564,7 @@ export const seed = async (db: Kysely<any>) => {
       {
         amount: 48,
         openedAt: "2025-10-28T15:43:00Z",
-        rarityId: 1, // Common
+        rarityId: 2, // Rare
         accountId: 9, // Lvl.1 Lander
         eventId: 14, // Treasure Hunt 6
         rewardId: 40, // Glowy Ore
@@ -6823,7 +6823,7 @@ export const seed = async (db: Kysely<any>) => {
       {
         amount: 479,
         openedAt: "2024-09-19T10:15:04Z",
-        rarityId: 1, // Common
+        rarityId: 2, // Rare
         accountId: 10, // FC Gods
         eventId: 1, // Treasure Chest Launch
         rewardId: 39, // Shiny Ore

@@ -11,27 +11,43 @@ import {
 } from "@/components/ui/card";
 import {
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
 
 const chartConfig = {
-  count: {
-    label: "Opened:",
-  },
+  common: { label: "Common", color: "#a3a3a3" },
+  rare: { label: "Rare", color: "#93c5fd" },
+  epic: { label: "Epic", color: "#a855f7" },
+  legendary: { label: "Legendary", color: "#facc15" },
+  count: { label: "Opened", color: "var(--primary)" },
 } satisfies ChartConfig;
 
 interface ChestCountCategoryChartProps {
   categories: {
     name: string;
     count: number;
+    rarities: {
+      name: string;
+      count: number;
+    }[];
   }[];
 }
 
 export default function ChestCountCategoryChart({
   categories,
 }: ChestCountCategoryChartProps) {
+  const chartData = categories.map(({ name, rarities, count }) => ({
+    name,
+    ...Object.fromEntries(
+      rarities.map(({ name, count }) => [name.toLowerCase(), count]),
+    ),
+    count,
+  }));
+
   return (
     <Card className="shadow-md">
       <CardHeader>
@@ -44,7 +60,7 @@ export default function ChestCountCategoryChart({
         <ChartContainer config={chartConfig} className="min-h-50 w-full">
           <BarChart
             accessibilityLayer
-            data={categories}
+            data={chartData}
             layout="vertical"
             margin={{
               right: 20,
@@ -55,21 +71,50 @@ export default function ChestCountCategoryChart({
               dataKey="name"
               type="category"
               tickLine={false}
-              tickMargin={10}
               axisLine={false}
+              interval={0}
               width={110}
+              tickFormatter={(value: string) => {
+                if (value.startsWith("Magic")) {
+                  return value.substring("Magic ".length);
+                }
+
+                return value;
+              }}
             />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <Bar
+              dataKey="common"
+              stackId="a"
+              radius={10}
+              fill={chartConfig.common.color}
             />
-            <Bar dataKey="count" radius={80} fill="var(--primary)">
+            <Bar
+              dataKey="rare"
+              stackId="a"
+              radius={10}
+              fill={chartConfig.rare.color}
+            />
+
+            <Bar
+              dataKey="epic"
+              stackId="a"
+              radius={10}
+              fill={chartConfig.epic.color}
+            />
+            <Bar
+              dataKey="legendary"
+              stackId="a"
+              radius={10}
+              fill={chartConfig.legendary.color}
+            >
               <LabelList
                 dataKey="count"
                 position="right"
-                fill="var(--foreground)"
+                fill={chartConfig.count.color}
               />
             </Bar>
+            <ChartLegend content={<ChartLegendContent />} />
           </BarChart>
         </ChartContainer>
       </CardContent>
