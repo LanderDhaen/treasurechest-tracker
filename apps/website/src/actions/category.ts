@@ -37,7 +37,7 @@ export const getChestCountPerCategory = async (accountId?: number) => {
           ])
           .whereRef("reward.category", "=", "category.id")
           .groupBy(["rarity.id", "rarity.name"])
-          .orderBy("rarity.name", "asc"),
+          .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
       ).as("rarities"),
     ])
     .groupBy(["category.id", "category.name"])
