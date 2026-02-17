@@ -51,7 +51,7 @@ export const getChestCountPerCategory = async (accountId?: number) => {
 export const getChestCountPerRewardPerCategory = async () => {
   const categories = await db
     .selectFrom("category")
-    .leftJoin("reward", "reward.category", "category.id")
+    .innerJoin("reward", "reward.category", "category.id")
     .leftJoin("chest", "chest.rewardId", "reward.id")
     .select((eb) => [
       "category.id",
