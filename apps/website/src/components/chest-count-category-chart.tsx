@@ -79,6 +79,10 @@ export default function ChestCountCategoryChart({
                   return value.substring("Magic ".length);
                 }
 
+                if (value.startsWith("Hero")) {
+                  return value.substring("Hero ".length);
+                }
+
                 return value;
               }}
             />
