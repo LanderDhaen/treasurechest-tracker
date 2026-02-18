@@ -41,7 +41,7 @@ export const getChestCountPerReward = async (accountId?: number) => {
       "reward.name",
       eb.fn.count<number>("chest.id").as("count"),
     ])
-    .groupBy("reward.name")
+    .groupBy(["reward.name"])
     .orderBy("count", "desc")
     .execute();
 
