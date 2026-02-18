@@ -11,27 +11,43 @@ import {
 } from "@/components/ui/card";
 import {
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
 
 const chartConfig = {
-  count: {
-    label: "Opened:",
-  },
+  common: { label: "Common", color: "#a3a3a3" },
+  rare: { label: "Rare", color: "#93c5fd" },
+  epic: { label: "Epic", color: "#a855f7" },
+  legendary: { label: "Legendary", color: "#facc15" },
+  count: { label: "Opened", color: "var(--primary)" },
 } satisfies ChartConfig;
 
 interface ChestCountRewardChartProps {
   rewards: {
     name: string;
     count: number;
+    rarities: {
+      name: string;
+      count: number;
+    }[];
   }[];
 }
 
 export default function ChestCountRewardChart({
   rewards,
 }: ChestCountRewardChartProps) {
+  const chartData = rewards.map(({ name, rarities, count }) => ({
+    name,
+    ...Object.fromEntries(
+      rarities.map(({ name, count }) => [name.toLowerCase(), count]),
+    ),
+    count,
+  }));
+
   return (
     <Card className="shadow-md">
       <CardHeader>
@@ -44,7 +60,7 @@ export default function ChestCountRewardChart({
         <ChartContainer config={chartConfig} className="min-h-50 w-full">
           <BarChart
             accessibilityLayer
-            data={rewards}
+            data={chartData}
             layout="vertical"
             margin={{
               right: 20,
@@ -60,17 +76,39 @@ export default function ChestCountRewardChart({
               width={110}
               interval={0}
             />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideIndicator />}
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <Bar
+              dataKey="common"
+              stackId="a"
+              radius={10}
+              fill={chartConfig.common.color}
             />
-            <Bar dataKey="count" radius={24} fill="#cbd5e1">
+            <Bar
+              dataKey="rare"
+              stackId="a"
+              radius={10}
+              fill={chartConfig.rare.color}
+            />
+
+            <Bar
+              dataKey="epic"
+              stackId="a"
+              radius={10}
+              fill={chartConfig.epic.color}
+            />
+            <Bar
+              dataKey="legendary"
+              stackId="a"
+              radius={10}
+              fill={chartConfig.legendary.color}
+            >
               <LabelList
                 dataKey="count"
                 position="right"
-                fill="var(--foreground)"
+                fill={chartConfig.count.color}
               />
             </Bar>
+            <ChartLegend content={<ChartLegendContent />} />
           </BarChart>
         </ChartContainer>
       </CardContent>
