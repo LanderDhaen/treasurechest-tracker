@@ -24,3 +24,26 @@ export const getMostReceivedReward = async (accountId?: number) => {
 
   return reward;
 };
+
+export const getChestCountPerReward = async (accountId?: number) => {
+  const rewards = await db
+    .selectFrom("reward")
+    .leftJoin("chest", (join) => {
+      let query = join.onRef("chest.rewardId", "=", "reward.id");
+
+      if (accountId) {
+        query = query.on("chest.accountId", "=", accountId);
+      }
+
+      return query;
+    })
+    .select((eb) => [
+      "reward.name",
+      eb.fn.count<number>("chest.id").as("count"),
+    ])
+    .groupBy("reward.name")
+    .orderBy("count", "desc")
+    .execute();
+
+  return rewards;
+};
