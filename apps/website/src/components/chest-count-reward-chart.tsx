@@ -75,6 +75,11 @@ export default function ChestCountRewardChart({
               axisLine={false}
               width={110}
               interval={0}
+              tickFormatter={(value: string) => {
+                if (value.length > 12) {
+                  return value.substring(0, 10) + "..";
+                } else return value;
+              }}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Bar
