@@ -8,8 +8,12 @@ import MostReceivedRewardCard from "@/components/most-received-reward-card";
 import TotalChestCard from "@/components/total-chest-card";
 import { getChestCountPerRarity } from "@/actions/rarity";
 import { getChestCountPerCategory } from "@/actions/category";
-import { getMostReceivedReward } from "@/actions/reward";
+import {
+  getChestCountPerReward,
+  getMostReceivedReward,
+} from "@/actions/reward";
 import ChestCountEventTable from "@/components/chest-count-event-table";
+import ChestCountRewardChart from "@/components/chest-count-reward-chart";
 
 export default async function Page({
   params,
@@ -26,6 +30,7 @@ export default async function Page({
   const categories = await getChestCountPerCategory(account.id);
   const rarities = await getChestCountPerRarity(account.id);
   const events = await getChestCountPerEvent(account.id);
+  const rewards = await getChestCountPerReward(account.id);
 
   return (
     <div className="grid grid-cols-1 gap-4">
@@ -41,6 +46,7 @@ export default async function Page({
         <ChestCountRarityChart rarities={rarities} />
         <ChestCountCategoryChart categories={categories} />
       </div>
+      <ChestCountRewardChart rewards={rewards} />
       <ChestCountEventTable events={events} />
     </div>
   );
