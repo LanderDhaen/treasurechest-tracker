@@ -92,7 +92,7 @@ export default function ChestCountAccountChart({
               cursor={false}
               content={<ChartTooltipContent hideIndicator />}
             />
-            <Bar dataKey="count" radius={24}>
+            <Bar dataKey="count" radius={100}>
               {accounts.map((account, index) => (
                 <Cell
                   key={`cell-${index}`}

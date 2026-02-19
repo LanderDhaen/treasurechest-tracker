@@ -85,26 +85,26 @@ export default function ChestCountRewardChart({
             <Bar
               dataKey="common"
               stackId="a"
-              radius={10}
+              radius={100}
               fill={chartConfig.common.color}
             />
             <Bar
               dataKey="rare"
               stackId="a"
-              radius={10}
+              radius={100}
               fill={chartConfig.rare.color}
             />
 
             <Bar
               dataKey="epic"
               stackId="a"
-              radius={10}
+              radius={100}
               fill={chartConfig.epic.color}
             />
             <Bar
               dataKey="legendary"
               stackId="a"
-              radius={10}
+              radius={100}
               fill={chartConfig.legendary.color}
             >
               <LabelList
