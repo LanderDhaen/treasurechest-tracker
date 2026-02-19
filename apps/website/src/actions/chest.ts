@@ -140,9 +140,14 @@ export const getLatestChest = async (accountId?: number) => {
   return chest;
 };
 
-export const getPeakOpeningHourData = async () => {
-  const peakOpeningHourData = await db
-    .selectFrom("chest")
+export const getPeakOpeningHourData = async (accountId?: number) => {
+  let query = db.selectFrom("chest");
+
+  if (accountId) {
+    query = query.where("chest.accountId", "=", accountId);
+  }
+
+  const peakOpeningHourData = await query
     .select((eb) => [
       sql<number>`CAST(EXTRACT(HOUR FROM ${eb.ref("chest.openedAt")}) AS INTEGER)`.as(
         "hour",
@@ -152,13 +157,6 @@ export const getPeakOpeningHourData = async () => {
     .groupBy(["hour"])
     .orderBy("count", "desc")
     .executeTakeFirst();
-
-  console.log(
-    "Peak Opening Hour Data:",
-    peakOpeningHourData,
-    "Type of hour:",
-    typeof peakOpeningHourData?.hour,
-  );
 
   return peakOpeningHourData;
 };

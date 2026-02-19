@@ -25,7 +25,7 @@ export default function PeakOpeningHourCard({
     return (
       <Card className="shadow-md">
         <CardHeader>
-          <CardDescription>Peak Opening Hour</CardDescription>
+          <CardDescription>Peak Opening Hours</CardDescription>
           <CardTitle className="text-2xl">-</CardTitle>
         </CardHeader>
       </Card>
