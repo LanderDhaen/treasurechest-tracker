@@ -24,7 +24,7 @@ export default async function Page({
   const { tag } = await params;
 
   const account = await getAccountByTag(tag);
-  const chest = await getLatestChest(account.id);
+  const chest = await getLatestChest({ accountId: account.id });
   const eventCount = await getTotalEvents();
   const chestCount = await getTotalChests({ accountId: account.id });
   const categories = await getChestCountPerCategory(account.id);

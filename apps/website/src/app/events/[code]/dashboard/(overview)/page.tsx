@@ -1,6 +1,7 @@
 import { getTotalAccounts } from "@/actions/account";
-import { getTotalChests } from "@/actions/chest";
+import { getLatestChest, getTotalChests } from "@/actions/chest";
 import { getEventByCode } from "@/actions/event";
+import LatestChestCard from "@/components/latest-chest-card";
 import TotalChestCard from "@/components/total-chest-card";
 
 export default async function Page({
@@ -20,6 +21,9 @@ export default async function Page({
     eventId: event.id,
   });
   const accountCount = await getTotalAccounts();
+  const chest = await getLatestChest({
+    eventId: event.id,
+  });
 
   return (
     <div className="grid grid-cols-1 gap-4">
@@ -28,6 +32,7 @@ export default async function Page({
           chestCount={chestCount}
           description={`during ${event.name}・${accountCount} accounts`}
         />
+        <LatestChestCard chest={chest} />
       </div>
     </div>
   );

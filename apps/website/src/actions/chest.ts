@@ -122,15 +122,22 @@ export const getAllChests = async ({
   };
 };
 
-export const getLatestChest = async (accountId?: number) => {
+export const getLatestChest = async (filters?: {
+  accountId?: number;
+  eventId?: number;
+}) => {
   let query = db
     .selectFrom("chest")
     .innerJoin("reward", "chest.rewardId", "reward.id")
     .innerJoin("rarity", "chest.rarityId", "rarity.id")
     .innerJoin("account", "chest.accountId", "account.id");
 
-  if (accountId) {
-    query = query.where("chest.accountId", "=", accountId);
+  if (filters?.accountId) {
+    query = query.where("chest.accountId", "=", filters.accountId);
+  }
+
+  if (filters?.eventId) {
+    query = query.where("chest.eventId", "=", filters.eventId);
   }
 
   const chest = await query
