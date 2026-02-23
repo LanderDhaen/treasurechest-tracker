@@ -8,12 +8,10 @@ import {
 import { calculatePercentage, formatHourRange } from "@/lib/utils";
 
 interface PeakOpeningHourCardProps {
-  peakOpeningHourData:
-    | {
-        hour: number;
-        count: number;
-      }
-    | undefined;
+  peakOpeningHourData?: {
+    hour: number;
+    count: number;
+  };
   totalChests: number;
 }
 

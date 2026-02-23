@@ -17,15 +17,13 @@ import { calculateTimeAgo, formatDateTime } from "@/lib/utils";
 import RarityBadge from "@/components/rarity-badge";
 
 interface LatestChestCardProps {
-  chest:
-    | {
-        amount: number;
-        openedAt: Date;
-        reward: string;
-        rarity: string;
-        account: string;
-      }
-    | undefined;
+  chest?: {
+    amount: number;
+    openedAt: Date;
+    reward: string;
+    rarity: string;
+    account: string;
+  };
 }
 
 export default function LatestChestCard({ chest }: LatestChestCardProps) {
