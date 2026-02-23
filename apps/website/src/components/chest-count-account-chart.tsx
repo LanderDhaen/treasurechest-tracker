@@ -56,7 +56,7 @@ export default function ChestCountAccountChart({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="min-h-50 w-full">
+        <ChartContainer config={chartConfig} className="min-h-100 w-full">
           <BarChart
             accessibilityLayer
             data={chartData}
