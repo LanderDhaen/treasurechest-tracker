@@ -36,6 +36,10 @@ export const getAllEvents = async ({
 
   // Sorting
 
+  if (sortBy === "code") {
+    query = query.orderBy("event.code", direction);
+  }
+
   if (sortBy === "status") {
     // Custom sorting for status (finished, ongoing, upcoming or reversed)
     query = query
