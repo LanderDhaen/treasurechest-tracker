@@ -27,8 +27,8 @@ export default async function Page({
   const chest = await getLatestChest({ accountId: account.id });
   const eventCount = await getTotalEvents();
   const chestCount = await getTotalChests({ accountId: account.id });
-  const categories = await getChestCountPerCategory(account.id);
-  const rarities = await getChestCountPerRarity(account.id);
+  const categories = await getChestCountPerCategory({ accountId: account.id });
+  const rarities = await getChestCountPerRarity({ accountId: account.id });
   const events = await getChestCountPerEvent(account.id);
   const rewards = await getChestCountPerReward(account.id);
   const peakOpeningHourData = await getPeakOpeningHourData({
