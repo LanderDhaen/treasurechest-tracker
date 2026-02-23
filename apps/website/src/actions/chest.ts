@@ -1,5 +1,6 @@
 import { db } from "@/db";
 import { ChestSearchParams } from "@/schemas/chest";
+import { sql } from "kysely";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
 export const getTotalChests = async (accountId?: number) => {
@@ -137,4 +138,25 @@ export const getLatestChest = async (accountId?: number) => {
     .executeTakeFirst();
 
   return chest;
+};
+
+export const getPeakOpeningHourData = async (accountId?: number) => {
+  let query = db.selectFrom("chest");
+
+  if (accountId) {
+    query = query.where("chest.accountId", "=", accountId);
+  }
+
+  const peakOpeningHourData = await query
+    .select((eb) => [
+      sql<number>`CAST(EXTRACT(HOUR FROM ${eb.ref("chest.openedAt")}) AS INTEGER)`.as(
+        "hour",
+      ),
+      db.fn.count<number>("chest.id").as("count"),
+    ])
+    .groupBy(["hour"])
+    .orderBy("count", "desc")
+    .executeTakeFirst();
+
+  return peakOpeningHourData;
 };

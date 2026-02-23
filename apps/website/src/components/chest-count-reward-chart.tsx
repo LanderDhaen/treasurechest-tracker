@@ -1,6 +1,6 @@
 "use client";
 
-import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, Cell, LabelList, XAxis, YAxis } from "recharts";
 
 import {
   Card,
@@ -26,8 +26,8 @@ const chartConfig = {
   count: { label: "Opened", color: "var(--primary)" },
 } satisfies ChartConfig;
 
-interface ChestCountCategoryChartProps {
-  categories: {
+interface ChestCountRewardChartProps {
+  rewards: {
     name: string;
     count: number;
     rarities: {
@@ -37,10 +37,10 @@ interface ChestCountCategoryChartProps {
   }[];
 }
 
-export default function ChestCountCategoryChart({
-  categories,
-}: ChestCountCategoryChartProps) {
-  const chartData = categories.map(({ name, rarities, count }) => ({
+export default function ChestCountRewardChart({
+  rewards,
+}: ChestCountRewardChartProps) {
+  const chartData = rewards.map(({ name, rarities, count }) => ({
     name,
     ...Object.fromEntries(
       rarities.map(({ name, count }) => [name.toLowerCase(), count]),
@@ -51,13 +51,13 @@ export default function ChestCountCategoryChart({
   return (
     <Card className="shadow-md">
       <CardHeader>
-        <CardTitle>Categories</CardTitle>
+        <CardTitle>Rewards</CardTitle>
         <CardDescription>
-          Shows the number of treasure chests opened per category
+          Shows the number of treasure chests opened per reward
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="min-h-50 w-full">
+        <ChartContainer config={chartConfig} className="min-h-400 w-full">
           <BarChart
             accessibilityLayer
             data={chartData}
@@ -71,19 +71,14 @@ export default function ChestCountCategoryChart({
               dataKey="name"
               type="category"
               tickLine={false}
+              tickMargin={10}
               axisLine={false}
-              interval={0}
               width={110}
+              interval={0}
               tickFormatter={(value: string) => {
-                if (value.startsWith("Magic")) {
-                  return value.substring("Magic ".length);
-                }
-
-                if (value.startsWith("Hero")) {
-                  return value.substring("Hero ".length);
-                }
-
-                return value;
+                if (value.length > 12) {
+                  return value.substring(0, 10) + "..";
+                } else return value;
               }}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />

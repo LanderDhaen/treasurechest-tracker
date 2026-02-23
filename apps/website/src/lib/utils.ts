@@ -71,3 +71,9 @@ export function calculatePercentage(part: number, total: number) {
   const percentage = (part / total) * 100;
   return `${percentage.toFixed(2)}%`;
 }
+
+export function formatHourRange(hour: number) {
+  const startHour = hour.toString().padStart(2, "0");
+  const endHour = ((hour + 1) % 24).toString().padStart(2, "0");
+  return `${startHour}:00 - ${endHour}:00`;
+}
