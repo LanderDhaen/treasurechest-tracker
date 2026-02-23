@@ -102,6 +102,16 @@ export const getAllEvents = async ({
   };
 };
 
+export const getEventByCode = async (code: string) => {
+  const event = await db
+    .selectFrom("event")
+    .where("event.code", "=", code)
+    .select(["event.id", "event.name"])
+    .executeTakeFirst();
+
+  return event;
+};
+
 export const getChestCountPerEvent = async (accountId?: number) => {
   const events = await db
     .selectFrom("event")

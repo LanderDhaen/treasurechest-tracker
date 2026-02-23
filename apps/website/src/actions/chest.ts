@@ -3,11 +3,18 @@ import { ChestSearchParams } from "@/schemas/chest";
 import { sql } from "kysely";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
-export const getTotalChests = async (accountId?: number) => {
+export const getTotalChests = async (filters?: {
+  accountId?: number;
+  eventId?: number;
+}) => {
   let query = db.selectFrom("chest");
 
-  if (accountId) {
-    query = query.where("chest.accountId", "=", accountId);
+  if (filters?.accountId) {
+    query = query.where("chest.accountId", "=", filters.accountId);
+  }
+
+  if (filters?.eventId) {
+    query = query.where("chest.eventId", "=", filters.eventId);
   }
 
   const result = await query
