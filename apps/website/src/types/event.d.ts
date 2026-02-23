@@ -1,9 +1,9 @@
 import { EventStatus } from "@/constants/event";
 
 export interface EventTableEntry {
-  id: number;
   status: EventStatus;
   name: string;
+  code: string;
   isGift: boolean;
   startDate: Date;
   endDate: Date;

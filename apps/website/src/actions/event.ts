@@ -79,8 +79,8 @@ export const getAllEvents = async ({
 
   const events = await query
     .select((eb) => [
-      "event.id",
       "event.name",
+      "event.code",
       "event.startDate",
       "event.endDate",
       "event.maxChests",

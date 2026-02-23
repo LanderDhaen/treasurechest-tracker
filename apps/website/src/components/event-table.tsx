@@ -21,8 +21,8 @@ interface EventTableProps {
 export default function EventTable({ events }: EventTableProps) {
   const router = useRouter();
 
-  const handleClick = (eventId: number) => {
-    router.push(`/events/${eventId}/dashboard`);
+  const handleClick = (eventCode: string) => {
+    router.push(`/events/${eventCode}/dashboard`);
   };
 
   return (
@@ -30,7 +30,7 @@ export default function EventTable({ events }: EventTableProps) {
       <Table>
         <TableHeader className="bg-muted">
           <TableRow>
-            <TableHead className="font-bold w-12">#</TableHead>
+            <TableHead className="font-bold w-24">Code</TableHead>
             <TableHead className="font-bold w-24">Status</TableHead>
             <TableHead className="font-bold">Name</TableHead>
             <TableHead className="font-bold">Start Date</TableHead>
@@ -48,11 +48,11 @@ export default function EventTable({ events }: EventTableProps) {
           ) : (
             events.map((event) => (
               <TableRow
-                key={event.id}
-                onClick={() => handleClick(event.id)}
+                key={event.code}
+                onClick={() => handleClick(event.code)}
                 className="hover:cursor-pointer"
               >
-                <TableCell>{event.id}</TableCell>
+                <TableCell>#{event.code}</TableCell>
                 <TableCell>
                   <StatusBadge status={event.status} />
                 </TableCell>
