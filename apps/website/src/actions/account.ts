@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { AccountSearchParams } from "@/schemas/account";
-import { jsonObjectFrom } from "kysely/helpers/postgres";
+import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
 
 export const getTotalAccounts = async () => {
   const result = await db
@@ -110,12 +110,31 @@ export const getChestCountPerAccount = async (filters?: {
     })
     .select((eb) => [
       "account.name",
-      "account.townhall",
       eb.fn.count<number>("chest.id").as("count"),
+      jsonArrayFrom(
+        eb
+          .selectFrom("rarity")
+          .leftJoin("chest", (join) => {
+            let query = join.onRef("chest.rarityId", "=", "rarity.id");
+
+            if (filters?.eventId) {
+              query = query.on("chest.eventId", "=", filters.eventId);
+            }
+
+            return query;
+          })
+          .leftJoin("reward", "chest.rewardId", "reward.id")
+          .select((eb) => [
+            "rarity.name",
+            eb.fn.count<number>("chest.id").as("count"),
+          ])
+          .whereRef("chest.accountId", "=", "account.id")
+          .groupBy(["rarity.id", "rarity.name"])
+          .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
+      ).as("rarities"),
     ])
-    .groupBy(["account.name", "account.townhall"])
+    .groupBy(["account.id", "account.name"])
     .orderBy("count", "desc")
-    .orderBy("account.townhall", "desc")
     .orderBy("account.name", "asc")
     .execute();
 
