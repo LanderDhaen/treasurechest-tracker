@@ -112,23 +112,25 @@ export const getEventByCode = async (code: string) => {
   return event;
 };
 
-export const getChestCountPerEvent = async (accountId?: number) => {
+export const getChestCountPerEvent = async (filters?: {
+  accountId?: number;
+}) => {
   const events = await db
     .selectFrom("event")
 
     .leftJoin("chest", (join) => {
       let query = join.onRef("chest.eventId", "=", "event.id");
 
-      if (accountId) {
-        query = query.on("chest.accountId", "=", accountId);
+      if (filters?.accountId) {
+        query = query.on("chest.accountId", "=", filters.accountId);
       }
 
       return query;
     })
 
     .select((eb) => [
-      "event.id",
       "event.name",
+      "event.code",
       "event.isGift",
       "event.maxChests",
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
@@ -137,8 +139,8 @@ export const getChestCountPerEvent = async (accountId?: number) => {
       eb.fn.count<number>("chest.id").as("count"),
     ])
     .groupBy([
-      "event.id",
       "event.name",
+      "event.code",
       "event.isGift",
       "event.maxChests",
       "event.startDate",
