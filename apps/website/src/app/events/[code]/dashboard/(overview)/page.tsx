@@ -7,8 +7,10 @@ import {
 } from "@/actions/chest";
 import { getEventByCode } from "@/actions/event";
 import { getChestCountPerRarity } from "@/actions/rarity";
+import { getChestCountPerReward } from "@/actions/reward";
 import ChestCountCategoryChart from "@/components/chest-count-category-chart";
 import ChestCountRarityChart from "@/components/chest-count-rarity-chart";
+import ChestCountRewardChart from "@/components/chest-count-reward-chart";
 import LatestChestCard from "@/components/latest-chest-card";
 import PeakOpeningHourCard from "@/components/peak-opening-hour-card";
 import TotalChestCard from "@/components/total-chest-card";
@@ -42,6 +44,9 @@ export default async function Page({
   const categories = await getChestCountPerCategory({
     eventId: event.id,
   });
+  const rewards = await getChestCountPerReward({
+    eventId: event.id,
+  });
 
   return (
     <div className="grid grid-cols-1 gap-4">
@@ -60,6 +65,7 @@ export default async function Page({
         <ChestCountRarityChart rarities={rarities} />
         <ChestCountCategoryChart categories={categories} />
       </div>
+      <ChestCountRewardChart rewards={rewards} />
     </div>
   );
 }

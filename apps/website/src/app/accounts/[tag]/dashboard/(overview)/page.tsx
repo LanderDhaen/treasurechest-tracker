@@ -30,7 +30,7 @@ export default async function Page({
   const categories = await getChestCountPerCategory({ accountId: account.id });
   const rarities = await getChestCountPerRarity({ accountId: account.id });
   const events = await getChestCountPerEvent(account.id);
-  const rewards = await getChestCountPerReward(account.id);
+  const rewards = await getChestCountPerReward({ accountId: account.id });
   const peakOpeningHourData = await getPeakOpeningHourData({
     accountId: account.id,
   });

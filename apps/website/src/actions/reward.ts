@@ -1,14 +1,21 @@
 import { db } from "@/db";
 import { jsonArrayFrom } from "kysely/helpers/postgres";
 
-export const getChestCountPerReward = async (accountId?: number) => {
+export const getChestCountPerReward = async (filters?: {
+  accountId?: number;
+  eventId?: number;
+}) => {
   const rewards = await db
     .selectFrom("reward")
     .leftJoin("chest", (join) => {
       let query = join.onRef("chest.rewardId", "=", "reward.id");
 
-      if (accountId) {
-        query = query.on("chest.accountId", "=", accountId);
+      if (filters?.accountId) {
+        query = query.on("chest.accountId", "=", filters.accountId);
+      }
+
+      if (filters?.eventId) {
+        query = query.on("chest.eventId", "=", filters.eventId);
       }
 
       return query;
@@ -22,8 +29,12 @@ export const getChestCountPerReward = async (accountId?: number) => {
           .leftJoin("chest", (join) => {
             let query = join.onRef("chest.rarityId", "=", "rarity.id");
 
-            if (accountId) {
-              query = query.on("chest.accountId", "=", accountId);
+            if (filters?.accountId) {
+              query = query.on("chest.accountId", "=", filters.accountId);
+            }
+
+            if (filters?.eventId) {
+              query = query.on("chest.eventId", "=", filters.eventId);
             }
 
             return query;
