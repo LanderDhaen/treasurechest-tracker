@@ -94,10 +94,20 @@ export const getAccountByTag = async (tag: string) => {
   return account;
 };
 
-export const getChestCountPerAccount = async () => {
+export const getChestCountPerAccount = async (filters?: {
+  eventId?: number;
+}) => {
   const accounts = await db
     .selectFrom("account")
-    .leftJoin("chest", "account.id", "chest.accountId")
+    .leftJoin("chest", (join) => {
+      let query = join.onRef("chest.accountId", "=", "account.id");
+
+      if (filters?.eventId) {
+        query = query.on("chest.eventId", "=", filters.eventId);
+      }
+
+      return query;
+    })
     .select((eb) => [
       "account.name",
       "account.townhall",

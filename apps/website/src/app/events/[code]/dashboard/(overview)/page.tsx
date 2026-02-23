@@ -1,4 +1,4 @@
-import { getTotalAccounts } from "@/actions/account";
+import { getChestCountPerAccount, getTotalAccounts } from "@/actions/account";
 import { getChestCountPerCategory } from "@/actions/category";
 import {
   getLatestChest,
@@ -8,6 +8,7 @@ import {
 import { getEventByCode } from "@/actions/event";
 import { getChestCountPerRarity } from "@/actions/rarity";
 import { getChestCountPerReward } from "@/actions/reward";
+import ChestCountAccountChart from "@/components/chest-count-account-chart";
 import ChestCountCategoryChart from "@/components/chest-count-category-chart";
 import ChestCountRarityChart from "@/components/chest-count-rarity-chart";
 import ChestCountRewardChart from "@/components/chest-count-reward-chart";
@@ -47,6 +48,9 @@ export default async function Page({
   const rewards = await getChestCountPerReward({
     eventId: event.id,
   });
+  const accounts = await getChestCountPerAccount({
+    eventId: event.id,
+  });
 
   return (
     <div className="grid grid-cols-1 gap-4">
@@ -66,6 +70,7 @@ export default async function Page({
         <ChestCountCategoryChart categories={categories} />
       </div>
       <ChestCountRewardChart rewards={rewards} />
+      <ChestCountAccountChart accounts={accounts} />
     </div>
   );
 }
