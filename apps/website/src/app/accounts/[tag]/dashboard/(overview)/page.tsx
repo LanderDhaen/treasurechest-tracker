@@ -31,7 +31,9 @@ export default async function Page({
   const rarities = await getChestCountPerRarity(account.id);
   const events = await getChestCountPerEvent(account.id);
   const rewards = await getChestCountPerReward(account.id);
-  const peakOpeningHourData = await getPeakOpeningHourData(account.id);
+  const peakOpeningHourData = await getPeakOpeningHourData({
+    accountId: account.id,
+  });
 
   return (
     <div className="grid grid-cols-1 gap-4">

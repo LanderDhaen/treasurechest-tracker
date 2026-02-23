@@ -154,11 +154,18 @@ export const getLatestChest = async (filters?: {
   return chest;
 };
 
-export const getPeakOpeningHourData = async (accountId?: number) => {
+export const getPeakOpeningHourData = async (filters?: {
+  accountId?: number;
+  eventId?: number;
+}) => {
   let query = db.selectFrom("chest");
 
-  if (accountId) {
-    query = query.where("chest.accountId", "=", accountId);
+  if (filters?.accountId) {
+    query = query.where("chest.accountId", "=", filters.accountId);
+  }
+
+  if (filters?.eventId) {
+    query = query.where("chest.eventId", "=", filters.eventId);
   }
 
   const peakOpeningHourData = await query
