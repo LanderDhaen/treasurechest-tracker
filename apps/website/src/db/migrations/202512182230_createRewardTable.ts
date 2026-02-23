@@ -10,7 +10,10 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("isActive", "boolean", (c) => c.notNull().defaultTo(true))
     .addColumn("name", "varchar", (c) => c.notNull())
     .addColumn("isObtainable", "boolean", (c) => c.notNull().defaultTo(true))
-    .addColumn("category", "integer", (c) =>
+
+    // Foreign keys
+
+    .addColumn("categoryId", "integer", (c) =>
       c.references("category.id").notNull().onDelete("restrict"),
     )
     .execute();

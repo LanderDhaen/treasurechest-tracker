@@ -12,8 +12,8 @@ export interface CategoryTable {
   updatedAt: ColumnType<Date>;
   isActive: ColumnType<boolean>;
   name: ColumnType<string>;
-  minRarity: ColumnType<number>;
-  maxRarity: ColumnType<number>;
+  minRarityId: ColumnType<number>;
+  maxRarityId: ColumnType<number>;
 }
 
 export type Category = Selectable<CategoryTable>;

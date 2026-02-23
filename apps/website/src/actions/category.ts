@@ -4,7 +4,7 @@ import { jsonArrayFrom } from "kysely/helpers/postgres";
 export const getChestCountPerCategory = async (accountId?: number) => {
   const categories = await db
     .selectFrom("category")
-    .leftJoin("reward", "reward.category", "category.id")
+    .leftJoin("reward", "reward.categoryId", "category.id")
     .leftJoin("chest", (join) => {
       let query = join.onRef("chest.rewardId", "=", "reward.id");
 
@@ -35,7 +35,7 @@ export const getChestCountPerCategory = async (accountId?: number) => {
             "rarity.name",
             eb.fn.count<number>("chest.id").as("count"),
           ])
-          .whereRef("reward.category", "=", "category.id")
+          .whereRef("reward.categoryId", "=", "category.id")
           .groupBy(["rarity.id", "rarity.name"])
           .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
       ).as("rarities"),

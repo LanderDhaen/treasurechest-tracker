@@ -13,7 +13,7 @@ export interface RewardTable {
   isActive: ColumnType<boolean>;
   name: ColumnType<string>;
   isObtainable: ColumnType<boolean>;
-  category: ColumnType<number>;
+  categoryId: ColumnType<number>;
 }
 
 export type Reward = Selectable<RewardTable>;

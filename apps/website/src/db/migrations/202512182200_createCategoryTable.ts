@@ -9,11 +9,14 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("updatedAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
     .addColumn("isActive", "boolean", (c) => c.notNull().defaultTo(true))
     .addColumn("name", "varchar", (c) => c.notNull())
-    .addColumn("minRarity", "integer", (c) =>
-      c.references("rarity.id").notNull().onDelete("restrict")
+
+    // Foreign keys
+
+    .addColumn("minRarityId", "integer", (c) =>
+      c.references("rarity.id").notNull().onDelete("restrict"),
     )
-    .addColumn("maxRarity", "integer", (c) =>
-      c.references("rarity.id").notNull().onDelete("restrict")
+    .addColumn("maxRarityId", "integer", (c) =>
+      c.references("rarity.id").notNull().onDelete("restrict"),
     )
     .execute();
 };
