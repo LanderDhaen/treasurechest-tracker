@@ -16,6 +16,7 @@ import LatestChestCard from "@/components/latest-chest-card";
 import PeakOpeningHourCard from "@/components/peak-opening-hour-card";
 import TotalChestCard from "@/components/total-chest-card";
 import EventInformationItem from "@/components/event-information-item";
+import EventNotFound from "@/components/event-not-found";
 
 export default async function Page({
   params,
@@ -27,7 +28,7 @@ export default async function Page({
   const event = await getEventByCode(code);
 
   if (!event) {
-    return <div>Event not found</div>;
+    return <EventNotFound />;
   }
 
   const chestCount = await getTotalChests({
