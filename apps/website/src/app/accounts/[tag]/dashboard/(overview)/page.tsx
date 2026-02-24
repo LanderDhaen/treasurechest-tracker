@@ -5,7 +5,7 @@ import {
 } from "@/actions/chest";
 import ChestCountRarityChart from "@/components/chest-count-rarity-chart";
 import ChestCountCategoryChart from "@/components/chest-count-category-chart";
-import { getChestCountPerEvent, getTotalEvents } from "@/actions/event";
+import { getChestCountPerEvent, getPossibleChestCount } from "@/actions/event";
 import { getAccountByTag } from "@/actions/account";
 import LatestChestCard from "@/components/latest-chest-card";
 import TotalChestCard from "@/components/total-chest-card";
@@ -25,7 +25,7 @@ export default async function Page({
 
   const account = await getAccountByTag(tag);
   const chest = await getLatestChest({ accountId: account.id });
-  const eventCount = await getTotalEvents();
+  const possibleChestCount = await getPossibleChestCount();
   const chestCount = await getTotalChests({ accountId: account.id });
   const categories = await getChestCountPerCategory({ accountId: account.id });
   const rarities = await getChestCountPerRarity({ accountId: account.id });
@@ -39,8 +39,8 @@ export default async function Page({
     <div className="grid grid-cols-1 gap-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <TotalChestCard
-          chestCount={chestCount}
-          description={`on ${account.name}・${eventCount} events`}
+          actualChestCount={chestCount}
+          possibleChestCount={possibleChestCount}
         />
         <LatestChestCard chest={chest} />
         <PeakOpeningHourCard

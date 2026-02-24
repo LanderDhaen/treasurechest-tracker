@@ -13,6 +13,15 @@ export const getTotalEvents = async () => {
   return result.total;
 };
 
+export const getPossibleChestCount = async () => {
+  const result = await db
+    .selectFrom("event")
+    .where("event.isActive", "=", true)
+    .select((eb) => eb.fn.sum<number>("event.maxChests").as("total"))
+    .executeTakeFirstOrThrow();
+  return result.total;
+};
+
 export const getAllEvents = async ({
   search,
   page,

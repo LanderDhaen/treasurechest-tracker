@@ -77,8 +77,8 @@ export default async function Page({
       </Item>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <TotalChestCard
-          chestCount={chestCount}
-          description={`during ${event.name}・${accountCount} accounts`}
+          actualChestCount={chestCount}
+          possibleChestCount={event.maxChests * accountCount}
         />
         <LatestChestCard chest={chest} />
         <PeakOpeningHourCard
