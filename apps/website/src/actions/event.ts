@@ -106,7 +106,18 @@ export const getEventByCode = async (code: string) => {
   const event = await db
     .selectFrom("event")
     .where("event.code", "=", code)
-    .select(["event.id", "event.name"])
+    .select((eb) => [
+      "event.id",
+      "event.name",
+      "event.code",
+      "event.startDate",
+      "event.endDate",
+      "event.maxChests",
+      "event.isGift",
+      deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
+        "status",
+      ),
+    ])
     .executeTakeFirst();
 
   return event;

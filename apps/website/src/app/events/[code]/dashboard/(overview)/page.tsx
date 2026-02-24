@@ -12,9 +12,19 @@ import ChestCountAccountChart from "@/components/chest-count-account-chart";
 import ChestCountCategoryChart from "@/components/chest-count-category-chart";
 import ChestCountRarityChart from "@/components/chest-count-rarity-chart";
 import ChestCountRewardChart from "@/components/chest-count-reward-chart";
+import GiftBadge from "@/components/gift-badge";
 import LatestChestCard from "@/components/latest-chest-card";
 import PeakOpeningHourCard from "@/components/peak-opening-hour-card";
+import StatusBadge from "@/components/status-badge";
 import TotalChestCard from "@/components/total-chest-card";
+
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from "@/components/ui/item";
+import { formatDate } from "@/lib/utils";
 
 export default async function Page({
   params,
@@ -54,6 +64,17 @@ export default async function Page({
 
   return (
     <div className="grid grid-cols-1 gap-4">
+      <Item className="p-0">
+        <ItemContent>
+          <ItemTitle className="text-xl font-bold">
+            {event.name} <StatusBadge status={event.status} />
+            <GiftBadge isGift={event.isGift} />
+          </ItemTitle>
+          <ItemDescription>
+            {formatDate(event.startDate)} - {formatDate(event.endDate)}
+          </ItemDescription>
+        </ItemContent>
+      </Item>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <TotalChestCard
           chestCount={chestCount}
