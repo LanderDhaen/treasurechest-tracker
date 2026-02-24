@@ -18,10 +18,10 @@ export default function StatisticCardSkeleton({
     <Card className="shadow-md">
       <CardHeader>
         <CardDescription>{title}</CardDescription>
-        <Skeleton className="h-8 w-1/8" />
+        <Skeleton className="h-8 w-44" />
       </CardHeader>
       <CardFooter>
-        <Skeleton className="h-5 w-full" />
+        <Skeleton className="h-5 w-100" />
       </CardFooter>
     </Card>
   );
