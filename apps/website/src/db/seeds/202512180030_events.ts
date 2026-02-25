@@ -164,6 +164,24 @@ export const seed = async (db: Kysely<any>) => {
         endDate: "2025-12-19",
         maxChests: 20,
       },
+      {
+        createdAt: "2025-12-18 00:30:00",
+        updatedAt: "2025-12-18 00:30:00",
+        name: "Treasure Hunt 8",
+        code: "TH8",
+        startDate: "2026-01-28",
+        endDate: "2026-02-02",
+        maxChests: 20,
+      },
+      {
+        createdAt: "2025-12-18 00:30:00",
+        updatedAt: "2025-12-18 00:30:00",
+        name: "Unleash The Duke",
+        code: "UTD1",
+        startDate: "2026-02-24",
+        endDate: "2026-03-01",
+        maxChests: 4,
+      },
     ])
     .execute();
 };
