@@ -109,7 +109,6 @@ export const getChestCountPerAccount = async (filters?: {
         eb
           .selectFrom("rarity")
           .innerJoin("filtered_chest", "filtered_chest.rarityId", "rarity.id")
-          .innerJoin("reward", "filtered_chest.rewardId", "reward.id")
           .select((eb) => [
             "rarity.name",
             eb.fn.count<number>("filtered_chest.id").as("count"),
