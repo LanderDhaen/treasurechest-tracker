@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { AccountSearchParams } from "@/schemas/account";
 import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
+import { withFilteredChests } from "./chest";
 
 export const getTotalAccounts = async () => {
   const result = await db
@@ -98,37 +99,22 @@ export const getChestCountPerAccount = async (filters?: {
   eventId?: number;
 }) => {
   const accounts = await db
+    .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("account")
-    .leftJoin("chest", (join) => {
-      let query = join.onRef("chest.accountId", "=", "account.id");
-
-      if (filters?.eventId) {
-        query = query.on("chest.eventId", "=", filters.eventId);
-      }
-
-      return query;
-    })
+    .leftJoin("filtered_chest", "filtered_chest.accountId", "account.id")
     .select((eb) => [
       "account.name",
-      eb.fn.count<number>("chest.id").as("count"),
+      eb.fn.count<number>("filtered_chest.id").as("count"),
       jsonArrayFrom(
         eb
           .selectFrom("rarity")
-          .leftJoin("chest", (join) => {
-            let query = join.onRef("chest.rarityId", "=", "rarity.id");
-
-            if (filters?.eventId) {
-              query = query.on("chest.eventId", "=", filters.eventId);
-            }
-
-            return query;
-          })
-          .leftJoin("reward", "chest.rewardId", "reward.id")
+          .innerJoin("filtered_chest", "filtered_chest.rarityId", "rarity.id")
+          .innerJoin("reward", "filtered_chest.rewardId", "reward.id")
           .select((eb) => [
             "rarity.name",
-            eb.fn.count<number>("chest.id").as("count"),
+            eb.fn.count<number>("filtered_chest.id").as("count"),
           ])
-          .whereRef("chest.accountId", "=", "account.id")
+          .whereRef("filtered_chest.accountId", "=", "account.id")
           .groupBy(["rarity.id", "rarity.name"])
           .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
       ).as("rarities"),

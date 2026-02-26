@@ -3,6 +3,7 @@ import { Expression, expressionBuilder, sql } from "kysely";
 import { EventStatus } from "@/constants/event";
 import { EventSearchParams } from "@/schemas/event";
 import { Database } from "@/db/types/database";
+import { withFilteredChests } from "./chest";
 
 export const getTotalEvents = async () => {
   const result = await db
@@ -136,18 +137,9 @@ export const getChestCountPerEvent = async (filters?: {
   accountId?: number;
 }) => {
   const events = await db
+    .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("event")
-
-    .leftJoin("chest", (join) => {
-      let query = join.onRef("chest.eventId", "=", "event.id");
-
-      if (filters?.accountId) {
-        query = query.on("chest.accountId", "=", filters.accountId);
-      }
-
-      return query;
-    })
-
+    .leftJoin("filtered_chest", "filtered_chest.eventId", "event.id")
     .select((eb) => [
       "event.name",
       "event.code",
@@ -156,7 +148,7 @@ export const getChestCountPerEvent = async (filters?: {
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
-      eb.fn.count<number>("chest.id").as("count"),
+      eb.fn.count<number>("filtered_chest.id").as("count"),
     ])
     .groupBy([
       "event.name",
