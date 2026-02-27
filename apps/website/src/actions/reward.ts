@@ -1,11 +1,9 @@
 import { db } from "@/db";
 import { jsonArrayFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
+import { FilterConfig } from "@/types/common";
 
-export const getChestCountPerReward = async (filters?: {
-  accountId?: number;
-  eventId?: number;
-}) => {
+export const getChestCountPerReward = async (filters: FilterConfig) => {
   const rewards = await db
     .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("reward")
