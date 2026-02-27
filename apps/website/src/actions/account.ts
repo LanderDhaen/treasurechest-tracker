@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { AccountSearchParams } from "@/schemas/account";
 import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
+import { FilterConfig } from "@/types/common";
 
 export const getTotalAccounts = async () => {
   const result = await db
@@ -108,9 +109,7 @@ export const getAccountByTag = async (tag: string) => {
   return account;
 };
 
-export const getChestCountPerAccount = async (filters?: {
-  eventId?: number;
-}) => {
+export const getChestCountPerAccount = async (filters: FilterConfig) => {
   const accounts = await db
     .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("account")
