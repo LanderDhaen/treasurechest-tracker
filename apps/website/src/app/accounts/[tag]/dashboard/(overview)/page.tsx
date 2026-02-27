@@ -15,6 +15,7 @@ import { getChestCountPerReward } from "@/actions/reward";
 import ChestCountEventTable from "@/components/chest-count-event-table";
 import ChestCountRewardChart from "@/components/chest-count-reward-chart";
 import PeakOpeningHourCard from "@/components/peak-opening-hour-card";
+import AccountInformationItem from "@/components/account-information-item";
 
 export default async function Page({
   params,
@@ -37,6 +38,7 @@ export default async function Page({
 
   return (
     <div className="grid grid-cols-1 gap-4">
+      <AccountInformationItem account={account} />
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <TotalChestCard
           actualChestCount={chestCount}
