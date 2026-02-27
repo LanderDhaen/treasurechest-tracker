@@ -4,6 +4,7 @@ import { EventStatus } from "@/constants/event";
 import { EventSearchParams } from "@/schemas/event";
 import { Database } from "@/db/types/database";
 import { withFilteredChests } from "./chest";
+import { FilterConfig } from "@/types/common";
 
 export const getTotalEvents = async () => {
   const result = await db
@@ -133,9 +134,7 @@ export const getEventByCode = async (code: string) => {
   return event;
 };
 
-export const getChestCountPerEvent = async (filters?: {
-  accountId?: number;
-}) => {
+export const getChestCountPerEvent = async (filters: FilterConfig) => {
   const events = await db
     .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("event")

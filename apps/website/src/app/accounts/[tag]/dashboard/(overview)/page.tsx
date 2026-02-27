@@ -7,13 +7,14 @@ import { getChestCountPerEvent, getPossibleChestCount } from "@/actions/event";
 import { getAccountByTag } from "@/actions/account";
 import LatestChestCard from "@/components/latest-chest-card";
 import TotalChestCard from "@/components/total-chest-card";
-import ChestCountEventTable from "@/components/chest-count-event-table";
+import ChestCountEventTable from "@/components/event-progress-table";
 import PeakOpeningHourCard from "@/components/peak-opening-hour-card";
 import AccountInformationItem from "@/components/account-information-item";
 import { FilterConfig } from "@/types/common";
 import RarityCard from "@/components/rarity-card";
 import CategoryCard from "@/components/category-card";
 import RewardCard from "@/components/reward-card";
+import EventCard from "@/components/event-card";
 
 export default async function Page({
   params,
@@ -31,7 +32,6 @@ export default async function Page({
   const chest = await getLatestChest({ accountId: account.id });
   const possibleChestCount = await getPossibleChestCount();
   const chestCount = await getTotalChests({ accountId: account.id });
-  const events = await getChestCountPerEvent({ accountId: account.id });
   const peakOpeningHourData = await getPeakOpeningHourData({
     accountId: account.id,
   });
@@ -55,7 +55,7 @@ export default async function Page({
         <CategoryCard filters={filters} />
       </div>
       <RewardCard filters={filters} />
-      <ChestCountEventTable events={events} accountCount={1} />
+      <EventCard filters={filters} />
     </div>
   );
 }
