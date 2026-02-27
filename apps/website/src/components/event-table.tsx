@@ -12,18 +12,25 @@ import {
   TableRow,
 } from "./ui/table";
 import { EventTableEntry } from "@/types/event";
+import { useRouter } from "next/navigation";
 
 interface EventTableProps {
   events: EventTableEntry[];
 }
 
 export default function EventTable({ events }: EventTableProps) {
+  const router = useRouter();
+
+  const handleClick = (eventCode: string) => {
+    router.push(`/events/${eventCode}/dashboard`);
+  };
+
   return (
     <div className="rounded-md border overflow-hidden">
       <Table>
         <TableHeader className="bg-muted">
           <TableRow>
-            <TableHead className="font-bold w-12">#</TableHead>
+            <TableHead className="font-bold w-24">Code</TableHead>
             <TableHead className="font-bold w-24">Status</TableHead>
             <TableHead className="font-bold">Name</TableHead>
             <TableHead className="font-bold">Start Date</TableHead>
@@ -40,8 +47,12 @@ export default function EventTable({ events }: EventTableProps) {
             </TableRow>
           ) : (
             events.map((event) => (
-              <TableRow key={event.id}>
-                <TableCell>{event.id}</TableCell>
+              <TableRow
+                key={event.code}
+                onClick={() => handleClick(event.code)}
+                className="hover:cursor-pointer"
+              >
+                <TableCell>#{event.code}</TableCell>
                 <TableCell>
                   <StatusBadge status={event.status} />
                 </TableCell>

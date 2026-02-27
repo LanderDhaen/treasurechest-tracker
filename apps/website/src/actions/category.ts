@@ -1,41 +1,29 @@
 import { db } from "@/db";
 import { jsonArrayFrom } from "kysely/helpers/postgres";
+import { withFilteredChests } from "./chest";
 
-export const getChestCountPerCategory = async (accountId?: number) => {
+export const getChestCountPerCategory = async (filters?: {
+  accountId?: number;
+  eventId?: number;
+}) => {
   const categories = await db
+    .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("category")
-    .leftJoin("reward", "reward.category", "category.id")
-    .leftJoin("chest", (join) => {
-      let query = join.onRef("chest.rewardId", "=", "reward.id");
-
-      if (accountId) {
-        query = query.on("chest.accountId", "=", accountId);
-      }
-
-      return query;
-    })
+    .leftJoin("reward", "reward.categoryId", "category.id")
+    .leftJoin("filtered_chest", "filtered_chest.rewardId", "reward.id")
     .select((eb) => [
       "category.name",
-      "category.id",
-      eb.fn.count<number>("chest.id").as("count"),
+      eb.fn.count<number>("filtered_chest.id").as("count"),
       jsonArrayFrom(
         eb
           .selectFrom("rarity")
-          .leftJoin("chest", (join) => {
-            let query = join.onRef("chest.rarityId", "=", "rarity.id");
-
-            if (accountId) {
-              query = query.on("chest.accountId", "=", accountId);
-            }
-
-            return query;
-          })
-          .leftJoin("reward", "chest.rewardId", "reward.id")
+          .innerJoin("filtered_chest", "filtered_chest.rarityId", "rarity.id")
+          .innerJoin("reward", "filtered_chest.rewardId", "reward.id")
           .select((eb) => [
             "rarity.name",
-            eb.fn.count<number>("chest.id").as("count"),
+            eb.fn.count<number>("filtered_chest.id").as("count"),
           ])
-          .whereRef("reward.category", "=", "category.id")
+          .whereRef("reward.categoryId", "=", "category.id")
           .groupBy(["rarity.id", "rarity.name"])
           .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
       ).as("rarities"),

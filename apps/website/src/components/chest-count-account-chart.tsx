@@ -11,55 +11,42 @@ import {
 } from "@/components/ui/card";
 import {
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
 
 const chartConfig = {
-  count: {
-    label: "Opened:",
-  },
+  common: { label: "Common", color: "#a3a3a3" },
+  rare: { label: "Rare", color: "#93c5fd" },
+  epic: { label: "Epic", color: "#a855f7" },
+  legendary: { label: "Legendary", color: "#facc15" },
+  count: { label: "Opened", color: "var(--primary)" },
 } satisfies ChartConfig;
 
 interface ChestCountAccountChartProps {
   accounts: {
     name: string;
-    townhall: number;
     count: number;
+    rarities: {
+      name: string;
+      count: number;
+    }[];
   }[];
 }
 
 export default function ChestCountAccountChart({
   accounts,
 }: ChestCountAccountChartProps) {
-  const defineColor = (townhall: number) => {
-    switch (townhall) {
-      case 9:
-        return "#9ca3af"; // bg-gray-400
-      case 10:
-        return "#f87171"; // bg-red-400
-      case 11:
-        return "#facc15"; // bg-yellow-400
-      case 12:
-        return "#93c5fd"; // bg-blue-300
-      case 13:
-        return "#3b82f6"; // bg-blue-500
-      case 14:
-        return "#16a34a"; // bg-green-600
-      case 15:
-        return "#c084fc"; // bg-violet-400
-      case 16:
-        return "#fb923c"; // bg-orange-400
-      case 17:
-        return "#000000"; // bg-black
-      case 18:
-        return "#bfdbfe"; // bg-blue-200
-      default:
-        return "#fed7aa"; // bg-orange-200
-    }
-  };
-
+  const chartData = accounts.map(({ name, rarities, count }) => ({
+    name,
+    ...Object.fromEntries(
+      rarities.map(({ name, count }) => [name.toLowerCase(), count]),
+    ),
+    count,
+  }));
   return (
     <Card className="shadow-md">
       <CardHeader>
@@ -69,10 +56,10 @@ export default function ChestCountAccountChart({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="min-h-50 w-full">
+        <ChartContainer config={chartConfig} className="min-h-100 w-full">
           <BarChart
             accessibilityLayer
-            data={accounts}
+            data={chartData}
             layout="vertical"
             margin={{
               right: 20,
@@ -88,23 +75,39 @@ export default function ChestCountAccountChart({
               width={110}
               interval={0}
             />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideIndicator />}
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <Bar
+              dataKey="common"
+              stackId="a"
+              radius={100}
+              fill={chartConfig.common.color}
             />
-            <Bar dataKey="count" radius={100}>
-              {accounts.map((account, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={defineColor(account.townhall)}
-                />
-              ))}
+            <Bar
+              dataKey="rare"
+              stackId="a"
+              radius={100}
+              fill={chartConfig.rare.color}
+            />
+
+            <Bar
+              dataKey="epic"
+              stackId="a"
+              radius={100}
+              fill={chartConfig.epic.color}
+            />
+            <Bar
+              dataKey="legendary"
+              stackId="a"
+              radius={100}
+              fill={chartConfig.legendary.color}
+            >
               <LabelList
                 dataKey="count"
                 position="right"
-                fill="var(--foreground)"
+                fill={chartConfig.count.color}
               />
             </Bar>
+            <ChartLegend content={<ChartLegendContent />} />
           </BarChart>
         </ChartContainer>
       </CardContent>

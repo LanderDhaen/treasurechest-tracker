@@ -21,19 +21,19 @@ import EventProgress from "./event-progress";
 
 interface ChestCountEventTableProps {
   events: {
-    id: number;
     status: EventStatus;
+    code: string;
     name: string;
     isGift: boolean;
     maxChests: number;
     count: number;
   }[];
-  accountCount?: number;
+  accountCount: number;
 }
 
 export default function ChestCountEventTable({
   events,
-  accountCount = 1,
+  accountCount,
 }: ChestCountEventTableProps) {
   return (
     <Card>
@@ -48,7 +48,7 @@ export default function ChestCountEventTable({
           <Table>
             <TableHeader>
               <TableRow className="bg-muted">
-                <TableHead className="font-bold w-12">#</TableHead>
+                <TableHead className="font-bold w-24">Code</TableHead>
                 <TableHead className="font-bold w-24">Status</TableHead>
                 <TableHead className="font-bold">Event</TableHead>
                 <TableHead className="font-bold min-w-40">Progress</TableHead>
@@ -56,8 +56,8 @@ export default function ChestCountEventTable({
             </TableHeader>
             <TableBody>
               {events.map((event) => (
-                <TableRow key={event.id}>
-                  <TableCell>{event.id}</TableCell>
+                <TableRow key={event.code}>
+                  <TableCell>#{event.code}</TableCell>
                   <TableCell>
                     <StatusBadge status={event.status} />
                   </TableCell>

@@ -1,40 +1,29 @@
 import { db } from "@/db";
 import { jsonArrayFrom } from "kysely/helpers/postgres";
+import { withFilteredChests } from "./chest";
 
-export const getChestCountPerReward = async (accountId?: number) => {
+export const getChestCountPerReward = async (filters?: {
+  accountId?: number;
+  eventId?: number;
+}) => {
   const rewards = await db
+    .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("reward")
-    .leftJoin("chest", (join) => {
-      let query = join.onRef("chest.rewardId", "=", "reward.id");
-
-      if (accountId) {
-        query = query.on("chest.accountId", "=", accountId);
-      }
-
-      return query;
-    })
+    .leftJoin("filtered_chest", "filtered_chest.rewardId", "reward.id")
     .select((eb) => [
       "reward.name",
-      eb.fn.count<number>("chest.id").as("count"),
+      eb.fn.count<number>("filtered_chest.id").as("count"),
       jsonArrayFrom(
         eb
           .selectFrom("rarity")
-          .leftJoin("chest", (join) => {
-            let query = join.onRef("chest.rarityId", "=", "rarity.id");
-
-            if (accountId) {
-              query = query.on("chest.accountId", "=", accountId);
-            }
-
-            return query;
-          })
+          .innerJoin("filtered_chest", "filtered_chest.rarityId", "rarity.id")
           .select((eb) => [
             "rarity.name",
-            eb.fn.count<number>("chest.id").as("count"),
+            eb.fn.count<number>("filtered_chest.id").as("count"),
           ])
-          .whereRef("chest.rewardId", "=", "reward.id")
+          .whereRef("filtered_chest.rewardId", "=", "reward.id")
           .groupBy(["rarity.id", "rarity.name"])
-          .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
+          .orderBy("rarity.chance", "desc"),
       ).as("rarities"),
     ])
     .groupBy(["reward.id", "reward.name"])

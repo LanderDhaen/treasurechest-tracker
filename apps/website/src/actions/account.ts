@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { AccountSearchParams } from "@/schemas/account";
-import { jsonObjectFrom } from "kysely/helpers/postgres";
+import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
+import { withFilteredChests } from "./chest";
 
 export const getTotalAccounts = async () => {
   const result = await db
@@ -86,7 +87,20 @@ export const getAllAccounts = async ({
 export const getAccountByTag = async (tag: string) => {
   const account = await db
     .selectFrom("account")
-    .select(["account.id", "account.name"])
+    .select((eb) => [
+      "account.id",
+      "account.tag",
+      "account.townhall",
+      "account.name",
+      jsonObjectFrom(
+        eb
+          .selectFrom("clan")
+          .select(["clan.id", "clan.name", "clan.tag"])
+          .whereRef("clan.id", "=", "account.clanId"),
+      )
+        .$notNull()
+        .as("clan"),
+    ])
     .where("account.isActive", "=", true)
     .where("account.tag", "=", tag)
     .executeTakeFirstOrThrow();
@@ -94,18 +108,31 @@ export const getAccountByTag = async (tag: string) => {
   return account;
 };
 
-export const getChestCountPerAccount = async () => {
+export const getChestCountPerAccount = async (filters?: {
+  eventId?: number;
+}) => {
   const accounts = await db
+    .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("account")
-    .leftJoin("chest", "account.id", "chest.accountId")
+    .leftJoin("filtered_chest", "filtered_chest.accountId", "account.id")
     .select((eb) => [
       "account.name",
-      "account.townhall",
-      eb.fn.count<number>("chest.id").as("count"),
+      eb.fn.count<number>("filtered_chest.id").as("count"),
+      jsonArrayFrom(
+        eb
+          .selectFrom("rarity")
+          .innerJoin("filtered_chest", "filtered_chest.rarityId", "rarity.id")
+          .select((eb) => [
+            "rarity.name",
+            eb.fn.count<number>("filtered_chest.id").as("count"),
+          ])
+          .whereRef("filtered_chest.accountId", "=", "account.id")
+          .groupBy(["rarity.id", "rarity.name"])
+          .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
+      ).as("rarities"),
     ])
-    .groupBy(["account.name", "account.townhall"])
+    .groupBy(["account.id", "account.name"])
     .orderBy("count", "desc")
-    .orderBy("account.townhall", "desc")
     .orderBy("account.name", "asc")
     .execute();
 

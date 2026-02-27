@@ -1,40 +1,66 @@
 import { getChestCountPerAccount, getTotalAccounts } from "@/actions/account";
 import { getChestCountPerCategory } from "@/actions/category";
 import {
-  getTotalChests,
   getLatestChest,
   getPeakOpeningHourData,
+  getTotalChests,
 } from "@/actions/chest";
-import { getChestCountPerEvent, getPossibleChestCount } from "@/actions/event";
+import { getEventByCode } from "@/actions/event";
 import { getChestCountPerRarity } from "@/actions/rarity";
 import { getChestCountPerReward } from "@/actions/reward";
 import ChestCountAccountChart from "@/components/chest-count-account-chart";
 import ChestCountCategoryChart from "@/components/chest-count-category-chart";
-import ChestCountEventTable from "@/components/chest-count-event-table";
 import ChestCountRarityChart from "@/components/chest-count-rarity-chart";
 import ChestCountRewardChart from "@/components/chest-count-reward-chart";
 import LatestChestCard from "@/components/latest-chest-card";
 import PeakOpeningHourCard from "@/components/peak-opening-hour-card";
 import TotalChestCard from "@/components/total-chest-card";
+import EventInformationItem from "@/components/event-information-item";
+import EventNotFound from "@/components/event-not-found";
 
-export default async function Dashboard() {
-  const chestCount = await getTotalChests();
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ code: string }>;
+}) {
+  const { code } = await params;
+
+  const event = await getEventByCode(code);
+
+  if (!event) {
+    return <EventNotFound />;
+  }
+
+  const chestCount = await getTotalChests({
+    eventId: event.id,
+  });
   const accountCount = await getTotalAccounts();
-  const possibleChestCount = await getPossibleChestCount();
-  const accounts = await getChestCountPerAccount();
-  const rarities = await getChestCountPerRarity();
-  const chest = await getLatestChest();
-  const categories = await getChestCountPerCategory();
-  const events = await getChestCountPerEvent();
-  const rewards = await getChestCountPerReward();
-  const peakOpeningHourData = await getPeakOpeningHourData();
+  const chest = await getLatestChest({
+    eventId: event.id,
+  });
+  const peakOpeningHourData = await getPeakOpeningHourData({
+    eventId: event.id,
+  });
+  const rarities = await getChestCountPerRarity({
+    eventId: event.id,
+  });
+  const categories = await getChestCountPerCategory({
+    eventId: event.id,
+  });
+  const rewards = await getChestCountPerReward({
+    eventId: event.id,
+  });
+  const accounts = await getChestCountPerAccount({
+    eventId: event.id,
+  });
 
   return (
     <div className="grid grid-cols-1 gap-4">
+      <EventInformationItem event={event} />
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <TotalChestCard
           actualChestCount={chestCount}
-          possibleChestCount={possibleChestCount * accountCount}
+          possibleChestCount={event.maxChests * accountCount}
         />
         <LatestChestCard chest={chest} />
         <PeakOpeningHourCard
@@ -48,7 +74,6 @@ export default async function Dashboard() {
       </div>
       <ChestCountRewardChart rewards={rewards} />
       <ChestCountAccountChart accounts={accounts} />
-      <ChestCountEventTable events={events} accountCount={accountCount} />
     </div>
   );
 }
