@@ -3,19 +3,19 @@ import {
   getTotalChests,
   getPeakOpeningHourData,
 } from "@/actions/chest";
-import ChestCountRarityChart from "@/components/chest-count-rarity-chart";
 import ChestCountCategoryChart from "@/components/chest-count-category-chart";
 import { getChestCountPerEvent, getPossibleChestCount } from "@/actions/event";
 import { getAccountByTag } from "@/actions/account";
 import LatestChestCard from "@/components/latest-chest-card";
 import TotalChestCard from "@/components/total-chest-card";
-import { getChestCountPerRarity } from "@/actions/rarity";
 import { getChestCountPerCategory } from "@/actions/category";
 import { getChestCountPerReward } from "@/actions/reward";
 import ChestCountEventTable from "@/components/chest-count-event-table";
 import ChestCountRewardChart from "@/components/chest-count-reward-chart";
 import PeakOpeningHourCard from "@/components/peak-opening-hour-card";
 import AccountInformationItem from "@/components/account-information-item";
+import { FilterConfig } from "@/types/common";
+import RarityCard from "@/components/rarity-card";
 
 export default async function Page({
   params,
@@ -25,11 +25,15 @@ export default async function Page({
   const { tag } = await params;
 
   const account = await getAccountByTag(tag);
+
+  const filters = {
+    accountId: account?.id,
+  } satisfies FilterConfig;
+
   const chest = await getLatestChest({ accountId: account.id });
   const possibleChestCount = await getPossibleChestCount();
   const chestCount = await getTotalChests({ accountId: account.id });
   const categories = await getChestCountPerCategory({ accountId: account.id });
-  const rarities = await getChestCountPerRarity({ accountId: account.id });
   const events = await getChestCountPerEvent({ accountId: account.id });
   const rewards = await getChestCountPerReward({ accountId: account.id });
   const peakOpeningHourData = await getPeakOpeningHourData({
@@ -51,7 +55,7 @@ export default async function Page({
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <ChestCountRarityChart rarities={rarities} />
+        <RarityCard filters={filters} />
         <ChestCountCategoryChart categories={categories} />
       </div>
       <ChestCountRewardChart rewards={rewards} />
