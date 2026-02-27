@@ -1,5 +1,4 @@
 import { getChestCountPerAccount, getTotalAccounts } from "@/actions/account";
-import { getChestCountPerCategory } from "@/actions/category";
 import {
   getTotalChests,
   getLatestChest,
@@ -7,8 +6,8 @@ import {
 } from "@/actions/chest";
 import { getChestCountPerEvent, getPossibleChestCount } from "@/actions/event";
 import { getChestCountPerReward } from "@/actions/reward";
+import CategoryCard from "@/components/category-card";
 import ChestCountAccountChart from "@/components/chest-count-account-chart";
-import ChestCountCategoryChart from "@/components/chest-count-category-chart";
 import ChestCountEventTable from "@/components/chest-count-event-table";
 import ChestCountRewardChart from "@/components/chest-count-reward-chart";
 import LatestChestCard from "@/components/latest-chest-card";
@@ -23,7 +22,6 @@ export default async function Dashboard() {
   const possibleChestCount = await getPossibleChestCount();
   const accounts = await getChestCountPerAccount();
   const chest = await getLatestChest();
-  const categories = await getChestCountPerCategory();
   const events = await getChestCountPerEvent();
   const rewards = await getChestCountPerReward();
   const peakOpeningHourData = await getPeakOpeningHourData();
@@ -45,7 +43,7 @@ export default async function Dashboard() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <RarityCard filters={filters} />
-        <ChestCountCategoryChart categories={categories} />
+        <CategoryCard filters={filters} />
       </div>
       <ChestCountRewardChart rewards={rewards} />
       <ChestCountAccountChart accounts={accounts} />
