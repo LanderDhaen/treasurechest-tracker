@@ -8,6 +8,7 @@ import RarityCard from "@/components/rarity-card";
 import CategoryCard from "@/components/category-card";
 import RewardCard from "@/components/reward-card";
 import EventCard from "@/components/event-card";
+import { notFound } from "next/navigation";
 
 export default async function Page({
   params,
@@ -18,8 +19,12 @@ export default async function Page({
 
   const account = await getAccountByTag(tag);
 
+  if (!account) {
+    return notFound();
+  }
+
   const filters = {
-    accountId: account?.id,
+    accountId: account.id,
   } satisfies FilterConfig;
 
   return (

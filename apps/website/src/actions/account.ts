@@ -104,7 +104,7 @@ export const getAccountByTag = async (tag: string) => {
     ])
     .where("account.isActive", "=", true)
     .where("account.tag", "=", tag)
-    .executeTakeFirstOrThrow();
+    .executeTakeFirst();
 
   return account;
 };
