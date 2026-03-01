@@ -150,20 +150,19 @@ export const getPeakOpeningHourData = async (filters: FilterConfig) => {
   return peakOpeningHourData;
 };
 
-export const withFilteredChests = (filters: {
-  accountId?: number;
-  eventId?: number;
-}) => {
+export const withFilteredChests = (filters: FilterConfig) => {
   const eb = expressionBuilder<Database>();
 
   let query = eb.selectFrom("chest");
 
-  if (filters?.accountId) {
-    query = query.where("chest.accountId", "=", filters.accountId);
+  const { accountId, eventId } = filters;
+
+  if (accountId) {
+    query = query.where("chest.accountId", "=", accountId);
   }
 
-  if (filters?.eventId) {
-    query = query.where("chest.eventId", "=", filters.eventId);
+  if (eventId) {
+    query = query.where("chest.eventId", "=", eventId);
   }
 
   return query.selectAll();
