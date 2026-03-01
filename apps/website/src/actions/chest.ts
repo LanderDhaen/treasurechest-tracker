@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { Database } from "@/db/types/database";
 import { ChestSearchParams } from "@/schemas/chest";
+import { FilterConfig } from "@/types/common";
 import { expressionBuilder, sql } from "kysely";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
@@ -115,10 +116,7 @@ export const getAllChests = async ({
   };
 };
 
-export const getLatestChest = async (filters?: {
-  accountId?: number;
-  eventId?: number;
-}) => {
+export const getLatestChest = async (filters: FilterConfig) => {
   const chest = await db
     .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("filtered_chest")

@@ -1,13 +1,8 @@
-import {
-  getLatestChest,
-  getTotalChests,
-  getPeakOpeningHourData,
-} from "@/actions/chest";
-import { getChestCountPerEvent, getPossibleChestCount } from "@/actions/event";
+import { getTotalChests, getPeakOpeningHourData } from "@/actions/chest";
+import { getPossibleChestCount } from "@/actions/event";
 import { getAccountByTag } from "@/actions/account";
 import LatestChestCard from "@/components/latest-chest-card";
 import TotalChestCard from "@/components/total-chest-card";
-import ChestCountEventTable from "@/components/event-progress-table";
 import PeakOpeningHourCard from "@/components/peak-opening-hour-card";
 import AccountInformationItem from "@/components/account-information-item";
 import { FilterConfig } from "@/types/common";
@@ -29,7 +24,6 @@ export default async function Page({
     accountId: account?.id,
   } satisfies FilterConfig;
 
-  const chest = await getLatestChest({ accountId: account.id });
   const possibleChestCount = await getPossibleChestCount();
   const chestCount = await getTotalChests({ accountId: account.id });
   const peakOpeningHourData = await getPeakOpeningHourData({
@@ -44,7 +38,7 @@ export default async function Page({
           actualChestCount={chestCount}
           possibleChestCount={possibleChestCount}
         />
-        <LatestChestCard chest={chest} />
+        <LatestChestCard filters={filters} />
         <PeakOpeningHourCard
           peakOpeningHourData={peakOpeningHourData}
           totalChests={chestCount}

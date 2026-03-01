@@ -1,9 +1,5 @@
 import { getTotalAccounts } from "@/actions/account";
-import {
-  getTotalChests,
-  getLatestChest,
-  getPeakOpeningHourData,
-} from "@/actions/chest";
+import { getTotalChests, getPeakOpeningHourData } from "@/actions/chest";
 import { getPossibleChestCount } from "@/actions/event";
 import AccountCard from "@/components/account-card";
 import CategoryCard from "@/components/category-card";
@@ -19,7 +15,6 @@ export default async function Dashboard() {
   const chestCount = await getTotalChests();
   const accountCount = await getTotalAccounts();
   const possibleChestCount = await getPossibleChestCount();
-  const chest = await getLatestChest();
   const peakOpeningHourData = await getPeakOpeningHourData();
 
   const filters = {} satisfies FilterConfig;
@@ -31,7 +26,7 @@ export default async function Dashboard() {
           actualChestCount={chestCount}
           possibleChestCount={possibleChestCount * accountCount}
         />
-        <LatestChestCard chest={chest} />
+        <LatestChestCard filters={filters} />
         <PeakOpeningHourCard
           peakOpeningHourData={peakOpeningHourData}
           totalChests={chestCount}

@@ -15,18 +15,18 @@ import {
 import { calculateTimeAgo, formatDateTime } from "@/lib/utils";
 
 import RarityBadge from "@/components/rarity-badge";
+import { FilterConfig } from "@/types/common";
+import { getLatestChest } from "@/actions/chest";
 
 interface LatestChestCardProps {
-  chest?: {
-    amount: number;
-    openedAt: Date;
-    reward: string;
-    rarity: string;
-    account: string;
-  };
+  filters: FilterConfig;
 }
 
-export default function LatestChestCard({ chest }: LatestChestCardProps) {
+export default async function LatestChestCard({
+  filters,
+}: LatestChestCardProps) {
+  const chest = await getLatestChest(filters);
+
   if (!chest) {
     return (
       <Card className="shadow-md">
