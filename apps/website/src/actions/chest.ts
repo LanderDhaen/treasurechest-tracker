@@ -136,10 +136,7 @@ export const getLatestChest = async (filters: FilterConfig) => {
   return chest;
 };
 
-export const getPeakOpeningHourData = async (filters?: {
-  accountId?: number;
-  eventId?: number;
-}) => {
+export const getPeakOpeningHourData = async (filters: FilterConfig) => {
   const peakOpeningHourData = await db
     .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("filtered_chest")

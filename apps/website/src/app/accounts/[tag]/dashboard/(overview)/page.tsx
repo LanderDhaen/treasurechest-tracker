@@ -1,4 +1,4 @@
-import { getTotalChests, getPeakOpeningHourData } from "@/actions/chest";
+import { getTotalChests } from "@/actions/chest";
 import { getPossibleChestCount } from "@/actions/event";
 import { getAccountByTag } from "@/actions/account";
 import LatestChestCard from "@/components/latest-chest-card";
@@ -26,9 +26,6 @@ export default async function Page({
 
   const possibleChestCount = await getPossibleChestCount();
   const chestCount = await getTotalChests({ accountId: account.id });
-  const peakOpeningHourData = await getPeakOpeningHourData({
-    accountId: account.id,
-  });
 
   return (
     <div className="grid grid-cols-1 gap-4">
@@ -39,10 +36,7 @@ export default async function Page({
           possibleChestCount={possibleChestCount}
         />
         <LatestChestCard filters={filters} />
-        <PeakOpeningHourCard
-          peakOpeningHourData={peakOpeningHourData}
-          totalChests={chestCount}
-        />
+        <PeakOpeningHourCard filters={filters} />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <RarityCard filters={filters} />
