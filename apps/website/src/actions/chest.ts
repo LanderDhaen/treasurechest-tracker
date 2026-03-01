@@ -5,10 +5,7 @@ import { FilterConfig } from "@/types/common";
 import { expressionBuilder, sql } from "kysely";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
 
-export const getTotalChests = async (filters?: {
-  accountId?: number;
-  eventId?: number;
-}) => {
+export const getTotalChests = async (filters: FilterConfig) => {
   const result = await db
     .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("filtered_chest")
@@ -153,7 +150,7 @@ export const getPeakOpeningHourData = async (filters: FilterConfig) => {
   return peakOpeningHourData;
 };
 
-export const withFilteredChests = (filters?: {
+export const withFilteredChests = (filters: {
   accountId?: number;
   eventId?: number;
 }) => {

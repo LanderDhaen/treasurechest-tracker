@@ -29,19 +29,11 @@ export default async function Page({
     eventId: event.id,
   } satisfies FilterConfig;
 
-  const chestCount = await getTotalChests({
-    eventId: event.id,
-  });
-  const accountCount = await getTotalAccounts();
-
   return (
     <div className="grid grid-cols-1 gap-4">
       <EventInformationItem event={event} />
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <TotalChestCard
-          actualChestCount={chestCount}
-          possibleChestCount={event.maxChests * accountCount}
-        />
+        <TotalChestCard filters={filters} />
         <LatestChestCard filters={filters} />
         <PeakOpeningHourCard filters={filters} />
       </div>

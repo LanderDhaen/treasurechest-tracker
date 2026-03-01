@@ -1,5 +1,3 @@
-import { getTotalChests } from "@/actions/chest";
-import { getPossibleChestCount } from "@/actions/event";
 import { getAccountByTag } from "@/actions/account";
 import LatestChestCard from "@/components/latest-chest-card";
 import TotalChestCard from "@/components/total-chest-card";
@@ -24,17 +22,11 @@ export default async function Page({
     accountId: account?.id,
   } satisfies FilterConfig;
 
-  const possibleChestCount = await getPossibleChestCount();
-  const chestCount = await getTotalChests({ accountId: account.id });
-
   return (
     <div className="grid grid-cols-1 gap-4">
       <AccountInformationItem account={account} />
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <TotalChestCard
-          actualChestCount={chestCount}
-          possibleChestCount={possibleChestCount}
-        />
+        <TotalChestCard filters={filters} />
         <LatestChestCard filters={filters} />
         <PeakOpeningHourCard filters={filters} />
       </div>

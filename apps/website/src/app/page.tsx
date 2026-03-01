@@ -1,6 +1,3 @@
-import { getTotalAccounts } from "@/actions/account";
-import { getTotalChests } from "@/actions/chest";
-import { getPossibleChestCount } from "@/actions/event";
 import AccountCard from "@/components/account-card";
 import CategoryCard from "@/components/category-card";
 import EventCard from "@/components/event-card";
@@ -12,19 +9,12 @@ import TotalChestCard from "@/components/total-chest-card";
 import { FilterConfig } from "@/types/common";
 
 export default async function Dashboard() {
-  const chestCount = await getTotalChests();
-  const accountCount = await getTotalAccounts();
-  const possibleChestCount = await getPossibleChestCount();
-
   const filters = {} satisfies FilterConfig;
 
   return (
     <div className="grid grid-cols-1 gap-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <TotalChestCard
-          actualChestCount={chestCount}
-          possibleChestCount={possibleChestCount * accountCount}
-        />
+        <TotalChestCard filters={filters} />
         <LatestChestCard filters={filters} />
         <PeakOpeningHourCard filters={filters} />
       </div>
