@@ -10,9 +10,6 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("isActive", "boolean", (c) => c.notNull().defaultTo(true))
     .addColumn("name", "varchar", (c) => c.notNull())
     .addColumn("code", "varchar", (c) => c.notNull().unique())
-    .addColumn("startDate", "date", (c) => c.notNull())
-    .addColumn("endDate", "date", (c) => c.notNull())
-    .addColumn("maxChests", "integer", (c) => c.notNull().defaultTo(0))
     .addColumn("isGift", "boolean", (c) => c.notNull().defaultTo(false))
     .execute();
 };

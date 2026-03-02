@@ -13,9 +13,6 @@ export interface EventTable {
   isActive: ColumnType<boolean>;
   name: ColumnType<string>;
   code: ColumnType<string>;
-  startDate: ColumnType<Date>;
-  endDate: ColumnType<Date>;
-  maxChests: ColumnType<number>;
   isGift: ColumnType<boolean>;
 }
 
