@@ -26,6 +26,7 @@ export const getAllChests = async ({
     .innerJoin("rarity", "chest.rarityId", "rarity.id")
     .innerJoin("reward", "chest.rewardId", "reward.id")
     .innerJoin("event", "chest.eventId", "event.id")
+    .innerJoin("series", "event.seriesId", "series.id")
     .innerJoin("account", "chest.accountId", "account.id");
 
   // Filtering
@@ -36,7 +37,7 @@ export const getAllChests = async ({
         eb("rarity.name", "ilike", `%${search}%`),
         eb("reward.name", "ilike", `%${search}%`),
         eb("account.name", "ilike", `%${search}%`),
-        eb("event.name", "ilike", `%${search}%`),
+        eb("series.name", "ilike", `%${search}%`),
       ]),
     );
   }
@@ -67,7 +68,9 @@ export const getAllChests = async ({
   }
 
   if (sortBy == "event") {
-    query = query.orderBy("event.name", direction);
+    query = query
+      .orderBy("series.name", direction)
+      .orderBy("event.edition", direction);
   }
 
   query = query
@@ -89,20 +92,30 @@ export const getAllChests = async ({
       "reward.name as reward",
       jsonObjectFrom(
         eb
-          .selectFrom("event")
-          .select(["event.name", "event.isGift"])
-          .whereRef("event.id", "=", "chest.eventId"),
-      )
-        .$notNull()
-        .as("event"),
-      jsonObjectFrom(
-        eb
           .selectFrom("account")
           .select(["account.name", "account.townhall"])
           .whereRef("account.id", "=", "chest.accountId"),
       )
         .$notNull()
         .as("account"),
+      jsonObjectFrom(
+        eb
+          .selectFrom("event")
+          .select([
+            "event.edition",
+            jsonObjectFrom(
+              eb
+                .selectFrom("series")
+                .select(["series.name", "series.isGift"])
+                .whereRef("series.id", "=", "event.seriesId"),
+            )
+              .$notNull()
+              .as("series"),
+          ])
+          .whereRef("event.id", "=", "chest.eventId"),
+      )
+        .$notNull()
+        .as("event"),
     ])
     .execute();
 
