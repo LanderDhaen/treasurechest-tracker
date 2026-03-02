@@ -46,13 +46,16 @@ export const getAllEvents = async ({
 }: EventSearchParams) => {
   let query = db
     .selectFrom("event")
-    .innerJoin("series", "series.id", "event.seriesId");
+    .innerJoin("series", "series.id", "event.seriesId")
+    .innerJoin("type", "type.id", "series.typeId");
 
   // Filtering
 
   if (search) {
     query = query.where((eb) =>
-      eb.or([eb("series.name", "ilike", `%${search}%`)]),
+      eb
+        .or([eb("series.name", "ilike", `%${search}%`)])
+        .or(eb("type.name", "ilike", `%${search}%`)),
     );
   }
 
@@ -83,6 +86,10 @@ export const getAllEvents = async ({
       )
       .orderBy("event.startDate", direction)
       .orderBy("event.endDate", direction);
+  }
+
+  if (sortBy === "type") {
+    query = query.orderBy("type.name", direction);
   }
 
   if (sortBy === "name") {

@@ -6,7 +6,6 @@ import {
 } from "@/components/ui/item";
 import StatusBadge from "./event-status-badge";
 import { formatDate } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import { EventStatus } from "@/constants/event";
 import { formatEventName } from "@/lib/event";
 import EventTypeBadge from "./event-type-badge";
@@ -35,19 +34,15 @@ export default function EventInformationItem({
   return (
     <Item className="p-0">
       <ItemContent>
-        <ItemTitle className="text-xl font-bold">
+        <ItemTitle className="text-xl font-bold items-center">
           {formatEventName(event.series.name, event.edition)}
-        </ItemTitle>
-        <ItemDescription className="flex gap-2 items-center">
-          <span className="italic">#{event.code}</span>
           <StatusBadge status={event.status} />
           <EventTypeBadge type={event.series.type} />
-          <Badge variant="secondary">
-            {event.maxChests == 1 ? "1 Chest" : `${event.maxChests} Chests`}
-          </Badge>
-        </ItemDescription>
+        </ItemTitle>
+        <ItemDescription className="italic">#{event.code}</ItemDescription>
 
         <ItemDescription className="text-sm text-muted-foreground">
+          {event.maxChests == 1 ? "1 Chest" : `${event.maxChests} Chests`}・
           {formatDate(event.startDate)} - {formatDate(event.endDate)}
         </ItemDescription>
       </ItemContent>

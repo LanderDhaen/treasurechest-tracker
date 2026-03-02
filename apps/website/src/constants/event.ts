@@ -7,6 +7,7 @@ export enum EventStatus {
 export const SORT_OPTIONS = [
   { label: "Code", value: "code" },
   { label: "Status", value: "status" },
+  { label: "Type", value: "type" },
   { label: "Name", value: "name" },
   { label: "Start Date", value: "startDate" },
   { label: "End Date", value: "endDate" },
