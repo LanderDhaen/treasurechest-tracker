@@ -2,6 +2,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -21,14 +22,18 @@ export default async function EventSeriesChartCard({
   return (
     <Card className="shadow-md">
       <CardHeader>
-        <CardTitle>Event Series</CardTitle>
+        <CardTitle>Series</CardTitle>
         <CardDescription>
-          Shows the number of treasure chest opened per event series
+          Shows the number of treasure chest opened per series
         </CardDescription>
       </CardHeader>
       <CardContent>
         <EventSeriesChart series={series} />
       </CardContent>
+      <CardFooter className="text-sm text-muted-foreground">
+        A series groups reoccuring events like all Treasure Hunt events or the
+        Gold Passes together.
+      </CardFooter>
     </Card>
   );
 }

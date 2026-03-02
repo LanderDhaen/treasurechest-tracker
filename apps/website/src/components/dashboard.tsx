@@ -10,17 +10,18 @@ import RarityChartCard from "@/components/rarity-chart-card";
 import RewardChartCard from "@/components/reward-chart-card";
 import AccountChartCard from "@/components/account-chart-card";
 import EventSeriesChartCard from "./event-series-chart-card";
+import EventTypeChartCard from "./event-type-chart-card";
 
 interface DashboardProps {
   filters: FilterConfig;
-  hideSeriesCard?: boolean;
+  hideEventCards?: boolean;
   hideAccountCard?: boolean;
 }
 
 export default function Dashboard({
   filters,
   hideAccountCard = false,
-  hideSeriesCard = false,
+  hideEventCards = false,
 }: DashboardProps) {
   return (
     <div className="grid grid-cols-1 gap-4">
@@ -86,17 +87,29 @@ export default function Dashboard({
           <AccountChartCard filters={filters} />
         </Suspense>
       )}
-      {!hideSeriesCard && (
-        <Suspense
-          fallback={
-            <ChartCardSkeleton
-              title="Event Series"
-              description="Shows the number of treasure chest opened per event series"
-            />
-          }
-        >
-          <EventSeriesChartCard filters={filters} />
-        </Suspense>
+      {!hideEventCards && (
+        <>
+          <Suspense
+            fallback={
+              <ChartCardSkeleton
+                title="Series"
+                description="Shows the number of treasure chest opened per series"
+              />
+            }
+          >
+            <EventSeriesChartCard filters={filters} />
+          </Suspense>
+          <Suspense
+            fallback={
+              <ChartCardSkeleton
+                title="Types"
+                description="Shows the number of treasure chest opened per type"
+              />
+            }
+          >
+            <EventTypeChartCard filters={filters} />
+          </Suspense>
+        </>
       )}
     </div>
   );

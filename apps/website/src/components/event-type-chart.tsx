@@ -19,8 +19,8 @@ const chartConfig = {
   count: { label: "Opened", color: "var(--primary)" },
 } satisfies ChartConfig;
 
-interface SeriesChartProps {
-  series: {
+interface EventTypeChartProps {
+  types: {
     name: string;
     count: number;
     rarities: {
@@ -30,8 +30,8 @@ interface SeriesChartProps {
   }[];
 }
 
-export default function EventSeriesChart({ series }: SeriesChartProps) {
-  const chartData = series.map(({ name, rarities, count }) => ({
+export default function EventTypeChart({ types }: EventTypeChartProps) {
+  const chartData = types.map(({ name, rarities, count }) => ({
     name,
     ...Object.fromEntries(
       rarities.map(({ name, count }) => [name.toLowerCase(), count]),
@@ -40,7 +40,7 @@ export default function EventSeriesChart({ series }: SeriesChartProps) {
   }));
 
   return (
-    <ChartContainer config={chartConfig} className="min-h-52 w-full">
+    <ChartContainer config={chartConfig} className="max-h-48 w-full">
       <BarChart
         accessibilityLayer
         data={chartData}
