@@ -6,22 +6,21 @@ import { Suspense } from "react";
 import StatisticCardSkeleton from "./skeletons/statistic-card-skeleton";
 import ChartCardSkeleton from "./skeletons/chart-card-skeleton";
 import CategoryChartCard from "@/components/category-chart-card";
-import EventProgressCard from "./event-progress-card";
 import RarityChartCard from "@/components/rarity-chart-card";
 import RewardChartCard from "@/components/reward-chart-card";
 import AccountChartCard from "@/components/account-chart-card";
-import SeriesChartCard from "./series-chart-card";
+import EventSeriesChartCard from "./event-series-chart-card";
 
 interface DashboardProps {
   filters: FilterConfig;
-  hideEventCard?: boolean;
+  hideSeriesCard?: boolean;
   hideAccountCard?: boolean;
 }
 
 export default function Dashboard({
   filters,
   hideAccountCard = false,
-  hideEventCard = false,
+  hideSeriesCard = false,
 }: DashboardProps) {
   return (
     <div className="grid grid-cols-1 gap-4">
@@ -87,19 +86,18 @@ export default function Dashboard({
           <AccountChartCard filters={filters} />
         </Suspense>
       )}
-      {!hideEventCard && (
+      {!hideSeriesCard && (
         <Suspense
           fallback={
             <ChartCardSkeleton
-              title="Events"
-              description="Shows the number of treasure chest opened per event"
+              title="Event Series"
+              description="Shows the number of treasure chest opened per event series"
             />
           }
         >
-          <EventProgressCard filters={filters} />
+          <EventSeriesChartCard filters={filters} />
         </Suspense>
       )}
-      <SeriesChartCard filters={filters} />
     </div>
   );
 }

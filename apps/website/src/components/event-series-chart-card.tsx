@@ -7,23 +7,23 @@ import {
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
 import { getChestCountPerSeries } from "@/actions/series";
-import SeriesChart from "./series-chart";
+import SeriesChart from "./event-series-chart";
 
-interface SeriesChartCardProps {
+interface EventSeriesChartCardProps {
   filters: FilterConfig;
 }
 
-export default async function SeriesChartCard({
+export default async function EventSeriesChartCard({
   filters,
-}: SeriesChartCardProps) {
+}: EventSeriesChartCardProps) {
   const series = await getChestCountPerSeries(filters);
 
   return (
     <Card className="shadow-md">
       <CardHeader>
-        <CardTitle>Series</CardTitle>
+        <CardTitle>Event Series</CardTitle>
         <CardDescription>
-          Shows the number of treasure chest opened per series
+          Shows the number of treasure chest opened per event series
         </CardDescription>
       </CardHeader>
       <CardContent>

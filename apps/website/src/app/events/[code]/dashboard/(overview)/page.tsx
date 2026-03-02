@@ -24,7 +24,7 @@ export default async function Page({
   return (
     <div className="flex flex-col gap-4">
       <EventInformationItem event={event} />
-      <Dashboard filters={filters} hideEventCard />
+      <Dashboard filters={filters} hideSeriesCard />
     </div>
   );
 }

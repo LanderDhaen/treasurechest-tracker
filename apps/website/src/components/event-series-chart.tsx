@@ -30,7 +30,9 @@ interface ChestCountSeriesChartProps {
   }[];
 }
 
-export default function SeriesChart({ series }: ChestCountSeriesChartProps) {
+export default function EventSeriesChart({
+  series,
+}: ChestCountSeriesChartProps) {
   const chartData = series.map(({ name, rarities, count }) => ({
     name,
     ...Object.fromEntries(
