@@ -1,7 +1,10 @@
 import { db } from "@/db";
-import { jsonArrayFrom } from "kysely/helpers/postgres";
+import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
+import { Expression, expressionBuilder } from "kysely";
+import { Database } from "@/db/types/database";
+import { Type } from "./type";
 
 export const getChestCountPerSeries = async (filters: FilterConfig) => {
   const series = await db
@@ -32,4 +35,20 @@ export const getChestCountPerSeries = async (filters: FilterConfig) => {
     .execute();
 
   return series;
+};
+
+export const Series = {
+  getById: (seriesId: Expression<number>) => {
+    const eb = expressionBuilder<Database, never>();
+
+    return eb
+      .selectFrom("series")
+      .select((eb) => [
+        "series.name",
+        jsonObjectFrom(Type.getById(eb.ref("series.typeId")))
+          .$notNull()
+          .as("type"),
+      ])
+      .whereRef("id", "=", seriesId);
+  },
 };

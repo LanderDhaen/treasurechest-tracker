@@ -1,7 +1,7 @@
 "use client";
 
 import { formatDate } from "@/lib/utils";
-import GiftBadge from "./gift-badge";
+import GiftBadge from "./event-type-badge";
 import StatusBadge from "./status-badge";
 import {
   Table,
@@ -14,6 +14,7 @@ import {
 import { useRouter } from "next/navigation";
 import { formatEventName } from "@/lib/event";
 import { EventStatus } from "@/constants/event";
+import EventTypeBadge from "./event-type-badge";
 
 interface EventTableProps {
   events: {
@@ -25,7 +26,9 @@ interface EventTableProps {
     status: EventStatus;
     series: {
       name: string;
-      isGift: boolean;
+      type: {
+        name: string;
+      };
     };
   }[];
 }
@@ -44,6 +47,7 @@ export default function EventTable({ events }: EventTableProps) {
           <TableRow>
             <TableHead className="font-bold w-24">Code</TableHead>
             <TableHead className="font-bold w-24">Status</TableHead>
+            <TableHead className="font-bold w-24">Type</TableHead>
             <TableHead className="font-bold">Name</TableHead>
             <TableHead className="font-bold">Start Date</TableHead>
             <TableHead className="font-bold">End Date</TableHead>
@@ -69,10 +73,10 @@ export default function EventTable({ events }: EventTableProps) {
                   <StatusBadge status={event.status} />
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-2">
-                    {formatEventName(event.series.name, event.edition)}
-                    <GiftBadge isGift={event.series.isGift} />
-                  </div>
+                  <EventTypeBadge type={event.series.type} />
+                </TableCell>
+                <TableCell>
+                  {formatEventName(event.series.name, event.edition)}
                 </TableCell>
                 <TableCell>{formatDate(event.startDate)}</TableCell>
                 <TableCell>{formatDate(event.endDate)}</TableCell>

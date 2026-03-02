@@ -4,6 +4,7 @@ import { ChestSearchParams } from "@/schemas/chest";
 import { FilterConfig } from "@/types/common";
 import { expressionBuilder, sql } from "kysely";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
+import { Series } from "./series";
 
 export const getTotalChests = async (filters: FilterConfig) => {
   const result = await db
@@ -103,12 +104,7 @@ export const getAllChests = async ({
           .selectFrom("event")
           .select([
             "event.edition",
-            jsonObjectFrom(
-              eb
-                .selectFrom("series")
-                .select(["series.name"])
-                .whereRef("series.id", "=", "event.seriesId"),
-            )
+            jsonObjectFrom(Series.getById(eb.ref("event.seriesId")))
               .$notNull()
               .as("series"),
           ])

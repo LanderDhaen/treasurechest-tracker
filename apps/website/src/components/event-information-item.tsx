@@ -5,11 +5,11 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import StatusBadge from "./status-badge";
-import GiftBadge from "./gift-badge";
 import { formatDate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { EventStatus } from "@/constants/event";
 import { formatEventName } from "@/lib/event";
+import EventTypeBadge from "./event-type-badge";
 
 interface EventInformationItemProps {
   event: {
@@ -22,7 +22,9 @@ interface EventInformationItemProps {
     status: EventStatus;
     series: {
       name: string;
-      isGift: boolean;
+      type: {
+        name: string;
+      };
     };
   };
 }
@@ -39,7 +41,7 @@ export default function EventInformationItem({
         <ItemDescription className="flex gap-2 items-center">
           <span className="italic">#{event.code}</span>
           <StatusBadge status={event.status} />
-          <GiftBadge isGift={event.series.isGift} />
+          <EventTypeBadge type={event.series.type} />
           <Badge variant="secondary">
             {event.maxChests == 1 ? "1 Chest" : `${event.maxChests} Chests`}
           </Badge>

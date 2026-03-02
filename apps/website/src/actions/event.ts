@@ -7,6 +7,7 @@ import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 import { withFilteredAccounts } from "./account";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
+import { Series } from "./series";
 
 export const getTotalEvents = async () => {
   const result = await db
@@ -118,12 +119,7 @@ export const getAllEvents = async ({
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
-      jsonObjectFrom(
-        eb
-          .selectFrom("series")
-          .select(["series.name"])
-          .whereRef("series.id", "=", "event.seriesId"),
-      )
+      jsonObjectFrom(Series.getById(eb.ref("event.seriesId")))
         .$notNull()
         .as("series"),
     ])
@@ -150,12 +146,7 @@ export const getEventByCode = async (code: string) => {
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
-      jsonObjectFrom(
-        eb
-          .selectFrom("series")
-          .select(["series.name"])
-          .whereRef("series.id", "=", "event.seriesId"),
-      )
+      jsonObjectFrom(Series.getById(eb.ref("event.seriesId")))
         .$notNull()
         .as("series"),
     ])
