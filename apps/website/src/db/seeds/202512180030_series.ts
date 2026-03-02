@@ -2,10 +2,10 @@ import { Kysely } from "kysely";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const seed = async (db: Kysely<any>) => {
-  await db.deleteFrom("event").execute();
+  await db.deleteFrom("series").execute();
 
   await db
-    .insertInto("event")
+    .insertInto("series")
     .values([
       {
         createdAt: "2025-12-18 00:30:00",

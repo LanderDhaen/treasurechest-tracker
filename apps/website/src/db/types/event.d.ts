@@ -8,12 +8,12 @@ import {
 
 export interface EventTable {
   id: Generated<number>;
-  createdAt: ColumnType<Date>;
-  updatedAt: ColumnType<Date>;
-  isActive: ColumnType<boolean>;
-  name: ColumnType<string>;
+  edition: ColumnType<number>;
   code: ColumnType<string>;
-  isGift: ColumnType<boolean>;
+  startDate: ColumnType<Date>;
+  endDate: ColumnType<Date>;
+  maxChests: ColumnType<number>;
+  seriesId: ColumnType<number>;
 }
 
 export type Event = Selectable<EventTable>;

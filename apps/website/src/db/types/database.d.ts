@@ -5,13 +5,13 @@ import { ChestTable } from "./chest";
 import { RarityTable } from "./rarity";
 import { CategoryTable } from "./category";
 import { RewardTable } from "./reward";
-import { EditionTable } from "./edition";
+import { SeriesTable } from "./series";
 
 export interface Database {
   clan: ClanTable;
   account: AccountTable;
+  series: SeriesTable;
   event: EventTable;
-  edition: EditionTable;
   rarity: RarityTable;
   category: CategoryTable;
   reward: RewardTable;
