@@ -18,14 +18,14 @@ const chartConfig = {
   Legendary: { label: "Legendary", color: "#facc15" },
 } satisfies ChartConfig;
 
-interface ChestCountRarityChartProps {
+interface RarityChartProps {
   rarities: {
     name: string;
     count: number;
   }[];
 }
 
-export default function RarityChart({ rarities }: ChestCountRarityChartProps) {
+export default function RarityChart({ rarities }: RarityChartProps) {
   return (
     <ChartContainer config={chartConfig}>
       <PieChart>

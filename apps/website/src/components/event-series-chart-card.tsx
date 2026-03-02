@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
 import { getChestCountPerSeries } from "@/actions/series";
-import SeriesChart from "./event-series-chart";
+import EventSeriesChart from "./event-series-chart";
 
 interface EventSeriesChartCardProps {
   filters: FilterConfig;
@@ -27,7 +27,7 @@ export default async function EventSeriesChartCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <SeriesChart series={series} />
+        <EventSeriesChart series={series} />
       </CardContent>
     </Card>
   );

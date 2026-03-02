@@ -19,7 +19,7 @@ const chartConfig = {
   count: { label: "Opened", color: "var(--primary)" },
 } satisfies ChartConfig;
 
-interface ChestCountAccountChartProps {
+interface AccountChartProps {
   accounts: {
     name: string;
     count: number;
@@ -30,9 +30,7 @@ interface ChestCountAccountChartProps {
   }[];
 }
 
-export default function AccountChart({
-  accounts,
-}: ChestCountAccountChartProps) {
+export default function AccountChart({ accounts }: AccountChartProps) {
   const chartData = accounts.map(({ name, rarities, count }) => ({
     name,
     ...Object.fromEntries(

@@ -19,7 +19,7 @@ const chartConfig = {
   count: { label: "Opened", color: "var(--primary)" },
 } satisfies ChartConfig;
 
-interface ChestCountRewardChartProps {
+interface RewardChartProps {
   rewards: {
     name: string;
     count: number;
@@ -30,7 +30,7 @@ interface ChestCountRewardChartProps {
   }[];
 }
 
-export default function RewardChart({ rewards }: ChestCountRewardChartProps) {
+export default function RewardChart({ rewards }: RewardChartProps) {
   const chartData = rewards.map(({ name, rarities, count }) => ({
     name,
     ...Object.fromEntries(

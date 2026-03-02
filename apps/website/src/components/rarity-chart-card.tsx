@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import ChestCountRarityChart from "./rarity-chart";
 import { FilterConfig } from "@/types/common";
+import RarityChart from "./rarity-chart";
 
 interface RarityChartCardProps {
   filters: FilterConfig;
@@ -27,7 +27,7 @@ export default async function RarityChartCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChestCountRarityChart rarities={rarities} />
+        <RarityChart rarities={rarities} />
       </CardContent>
     </Card>
   );

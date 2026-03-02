@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
 import { getChestCountPerReward } from "@/actions/reward";
-import ChestCountRewardChart from "./reward-chart";
+import RewardChart from "./reward-chart";
 
 interface RewardChartCardProps {
   filters: FilterConfig;
@@ -27,7 +27,7 @@ export default async function RewardChartCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChestCountRewardChart rewards={rewards} />
+        <RewardChart rewards={rewards} />
       </CardContent>
     </Card>
   );

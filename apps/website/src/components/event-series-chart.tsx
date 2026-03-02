@@ -19,7 +19,7 @@ const chartConfig = {
   count: { label: "Opened", color: "var(--primary)" },
 } satisfies ChartConfig;
 
-interface ChestCountSeriesChartProps {
+interface SeriesChartProps {
   series: {
     name: string;
     count: number;
@@ -30,9 +30,7 @@ interface ChestCountSeriesChartProps {
   }[];
 }
 
-export default function EventSeriesChart({
-  series,
-}: ChestCountSeriesChartProps) {
+export default function EventSeriesChart({ series }: SeriesChartProps) {
   const chartData = series.map(({ name, rarities, count }) => ({
     name,
     ...Object.fromEntries(
