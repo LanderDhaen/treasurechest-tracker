@@ -18,14 +18,12 @@ interface ChestCountEventTableProps {
     name: string;
     isGift: boolean;
     maxChests: number;
-    count: number;
+    openedChests: number;
   }[];
-  accountCount: number;
 }
 
 export default function EventProgressTable({
   events,
-  accountCount,
 }: ChestCountEventTableProps) {
   return (
     <div className="rounded-md border overflow-hidden">
@@ -54,8 +52,8 @@ export default function EventProgressTable({
 
               <TableCell>
                 <EventProgress
-                  count={event.count}
-                  maxChests={event.maxChests * accountCount}
+                  openedChests={event.openedChests}
+                  maxChests={event.maxChests}
                 />
               </TableCell>
             </TableRow>

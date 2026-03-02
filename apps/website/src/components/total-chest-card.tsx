@@ -17,11 +17,7 @@ interface TotalChestCardProps {
 
 export default async function TotalChestCard({ filters }: TotalChestCardProps) {
   const actualChestCount = await getTotalChests(filters);
-  const possibleChestCount = await getPossibleChestCount();
-
-  // If accountId filter is applied, we can assume there's only 1 account. Otherwise, we need to get the total account count for the progress calculation in the table.
-
-  const accountCount = filters.accountId ? 1 : await getTotalAccounts();
+  const possibleChestCount = await getPossibleChestCount(filters);
 
   return (
     <Card className="shadow-md">
@@ -30,11 +26,8 @@ export default async function TotalChestCard({ filters }: TotalChestCardProps) {
         <CardTitle className="text-2xl">{actualChestCount}</CardTitle>
       </CardHeader>
       <CardFooter className="text-sm text-muted-foreground">
-        out of {possibleChestCount * accountCount} possible chests・
-        {calculatePercentage(
-          actualChestCount,
-          possibleChestCount * accountCount,
-        )}
+        out of {possibleChestCount} possible chests・
+        {calculatePercentage(actualChestCount, possibleChestCount)}
       </CardFooter>
     </Card>
   );

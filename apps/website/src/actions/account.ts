@@ -3,6 +3,8 @@ import { AccountSearchParams } from "@/schemas/account";
 import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
+import { expressionBuilder } from "kysely";
+import { Database } from "@/db/types/database";
 
 export const getTotalAccounts = async () => {
   const result = await db
@@ -136,4 +138,18 @@ export const getChestCountPerAccount = async (filters: FilterConfig) => {
     .execute();
 
   return accounts;
+};
+
+export const withFilteredAccounts = (filters: FilterConfig) => {
+  const eb = expressionBuilder<Database>();
+
+  let query = eb.selectFrom("account");
+
+  const { accountId } = filters;
+
+  if (accountId) {
+    query = query.where("account.id", "=", accountId);
+  }
+
+  return query.selectAll();
 };

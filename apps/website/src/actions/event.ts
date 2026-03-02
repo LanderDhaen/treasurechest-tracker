@@ -5,6 +5,7 @@ import { EventSearchParams } from "@/schemas/event";
 import { Database } from "@/db/types/database";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
+import { withFilteredAccounts } from "./account";
 
 export const getTotalEvents = async () => {
   const result = await db
@@ -15,11 +16,19 @@ export const getTotalEvents = async () => {
   return result.total;
 };
 
-export const getPossibleChestCount = async () => {
+export const getPossibleChestCount = async (filters: FilterConfig) => {
   const result = await db
+    .with("filtered_account", () => withFilteredAccounts(filters))
     .selectFrom("event")
-    .where("event.isActive", "=", true)
-    .select((eb) => eb.fn.sum<number>("event.maxChests").as("total"))
+    .select((eb) =>
+      eb(
+        eb.fn.sum<number>("event.maxChests"),
+        "*",
+        eb
+          .selectFrom("filtered_account")
+          .select(eb.fn.countAll<number>().as("count")),
+      ).as("total"),
+    )
     .executeTakeFirstOrThrow();
   return result.total;
 };
@@ -137,17 +146,24 @@ export const getEventByCode = async (code: string) => {
 export const getChestCountPerEvent = async (filters: FilterConfig) => {
   const events = await db
     .with("filtered_chest", () => withFilteredChests(filters))
+    .with("filtered_account", () => withFilteredAccounts(filters))
     .selectFrom("event")
     .leftJoin("filtered_chest", "filtered_chest.eventId", "event.id")
     .select((eb) => [
       "event.name",
       "event.code",
       "event.isGift",
-      "event.maxChests",
+      eb(
+        "event.maxChests",
+        "*",
+        eb
+          .selectFrom("filtered_account")
+          .select(eb.fn.countAll<number>().as("count")),
+      ).as("maxChests"),
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
-      eb.fn.count<number>("filtered_chest.id").as("count"),
+      eb.fn.count<number>("filtered_chest.id").as("openedChests"),
     ])
     .groupBy([
       "event.name",

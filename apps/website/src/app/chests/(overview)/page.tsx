@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { SORT_OPTIONS } from "@/constants/chest";
 import { chestSearchParamsSchema } from "@/schemas/chest";
+import { FilterConfig } from "@/types/common";
 
 export default async function Page({
   searchParams,
@@ -30,7 +31,9 @@ export default async function Page({
     direction,
   });
 
-  const count = await getTotalChests();
+  const filters = {} satisfies FilterConfig;
+
+  const count = await getTotalChests(filters);
 
   return (
     <Card className="shadow-md">

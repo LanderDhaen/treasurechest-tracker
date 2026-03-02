@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
 import { getChestCountPerEvent } from "@/actions/event";
-import { getTotalAccounts } from "@/actions/account";
 import EventProgressTable from "./event-progress-table";
 
 export interface EventProgressCardProps {
@@ -19,10 +18,6 @@ export default async function EventProgressCard({
 }: EventProgressCardProps) {
   const events = await getChestCountPerEvent(filters);
 
-  // If accountId filter is applied, we can assume there's only 1 account. Otherwise, we need to get the total account count for the progress calculation in the table.
-
-  const accountCount = filters.accountId ? 1 : await getTotalAccounts();
-
   return (
     <Card className="shadow-md">
       <CardHeader>
@@ -32,7 +27,7 @@ export default async function EventProgressCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <EventProgressTable events={events} accountCount={accountCount} />
+        <EventProgressTable events={events} />
       </CardContent>
     </Card>
   );
