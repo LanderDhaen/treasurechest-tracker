@@ -30,14 +30,14 @@ export default async function Page({
     direction,
   });
 
-  const count = await getTotalEvents();
+  const totalEvents = await getTotalEvents();
 
   return (
     <Card className="shadow-md">
       <CardHeader>
         <CardTitle>Events</CardTitle>
         <CardDescription>
-          {`Currently tracking ${count} event${count !== 1 ? "s" : ""}.`}
+          {`Currently tracking ${totalEvents} event${totalEvents !== 1 ? "s" : ""}.`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">

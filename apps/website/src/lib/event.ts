@@ -12,3 +12,7 @@ export function colorEventStatus(status: EventStatus) {
       return "bg-gray-50 text-gray-600";
   }
 }
+
+export function formatName(name: string, edition: number) {
+  return edition > 1 ? `${name} ${edition}` : name;
+}

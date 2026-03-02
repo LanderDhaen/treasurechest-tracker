@@ -6,13 +6,14 @@ import { Database } from "@/db/types/database";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 import { withFilteredAccounts } from "./account";
+import { jsonObjectFrom } from "kysely/helpers/postgres";
 
 export const getTotalEvents = async () => {
   const result = await db
     .selectFrom("event")
-    .where("event.isActive", "=", true)
     .select((eb) => eb.fn.countAll<number>().as("total"))
     .executeTakeFirstOrThrow();
+
   return result.total;
 };
 
@@ -40,13 +41,15 @@ export const getAllEvents = async ({
   sortBy,
   direction,
 }: EventSearchParams) => {
-  let query = db.selectFrom("event").where("event.isActive", "=", true);
+  let query = db
+    .selectFrom("event")
+    .innerJoin("series", "series.id", "event.seriesId");
 
   // Filtering
 
   if (search) {
     query = query.where((eb) =>
-      eb.or([eb("event.name", "ilike", `%${search}%`)]),
+      eb.or([eb("series.name", "ilike", `%${search}%`)]),
     );
   }
 
@@ -80,7 +83,9 @@ export const getAllEvents = async ({
   }
 
   if (sortBy === "name") {
-    query = query.orderBy("event.name", direction);
+    query = query
+      .orderBy("series.name", direction)
+      .orderBy("event.edition", direction);
   }
 
   if (sortBy === "startDate") {
@@ -103,15 +108,22 @@ export const getAllEvents = async ({
 
   const events = await query
     .select((eb) => [
-      "event.name",
       "event.code",
+      "event.edition",
       "event.startDate",
       "event.endDate",
       "event.maxChests",
-      "event.isGift",
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
+      jsonObjectFrom(
+        eb
+          .selectFrom("series")
+          .select(["series.name", "series.isGift"])
+          .whereRef("series.id", "=", "event.seriesId"),
+      )
+        .$notNull()
+        .as("series"),
     ])
     .execute();
 
@@ -133,7 +145,6 @@ export const getEventByCode = async (code: string) => {
       "event.startDate",
       "event.endDate",
       "event.maxChests",
-      "event.isGift",
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),

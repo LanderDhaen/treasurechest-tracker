@@ -11,11 +11,23 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { EventTableEntry } from "@/types/event";
 import { useRouter } from "next/navigation";
+import { formatName } from "@/lib/event";
+import { EventStatus } from "@/constants/event";
 
 interface EventTableProps {
-  events: EventTableEntry[];
+  events: {
+    code: string;
+    edition: number;
+    startDate: Date;
+    endDate: Date;
+    maxChests: number;
+    status: EventStatus;
+    series: {
+      name: string;
+      isGift: boolean;
+    };
+  }[];
 }
 
 export default function EventTable({ events }: EventTableProps) {
@@ -58,8 +70,8 @@ export default function EventTable({ events }: EventTableProps) {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
-                    {event.name}
-                    <GiftBadge isGift={event.isGift} />
+                    {formatName(event.series.name, event.edition)}
+                    <GiftBadge isGift={event.series.isGift} />
                   </div>
                 </TableCell>
                 <TableCell>{formatDate(event.startDate)}</TableCell>

@@ -1,10 +1,6 @@
 import * as z from "zod";
 import { paginationSchema, searchSchema } from "./common";
-import {
-  SORT_OPTIONS,
-  DEFAULT_SORT_DIRECTION,
-  DEFAULT_SORT_OPTION,
-} from "@/constants/event";
+import { DEFAULT_SORT_DIRECTION, DEFAULT_SORT_OPTION } from "@/constants/event";
 
 export const eventSearchParamsSchema = z.object({
   ...searchSchema.shape,
