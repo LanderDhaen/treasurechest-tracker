@@ -10,6 +10,7 @@ import EventProgressCard from "./event-progress-card";
 import RarityChartCard from "@/components/rarity-chart-card";
 import RewardChartCard from "@/components/reward-chart-card";
 import AccountChartCard from "@/components/account-chart-card";
+import SeriesChartCard from "./series-chart-card";
 
 interface DashboardProps {
   filters: FilterConfig;
@@ -98,6 +99,7 @@ export default function Dashboard({
           <EventProgressCard filters={filters} />
         </Suspense>
       )}
+      <SeriesChartCard filters={filters} />
     </div>
   );
 }
