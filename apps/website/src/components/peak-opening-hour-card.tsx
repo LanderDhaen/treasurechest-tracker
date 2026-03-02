@@ -1,3 +1,4 @@
+import { getPeakOpeningHourData, getTotalChests } from "@/actions/chest";
 import {
   Card,
   CardHeader,
@@ -6,19 +7,18 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { calculatePercentage, formatHourRange } from "@/lib/utils";
+import { FilterConfig } from "@/types/common";
 
 interface PeakOpeningHourCardProps {
-  peakOpeningHourData?: {
-    hour: number;
-    count: number;
-  };
-  totalChests: number;
+  filters: FilterConfig;
 }
 
-export default function PeakOpeningHourCard({
-  peakOpeningHourData,
-  totalChests,
+export default async function PeakOpeningHourCard({
+  filters,
 }: PeakOpeningHourCardProps) {
+  const peakOpeningHourData = await getPeakOpeningHourData(filters);
+  const totalChests = await getTotalChests(filters);
+
   if (!peakOpeningHourData) {
     return (
       <Card className="shadow-md">

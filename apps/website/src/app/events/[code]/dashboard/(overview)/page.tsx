@@ -1,22 +1,8 @@
-import { getChestCountPerAccount, getTotalAccounts } from "@/actions/account";
-import { getChestCountPerCategory } from "@/actions/category";
-import {
-  getLatestChest,
-  getPeakOpeningHourData,
-  getTotalChests,
-} from "@/actions/chest";
 import { getEventByCode } from "@/actions/event";
-import { getChestCountPerRarity } from "@/actions/rarity";
-import { getChestCountPerReward } from "@/actions/reward";
-import ChestCountAccountChart from "@/components/chest-count-account-chart";
-import ChestCountCategoryChart from "@/components/chest-count-category-chart";
-import ChestCountRarityChart from "@/components/chest-count-rarity-chart";
-import ChestCountRewardChart from "@/components/chest-count-reward-chart";
-import LatestChestCard from "@/components/latest-chest-card";
-import PeakOpeningHourCard from "@/components/peak-opening-hour-card";
-import TotalChestCard from "@/components/total-chest-card";
 import EventInformationItem from "@/components/event-information-item";
-import EventNotFound from "@/components/event-not-found";
+import { FilterConfig } from "@/types/common";
+import { notFound } from "next/navigation";
+import Dashboard from "@/components/dashboard";
 
 export default async function Page({
   params,
@@ -28,52 +14,17 @@ export default async function Page({
   const event = await getEventByCode(code);
 
   if (!event) {
-    return <EventNotFound />;
+    return notFound();
   }
 
-  const chestCount = await getTotalChests({
+  const filters = {
     eventId: event.id,
-  });
-  const accountCount = await getTotalAccounts();
-  const chest = await getLatestChest({
-    eventId: event.id,
-  });
-  const peakOpeningHourData = await getPeakOpeningHourData({
-    eventId: event.id,
-  });
-  const rarities = await getChestCountPerRarity({
-    eventId: event.id,
-  });
-  const categories = await getChestCountPerCategory({
-    eventId: event.id,
-  });
-  const rewards = await getChestCountPerReward({
-    eventId: event.id,
-  });
-  const accounts = await getChestCountPerAccount({
-    eventId: event.id,
-  });
+  } satisfies FilterConfig;
 
   return (
-    <div className="grid grid-cols-1 gap-4">
+    <div className="flex flex-col gap-4">
       <EventInformationItem event={event} />
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <TotalChestCard
-          actualChestCount={chestCount}
-          possibleChestCount={event.maxChests * accountCount}
-        />
-        <LatestChestCard chest={chest} />
-        <PeakOpeningHourCard
-          peakOpeningHourData={peakOpeningHourData}
-          totalChests={chestCount}
-        />
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <ChestCountRarityChart rarities={rarities} />
-        <ChestCountCategoryChart categories={categories} />
-      </div>
-      <ChestCountRewardChart rewards={rewards} />
-      <ChestCountAccountChart accounts={accounts} />
+      <Dashboard filters={filters} hideEventCard />
     </div>
   );
 }

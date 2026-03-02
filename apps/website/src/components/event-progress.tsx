@@ -1,20 +1,20 @@
 import { Progress } from "./ui/progress";
 
 interface EventProgressProps {
-  count: number;
+  openedChests: number;
   maxChests: number;
 }
 
 export default function EventProgress({
-  count,
+  openedChests,
   maxChests,
 }: EventProgressProps) {
-  const percentage = (count / maxChests) * 100;
+  const percentage = (openedChests / maxChests) * 100;
 
   return (
     <>
       <div className="flex justify-between">
-        {count} / {maxChests}
+        {openedChests} / {maxChests}
         <span className="text-muted-foreground">{percentage.toFixed(0)}%</span>
       </div>
       <Progress value={percentage} />

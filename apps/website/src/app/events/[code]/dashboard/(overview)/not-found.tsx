@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/empty";
 import Link from "next/link";
 
-export default function EventNotFound() {
+export default function NotFound() {
   return (
     <Empty>
       <EmptyHeader>

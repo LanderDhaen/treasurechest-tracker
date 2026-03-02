@@ -1,24 +1,22 @@
-import SectionCardsSkeleton from "@/components/skeletons/statistic-card-skeleton";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-interface ChartSkeletonProps {
+interface ChartCardSkeletonProps {
   title: string;
   description: string;
 }
 
-export default function ChartSkeleton({
+export default function ChartCardSkeleton({
   title,
   description,
-}: ChartSkeletonProps) {
+}: ChartCardSkeletonProps) {
   return (
     <Card className="shadow-md">
       <CardHeader>

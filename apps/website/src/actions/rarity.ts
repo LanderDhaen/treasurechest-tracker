@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { withFilteredChests } from "./chest";
 
-export const getChestCountPerRarity = async (filters?: {
+export const getChestCountPerRarity = async (filters: {
   accountId?: number;
   eventId?: number;
 }) => {

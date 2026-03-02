@@ -1,3 +1,6 @@
+import { getTotalAccounts } from "@/actions/account";
+import { getTotalChests } from "@/actions/chest";
+import { getPossibleChestCount } from "@/actions/event";
 import {
   Card,
   CardHeader,
@@ -6,16 +9,16 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { calculatePercentage } from "@/lib/utils";
+import { FilterConfig } from "@/types/common";
 
 interface TotalChestCardProps {
-  actualChestCount: number;
-  possibleChestCount: number;
+  filters: FilterConfig;
 }
 
-export default function TotalChestCard({
-  actualChestCount,
-  possibleChestCount,
-}: TotalChestCardProps) {
+export default async function TotalChestCard({ filters }: TotalChestCardProps) {
+  const actualChestCount = await getTotalChests(filters);
+  const possibleChestCount = await getPossibleChestCount(filters);
+
   return (
     <Card className="shadow-md">
       <CardHeader>
