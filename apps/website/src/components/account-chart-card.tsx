@@ -8,27 +8,29 @@ import {
 import { Suspense } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { FilterConfig } from "@/types/common";
-import { getChestCountPerReward } from "@/actions/reward";
-import ChestCountRewardChart from "./reward-chart";
+import { getChestCountPerAccount } from "@/actions/account";
+import AccountChart from "./account-chart";
 
-interface RewardCardProps {
+interface AccountChartCardProps {
   filters: FilterConfig;
 }
 
-export default async function RewardCard({ filters }: RewardCardProps) {
-  const rewards = await getChestCountPerReward(filters);
+export default async function AccountChartCard({
+  filters,
+}: AccountChartCardProps) {
+  const accounts = await getChestCountPerAccount(filters);
 
   return (
     <Card className="shadow-md">
       <CardHeader>
-        <CardTitle>Rewards</CardTitle>
+        <CardTitle>Accounts</CardTitle>
         <CardDescription>
-          Shows the number of treasure chest opened per reward
+          Shows the number of treasure chest opened per account
         </CardDescription>
       </CardHeader>
       <CardContent>
         <Suspense fallback={<Skeleton className="aspect-video" />}>
-          <ChestCountRewardChart rewards={rewards} />
+          <AccountChart accounts={accounts} />
         </Suspense>
       </CardContent>
     </Card>

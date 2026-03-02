@@ -1,15 +1,17 @@
 import LatestChestCard from "@/components/latest-chest-card";
 import PeakOpeningHourCard from "@/components/peak-opening-hour-card";
 import TotalChestCard from "@/components/total-chest-card";
-import RarityCard from "@/components/rarity-card";
 import { FilterConfig } from "@/types/common";
-import CategoryCard from "@/components/category-card";
-import RewardCard from "@/components/reward-card";
-import AccountCard from "@/components/account-card";
-import EventCard from "./event-card";
+import RewardCard from "@/components/reward-chart-card";
+import AccountCard from "@/components/account-chart-card";
 import { Suspense } from "react";
 import StatisticCardSkeleton from "./skeletons/statistic-card-skeleton";
 import ChartCardSkeleton from "./skeletons/chart-card-skeleton";
+import CategoryChartCard from "@/components/category-chart-card";
+import EventProgressCard from "./event-progress-card";
+import RarityChartCard from "@/components/rarity-chart-card";
+import RewardChartCard from "@/components/reward-chart-card";
+import AccountChartCard from "@/components/account-chart-card";
 
 interface DashboardProps {
   filters: FilterConfig;
@@ -51,7 +53,7 @@ export default function Dashboard({
             />
           }
         >
-          <RarityCard filters={filters} />
+          <RarityChartCard filters={filters} />
         </Suspense>
         <Suspense
           fallback={
@@ -61,7 +63,7 @@ export default function Dashboard({
             />
           }
         >
-          <CategoryCard filters={filters} />
+          <CategoryChartCard filters={filters} />
         </Suspense>
       </div>
       <Suspense
@@ -72,7 +74,7 @@ export default function Dashboard({
           />
         }
       >
-        <RewardCard filters={filters} />
+        <RewardChartCard filters={filters} />
       </Suspense>
       {!hideAccountCard && (
         <Suspense
@@ -83,7 +85,7 @@ export default function Dashboard({
             />
           }
         >
-          <AccountCard filters={filters} />
+          <AccountChartCard filters={filters} />
         </Suspense>
       )}
       {!hideEventCard && (
@@ -95,7 +97,7 @@ export default function Dashboard({
             />
           }
         >
-          <EventCard filters={filters} />
+          <EventProgressCard filters={filters} />
         </Suspense>
       )}
     </div>

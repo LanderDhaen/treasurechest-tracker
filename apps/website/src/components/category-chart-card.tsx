@@ -11,11 +11,13 @@ import ChestCountCategoryChart from "./category-chart";
 import { Suspense } from "react";
 import { Skeleton } from "./ui/skeleton";
 
-export interface CategoryCardProps {
+export interface CategoryChartCardProps {
   filters: FilterConfig;
 }
 
-export default async function CategoryCard({ filters }: CategoryCardProps) {
+export default async function CategoryChartCard({
+  filters,
+}: CategoryChartCardProps) {
   const categories = await getChestCountPerCategory(filters);
 
   return (

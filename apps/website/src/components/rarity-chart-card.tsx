@@ -1,3 +1,4 @@
+import { getChestCountPerRarity } from "@/actions/rarity";
 import {
   Card,
   CardContent,
@@ -5,30 +6,31 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ChestCountRarityChart from "./rarity-chart";
 import { Suspense } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { FilterConfig } from "@/types/common";
-import { getChestCountPerAccount } from "@/actions/account";
-import AccountChart from "./account-chart";
 
-interface AccountCardProps {
+interface RarityChartCardProps {
   filters: FilterConfig;
 }
 
-export default async function AccountCard({ filters }: AccountCardProps) {
-  const accounts = await getChestCountPerAccount(filters);
+export default async function RarityChartCard({
+  filters,
+}: RarityChartCardProps) {
+  const rarities = await getChestCountPerRarity(filters);
 
   return (
     <Card className="shadow-md">
       <CardHeader>
-        <CardTitle>Accounts</CardTitle>
+        <CardTitle>Rarities</CardTitle>
         <CardDescription>
-          Shows the number of treasure chest opened per account
+          Shows the number of treasure chest opened per rarity
         </CardDescription>
       </CardHeader>
       <CardContent>
         <Suspense fallback={<Skeleton className="aspect-video" />}>
-          <AccountChart accounts={accounts} />
+          <ChestCountRarityChart rarities={rarities} />
         </Suspense>
       </CardContent>
     </Card>

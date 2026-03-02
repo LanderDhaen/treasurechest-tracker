@@ -12,11 +12,13 @@ import { getChestCountPerEvent } from "@/actions/event";
 import { getTotalAccounts } from "@/actions/account";
 import EventProgressTable from "./event-progress-table";
 
-export interface EventCardProps {
+export interface EventProgressCardProps {
   filters: FilterConfig;
 }
 
-export default async function EventCard({ filters }: EventCardProps) {
+export default async function EventProgressCard({
+  filters,
+}: EventProgressCardProps) {
   const events = await getChestCountPerEvent(filters);
 
   // If accountId filter is applied, we can assume there's only 1 account. Otherwise, we need to get the total account count for the progress calculation in the table.
