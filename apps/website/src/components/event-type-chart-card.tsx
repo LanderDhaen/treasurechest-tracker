@@ -24,7 +24,7 @@ export default async function EventTypeChartCard({
       <CardHeader>
         <CardTitle>Types</CardTitle>
         <CardDescription>
-          Shows the number of treasure chest opened per type
+          Shows the number of treasure chests opened per type
         </CardDescription>
       </CardHeader>
       <CardContent>

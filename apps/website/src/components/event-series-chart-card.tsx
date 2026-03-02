@@ -24,7 +24,7 @@ export default async function EventSeriesChartCard({
       <CardHeader>
         <CardTitle>Series</CardTitle>
         <CardDescription>
-          Shows the number of treasure chest opened per series
+          Shows the number of treasure chests opened per series
         </CardDescription>
       </CardHeader>
       <CardContent>

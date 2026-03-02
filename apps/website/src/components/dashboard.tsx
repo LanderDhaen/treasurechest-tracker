@@ -48,7 +48,7 @@ export default function Dashboard({
           fallback={
             <ChartCardSkeleton
               title="Rarities"
-              description="Shows the number of treasure chest opened per rarity"
+              description="Shows the number of treasure chests opened per rarity"
             />
           }
         >
@@ -80,7 +80,7 @@ export default function Dashboard({
           fallback={
             <ChartCardSkeleton
               title="Accounts"
-              description="Shows the number of treasure chest opened per account"
+              description="Shows the number of treasure chests opened per account"
             />
           }
         >
@@ -93,7 +93,7 @@ export default function Dashboard({
             fallback={
               <ChartCardSkeleton
                 title="Series"
-                description="Shows the number of treasure chest opened per series"
+                description="Shows the number of treasure chests opened per series"
               />
             }
           >
@@ -103,7 +103,7 @@ export default function Dashboard({
             fallback={
               <ChartCardSkeleton
                 title="Types"
-                description="Shows the number of treasure chest opened per type"
+                description="Shows the number of treasure chests opened per type"
               />
             }
           >

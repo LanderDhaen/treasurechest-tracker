@@ -23,7 +23,7 @@ export default async function RarityChartCard({
       <CardHeader>
         <CardTitle>Rarities</CardTitle>
         <CardDescription>
-          Shows the number of treasure chest opened per rarity
+          Shows the number of treasure chests opened per rarity
         </CardDescription>
       </CardHeader>
       <CardContent>

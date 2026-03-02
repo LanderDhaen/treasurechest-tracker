@@ -23,7 +23,7 @@ export default async function RewardChartCard({
       <CardHeader>
         <CardTitle>Rewards</CardTitle>
         <CardDescription>
-          Shows the number of treasure chest opened per reward
+          Shows the number of treasure chests opened per reward
         </CardDescription>
       </CardHeader>
       <CardContent>
