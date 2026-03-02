@@ -4,7 +4,7 @@ import {
   ItemDescription,
   ItemTitle,
 } from "@/components/ui/item";
-import StatusBadge from "./status-badge";
+import StatusBadge from "./event-status-badge";
 import { formatDate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { EventStatus } from "@/constants/event";

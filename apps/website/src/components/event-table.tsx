@@ -2,7 +2,7 @@
 
 import { formatDate } from "@/lib/utils";
 import GiftBadge from "./event-type-badge";
-import StatusBadge from "./status-badge";
+import StatusBadge from "./event-status-badge";
 import {
   Table,
   TableBody,
