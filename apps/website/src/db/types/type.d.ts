@@ -6,16 +6,14 @@ import {
   Updateable,
 } from "kysely";
 
-export interface SeriesTable {
+export interface TypeTable {
   id: Generated<number>;
   createdAt: ColumnType<Date>;
   updatedAt: ColumnType<Date>;
   isActive: ColumnType<boolean>;
   name: ColumnType<string>;
-  code: ColumnType<string>;
-  typeId: ColumnType<number>;
 }
 
-export type Series = Selectable<SeriesTable>;
-export type InsertableSeries = Insertable<SeriesTable>;
-export type UpdateableSeries = Updateable<SeriesTable>;
+export type Type = Selectable<TypeTable>;
+export type InsertableType = Insertable<TypeTable>;
+export type UpdateableType = Updateable<TypeTable>;

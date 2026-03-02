@@ -106,7 +106,7 @@ export const getAllChests = async ({
             jsonObjectFrom(
               eb
                 .selectFrom("series")
-                .select(["series.name", "series.isGift"])
+                .select(["series.name"])
                 .whereRef("series.id", "=", "event.seriesId"),
             )
               .$notNull()

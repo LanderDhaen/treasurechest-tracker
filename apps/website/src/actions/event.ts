@@ -121,7 +121,7 @@ export const getAllEvents = async ({
       jsonObjectFrom(
         eb
           .selectFrom("series")
-          .select(["series.name", "series.isGift"])
+          .select(["series.name"])
           .whereRef("series.id", "=", "event.seriesId"),
       )
         .$notNull()
@@ -153,7 +153,7 @@ export const getEventByCode = async (code: string) => {
       jsonObjectFrom(
         eb
           .selectFrom("series")
-          .select(["series.name", "series.isGift"])
+          .select(["series.name"])
           .whereRef("series.id", "=", "event.seriesId"),
       )
         .$notNull()
@@ -188,7 +188,7 @@ export const getChestCountPerEvent = async (filters: FilterConfig) => {
       jsonObjectFrom(
         eb
           .selectFrom("series")
-          .select(["series.name", "series.isGift"])
+          .select(["series.name"])
           .whereRef("series.id", "=", "event.seriesId"),
       )
         .$notNull()
