@@ -9,9 +9,9 @@ export const getTotalChests = async (filters: FilterConfig) => {
   const result = await db
     .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("filtered_chest")
-    .select((eb) => eb.fn.countAll<number>().as("count"))
+    .select((eb) => eb.fn.countAll<number>().as("totalChests"))
     .executeTakeFirstOrThrow();
-  return result.count;
+  return result.totalChests;
 };
 
 export const getAllChests = async ({

@@ -20,18 +20,20 @@ export const getTotalEvents = async () => {
 export const getPossibleChestCount = async (filters: FilterConfig) => {
   const result = await db
     .with("filtered_account", () => withFilteredAccounts(filters))
-    .selectFrom("event")
+    .with("filtered_event", () => withFilteredEvents(filters))
+    .selectFrom("filtered_event")
     .select((eb) =>
       eb(
-        eb.fn.sum<number>("event.maxChests"),
+        eb.fn.sum<number>("filtered_event.maxChests"),
         "*",
         eb
           .selectFrom("filtered_account")
           .select(eb.fn.countAll<number>().as("count")),
-      ).as("total"),
+      ).as("possibleChestCount"),
     )
     .executeTakeFirstOrThrow();
-  return result.total;
+
+  return result.possibleChestCount;
 };
 
 export const getAllEvents = async ({
@@ -205,6 +207,20 @@ export const getChestCountPerEvent = async (filters: FilterConfig) => {
     .execute();
 
   return events;
+};
+
+export const withFilteredEvents = (filters: FilterConfig) => {
+  const eb = expressionBuilder<Database>();
+
+  let query = eb.selectFrom("event");
+
+  const { eventId } = filters;
+
+  if (eventId) {
+    query = query.where("event.id", "=", eventId);
+  }
+
+  return query.selectAll();
 };
 
 export const deriveEventStatus = (

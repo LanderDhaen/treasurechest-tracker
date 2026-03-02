@@ -1,4 +1,3 @@
-import { getTotalAccounts } from "@/actions/account";
 import { getTotalChests } from "@/actions/chest";
 import { getPossibleChestCount } from "@/actions/event";
 import {
