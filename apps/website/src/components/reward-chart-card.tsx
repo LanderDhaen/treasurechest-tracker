@@ -5,8 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Suspense } from "react";
-import { Skeleton } from "./ui/skeleton";
 import { FilterConfig } from "@/types/common";
 import { getChestCountPerReward } from "@/actions/reward";
 import ChestCountRewardChart from "./reward-chart";
@@ -29,9 +27,7 @@ export default async function RewardChartCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Suspense fallback={<Skeleton className="aspect-video" />}>
-          <ChestCountRewardChart rewards={rewards} />
-        </Suspense>
+        <ChestCountRewardChart rewards={rewards} />
       </CardContent>
     </Card>
   );

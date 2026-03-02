@@ -2,8 +2,6 @@ import LatestChestCard from "@/components/latest-chest-card";
 import PeakOpeningHourCard from "@/components/peak-opening-hour-card";
 import TotalChestCard from "@/components/total-chest-card";
 import { FilterConfig } from "@/types/common";
-import RewardCard from "@/components/reward-chart-card";
-import AccountCard from "@/components/account-chart-card";
 import { Suspense } from "react";
 import StatisticCardSkeleton from "./skeletons/statistic-card-skeleton";
 import ChartCardSkeleton from "./skeletons/chart-card-skeleton";

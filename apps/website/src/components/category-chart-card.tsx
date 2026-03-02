@@ -8,8 +8,6 @@ import {
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
 import ChestCountCategoryChart from "./category-chart";
-import { Suspense } from "react";
-import { Skeleton } from "./ui/skeleton";
 
 export interface CategoryChartCardProps {
   filters: FilterConfig;
@@ -29,9 +27,7 @@ export default async function CategoryChartCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Suspense fallback={<Skeleton className="aspect-video" />}>
-          <ChestCountCategoryChart categories={categories} />
-        </Suspense>
+        <ChestCountCategoryChart categories={categories} />
       </CardContent>
     </Card>
   );

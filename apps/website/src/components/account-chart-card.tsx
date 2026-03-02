@@ -5,8 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Suspense } from "react";
-import { Skeleton } from "./ui/skeleton";
 import { FilterConfig } from "@/types/common";
 import { getChestCountPerAccount } from "@/actions/account";
 import AccountChart from "./account-chart";
@@ -29,9 +27,7 @@ export default async function AccountChartCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Suspense fallback={<Skeleton className="aspect-video" />}>
-          <AccountChart accounts={accounts} />
-        </Suspense>
+        <AccountChart accounts={accounts} />
       </CardContent>
     </Card>
   );

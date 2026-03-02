@@ -6,8 +6,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
-import { Suspense } from "react";
-import { Skeleton } from "./ui/skeleton";
 import { getChestCountPerEvent } from "@/actions/event";
 import { getTotalAccounts } from "@/actions/account";
 import EventProgressTable from "./event-progress-table";
@@ -34,9 +32,7 @@ export default async function EventProgressCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Suspense fallback={<Skeleton className="aspect-video" />}>
-          <EventProgressTable events={events} accountCount={accountCount} />
-        </Suspense>
+        <EventProgressTable events={events} accountCount={accountCount} />
       </CardContent>
     </Card>
   );

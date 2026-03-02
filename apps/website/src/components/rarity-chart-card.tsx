@@ -7,8 +7,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import ChestCountRarityChart from "./rarity-chart";
-import { Suspense } from "react";
-import { Skeleton } from "./ui/skeleton";
 import { FilterConfig } from "@/types/common";
 
 interface RarityChartCardProps {
@@ -29,9 +27,7 @@ export default async function RarityChartCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Suspense fallback={<Skeleton className="aspect-video" />}>
-          <ChestCountRarityChart rarities={rarities} />
-        </Suspense>
+        <ChestCountRarityChart rarities={rarities} />
       </CardContent>
     </Card>
   );
