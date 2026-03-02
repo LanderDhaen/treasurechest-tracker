@@ -140,14 +140,22 @@ export const getEventByCode = async (code: string) => {
     .where("event.code", "=", code)
     .select((eb) => [
       "event.id",
-      "event.name",
       "event.code",
+      "event.edition",
       "event.startDate",
       "event.endDate",
       "event.maxChests",
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
+      jsonObjectFrom(
+        eb
+          .selectFrom("series")
+          .select(["series.name", "series.isGift"])
+          .whereRef("series.id", "=", "event.seriesId"),
+      )
+        .$notNull()
+        .as("series"),
     ])
     .executeTakeFirst();
 
@@ -159,11 +167,17 @@ export const getChestCountPerEvent = async (filters: FilterConfig) => {
     .with("filtered_chest", () => withFilteredChests(filters))
     .with("filtered_account", () => withFilteredAccounts(filters))
     .selectFrom("event")
+    .innerJoin("series", "series.id", "event.seriesId")
     .leftJoin("filtered_chest", "filtered_chest.eventId", "event.id")
     .select((eb) => [
-      "event.name",
-      "event.code",
-      "event.isGift",
+      jsonObjectFrom(
+        eb
+          .selectFrom("series")
+          .select(["series.name", "series.isGift"])
+          .whereRef("series.id", "=", "event.seriesId"),
+      )
+        .$notNull()
+        .as("series"),
       eb(
         "event.maxChests",
         "*",
@@ -176,14 +190,7 @@ export const getChestCountPerEvent = async (filters: FilterConfig) => {
       ),
       eb.fn.count<number>("filtered_chest.id").as("openedChests"),
     ])
-    .groupBy([
-      "event.name",
-      "event.code",
-      "event.isGift",
-      "event.maxChests",
-      "event.startDate",
-      "event.endDate",
-    ])
+    .groupBy(["event.code", "event.startDate", "event.endDate"])
     .orderBy("event.startDate", "desc")
     .orderBy("event.endDate", "desc")
     .execute();

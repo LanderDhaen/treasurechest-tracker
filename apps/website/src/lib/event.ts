@@ -13,6 +13,6 @@ export function colorEventStatus(status: EventStatus) {
   }
 }
 
-export function formatName(name: string, edition: number) {
+export function formatEventName(name: string, edition: number) {
   return edition > 1 ? `${name} ${edition}` : name;
 }

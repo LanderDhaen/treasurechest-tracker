@@ -9,15 +9,21 @@ import GiftBadge from "./gift-badge";
 import { formatDate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { EventStatus } from "@/constants/event";
+import { formatEventName } from "@/lib/event";
 
 interface EventInformationItemProps {
   event: {
-    name: string;
+    id: number;
+    code: string;
+    edition: number;
     startDate: Date;
     endDate: Date;
     maxChests: number;
     status: EventStatus;
-    isGift: boolean;
+    series: {
+      name: string;
+      isGift: boolean;
+    };
   };
 }
 
@@ -27,10 +33,13 @@ export default function EventInformationItem({
   return (
     <Item className="p-0">
       <ItemContent>
-        <ItemTitle className="text-xl font-bold">{event.name}</ItemTitle>
-        <ItemDescription className="flex gap-2">
+        <ItemTitle className="text-xl font-bold">
+          {formatEventName(event.series.name, event.edition)}
+        </ItemTitle>
+        <ItemDescription className="flex gap-2 items-center">
+          <span className="italic">#{event.code}</span>
           <StatusBadge status={event.status} />
-          <GiftBadge isGift={event.isGift} />
+          <GiftBadge isGift={event.series.isGift} />
           <Badge variant="secondary">
             {event.maxChests == 1 ? "1 Chest" : `${event.maxChests} Chests`}
           </Badge>

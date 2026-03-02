@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "./ui/table";
 import { useRouter } from "next/navigation";
-import { formatName } from "@/lib/event";
+import { formatEventName } from "@/lib/event";
 import { EventStatus } from "@/constants/event";
 
 interface EventTableProps {
@@ -70,7 +70,7 @@ export default function EventTable({ events }: EventTableProps) {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
-                    {formatName(event.series.name, event.edition)}
+                    {formatEventName(event.series.name, event.edition)}
                     <GiftBadge isGift={event.series.isGift} />
                   </div>
                 </TableCell>
