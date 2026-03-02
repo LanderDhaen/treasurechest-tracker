@@ -10,15 +10,19 @@ import GiftBadge from "./gift-badge";
 import { EventStatus } from "@/constants/event";
 import StatusBadge from "./status-badge";
 import EventProgress from "./event-progress";
+import { formatEventName } from "@/lib/event";
 
 interface ChestCountEventTableProps {
   events: {
-    status: EventStatus;
     code: string;
-    name: string;
-    isGift: boolean;
+    status: EventStatus;
+    edition: number;
     maxChests: number;
     openedChests: number;
+    series: {
+      name: string;
+      isGift: boolean;
+    };
   }[];
 }
 
@@ -45,8 +49,8 @@ export default function EventProgressTable({
               </TableCell>
               <TableCell>
                 <div className="flex items-center gap-2">
-                  {event.name}
-                  <GiftBadge isGift={event.isGift} />
+                  {formatEventName(event.series.name, event.edition)}
+                  <GiftBadge isGift={event.series.isGift} />
                 </div>
               </TableCell>
 

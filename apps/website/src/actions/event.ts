@@ -170,6 +170,19 @@ export const getChestCountPerEvent = async (filters: FilterConfig) => {
     .innerJoin("series", "series.id", "event.seriesId")
     .leftJoin("filtered_chest", "filtered_chest.eventId", "event.id")
     .select((eb) => [
+      "event.code",
+      "event.edition",
+      deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
+        "status",
+      ),
+      eb(
+        "event.maxChests",
+        "*",
+        eb
+          .selectFrom("filtered_account")
+          .select(eb.fn.countAll<number>().as("count")),
+      ).as("maxChests"),
+      eb.fn.count<number>("filtered_chest.id").as("openedChests"),
       jsonObjectFrom(
         eb
           .selectFrom("series")
@@ -178,19 +191,15 @@ export const getChestCountPerEvent = async (filters: FilterConfig) => {
       )
         .$notNull()
         .as("series"),
-      eb(
-        "event.maxChests",
-        "*",
-        eb
-          .selectFrom("filtered_account")
-          .select(eb.fn.countAll<number>().as("count")),
-      ).as("maxChests"),
-      deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
-        "status",
-      ),
-      eb.fn.count<number>("filtered_chest.id").as("openedChests"),
     ])
-    .groupBy(["event.code", "event.startDate", "event.endDate"])
+    .groupBy([
+      "event.edition",
+      "event.code",
+      "event.startDate",
+      "event.endDate",
+      "event.seriesId",
+      "event.maxChests",
+    ])
     .orderBy("event.startDate", "desc")
     .orderBy("event.endDate", "desc")
     .execute();
