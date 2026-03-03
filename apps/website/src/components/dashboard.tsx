@@ -88,7 +88,7 @@ export default function Dashboard({
         </Suspense>
       )}
       {!hideEventCards && (
-        <>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Suspense
             fallback={
               <ChartCardSkeleton
@@ -109,7 +109,7 @@ export default function Dashboard({
           >
             <EventTypeChartCard filters={filters} />
           </Suspense>
-        </>
+        </div>
       )}
     </div>
   );

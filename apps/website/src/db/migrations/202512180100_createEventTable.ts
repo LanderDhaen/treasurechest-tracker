@@ -13,6 +13,10 @@ export const up = async (db: Kysely<any>) => {
 
     // Foreign keys
 
+    .addColumn("typeId", "integer", (c) =>
+      c.references("type.id").onDelete("restrict").notNull(),
+    )
+
     .addColumn("seriesId", "integer", (c) =>
       c.references("series.id").onDelete("restrict").notNull(),
     )

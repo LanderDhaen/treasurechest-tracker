@@ -7,7 +7,6 @@ import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 import { withFilteredAccounts } from "./account";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
-import { Series } from "./series";
 
 export const getTotalEvents = async () => {
   const result = await db
@@ -46,8 +45,8 @@ export const getAllEvents = async ({
 }: EventSearchParams) => {
   let query = db
     .selectFrom("event")
-    .innerJoin("series", "series.id", "event.seriesId")
-    .innerJoin("type", "type.id", "series.typeId");
+    .innerJoin("type", "type.id", "event.typeId")
+    .innerJoin("series", "series.id", "event.seriesId");
 
   // Filtering
 
@@ -126,9 +125,8 @@ export const getAllEvents = async ({
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
-      jsonObjectFrom(Series.getById(eb.ref("event.seriesId")))
-        .$notNull()
-        .as("series"),
+      "type.name as type",
+      "series.name",
     ])
     .execute();
 
@@ -142,6 +140,8 @@ export const getAllEvents = async ({
 export const getEventByCode = async (code: string) => {
   const event = await db
     .selectFrom("event")
+    .innerJoin("type", "type.id", "event.typeId")
+    .innerJoin("series", "series.id", "event.seriesId")
     .where("event.code", "=", code)
     .select((eb) => [
       "event.id",
@@ -153,9 +153,8 @@ export const getEventByCode = async (code: string) => {
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
-      jsonObjectFrom(Series.getById(eb.ref("event.seriesId")))
-        .$notNull()
-        .as("series"),
+      "series.name",
+      "type.name as type",
     ])
     .executeTakeFirst();
 

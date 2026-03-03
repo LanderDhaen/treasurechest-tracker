@@ -13,7 +13,6 @@ export interface SeriesTable {
   isActive: ColumnType<boolean>;
   name: ColumnType<string>;
   code: ColumnType<string>;
-  typeId: ColumnType<number>;
 }
 
 export type Series = Selectable<SeriesTable>;

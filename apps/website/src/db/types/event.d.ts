@@ -13,6 +13,7 @@ export interface EventTable {
   startDate: ColumnType<Date>;
   endDate: ColumnType<Date>;
   maxChests: ColumnType<number>;
+  typeId: ColumnType<number>;
   seriesId: ColumnType<number>;
 }
 

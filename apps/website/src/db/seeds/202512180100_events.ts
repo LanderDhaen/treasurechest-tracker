@@ -13,6 +13,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2024-09-19",
         endDate: "2024-09-19",
         maxChests: 5,
+        typeId: 1,
         seriesId: 1,
       },
       {
@@ -21,6 +22,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2024-09-19",
         endDate: "2024-10-09",
         maxChests: 30,
+        typeId: 2,
         seriesId: 2,
       },
       {
@@ -29,6 +31,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2024-12-04",
         endDate: "2024-12-30",
         maxChests: 20,
+        typeId: 2,
         seriesId: 3,
       },
       {
@@ -37,6 +40,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2024-12-25",
         endDate: "2024-12-25",
         maxChests: 1,
+        typeId: 1,
         seriesId: 4,
       },
       {
@@ -45,6 +49,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-03-17",
         endDate: "2025-03-17",
         maxChests: 5,
+        typeId: 1,
         seriesId: 5,
       },
       {
@@ -53,6 +58,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-03-17",
         endDate: "2025-03-25",
         maxChests: 24,
+        typeId: 2,
         seriesId: 2,
       },
       {
@@ -61,6 +67,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-04-14",
         endDate: "2025-04-21",
         maxChests: 20,
+        typeId: 3,
         seriesId: 6,
       },
       {
@@ -69,6 +76,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-04-24",
         endDate: "2025-04-24",
         maxChests: 1,
+        typeId: 1,
         seriesId: 7,
       },
       {
@@ -77,6 +85,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-05-17",
         endDate: "2025-05-22",
         maxChests: 20,
+        typeId: 2,
         seriesId: 2,
       },
       {
@@ -85,6 +94,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-07-17",
         endDate: "2025-07-21",
         maxChests: 20,
+        typeId: 2,
         seriesId: 2,
       },
       {
@@ -93,6 +103,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-08-08",
         endDate: "2025-08-31",
         maxChests: 1,
+        typeId: 2,
         seriesId: 8,
       },
       {
@@ -101,6 +112,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-08-13",
         endDate: "2025-08-20",
         maxChests: 20,
+        typeId: 3,
         seriesId: 9,
       },
       {
@@ -109,6 +121,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-09-28",
         endDate: "2025-10-03",
         maxChests: 20,
+        typeId: 2,
         seriesId: 2,
       },
       {
@@ -117,6 +130,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-10-24",
         endDate: "2025-10-28",
         maxChests: 12,
+        typeId: 2,
         seriesId: 2,
       },
       {
@@ -125,6 +139,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-10-24",
         endDate: "2025-10-28",
         maxChests: 13,
+        typeId: 4,
         seriesId: 10,
       },
       {
@@ -133,6 +148,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-11-28",
         endDate: "2025-12-03",
         maxChests: 20,
+        typeId: 2,
         seriesId: 2,
       },
       {
@@ -141,6 +157,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-12-12",
         endDate: "2025-12-19",
         maxChests: 20,
+        typeId: 3,
         seriesId: 11,
       },
       {
@@ -149,6 +166,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2026-01-28",
         endDate: "2026-02-02",
         maxChests: 20,
+        typeId: 2,
         seriesId: 2,
       },
       {
@@ -157,6 +175,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2026-02-24",
         endDate: "2026-03-01",
         maxChests: 12,
+        typeId: 4,
         seriesId: 12,
       },
       {
@@ -165,6 +184,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2026-03-01",
         endDate: "2026-04-01",
         maxChests: 11,
+        typeId: 1,
         seriesId: 13,
       },
     ])

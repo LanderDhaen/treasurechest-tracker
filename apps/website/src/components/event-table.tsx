@@ -24,12 +24,8 @@ interface EventTableProps {
     endDate: Date;
     maxChests: number;
     status: EventStatus;
-    series: {
-      name: string;
-      type: {
-        name: string;
-      };
-    };
+    name: string;
+    type: string;
   }[];
 }
 
@@ -73,10 +69,10 @@ export default function EventTable({ events }: EventTableProps) {
                   <StatusBadge status={event.status} />
                 </TableCell>
                 <TableCell>
-                  <EventTypeBadge type={event.series.type} />
+                  <EventTypeBadge type={event.type} />
                 </TableCell>
                 <TableCell>
-                  {formatEventName(event.series.name, event.edition)}
+                  {formatEventName(event.name, event.edition)}
                 </TableCell>
                 <TableCell>{formatDate(event.startDate)}</TableCell>
                 <TableCell>{formatDate(event.endDate)}</TableCell>
