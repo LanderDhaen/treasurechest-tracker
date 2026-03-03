@@ -8,16 +8,8 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@/components/ui/chart";
-
-const chartConfig = {
-  common: { label: "Common", color: "#a3a3a3" },
-  rare: { label: "Rare", color: "#93c5fd" },
-  epic: { label: "Epic", color: "#a855f7" },
-  legendary: { label: "Legendary", color: "#facc15" },
-  count: { label: "Opened", color: "var(--primary)" },
-} satisfies ChartConfig;
+import { chartConfig } from "@/constants/common";
 
 interface EventTypeChartProps {
   types: {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Cell, LabelList, Pie, PieChart } from "recharts";
+import { LabelList, Pie, PieChart } from "recharts";
 
 import {
   ChartContainer,
@@ -8,15 +8,8 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@/components/ui/chart";
-
-const chartConfig = {
-  Common: { label: "Common", color: "#a3a3a3" },
-  Rare: { label: "Rare", color: "#93c5fd" },
-  Epic: { label: "Epic", color: "#a855f7" },
-  Legendary: { label: "Legendary", color: "#facc15" },
-} satisfies ChartConfig;
+import { chartConfig } from "@/constants/common";
 
 interface RarityChartProps {
   rarities: {
@@ -26,20 +19,20 @@ interface RarityChartProps {
 }
 
 export default function RarityChart({ rarities }: RarityChartProps) {
+  const chartData = rarities.map(({ name, count }) => ({
+    name: name.toLowerCase(),
+    count,
+    fill: chartConfig[name.toLowerCase() as keyof typeof chartConfig]?.color,
+  }));
+
   return (
-    <ChartContainer config={chartConfig}>
+    <ChartContainer config={chartConfig} className="min-h-52">
       <PieChart>
         <ChartTooltip
           cursor={false}
           content={<ChartTooltipContent hideLabel />}
         />
-        <Pie data={rarities} dataKey="count" nameKey="name">
-          {rarities.map((rarity) => (
-            <Cell
-              key={rarity.name}
-              fill={chartConfig[rarity.name as keyof typeof chartConfig]?.color}
-            />
-          ))}
+        <Pie data={chartData} dataKey="count" nameKey="name">
           <LabelList
             dataKey="count"
             position="outside"
