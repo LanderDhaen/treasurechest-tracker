@@ -24,6 +24,7 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Spinner } from "./ui/spinner";
 import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,12 +43,20 @@ export default function LoginForm() {
     const { data, error } = await authClient.signIn.email({
       email: formData.email,
       password: formData.password,
+      rememberMe: true,
     });
 
     if (error) {
-      console.log(error);
+      const isInvalidCredentials = error.code === "INVALID_EMAIL_OR_PASSWORD";
+
+      const message = isInvalidCredentials
+        ? "That combination of credentials is not valid."
+        : "An unexpected error occurred. Please try again later.";
+
+      toast.error(message);
       setIsLoading(false);
     } else {
+      toast.success(`Welcome back, ${data.user.name}!`);
       redirect("/");
     }
   };
