@@ -13,6 +13,7 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
+  FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
@@ -54,9 +55,9 @@ export default function LoginForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-center">Login to your account</CardTitle>
+        <CardTitle className="text-center">Sign in to your account</CardTitle>
         <CardDescription className="text-center">
-          Enter your credentials below to login
+          Enter your credentials below to sign in
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -103,9 +104,25 @@ export default function LoginForm() {
                 </Field>
               )}
             />
+            <FieldSeparator />
             <Field>
               <Button type="submit" disabled={isLoading}>
-                {isLoading ? <Spinner /> : "Login"}
+                {isLoading ? (
+                  <>
+                    <Spinner data-icon="inline-start" />
+                    Signing in...
+                  </>
+                ) : (
+                  "Sign In"
+                )}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => form.reset()}
+                disabled={isLoading}
+              >
+                Reset
               </Button>
             </Field>
           </FieldGroup>
