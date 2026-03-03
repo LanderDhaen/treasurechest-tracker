@@ -6,21 +6,22 @@ import { Suspense } from "react";
 import StatisticCardSkeleton from "./skeletons/statistic-card-skeleton";
 import ChartCardSkeleton from "./skeletons/chart-card-skeleton";
 import CategoryChartCard from "@/components/category-chart-card";
-import EventProgressCard from "./event-progress-card";
 import RarityChartCard from "@/components/rarity-chart-card";
 import RewardChartCard from "@/components/reward-chart-card";
 import AccountChartCard from "@/components/account-chart-card";
+import EventSeriesChartCard from "./event-series-chart-card";
+import EventTypeChartCard from "./event-type-chart-card";
 
 interface DashboardProps {
   filters: FilterConfig;
-  hideEventCard?: boolean;
+  hideEventCards?: boolean;
   hideAccountCard?: boolean;
 }
 
 export default function Dashboard({
   filters,
   hideAccountCard = false,
-  hideEventCard = false,
+  hideEventCards = false,
 }: DashboardProps) {
   return (
     <div className="grid grid-cols-1 gap-4">
@@ -47,7 +48,7 @@ export default function Dashboard({
           fallback={
             <ChartCardSkeleton
               title="Rarities"
-              description="Shows the number of treasure chest opened per rarity"
+              description="Shows the number of treasure chests opened per rarity"
             />
           }
         >
@@ -79,24 +80,36 @@ export default function Dashboard({
           fallback={
             <ChartCardSkeleton
               title="Accounts"
-              description="Shows the number of treasure chest opened per account"
+              description="Shows the number of treasure chests opened per account"
             />
           }
         >
           <AccountChartCard filters={filters} />
         </Suspense>
       )}
-      {!hideEventCard && (
-        <Suspense
-          fallback={
-            <ChartCardSkeleton
-              title="Events"
-              description="Shows the number of treasure chest opened per event"
-            />
-          }
-        >
-          <EventProgressCard filters={filters} />
-        </Suspense>
+      {!hideEventCards && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <Suspense
+            fallback={
+              <ChartCardSkeleton
+                title="Series"
+                description="Shows the number of treasure chests opened per series"
+              />
+            }
+          >
+            <EventSeriesChartCard filters={filters} />
+          </Suspense>
+          <Suspense
+            fallback={
+              <ChartCardSkeleton
+                title="Types"
+                description="Shows the number of treasure chests opened per type"
+              />
+            }
+          >
+            <EventTypeChartCard filters={filters} />
+          </Suspense>
+        </div>
       )}
     </div>
   );

@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
-import ChestCountCategoryChart from "./category-chart";
+import CategoryChart from "./category-chart";
 
 export interface CategoryChartCardProps {
   filters: FilterConfig;
@@ -27,7 +27,7 @@ export default async function CategoryChartCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChestCountCategoryChart categories={categories} />
+        <CategoryChart categories={categories} />
       </CardContent>
     </Card>
   );

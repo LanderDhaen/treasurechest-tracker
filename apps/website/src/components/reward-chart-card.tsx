@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
 import { getChestCountPerReward } from "@/actions/reward";
-import ChestCountRewardChart from "./reward-chart";
+import RewardChart from "./reward-chart";
 
 interface RewardChartCardProps {
   filters: FilterConfig;
@@ -23,11 +23,11 @@ export default async function RewardChartCard({
       <CardHeader>
         <CardTitle>Rewards</CardTitle>
         <CardDescription>
-          Shows the number of treasure chest opened per reward
+          Shows the number of treasure chests opened per reward
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChestCountRewardChart rewards={rewards} />
+        <RewardChart rewards={rewards} />
       </CardContent>
     </Card>
   );

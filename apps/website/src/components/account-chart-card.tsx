@@ -23,7 +23,7 @@ export default async function AccountChartCard({
       <CardHeader>
         <CardTitle>Accounts</CardTitle>
         <CardDescription>
-          Shows the number of treasure chest opened per account
+          Shows the number of treasure chests opened per account
         </CardDescription>
       </CardHeader>
       <CardContent>

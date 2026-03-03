@@ -4,20 +4,23 @@ import {
   ItemDescription,
   ItemTitle,
 } from "@/components/ui/item";
-import StatusBadge from "./status-badge";
-import GiftBadge from "./gift-badge";
+import StatusBadge from "./event-status-badge";
 import { formatDate } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import { EventStatus } from "@/constants/event";
+import { formatEventName } from "@/lib/event";
+import EventTypeBadge from "./event-type-badge";
 
 interface EventInformationItemProps {
   event: {
-    name: string;
+    id: number;
+    code: string;
+    edition: number;
     startDate: Date;
     endDate: Date;
     maxChests: number;
     status: EventStatus;
-    isGift: boolean;
+    name: string;
+    type: string;
   };
 }
 
@@ -27,16 +30,15 @@ export default function EventInformationItem({
   return (
     <Item className="p-0">
       <ItemContent>
-        <ItemTitle className="text-xl font-bold">{event.name}</ItemTitle>
-        <ItemDescription className="flex gap-2">
+        <ItemTitle className="text-xl font-bold items-center">
+          {formatEventName(event.name, event.edition)}
           <StatusBadge status={event.status} />
-          <GiftBadge isGift={event.isGift} />
-          <Badge variant="secondary">
-            {event.maxChests == 1 ? "1 Chest" : `${event.maxChests} Chests`}
-          </Badge>
-        </ItemDescription>
+          <EventTypeBadge type={event.type} />
+        </ItemTitle>
+        <ItemDescription className="italic">#{event.code}</ItemDescription>
 
         <ItemDescription className="text-sm text-muted-foreground">
+          {event.maxChests == 1 ? "1 Chest" : `${event.maxChests} Chests`}・
           {formatDate(event.startDate)} - {formatDate(event.endDate)}
         </ItemDescription>
       </ItemContent>

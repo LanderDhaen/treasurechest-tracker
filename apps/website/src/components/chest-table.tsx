@@ -1,7 +1,6 @@
 "use client";
 
 import { formatDateTime } from "@/lib/utils";
-import GiftBadge from "./gift-badge";
 import {
   Table,
   TableBody,
@@ -11,10 +10,23 @@ import {
   TableRow,
 } from "./ui/table";
 import RarityBadge from "./rarity-badge";
-import { ChestTableEntry } from "@/types/chest";
+import { formatEventName } from "@/lib/event";
 
 interface ChestTableProps {
-  chests: ChestTableEntry[];
+  chests: {
+    id: number;
+    amount: number;
+    openedAt: Date;
+    rarity: string;
+    reward: string;
+    account: {
+      name: string;
+    };
+    event: {
+      edition: number;
+      name: string;
+    };
+  }[];
 }
 
 export default function ChestTable({ chests }: ChestTableProps) {
@@ -53,9 +65,7 @@ export default function ChestTable({ chests }: ChestTableProps) {
                 <TableCell>{formatDateTime(chest.openedAt)}</TableCell>
                 <TableCell>{chest.account.name}</TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-2">
-                    {chest.event.name} <GiftBadge isGift={chest.event.isGift} />
-                  </div>
+                  {formatEventName(chest.event.name, chest.event.edition)}
                 </TableCell>
               </TableRow>
             ))

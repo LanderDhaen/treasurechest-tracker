@@ -1,8 +1,8 @@
 "use client";
 
 import { formatDate } from "@/lib/utils";
-import GiftBadge from "./gift-badge";
-import StatusBadge from "./status-badge";
+import GiftBadge from "./event-type-badge";
+import StatusBadge from "./event-status-badge";
 import {
   Table,
   TableBody,
@@ -11,11 +11,22 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { EventTableEntry } from "@/types/event";
 import { useRouter } from "next/navigation";
+import { formatEventName } from "@/lib/event";
+import { EventStatus } from "@/constants/event";
+import EventTypeBadge from "./event-type-badge";
 
 interface EventTableProps {
-  events: EventTableEntry[];
+  events: {
+    code: string;
+    edition: number;
+    startDate: Date;
+    endDate: Date;
+    maxChests: number;
+    status: EventStatus;
+    name: string;
+    type: string;
+  }[];
 }
 
 export default function EventTable({ events }: EventTableProps) {
@@ -32,6 +43,7 @@ export default function EventTable({ events }: EventTableProps) {
           <TableRow>
             <TableHead className="font-bold w-24">Code</TableHead>
             <TableHead className="font-bold w-24">Status</TableHead>
+            <TableHead className="font-bold w-24">Type</TableHead>
             <TableHead className="font-bold">Name</TableHead>
             <TableHead className="font-bold">Start Date</TableHead>
             <TableHead className="font-bold">End Date</TableHead>
@@ -57,10 +69,10 @@ export default function EventTable({ events }: EventTableProps) {
                   <StatusBadge status={event.status} />
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-2">
-                    {event.name}
-                    <GiftBadge isGift={event.isGift} />
-                  </div>
+                  <EventTypeBadge type={event.type} />
+                </TableCell>
+                <TableCell>
+                  {formatEventName(event.name, event.edition)}
                 </TableCell>
                 <TableCell>{formatDate(event.startDate)}</TableCell>
                 <TableCell>{formatDate(event.endDate)}</TableCell>

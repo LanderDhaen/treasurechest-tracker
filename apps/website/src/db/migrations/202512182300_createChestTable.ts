@@ -11,16 +11,16 @@ export const up = async (db: Kysely<any>) => {
     // Foreign Keys
 
     .addColumn("rarityId", "integer", (c) =>
-      c.references("rarity.id").notNull().onDelete("restrict")
+      c.references("rarity.id").notNull().onDelete("restrict"),
     )
     .addColumn("accountId", "integer", (c) =>
-      c.references("account.id").notNull().onDelete("restrict")
+      c.references("account.id").notNull().onDelete("restrict"),
     )
     .addColumn("eventId", "integer", (c) =>
-      c.references("event.id").notNull().onDelete("restrict")
+      c.references("event.id").notNull().onDelete("restrict"),
     )
     .addColumn("rewardId", "integer", (c) =>
-      c.references("reward.id").notNull().onDelete("restrict")
+      c.references("reward.id").notNull().onDelete("restrict"),
     )
     .execute();
 };

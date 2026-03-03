@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/chart";
 import { chartConfig } from "@/constants/common";
 
-interface RewardChartProps {
-  rewards: {
+interface SeriesChartProps {
+  series: {
     name: string;
     count: number;
     rarities: {
@@ -22,8 +22,8 @@ interface RewardChartProps {
   }[];
 }
 
-export default function RewardChart({ rewards }: RewardChartProps) {
-  const chartData = rewards.map(({ name, rarities, count }) => ({
+export default function EventSeriesChart({ series }: SeriesChartProps) {
+  const chartData = series.map(({ name, rarities, count }) => ({
     name,
     ...Object.fromEntries(
       rarities.map(({ name, count }) => [name.toLowerCase(), count]),
@@ -32,7 +32,7 @@ export default function RewardChart({ rewards }: RewardChartProps) {
   }));
 
   return (
-    <ChartContainer config={chartConfig} className="min-h-400 w-full">
+    <ChartContainer config={chartConfig} className="min-h-52 w-full">
       <BarChart
         accessibilityLayer
         data={chartData}

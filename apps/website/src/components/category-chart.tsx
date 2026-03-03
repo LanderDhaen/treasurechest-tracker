@@ -8,18 +8,10 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@/components/ui/chart";
+import { chartConfig } from "@/constants/common";
 
-const chartConfig = {
-  common: { label: "Common", color: "#a3a3a3" },
-  rare: { label: "Rare", color: "#93c5fd" },
-  epic: { label: "Epic", color: "#a855f7" },
-  legendary: { label: "Legendary", color: "#facc15" },
-  count: { label: "Opened", color: "var(--primary)" },
-} satisfies ChartConfig;
-
-interface ChestCountCategoryChartProps {
+interface CategoryChartProps {
   categories: {
     name: string;
     count: number;
@@ -30,9 +22,7 @@ interface ChestCountCategoryChartProps {
   }[];
 }
 
-export default function CategoryChart({
-  categories,
-}: ChestCountCategoryChartProps) {
+export default function CategoryChart({ categories }: CategoryChartProps) {
   const chartData = categories.map(({ name, rarities, count }) => ({
     name,
     ...Object.fromEntries(
@@ -42,7 +32,7 @@ export default function CategoryChart({
   }));
 
   return (
-    <ChartContainer config={chartConfig} className="min-h-50 w-full">
+    <ChartContainer config={chartConfig} className="min-h-52 w-full">
       <BarChart
         accessibilityLayer
         data={chartData}

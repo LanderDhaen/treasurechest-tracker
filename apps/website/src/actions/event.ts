@@ -6,31 +6,34 @@ import { Database } from "@/db/types/database";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 import { withFilteredAccounts } from "./account";
+import { jsonObjectFrom } from "kysely/helpers/postgres";
 
 export const getTotalEvents = async () => {
   const result = await db
     .selectFrom("event")
-    .where("event.isActive", "=", true)
     .select((eb) => eb.fn.countAll<number>().as("total"))
     .executeTakeFirstOrThrow();
+
   return result.total;
 };
 
 export const getPossibleChestCount = async (filters: FilterConfig) => {
   const result = await db
     .with("filtered_account", () => withFilteredAccounts(filters))
-    .selectFrom("event")
+    .with("filtered_event", () => withFilteredEvents(filters))
+    .selectFrom("filtered_event")
     .select((eb) =>
       eb(
-        eb.fn.sum<number>("event.maxChests"),
+        eb.fn.sum<number>("filtered_event.maxChests"),
         "*",
         eb
           .selectFrom("filtered_account")
           .select(eb.fn.countAll<number>().as("count")),
-      ).as("total"),
+      ).as("possibleChestCount"),
     )
     .executeTakeFirstOrThrow();
-  return result.total;
+
+  return result.possibleChestCount;
 };
 
 export const getAllEvents = async ({
@@ -40,13 +43,18 @@ export const getAllEvents = async ({
   sortBy,
   direction,
 }: EventSearchParams) => {
-  let query = db.selectFrom("event").where("event.isActive", "=", true);
+  let query = db
+    .selectFrom("event")
+    .innerJoin("type", "type.id", "event.typeId")
+    .innerJoin("series", "series.id", "event.seriesId");
 
   // Filtering
 
   if (search) {
     query = query.where((eb) =>
-      eb.or([eb("event.name", "ilike", `%${search}%`)]),
+      eb
+        .or([eb("series.name", "ilike", `%${search}%`)])
+        .or(eb("type.name", "ilike", `%${search}%`)),
     );
   }
 
@@ -79,8 +87,14 @@ export const getAllEvents = async ({
       .orderBy("event.endDate", direction);
   }
 
+  if (sortBy === "type") {
+    query = query.orderBy("type.name", direction);
+  }
+
   if (sortBy === "name") {
-    query = query.orderBy("event.name", direction);
+    query = query
+      .orderBy("series.name", direction)
+      .orderBy("event.edition", direction);
   }
 
   if (sortBy === "startDate") {
@@ -103,15 +117,16 @@ export const getAllEvents = async ({
 
   const events = await query
     .select((eb) => [
-      "event.name",
       "event.code",
+      "event.edition",
       "event.startDate",
       "event.endDate",
       "event.maxChests",
-      "event.isGift",
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
+      "type.name as type",
+      "series.name",
     ])
     .execute();
 
@@ -125,18 +140,21 @@ export const getAllEvents = async ({
 export const getEventByCode = async (code: string) => {
   const event = await db
     .selectFrom("event")
+    .innerJoin("type", "type.id", "event.typeId")
+    .innerJoin("series", "series.id", "event.seriesId")
     .where("event.code", "=", code)
     .select((eb) => [
       "event.id",
-      "event.name",
       "event.code",
+      "event.edition",
       "event.startDate",
       "event.endDate",
       "event.maxChests",
-      "event.isGift",
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
+      "series.name",
+      "type.name as type",
     ])
     .executeTakeFirst();
 
@@ -148,11 +166,14 @@ export const getChestCountPerEvent = async (filters: FilterConfig) => {
     .with("filtered_chest", () => withFilteredChests(filters))
     .with("filtered_account", () => withFilteredAccounts(filters))
     .selectFrom("event")
+    .innerJoin("series", "series.id", "event.seriesId")
     .leftJoin("filtered_chest", "filtered_chest.eventId", "event.id")
     .select((eb) => [
-      "event.name",
       "event.code",
-      "event.isGift",
+      "event.edition",
+      deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
+        "status",
+      ),
       eb(
         "event.maxChests",
         "*",
@@ -160,24 +181,43 @@ export const getChestCountPerEvent = async (filters: FilterConfig) => {
           .selectFrom("filtered_account")
           .select(eb.fn.countAll<number>().as("count")),
       ).as("maxChests"),
-      deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
-        "status",
-      ),
       eb.fn.count<number>("filtered_chest.id").as("openedChests"),
+      jsonObjectFrom(
+        eb
+          .selectFrom("series")
+          .select(["series.name"])
+          .whereRef("series.id", "=", "event.seriesId"),
+      )
+        .$notNull()
+        .as("series"),
     ])
     .groupBy([
-      "event.name",
+      "event.edition",
       "event.code",
-      "event.isGift",
-      "event.maxChests",
       "event.startDate",
       "event.endDate",
+      "event.seriesId",
+      "event.maxChests",
     ])
     .orderBy("event.startDate", "desc")
     .orderBy("event.endDate", "desc")
     .execute();
 
   return events;
+};
+
+export const withFilteredEvents = (filters: FilterConfig) => {
+  const eb = expressionBuilder<Database>();
+
+  let query = eb.selectFrom("event");
+
+  const { eventId } = filters;
+
+  if (eventId) {
+    query = query.where("event.id", "=", eventId);
+  }
+
+  return query.selectAll();
 };
 
 export const deriveEventStatus = (

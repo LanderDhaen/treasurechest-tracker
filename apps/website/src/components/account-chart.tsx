@@ -8,18 +8,10 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@/components/ui/chart";
+import { chartConfig } from "@/constants/common";
 
-const chartConfig = {
-  common: { label: "Common", color: "#a3a3a3" },
-  rare: { label: "Rare", color: "#93c5fd" },
-  epic: { label: "Epic", color: "#a855f7" },
-  legendary: { label: "Legendary", color: "#facc15" },
-  count: { label: "Opened", color: "var(--primary)" },
-} satisfies ChartConfig;
-
-interface ChestCountAccountChartProps {
+interface AccountChartProps {
   accounts: {
     name: string;
     count: number;
@@ -30,9 +22,7 @@ interface ChestCountAccountChartProps {
   }[];
 }
 
-export default function AccountChart({
-  accounts,
-}: ChestCountAccountChartProps) {
+export default function AccountChart({ accounts }: AccountChartProps) {
   const chartData = accounts.map(({ name, rarities, count }) => ({
     name,
     ...Object.fromEntries(
