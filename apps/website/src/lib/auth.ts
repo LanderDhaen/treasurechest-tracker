@@ -14,4 +14,10 @@ export const auth = betterAuth({
     modelName: "profile",
   },
   plugins: [nextCookies()],
+
+  // Providers
+
+  emailAndPassword: {
+    enabled: true,
+  },
 });

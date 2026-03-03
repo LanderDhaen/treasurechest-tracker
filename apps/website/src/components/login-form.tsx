@@ -15,12 +15,18 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 import { LoginFormValues, loginSchema } from "@/schemas/auth";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { Spinner } from "./ui/spinner";
+import { redirect } from "next/navigation";
 
 export default function LoginForm() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -29,8 +35,20 @@ export default function LoginForm() {
     },
   });
 
-  const onSubmit = (data: LoginFormValues) => {
-    console.log("Form submitted with data:", data);
+  const onSubmit = async (formData: LoginFormValues) => {
+    setIsLoading(true);
+
+    const { data, error } = await authClient.signIn.email({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    if (error) {
+      console.log(error);
+      setIsLoading(false);
+    } else {
+      redirect("/");
+    }
   };
 
   return (
@@ -56,9 +74,10 @@ export default function LoginForm() {
                     aria-invalid={fieldState.invalid}
                     type="email"
                     placeholder="m@example.com"
+                    disabled={isLoading}
                     required
                   />
-                  {fieldState.error && (
+                  {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
                 </Field>
@@ -70,15 +89,24 @@ export default function LoginForm() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor={field.name}>Password</FieldLabel>
-                  <Input {...field} id={field.name} type="password" required />
-                  {fieldState.error && (
+                  <Input
+                    {...field}
+                    id={field.name}
+                    aria-invalid={fieldState.invalid}
+                    type="password"
+                    required
+                    disabled={isLoading}
+                  />
+                  {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
                 </Field>
               )}
             />
             <Field>
-              <Button type="submit">Login</Button>
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? <Spinner /> : "Login"}
+              </Button>
             </Field>
           </FieldGroup>
         </form>
