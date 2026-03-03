@@ -41,7 +41,7 @@ export default function RootLayout({
             </SidebarInset>
           </SidebarProvider>
         </NuqsAdapter>
-        <Toaster position="top-center" />
+        <Toaster position="bottom-right" />
       </body>
     </html>
   );

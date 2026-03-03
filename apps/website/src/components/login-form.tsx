@@ -43,7 +43,6 @@ export default function LoginForm() {
     const { data, error } = await authClient.signIn.email({
       email: formData.email,
       password: formData.password,
-      rememberMe: true,
     });
 
     if (error) {
