@@ -26,7 +26,7 @@ import { Spinner } from "./ui/spinner";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
-export default function LoginForm() {
+export default function SignInForm() {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<LoginFormValues>({
