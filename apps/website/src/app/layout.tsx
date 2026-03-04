@@ -34,7 +34,7 @@ export default function RootLayout({
           <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-              <div className="flex flex-col flex-1 px-4">
+              <div className="flex flex-col flex-1 px-4 pb-4">
                 <Header />
                 {children}
               </div>
