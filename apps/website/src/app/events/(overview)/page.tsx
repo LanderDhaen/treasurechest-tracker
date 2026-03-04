@@ -12,10 +12,6 @@ import { eventSearchParamsSchema } from "@/schemas/event";
 import SortingMenu from "@/components/sorting-menu";
 import { SORT_OPTIONS } from "@/constants/event";
 import SearchBar from "@/components/searchbar";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import Link from "next/link";
-import AddButton from "@/components/add-button";
 
 export default async function Page({
   searchParams,
@@ -52,7 +48,6 @@ export default async function Page({
             currentDirection={direction}
             sortingOptions={SORT_OPTIONS}
           />
-          <AddButton />
         </div>
         <EventTable events={events} />
         {totalPages > 0 && (
