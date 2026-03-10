@@ -62,6 +62,9 @@ export default function AccountForm({ clans }: AccountFormProps) {
 
     if (error) {
       switch (error.code) {
+        case "VALIDATION_ERROR":
+          toast.error(error.message);
+          break;
         case "UNAUTHORIZED":
           toast.error(error.message);
           break;
