@@ -30,6 +30,8 @@ import {
   SelectValue,
 } from "./ui/select";
 import { submitAccountForm } from "@/actions/account";
+import { toast } from "sonner";
+import { redirect } from "next/navigation";
 
 interface AccountFormProps {
   clans: {
@@ -53,11 +55,22 @@ export default function AccountForm({ clans }: AccountFormProps) {
 
   const onSubmit = async (formData: AccountFormValues) => {
     setIsLoading(true);
-    const { success, error } = await submitAccountForm(formData);
 
-    console.log("Create account result:", { success, error });
-
+    const { data, error } = await submitAccountForm(formData);
     setIsLoading(false);
+
+    if (error) {
+      if (error.code === "CLAN_NOT_FOUND") {
+        form.setError("clanTag", {
+          message: "The specified clan was not found.",
+        });
+      } else {
+        toast.error(error.message);
+      }
+    } else {
+      toast.success(`Account "${data.name}" created successfully!`);
+      redirect("/accounts");
+    }
   };
 
   return (

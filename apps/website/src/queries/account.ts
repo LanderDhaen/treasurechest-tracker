@@ -161,7 +161,7 @@ export const createAccount = async ({
   townhall,
   clanId,
 }: InsertableAccount) => {
-  await db
+  const account = await db
     .insertInto("account")
     .values({
       name,
@@ -169,5 +169,8 @@ export const createAccount = async ({
       townhall,
       clanId,
     })
+    .returning("account.name")
     .executeTakeFirstOrThrow();
+
+  return account;
 };

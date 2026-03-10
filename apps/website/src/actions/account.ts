@@ -3,6 +3,7 @@
 import { getClanByTag } from "@/queries/clan";
 import { AccountFormValues } from "@/schemas/account";
 import { createAccount } from "@/queries/account";
+import { getServerSession } from "@/queries/auth";
 
 export const submitAccountForm = async ({
   name,
@@ -10,18 +11,31 @@ export const submitAccountForm = async ({
   townhall,
   clanTag,
 }: AccountFormValues) => {
+  const session = await getServerSession();
+
+  if (!session) {
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to create an account.",
+      },
+    };
+  }
+
   const clan = await getClanByTag(clanTag);
 
   if (!clan) {
     return {
-      success: false,
-      error: "CLAN_NOT_FOUND",
+      data: null,
+      error: {
+        code: "CLAN_NOT_FOUND",
+        message: "The specified clan was not found.",
+      },
     };
   }
 
-  const clanId = clan.id;
+  const account = await createAccount({ name, tag, townhall, clanId: clan.id });
 
-  await createAccount({ name, tag, townhall, clanId });
-
-  return { success: true, error: null };
+  return { data: account, error: null };
 };
