@@ -1,4 +1,4 @@
-import { getEventByCode } from "@/actions/event";
+import { getEventByCode } from "@/queries/event";
 import EventInformationItem from "@/components/event-information-item";
 import { FilterConfig } from "@/types/common";
 import { notFound } from "next/navigation";

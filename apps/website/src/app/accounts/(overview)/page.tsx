@@ -1,4 +1,4 @@
-import { getAllAccounts, getTotalAccounts } from "@/actions/account";
+import { getAllAccounts, getTotalAccounts } from "@/queries/account";
 import {
   Card,
   CardContent,

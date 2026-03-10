@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
-import { getChestCountPerReward } from "@/actions/reward";
+import { getChestCountPerReward } from "@/queries/reward";
 import RewardChart from "./reward-chart";
 
 interface RewardChartCardProps {

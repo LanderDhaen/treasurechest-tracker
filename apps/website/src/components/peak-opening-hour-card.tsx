@@ -1,4 +1,4 @@
-import { getPeakOpeningHourData, getTotalChests } from "@/actions/chest";
+import { getPeakOpeningHourData, getTotalChests } from "@/queries/chest";
 import {
   Card,
   CardHeader,

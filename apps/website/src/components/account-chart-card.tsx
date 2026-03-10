@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
-import { getChestCountPerAccount } from "@/actions/account";
+import { getChestCountPerAccount } from "@/queries/account";
 import AccountChart from "./account-chart";
 
 interface AccountChartCardProps {

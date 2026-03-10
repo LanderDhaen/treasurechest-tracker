@@ -1,4 +1,4 @@
-import { getServerSession } from "@/actions/auth";
+import { getServerSession } from "@/queries/auth";
 
 export default async function AuthGuard({
   children,

@@ -1,20 +1,22 @@
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { getServerSession } from "@/queries/auth";
+import { getAllClans } from "@/queries/clan";
+import AccountForm from "@/components/account-form";
 import { notFound } from "next/navigation";
 
 export default async function Page() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await getServerSession();
 
   if (!session) {
     notFound();
   }
 
+  const clans = await getAllClans();
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Add Account</h1>
-      <p>This is where you can add a new account.</p>
+    <div className="flex flex-1 w-full items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm">
+        <AccountForm clans={clans} />
+      </div>
     </div>
   );
 }

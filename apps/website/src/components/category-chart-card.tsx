@@ -1,4 +1,4 @@
-import { getChestCountPerCategory } from "@/actions/category";
+import { getChestCountPerCategory } from "@/queries/category";
 import {
   Card,
   CardContent,

@@ -1,4 +1,4 @@
-import { getAccountByTag } from "@/actions/account";
+import { getAccountByTag } from "@/queries/account";
 import AccountInformationItem from "@/components/account-information-item";
 import { FilterConfig } from "@/types/common";
 import { notFound } from "next/navigation";

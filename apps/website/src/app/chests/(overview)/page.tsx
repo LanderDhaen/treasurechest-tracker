@@ -1,4 +1,4 @@
-import { getAllChests, getTotalChests } from "@/actions/chest";
+import { getAllChests, getTotalChests } from "@/queries/chest";
 import ChestTable from "@/components/chest-table";
 import Pagination from "@/components/pagination";
 import SearchBar from "@/components/searchbar";
