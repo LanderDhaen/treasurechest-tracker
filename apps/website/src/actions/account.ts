@@ -1,17 +1,26 @@
 "use server";
 
 import { getClanByTag } from "@/queries/clan";
-import { AccountFormValues } from "@/schemas/account";
+import { accountFormSchema, AccountFormValues } from "@/schemas/account";
 import { createAccount } from "@/queries/account";
 import { getServerSession } from "@/queries/auth";
 import { DatabaseError } from "pg";
 
-export const submitAccountForm = async ({
-  name,
-  tag,
-  townhall,
-  clanTag,
-}: AccountFormValues) => {
+export const submitAccountForm = async (formData: AccountFormValues) => {
+  const result = accountFormSchema.safeParse(formData);
+
+  if (!result.success) {
+    return {
+      data: null,
+      error: {
+        code: "VALIDATION_ERROR",
+        message: "These values are invalid.",
+      },
+    };
+  }
+
+  const { name, tag, townhall, clanTag } = result.data;
+
   const session = await getServerSession();
 
   if (!session) {
