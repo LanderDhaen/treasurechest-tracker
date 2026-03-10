@@ -51,7 +51,7 @@ export default function SortingMenu({
 
   return (
     <ButtonGroup>
-      <Button onClick={handleButtonClick} variant="outline">
+      <Button onClick={handleButtonClick} variant="outline" size="icon">
         {isAscending ? <ArrowUpNarrowWide /> : <ArrowDownWideNarrow />}
       </Button>
       <Select onValueChange={handleValueChange} value={currentSort}>

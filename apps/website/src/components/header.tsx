@@ -1,9 +1,11 @@
+"use client";
+
 import { Separator } from "./ui/separator";
 import { SidebarTrigger } from "./ui/sidebar";
 
-export function Header() {
+export default function Header() {
   return (
-    <header className="flex h-12 items-center gap-2">
+    <header className="flex h-13 items-center gap-2">
       <SidebarTrigger />
       <Separator
         orientation="vertical"
