@@ -12,6 +12,10 @@ import { eventSearchParamsSchema } from "@/schemas/event";
 import SortingMenu from "@/components/sorting-menu";
 import { SORT_OPTIONS } from "@/constants/event";
 import SearchBar from "@/components/searchbar";
+import { getServerSession } from "@/actions/auth";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Plus } from "lucide-react";
 
 export default async function Page({
   searchParams,
@@ -32,6 +36,8 @@ export default async function Page({
 
   const totalEvents = await getTotalEvents();
 
+  const session = await getServerSession();
+
   return (
     <Card className="shadow-md">
       <CardHeader>
@@ -48,6 +54,13 @@ export default async function Page({
             currentDirection={direction}
             sortingOptions={SORT_OPTIONS}
           />
+          {session && (
+            <Button asChild variant="outline" size="icon">
+              <Link href="/events/add">
+                <Plus />
+              </Link>
+            </Button>
+          )}
         </div>
         <EventTable events={events} />
         {totalPages > 0 && (

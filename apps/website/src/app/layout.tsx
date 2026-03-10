@@ -4,7 +4,7 @@ import "@/app/globals.css";
 import { cn } from "@/lib/utils";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { Header } from "@/components/header";
+import Header from "@/components/header";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "sonner";
 
