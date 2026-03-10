@@ -68,6 +68,9 @@ export default function AccountForm({ clans }: AccountFormProps) {
         case "CLAN_NOT_FOUND":
           form.setError("clanTag", { message: error.message });
           break;
+        case "ACCOUNT_EXISTS":
+          form.setError("tag", { message: error.message });
+          break;
         default:
           toast.error("An unexpected error occurred. Please try again later.");
       }
