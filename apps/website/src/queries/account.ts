@@ -5,6 +5,7 @@ import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 import { expressionBuilder } from "kysely";
 import { Database } from "@/db/types/database";
+import { InsertableAccount } from "@/db/types/account";
 
 export const getTotalAccounts = async () => {
   const result = await db
@@ -152,4 +153,21 @@ export const withFilteredAccounts = (filters: FilterConfig) => {
   }
 
   return query.selectAll();
+};
+
+export const createAccount = async ({
+  name,
+  tag,
+  townhall,
+  clanId,
+}: InsertableAccount) => {
+  await db
+    .insertInto("account")
+    .values({
+      name,
+      tag,
+      townhall,
+      clanId,
+    })
+    .executeTakeFirstOrThrow();
 };
