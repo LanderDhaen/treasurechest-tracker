@@ -57,15 +57,19 @@ export default function AccountForm({ clans }: AccountFormProps) {
     setIsLoading(true);
 
     const { data, error } = await submitAccountForm(formData);
+
     setIsLoading(false);
 
     if (error) {
-      if (error.code === "CLAN_NOT_FOUND") {
-        form.setError("clanTag", {
-          message: "The specified clan was not found.",
-        });
-      } else {
-        toast.error(error.message);
+      switch (error.code) {
+        case "UNAUTHORIZED":
+          toast.error(error.message);
+          break;
+        case "CLAN_NOT_FOUND":
+          form.setError("clanTag", { message: error.message });
+          break;
+        default:
+          toast.error("An unexpected error occurred. Please try again later.");
       }
     } else {
       toast.success(`Account "${data.name}" created successfully!`);
