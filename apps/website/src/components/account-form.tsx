@@ -32,6 +32,7 @@ import {
 import { submitAccountForm } from "@/actions/account";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
 interface AccountFormProps {
   clans: {
@@ -99,7 +100,9 @@ export default function AccountForm({ clans }: AccountFormProps) {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                  <FieldLabel htmlFor={field.name}>
+                    Name<span className="text-red-500 -ml-1">*</span>
+                  </FieldLabel>
                   <Input
                     {...field}
                     id={field.name}
@@ -120,16 +123,20 @@ export default function AccountForm({ clans }: AccountFormProps) {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor={field.name}>Tag</FieldLabel>
-                  <Input
-                    {...field}
-                    id={field.name}
-                    aria-invalid={fieldState.invalid}
-                    type="text"
-                    placeholder="Tag"
-                    disabled={isLoading}
-                    required
-                  />
+                  <FieldLabel htmlFor={field.name}>
+                    Tag<span className="text-red-500 -ml-1">*</span>
+                  </FieldLabel>
+                  <InputGroup>
+                    <InputGroupAddon>#</InputGroupAddon>
+                    <InputGroupInput
+                      {...field}
+                      id={field.name}
+                      aria-invalid={fieldState.invalid}
+                      type="text"
+                      disabled={isLoading}
+                      required
+                    />
+                  </InputGroup>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
@@ -141,7 +148,9 @@ export default function AccountForm({ clans }: AccountFormProps) {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor={field.name}>Townhall</FieldLabel>
+                  <FieldLabel htmlFor={field.name}>
+                    Townhall<span className="text-red-500 -ml-1">*</span>
+                  </FieldLabel>
                   <Input
                     {...field}
                     id={field.name}
@@ -163,7 +172,9 @@ export default function AccountForm({ clans }: AccountFormProps) {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor={field.name}>Clan</FieldLabel>
+                  <FieldLabel htmlFor={field.name}>
+                    Clan<span className="text-red-500 -ml-1">*</span>
+                  </FieldLabel>
                   <Select
                     name={field.name}
                     value={field.value}
