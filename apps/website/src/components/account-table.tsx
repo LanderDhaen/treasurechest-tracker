@@ -19,7 +19,7 @@ export default function AccountTable({ accounts }: AccountTableProps) {
   const router = useRouter();
 
   const handeClick = (tag: string) => {
-    router.push(`/accounts/${tag}/dashboard`);
+    router.push(`/accounts/${tag}`);
   };
 
   return (
