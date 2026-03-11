@@ -2,9 +2,10 @@
 
 import { getClanByTag } from "@/queries/clan";
 import { accountFormSchema, AccountFormValues } from "@/schemas/account";
-import { createAccount } from "@/queries/account";
+import { createAccount, updateAccount } from "@/queries/account";
 import { getServerSession } from "@/queries/auth";
 import { DatabaseError } from "pg";
+import { revalidatePath } from "next/cache";
 
 export const submitAccountForm = async (formData: AccountFormValues) => {
   const result = accountFormSchema.safeParse(formData);
@@ -73,4 +74,10 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
       };
     }
   }
+};
+
+export const upgradeTownhall = async (accountId: number, townhall: number) => {
+  const account = await updateAccount(accountId, { townhall });
+
+  revalidatePath(`/accounts/${account.tag}`);
 };

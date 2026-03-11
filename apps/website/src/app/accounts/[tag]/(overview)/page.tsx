@@ -3,6 +3,7 @@ import AccountInformationItem from "@/components/account-information-item";
 import { FilterConfig } from "@/types/common";
 import { notFound } from "next/navigation";
 import Dashboard from "@/components/dashboard";
+import AccountActions from "@/components/account-actions";
 
 export default async function Page({
   params,
@@ -24,6 +25,7 @@ export default async function Page({
   return (
     <div className="flex flex-col gap-4">
       <AccountInformationItem account={account} />
+      <AccountActions account={account} />
       <Dashboard filters={filters} hideAccountCard />
     </div>
   );

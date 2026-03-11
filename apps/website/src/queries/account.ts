@@ -5,7 +5,8 @@ import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 import { expressionBuilder } from "kysely";
 import { Database } from "@/db/types/database";
-import { InsertableAccount } from "@/db/types/account";
+import { InsertableAccount, UpdateableAccount } from "@/db/types/account";
+import { id } from "zod/v4/locales";
 
 export const getTotalAccounts = async () => {
   const result = await db
@@ -173,4 +174,25 @@ export const createAccount = async ({
     .executeTakeFirstOrThrow();
 
   return account;
+};
+
+export const updateAccount = async (
+  accountId: number,
+  data: UpdateableAccount,
+) => {
+  const { name, tag, townhall, clanId } = data;
+
+  const updatedAccount = await db
+    .updateTable("account")
+    .set({
+      name,
+      tag,
+      townhall,
+      clanId,
+    })
+    .where("account.id", "=", accountId)
+    .returningAll()
+    .executeTakeFirstOrThrow();
+
+  return updatedAccount;
 };
