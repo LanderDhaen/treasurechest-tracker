@@ -36,13 +36,13 @@ export default function EventTypeChart({ types }: EventTypeChartProps) {
       <BarChart
         accessibilityLayer
         data={chartData}
-        layout="vertical"
+        layout="horizontal"
         margin={{
-          right: 20,
+          top: 20,
         }}
       >
-        <XAxis type="number" dataKey="count" hide />
-        <YAxis
+        <YAxis type="number" dataKey="count" hide />
+        <XAxis
           dataKey="name"
           type="category"
           tickLine={false}
@@ -84,7 +84,7 @@ export default function EventTypeChart({ types }: EventTypeChartProps) {
         >
           <LabelList
             dataKey="count"
-            position="right"
+            position="top"
             fill={chartConfig.count.color}
           />
         </Bar>
