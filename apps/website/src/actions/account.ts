@@ -2,7 +2,11 @@
 
 import { getClanByTag } from "@/queries/clan";
 import { accountFormSchema, AccountFormValues } from "@/schemas/account";
-import { createAccount, updateAccount } from "@/queries/account";
+import {
+  createAccount,
+  getAccountById,
+  updateAccount,
+} from "@/queries/account";
 import { getServerSession } from "@/queries/auth";
 import { DatabaseError } from "pg";
 import { revalidatePath } from "next/cache";
@@ -76,7 +80,7 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
   }
 };
 
-export const upgradeTownhall = async (accountId: number, townhall: number) => {
+export const upgradeTownhall = async (accountId: number) => {
   const session = await getServerSession();
 
   if (!session) {
@@ -89,9 +93,39 @@ export const upgradeTownhall = async (accountId: number, townhall: number) => {
     };
   }
 
-  const account = await updateAccount(accountId, { townhall });
+  const account = await getAccountById(accountId);
 
-  revalidatePath(`/accounts/${account.tag}`);
+  if (!account) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
 
-  return { data: account, error: null };
+  const updatedAccount = await updateAccount(account.id, {
+    townhall: account.townhall + 1,
+  });
+
+  if (!updatedAccount) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
+
+  revalidatePath(`/accounts/${updatedAccount.tag}`);
+
+  return {
+    data: {
+      name: updatedAccount.name,
+      townhall: updatedAccount.townhall,
+    },
+    error: null,
+  };
 };

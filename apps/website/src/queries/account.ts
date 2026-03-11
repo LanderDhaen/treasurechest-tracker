@@ -6,7 +6,6 @@ import { FilterConfig } from "@/types/common";
 import { expressionBuilder } from "kysely";
 import { Database } from "@/db/types/database";
 import { InsertableAccount, UpdateableAccount } from "@/db/types/account";
-import { id } from "zod/v4/locales";
 
 export const getTotalAccounts = async () => {
   const result = await db
@@ -113,6 +112,16 @@ export const getAccountByTag = async (tag: string) => {
   return account;
 };
 
+export const getAccountById = async (accountId: number) => {
+  const account = await db
+    .selectFrom("account")
+    .select(["account.id", "account.townhall"])
+    .where("account.id", "=", accountId)
+    .executeTakeFirst();
+
+  return account;
+};
+
 export const getChestCountPerAccount = async (filters: FilterConfig) => {
   const accounts = await db
     .with("filtered_chest", () => withFilteredChests(filters))
@@ -191,8 +200,8 @@ export const updateAccount = async (
       clanId,
     })
     .where("account.id", "=", accountId)
-    .returningAll()
-    .executeTakeFirstOrThrow();
+    .returning(["account.name", "account.townhall", "account.tag"])
+    .executeTakeFirst();
 
   return updatedAccount;
 };

@@ -25,15 +25,14 @@ export default function AccountActions({ account }: AccountActionsProps) {
   const handleUpgradeTH = async () => {
     setIsLoading(true);
 
-    const { data, error } = await upgradeTownhall(
-      account.id,
-      account.townhall + 1,
-    );
+    const { data: updatedAccount, error } = await upgradeTownhall(account.id);
 
     if (error) {
       toast.error(error.message);
     } else {
-      toast.success(`${account.name} has been upgraded to TH${data.townhall}!`);
+      toast.success(
+        `${updatedAccount.name} has been upgraded to TH${updatedAccount.townhall}!`,
+      );
     }
 
     setIsLoading(false);
