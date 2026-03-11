@@ -30,17 +30,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(montserrat.className)}>
-        <NuqsAdapter>
-          <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset>
-              <div className="flex flex-col flex-1 px-4 pb-4">
-                <Header />
-                {children}
-              </div>
-            </SidebarInset>
-          </SidebarProvider>
-        </NuqsAdapter>
+        <SidebarProvider>
+          <AppSidebar />
+          <div className="flex flex-col flex-1 px-4 pb-4">
+            <Header />
+            {children}
+          </div>
+        </SidebarProvider>
         <Toaster position="bottom-right" />
       </body>
     </html>
