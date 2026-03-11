@@ -8,9 +8,9 @@ import {
 
 export interface AccountTable {
   id: Generated<number>;
-  createdAt: ColumnType<Date>;
-  updatedAt: ColumnType<Date>;
-  isActive: ColumnType<boolean>;
+  createdAt: ColumnType<Date, never, never>;
+  updatedAt: ColumnType<Date, never, never>;
+  isActive: ColumnType<boolean, never, never>;
   name: ColumnType<string>;
   tag: ColumnType<string>;
   townhall: ColumnType<number>;

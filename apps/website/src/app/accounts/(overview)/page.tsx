@@ -1,4 +1,4 @@
-import { getAllAccounts, getTotalAccounts } from "@/actions/account";
+import { getAllAccounts, getTotalAccounts } from "@/queries/account";
 import {
   Card,
   CardContent,
@@ -12,6 +12,10 @@ import { accountSearchParamsSchema } from "@/schemas/account";
 import SortingMenu from "@/components/sorting-menu";
 import { SORT_OPTIONS } from "@/constants/account";
 import SearchBar from "@/components/searchbar";
+import AuthGuard from "@/components/auth-guard";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Plus } from "lucide-react";
 
 export default async function Page({
   searchParams,
@@ -48,6 +52,13 @@ export default async function Page({
             currentDirection={direction}
             sortingOptions={SORT_OPTIONS}
           />
+          <AuthGuard>
+            <Button asChild variant="outline" size="icon">
+              <Link href="/accounts/add">
+                <Plus />
+              </Link>
+            </Button>
+          </AuthGuard>
         </div>
         <AccountTable accounts={accounts} />
         {totalPages > 0 && (

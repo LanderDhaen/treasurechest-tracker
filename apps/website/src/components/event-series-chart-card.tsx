@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
-import { getChestCountPerSeries } from "@/actions/series";
+import { getChestCountPerSeries } from "@/queries/series";
 import EventSeriesChart from "./event-series-chart";
 
 interface EventSeriesChartCardProps {

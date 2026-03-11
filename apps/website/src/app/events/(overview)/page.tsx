@@ -1,4 +1,4 @@
-import { getAllEvents, getTotalEvents } from "@/actions/event";
+import { getAllEvents, getTotalEvents } from "@/queries/event";
 import {
   Card,
   CardContent,
@@ -12,7 +12,7 @@ import { eventSearchParamsSchema } from "@/schemas/event";
 import SortingMenu from "@/components/sorting-menu";
 import { SORT_OPTIONS } from "@/constants/event";
 import SearchBar from "@/components/searchbar";
-import { getServerSession } from "@/actions/auth";
+import { getServerSession } from "@/queries/auth";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plus } from "lucide-react";

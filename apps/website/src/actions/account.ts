@@ -1,155 +1,76 @@
-import { db } from "@/db";
-import { AccountSearchParams } from "@/schemas/account";
-import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
-import { withFilteredChests } from "./chest";
-import { FilterConfig } from "@/types/common";
-import { expressionBuilder } from "kysely";
-import { Database } from "@/db/types/database";
+"use server";
 
-export const getTotalAccounts = async () => {
-  const result = await db
-    .selectFrom("account")
-    .where("account.isActive", "=", true)
-    .select((eb) => eb.fn.countAll<number>().as("total"))
-    .executeTakeFirstOrThrow();
-  return result.total;
-};
+import { getClanByTag } from "@/queries/clan";
+import { accountFormSchema, AccountFormValues } from "@/schemas/account";
+import { createAccount } from "@/queries/account";
+import { getServerSession } from "@/queries/auth";
+import { DatabaseError } from "pg";
 
-export const getAllAccounts = async ({
-  search,
-  page,
-  pageSize,
-  sortBy,
-  direction,
-}: AccountSearchParams) => {
-  let query = db
-    .selectFrom("account")
-    .innerJoin("clan", "account.clanId", "clan.id")
-    .where("account.isActive", "=", true);
+export const submitAccountForm = async (formData: AccountFormValues) => {
+  const result = accountFormSchema.safeParse(formData);
 
-  // Filtering
-
-  if (search) {
-    query = query.where((eb) =>
-      eb.or([
-        eb("account.name", "ilike", `%${search}%`),
-        eb("clan.name", "ilike", `%${search}%`),
-      ]),
-    );
+  if (!result.success) {
+    return {
+      data: null,
+      error: {
+        code: "VALIDATION_ERROR",
+        message: "These values are invalid.",
+      },
+    };
   }
 
-  const countQuery = await query
-    .select((eb) => eb.fn.countAll<number>().as("result"))
-    .executeTakeFirstOrThrow();
+  const { name, tag, townhall, clanTag } = result.data;
 
-  // Sorting
+  const session = await getServerSession();
 
-  if (sortBy === "townhall") {
-    query = query.orderBy("account.townhall", direction);
+  if (!session) {
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to create an account.",
+      },
+    };
   }
 
-  if (sortBy === "name") {
-    query = query.orderBy("account.name", direction);
+  const clan = await getClanByTag(clanTag);
+
+  if (!clan) {
+    return {
+      data: null,
+      error: {
+        code: "CLAN_NOT_FOUND",
+        message: "The specified clan was not found.",
+      },
+    };
   }
 
-  if (sortBy === "clan") {
-    query = query.orderBy("clan.rank", direction);
+  try {
+    const account = await createAccount({
+      name,
+      tag,
+      townhall,
+      clanId: clan.id,
+    });
+
+    return { data: account, error: null };
+  } catch (error) {
+    if (error instanceof DatabaseError && error.code === "23505") {
+      return {
+        data: null,
+        error: {
+          code: "ACCOUNT_EXISTS",
+          message: "An account with this tag already exists.",
+        },
+      };
+    } else {
+      return {
+        data: null,
+        error: {
+          code: "UNKNOWN_ERROR",
+          message: "An unknown error occurred. Please try again later.",
+        },
+      };
+    }
   }
-
-  query = query.orderBy("account.id", direction); // Secondary sort to ensure consistent order
-
-  // Pagination
-
-  query = query.limit(pageSize).offset((page - 1) * pageSize);
-
-  // Selecting
-
-  const accounts = await query
-    .select((eb) => [
-      "account.name",
-      "account.tag",
-      "account.townhall",
-      jsonObjectFrom(
-        eb
-          .selectFrom("clan")
-          .select(["clan.id", "clan.name", "clan.tag"])
-          .whereRef("clan.id", "=", "account.clanId"),
-      )
-        .$notNull()
-        .as("clan"),
-    ])
-    .execute();
-
-  return {
-    accounts,
-    rows: countQuery.result,
-    totalPages: Math.ceil(countQuery.result / pageSize),
-  };
-};
-
-export const getAccountByTag = async (tag: string) => {
-  const account = await db
-    .selectFrom("account")
-    .select((eb) => [
-      "account.id",
-      "account.tag",
-      "account.townhall",
-      "account.name",
-      jsonObjectFrom(
-        eb
-          .selectFrom("clan")
-          .select(["clan.id", "clan.name", "clan.tag"])
-          .whereRef("clan.id", "=", "account.clanId"),
-      )
-        .$notNull()
-        .as("clan"),
-    ])
-    .where("account.isActive", "=", true)
-    .where("account.tag", "=", tag)
-    .executeTakeFirst();
-
-  return account;
-};
-
-export const getChestCountPerAccount = async (filters: FilterConfig) => {
-  const accounts = await db
-    .with("filtered_chest", () => withFilteredChests(filters))
-    .selectFrom("account")
-    .leftJoin("filtered_chest", "filtered_chest.accountId", "account.id")
-    .select((eb) => [
-      "account.name",
-      eb.fn.count<number>("filtered_chest.id").as("count"),
-      jsonArrayFrom(
-        eb
-          .selectFrom("rarity")
-          .innerJoin("filtered_chest", "filtered_chest.rarityId", "rarity.id")
-          .select((eb) => [
-            "rarity.name",
-            eb.fn.count<number>("filtered_chest.id").as("count"),
-          ])
-          .whereRef("filtered_chest.accountId", "=", "account.id")
-          .groupBy(["rarity.id", "rarity.name"])
-          .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
-      ).as("rarities"),
-    ])
-    .groupBy(["account.id", "account.name"])
-    .orderBy("count", "desc")
-    .orderBy("account.name", "asc")
-    .execute();
-
-  return accounts;
-};
-
-export const withFilteredAccounts = (filters: FilterConfig) => {
-  const eb = expressionBuilder<Database>();
-
-  let query = eb.selectFrom("account");
-
-  const { accountId } = filters;
-
-  if (accountId) {
-    query = query.where("account.id", "=", accountId);
-  }
-
-  return query.selectAll();
 };

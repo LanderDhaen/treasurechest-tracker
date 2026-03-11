@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import Header from "@/components/header";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "sonner";
 
 const montserrat = Montserrat({
@@ -30,17 +29,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(montserrat.className)}>
-        <NuqsAdapter>
-          <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset>
-              <div className="flex flex-col flex-1 px-4 pb-4">
-                <Header />
-                {children}
-              </div>
-            </SidebarInset>
-          </SidebarProvider>
-        </NuqsAdapter>
+        <SidebarProvider>
+          <AppSidebar />
+          <div className="flex flex-col flex-1 px-4 pb-4">
+            <Header />
+            {children}
+          </div>
+        </SidebarProvider>
         <Toaster position="bottom-right" />
       </body>
     </html>

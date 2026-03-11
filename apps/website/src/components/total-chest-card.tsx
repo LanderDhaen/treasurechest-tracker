@@ -1,5 +1,5 @@
-import { getTotalChests } from "@/actions/chest";
-import { getPossibleChestCount } from "@/actions/event";
+import { getTotalChests } from "@/queries/chest";
+import { getPossibleChestCount } from "@/queries/event";
 import {
   Card,
   CardHeader,

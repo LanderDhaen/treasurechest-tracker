@@ -16,7 +16,7 @@ import { calculateTimeAgo, formatDateTime } from "@/lib/utils";
 
 import RarityBadge from "@/components/rarity-badge";
 import { FilterConfig } from "@/types/common";
-import { getLatestChest } from "@/actions/chest";
+import { getLatestChest } from "@/queries/chest";
 
 interface LatestChestCardProps {
   filters: FilterConfig;

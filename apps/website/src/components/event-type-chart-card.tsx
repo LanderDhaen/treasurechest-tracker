@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
 import EventTypeChart from "./event-type-chart";
-import { getChestCountPerType } from "@/actions/type";
+import { getChestCountPerType } from "@/queries/type";
 
 interface EventTypeChartCardProps {
   filters: FilterConfig;

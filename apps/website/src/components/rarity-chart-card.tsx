@@ -1,4 +1,4 @@
-import { getChestCountPerRarity } from "@/actions/rarity";
+import { getChestCountPerRarity } from "@/queries/rarity";
 import {
   Card,
   CardContent,
