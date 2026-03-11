@@ -4,6 +4,7 @@ import { CircleFadingArrowUp } from "lucide-react";
 import { Button } from "./ui/button";
 import { upgradeTownhall } from "@/actions/account";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface AccountActionsProps {
   account: {
@@ -24,7 +25,16 @@ export default function AccountActions({ account }: AccountActionsProps) {
   const handleUpgradeTH = async () => {
     setIsLoading(true);
 
-    await upgradeTownhall(account.id, account.townhall + 1);
+    const { data, error } = await upgradeTownhall(
+      account.id,
+      account.townhall + 1,
+    );
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success(`${account.name} has been upgraded to TH${data.townhall}!`);
+    }
 
     setIsLoading(false);
   };

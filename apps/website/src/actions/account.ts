@@ -77,7 +77,21 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
 };
 
 export const upgradeTownhall = async (accountId: number, townhall: number) => {
+  const session = await getServerSession();
+
+  if (!session) {
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to update an account.",
+      },
+    };
+  }
+
   const account = await updateAccount(accountId, { townhall });
 
   revalidatePath(`/accounts/${account.tag}`);
+
+  return { data: account, error: null };
 };
