@@ -18,6 +18,7 @@ export default async function Page({
   }
 
   const filters = {
+    excludeUntrackedAccounts: false,
     eventId: event.id,
   } satisfies FilterConfig;
 

@@ -128,10 +128,15 @@ export const getAccountById = async (accountId: number) => {
 export const getChestCountPerAccount = async (filters: FilterConfig) => {
   const accounts = await db
     .with("filtered_chest", () => withFilteredChests(filters))
-    .selectFrom("account")
-    .leftJoin("filtered_chest", "filtered_chest.accountId", "account.id")
+    .with("filtered_account", () => withFilteredAccounts(filters))
+    .selectFrom("filtered_account")
+    .leftJoin(
+      "filtered_chest",
+      "filtered_chest.accountId",
+      "filtered_account.id",
+    )
     .select((eb) => [
-      "account.name",
+      "filtered_account.name",
       eb.fn.count<number>("filtered_chest.id").as("count"),
       jsonArrayFrom(
         eb
@@ -141,15 +146,14 @@ export const getChestCountPerAccount = async (filters: FilterConfig) => {
             "rarity.name",
             eb.fn.count<number>("filtered_chest.id").as("count"),
           ])
-          .whereRef("filtered_chest.accountId", "=", "account.id")
+          .whereRef("filtered_chest.accountId", "=", "filtered_account.id")
           .groupBy(["rarity.id", "rarity.name"])
           .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
       ).as("rarities"),
     ])
-    .where("account.isActive", "=", true)
-    .groupBy(["account.id", "account.name"])
+    .groupBy(["filtered_account.id", "filtered_account.name"])
     .orderBy("count", "desc")
-    .orderBy("account.name", "asc")
+    .orderBy("filtered_account.name", "asc")
     .execute();
 
   return accounts;
@@ -160,7 +164,11 @@ export const withFilteredAccounts = (filters: FilterConfig) => {
 
   let query = eb.selectFrom("account").where("account.isActive", "=", true);
 
-  const { accountId } = filters;
+  const { excludeUntrackedAccounts, accountId } = filters;
+
+  if (excludeUntrackedAccounts === true) {
+    query = query.where("account.isTracked", "=", true);
+  }
 
   if (accountId) {
     query = query.where("account.id", "=", accountId);

@@ -162,7 +162,11 @@ export const withFilteredChests = (filters: FilterConfig) => {
     .innerJoin("account", "chest.accountId", "account.id")
     .where("account.isActive", "=", true);
 
-  const { accountId, eventId } = filters;
+  const { excludeUntrackedAccounts, accountId, eventId } = filters;
+
+  if (excludeUntrackedAccounts === true) {
+    query = query.where("account.isTracked", "=", true);
+  }
 
   if (accountId) {
     query = query.where("account.id", "=", accountId);
