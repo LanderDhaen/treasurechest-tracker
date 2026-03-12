@@ -6,6 +6,18 @@ import { deleteAccount, upgradeTownhall } from "@/actions/account";
 import { useState } from "react";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogMedia,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface AccountActionsProps {
   account: {
@@ -66,14 +78,33 @@ export default function AccountActions({ account }: AccountActionsProps) {
       >
         <CircleFadingArrowUp /> Upgrade TH
       </Button>
-      <Button
-        variant="destructive"
-        size="icon-sm"
-        onClick={handleDeleteAccount}
-        disabled={isLoading}
-      >
-        <Trash2 />
-      </Button>
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <Button variant="destructive" size="icon-sm" disabled={isLoading}>
+            <Trash2 />
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent size="sm">
+          <AlertDialogHeader>
+            <AlertDialogMedia className="bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive">
+              <Trash2 />
+            </AlertDialogMedia>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will permanently delete this account.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel variant="outline">Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              variant="destructive"
+              onClick={handleDeleteAccount}
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
