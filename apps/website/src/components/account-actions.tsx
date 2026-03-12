@@ -1,6 +1,6 @@
 "use client";
 
-import { CircleFadingArrowUp, Play, Trash2, X } from "lucide-react";
+import { CircleFadingArrowUp, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   changeTrackingStatus,
@@ -22,7 +22,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Spinner } from "./ui/spinner";
+import { Switch } from "./ui/switch";
+import { Label } from "./ui/label";
+import { Separator } from "./ui/separator";
 
 interface AccountActionsProps {
   account: {
@@ -41,6 +43,22 @@ interface AccountActionsProps {
 export default function AccountActions({ account }: AccountActionsProps) {
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleUpgradeTH = async () => {
+    setIsLoading(true);
+
+    const { data: updatedAccount, error } = await upgradeTownhall(account.id);
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success(
+        `${updatedAccount.name} has been upgraded to TH${updatedAccount.townhall}!`,
+      );
+    }
+
+    setIsLoading(false);
+  };
+
   const handleChangeTrackingStatus = async () => {
     setIsLoading(true);
 
@@ -56,22 +74,6 @@ export default function AccountActions({ account }: AccountActionsProps) {
         : `${updatedAccount.name} is no longer being tracked.`;
 
       toast.success(message);
-    }
-
-    setIsLoading(false);
-  };
-
-  const handleUpgradeTH = async () => {
-    setIsLoading(true);
-
-    const { data: updatedAccount, error } = await upgradeTownhall(account.id);
-
-    if (error) {
-      toast.error(error.message);
-    } else {
-      toast.success(
-        `${updatedAccount.name} has been upgraded to TH${updatedAccount.townhall}!`,
-      );
     }
 
     setIsLoading(false);
@@ -95,24 +97,7 @@ export default function AccountActions({ account }: AccountActionsProps) {
 
   return (
     <div className="flex justify-between">
-      <div className="flex gap-2">
-        <Button
-          variant="outline"
-          className="bg-white"
-          size="sm"
-          onClick={handleChangeTrackingStatus}
-          disabled={isLoading}
-        >
-          {account.isTracked ? (
-            <>
-              <X /> Stop Tracking
-            </>
-          ) : (
-            <>
-              <Spinner /> Start Tracking
-            </>
-          )}
-        </Button>
+      <div className="flex gap-4">
         <Button
           variant="outline"
           className="bg-white"
@@ -122,6 +107,19 @@ export default function AccountActions({ account }: AccountActionsProps) {
         >
           <CircleFadingArrowUp /> Upgrade TH
         </Button>
+        <Separator orientation="vertical" />
+        <div className="flex items-center gap-2">
+          <Switch
+            id="tracking"
+            className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500"
+            checked={account.isTracked}
+            onCheckedChange={handleChangeTrackingStatus}
+            disabled={isLoading}
+          />
+          <Label htmlFor="tracking" className="text-sm text-muted-foreground">
+            Tracking
+          </Label>
+        </div>
       </div>
       <AlertDialog>
         <AlertDialogTrigger asChild>

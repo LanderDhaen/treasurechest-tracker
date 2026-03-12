@@ -80,56 +80,6 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
   }
 };
 
-export const changeTrackingStatus = async (accountId: number) => {
-  const session = await getServerSession();
-
-  if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to update an account.",
-      },
-    };
-  }
-
-  const account = await getAccountById(accountId);
-
-  if (!account) {
-    return {
-      data: null,
-      error: {
-        code: "ACCOUNT_NOT_FOUND",
-        message: "The specified account was not found.",
-      },
-    };
-  }
-
-  const updatedAccount = await updateAccount(account.id, {
-    isTracked: !account.isTracked,
-  });
-
-  if (!updatedAccount) {
-    return {
-      data: null,
-      error: {
-        code: "ACCOUNT_NOT_FOUND",
-        message: "The specified account was not found.",
-      },
-    };
-  }
-
-  revalidatePath(`/accounts/${updatedAccount.tag}`);
-
-  return {
-    data: {
-      name: updatedAccount.name,
-      isTracked: updatedAccount.isTracked,
-    },
-    error: null,
-  };
-};
-
 export const upgradeTownhall = async (accountId: number) => {
   const session = await getServerSession();
 
@@ -175,6 +125,56 @@ export const upgradeTownhall = async (accountId: number) => {
     data: {
       name: updatedAccount.name,
       townhall: updatedAccount.townhall,
+    },
+    error: null,
+  };
+};
+
+export const changeTrackingStatus = async (accountId: number) => {
+  const session = await getServerSession();
+
+  if (!session) {
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to update an account.",
+      },
+    };
+  }
+
+  const account = await getAccountById(accountId);
+
+  if (!account) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
+
+  const updatedAccount = await updateAccount(account.id, {
+    isTracked: !account.isTracked,
+  });
+
+  if (!updatedAccount) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
+
+  revalidatePath(`/accounts/${updatedAccount.tag}`);
+
+  return {
+    data: {
+      name: updatedAccount.name,
+      isTracked: updatedAccount.isTracked,
     },
     error: null,
   };
