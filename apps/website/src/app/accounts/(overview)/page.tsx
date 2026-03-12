@@ -41,7 +41,7 @@ export default async function Page({
       <CardHeader>
         <CardTitle>Accounts</CardTitle>
         <CardDescription>
-          {`Currently tracking ${count} account${count !== 1 ? "s" : ""}.`}
+          {`Currently  ${count} account${count !== 1 ? "s" : ""} have been created.`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
