@@ -14,6 +14,7 @@ export interface AccountTable {
   name: ColumnType<string>;
   tag: ColumnType<string>;
   townhall: ColumnType<number>;
+  isTracked: ColumnType<boolean, never, boolean>;
   clanId: ColumnType<number>;
 }
 

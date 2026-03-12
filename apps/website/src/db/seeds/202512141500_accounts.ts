@@ -53,6 +53,7 @@ export const seed = async (db: Kysely<any>) => {
         name: "Lander™",
         tag: "8UQ9LGYQ",
         townhall: 16,
+        isTracked: false,
         clanId: 4, // DL Mini
       },
       {
@@ -85,6 +86,7 @@ export const seed = async (db: Kysely<any>) => {
         name: "FC Gods",
         tag: "PULUP0L9",
         townhall: 11,
+        isTracked: false,
         clanId: 4, // DL Mini
       },
       {
@@ -93,6 +95,7 @@ export const seed = async (db: Kysely<any>) => {
         name: "EXP Flickzie",
         tag: "88G9UPCU",
         townhall: 10,
+        isTracked: false,
         clanId: 4, // DL Mini
       },
       {
@@ -101,6 +104,7 @@ export const seed = async (db: Kysely<any>) => {
         name: "Lvl.10 Lander",
         tag: "L2VP2C2P0",
         townhall: 10,
+        isTracked: false,
         clanId: 4, // DL Mini
       },
       {
@@ -109,6 +113,7 @@ export const seed = async (db: Kysely<any>) => {
         name: "Peace",
         tag: "28U8RUVL",
         townhall: 10,
+        isTracked: false,
         clanId: 4, // DL Mini
       },
       {
@@ -117,6 +122,7 @@ export const seed = async (db: Kysely<any>) => {
         name: "Lvl.9 Lander",
         tag: "PUCV28QP9",
         townhall: 9,
+        isTracked: false,
         clanId: 4, // DL Mini
       },
       {
@@ -125,6 +131,7 @@ export const seed = async (db: Kysely<any>) => {
         name: "Lander - TH8",
         tag: "YGJL820VP",
         townhall: 8,
+        isTracked: false,
         clanId: 4, // DL Mini
       },
       {
@@ -132,6 +139,7 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: "2025-12-14 15:00:00",
         name: "Lvl.8 Lander",
         tag: "QY0RVPYQ",
+        isTracked: false,
         townhall: 8,
         clanId: 4, // DL Mini
       },
@@ -139,6 +147,7 @@ export const seed = async (db: Kysely<any>) => {
         createdAt: "2025-12-14 15:00:00",
         updatedAt: "2025-12-14 15:00:00",
         name: "Lvl.7 Lander",
+        isTracked: false,
         tag: "LYC0RRUUL",
         townhall: 7,
         clanId: 4, // DL Mini

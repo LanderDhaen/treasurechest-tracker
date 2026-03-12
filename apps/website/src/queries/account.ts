@@ -70,6 +70,7 @@ export const getAllAccounts = async ({
       "account.name",
       "account.tag",
       "account.townhall",
+      "account.isTracked",
       jsonObjectFrom(
         eb
           .selectFrom("clan")
@@ -96,6 +97,7 @@ export const getAccountByTag = async (tag: string) => {
       "account.tag",
       "account.townhall",
       "account.name",
+      "account.isTracked",
       jsonObjectFrom(
         eb
           .selectFrom("clan")

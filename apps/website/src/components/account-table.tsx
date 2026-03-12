@@ -1,6 +1,5 @@
 "use client";
 
-import { AccountTableEntry } from "@/types/account";
 import {
   Table,
   TableBody,
@@ -10,9 +9,20 @@ import {
   TableRow,
 } from "./ui/table";
 import { useRouter } from "next/navigation";
+import AccountTrackedBage from "./account-tracked-badge";
 
 interface AccountTableProps {
-  accounts: AccountTableEntry[];
+  accounts: {
+    name: string;
+    tag: string;
+    isTracked: boolean;
+    townhall: number;
+    clan: {
+      id: number;
+      name: string;
+      tag: string;
+    };
+  }[];
 }
 
 export default function AccountTable({ accounts }: AccountTableProps) {
@@ -27,8 +37,9 @@ export default function AccountTable({ accounts }: AccountTableProps) {
       <Table>
         <TableHeader className="bg-muted">
           <TableRow>
-            <TableHead className="font-bold">Tag</TableHead>
-            <TableHead className="font-bold">Townhall</TableHead>
+            <TableHead className="font-bold w-36">Tag</TableHead>
+            <TableHead className="font-bold w-24">Status</TableHead>
+            <TableHead className="font-bold w-24">Townhall</TableHead>
             <TableHead className="font-bold">Name</TableHead>
             <TableHead className="font-bold">Clan</TableHead>
           </TableRow>
@@ -37,7 +48,7 @@ export default function AccountTable({ accounts }: AccountTableProps) {
         <TableBody>
           {accounts.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={4} className="text-center italic">
+              <TableCell colSpan={5} className="text-center italic">
                 No accounts found.
               </TableCell>
             </TableRow>
@@ -49,6 +60,9 @@ export default function AccountTable({ accounts }: AccountTableProps) {
                 className="hover:cursor-pointer"
               >
                 <TableCell>#{account.tag}</TableCell>
+                <TableCell>
+                  <AccountTrackedBage isTracked={account.isTracked} />
+                </TableCell>
                 <TableCell>{account.townhall}</TableCell>
                 <TableCell>{account.name}</TableCell>
                 <TableCell>{account.clan.name}</TableCell>
