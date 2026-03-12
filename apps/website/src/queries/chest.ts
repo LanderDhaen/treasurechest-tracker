@@ -157,17 +157,28 @@ export const getPeakOpeningHourData = async (filters: FilterConfig) => {
 export const withFilteredChests = (filters: FilterConfig) => {
   const eb = expressionBuilder<Database>();
 
-  let query = eb.selectFrom("chest");
+  let query = eb
+    .selectFrom("chest")
+    .innerJoin("account", "chest.accountId", "account.id")
+    .where("account.isActive", "=", true);
 
   const { accountId, eventId } = filters;
 
   if (accountId) {
-    query = query.where("chest.accountId", "=", accountId);
+    query = query.where("account.id", "=", accountId);
   }
 
   if (eventId) {
     query = query.where("chest.eventId", "=", eventId);
   }
 
-  return query.selectAll();
+  return query.select([
+    "chest.id",
+    "chest.rarityId",
+    "chest.rewardId",
+    "chest.accountId",
+    "chest.eventId",
+    "chest.amount",
+    "chest.openedAt",
+  ]);
 };

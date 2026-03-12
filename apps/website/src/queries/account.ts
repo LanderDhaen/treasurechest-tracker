@@ -117,6 +117,7 @@ export const getAccountById = async (accountId: number) => {
     .selectFrom("account")
     .select(["account.id", "account.townhall"])
     .where("account.id", "=", accountId)
+    .where("account.isActive", "=", true)
     .executeTakeFirst();
 
   return account;
@@ -143,6 +144,7 @@ export const getChestCountPerAccount = async (filters: FilterConfig) => {
           .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
       ).as("rarities"),
     ])
+    .where("account.isActive", "=", true)
     .groupBy(["account.id", "account.name"])
     .orderBy("count", "desc")
     .orderBy("account.name", "asc")
@@ -154,7 +156,7 @@ export const getChestCountPerAccount = async (filters: FilterConfig) => {
 export const withFilteredAccounts = (filters: FilterConfig) => {
   const eb = expressionBuilder<Database>();
 
-  let query = eb.selectFrom("account");
+  let query = eb.selectFrom("account").where("account.isActive", "=", true);
 
   const { accountId } = filters;
 
