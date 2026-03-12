@@ -189,11 +189,12 @@ export const updateAccount = async (
   accountId: number,
   data: UpdateableAccount,
 ) => {
-  const { name, tag, townhall, clanId } = data;
+  const { isActive, name, tag, townhall, clanId } = data;
 
   const updatedAccount = await db
     .updateTable("account")
     .set({
+      isActive,
       name,
       tag,
       townhall,

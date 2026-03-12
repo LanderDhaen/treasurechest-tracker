@@ -10,7 +10,7 @@ export interface AccountTable {
   id: Generated<number>;
   createdAt: ColumnType<Date, never, never>;
   updatedAt: ColumnType<Date, never, never>;
-  isActive: ColumnType<boolean, never, never>;
+  isActive: ColumnType<boolean, never, boolean>;
   name: ColumnType<string>;
   tag: ColumnType<string>;
   townhall: ColumnType<number>;

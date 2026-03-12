@@ -1,10 +1,11 @@
 "use client";
 
-import { CircleFadingArrowUp } from "lucide-react";
+import { CircleFadingArrowUp, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
-import { upgradeTownhall } from "@/actions/account";
+import { deleteAccount, upgradeTownhall } from "@/actions/account";
 import { useState } from "react";
 import { toast } from "sonner";
+import { redirect } from "next/navigation";
 
 interface AccountActionsProps {
   account: {
@@ -38,8 +39,24 @@ export default function AccountActions({ account }: AccountActionsProps) {
     setIsLoading(false);
   };
 
+  const handleDeleteAccount = async () => {
+    setIsLoading(true);
+
+    const { data: updatedAccount, error } = await deleteAccount(account.id);
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success(`${updatedAccount.name} has been deleted.`);
+
+      redirect("/accounts");
+    }
+
+    setIsLoading(false);
+  };
+
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 justify-between">
       <Button
         variant="outline"
         className="bg-white"
@@ -48,6 +65,14 @@ export default function AccountActions({ account }: AccountActionsProps) {
         disabled={isLoading}
       >
         <CircleFadingArrowUp /> Upgrade TH
+      </Button>
+      <Button
+        variant="destructive"
+        size="icon-sm"
+        onClick={handleDeleteAccount}
+        disabled={isLoading}
+      >
+        <Trash2 />
       </Button>
     </div>
   );

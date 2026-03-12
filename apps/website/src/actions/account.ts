@@ -129,3 +129,46 @@ export const upgradeTownhall = async (accountId: number) => {
     error: null,
   };
 };
+
+export const deleteAccount = async (accountId: number) => {
+  const session = await getServerSession();
+
+  if (!session) {
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to delete an account.",
+      },
+    };
+  }
+
+  const account = await getAccountById(accountId);
+
+  if (!account) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
+
+  const updatedAccount = await updateAccount(account.id, { isActive: false });
+
+  if (!updatedAccount) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
+
+  return {
+    data: updatedAccount,
+    error: null,
+  };
+};
