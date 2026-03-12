@@ -117,7 +117,7 @@ export const getAccountByTag = async (tag: string) => {
 export const getAccountById = async (accountId: number) => {
   const account = await db
     .selectFrom("account")
-    .select(["account.id", "account.townhall"])
+    .select(["account.id", "account.townhall", "account.isTracked"])
     .where("account.id", "=", accountId)
     .where("account.isActive", "=", true)
     .executeTakeFirst();
@@ -193,20 +193,23 @@ export const updateAccount = async (
   accountId: number,
   data: UpdateableAccount,
 ) => {
-  const { isActive, name, tag, townhall, clanId } = data;
+  const { isActive, townhall, isTracked } = data;
 
   const updatedAccount = await db
     .updateTable("account")
     .set({
       updatedAt: new Date(),
       isActive,
-      name,
-      tag,
       townhall,
-      clanId,
+      isTracked,
     })
     .where("account.id", "=", accountId)
-    .returning(["account.name", "account.townhall", "account.tag"])
+    .returning([
+      "account.name",
+      "account.townhall",
+      "account.tag",
+      "account.isTracked",
+    ])
     .executeTakeFirst();
 
   return updatedAccount;

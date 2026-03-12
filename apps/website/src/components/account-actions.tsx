@@ -1,8 +1,12 @@
 "use client";
 
-import { CircleFadingArrowUp, Trash2 } from "lucide-react";
+import { CircleFadingArrowUp, Play, Trash2, X } from "lucide-react";
 import { Button } from "./ui/button";
-import { deleteAccount, upgradeTownhall } from "@/actions/account";
+import {
+  changeTrackingStatus,
+  deleteAccount,
+  upgradeTownhall,
+} from "@/actions/account";
 import { useState } from "react";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
@@ -18,6 +22,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Spinner } from "./ui/spinner";
 
 interface AccountActionsProps {
   account: {
@@ -25,6 +30,7 @@ interface AccountActionsProps {
     name: string;
     tag: string;
     townhall: number;
+    isTracked: boolean;
     clan: {
       id: number;
       name: string;
@@ -34,6 +40,26 @@ interface AccountActionsProps {
 
 export default function AccountActions({ account }: AccountActionsProps) {
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleChangeTrackingStatus = async () => {
+    setIsLoading(true);
+
+    const { data: updatedAccount, error } = await changeTrackingStatus(
+      account.id,
+    );
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      const message = updatedAccount.isTracked
+        ? `${updatedAccount.name} is now being tracked.`
+        : `${updatedAccount.name} is no longer being tracked.`;
+
+      toast.success(message);
+    }
+
+    setIsLoading(false);
+  };
 
   const handleUpgradeTH = async () => {
     setIsLoading(true);
@@ -68,16 +94,35 @@ export default function AccountActions({ account }: AccountActionsProps) {
   };
 
   return (
-    <div className="flex gap-2 justify-between">
-      <Button
-        variant="outline"
-        className="bg-white"
-        size="sm"
-        onClick={handleUpgradeTH}
-        disabled={isLoading}
-      >
-        <CircleFadingArrowUp /> Upgrade TH
-      </Button>
+    <div className="flex justify-between">
+      <div className="flex gap-2">
+        <Button
+          variant="outline"
+          className="bg-white"
+          size="sm"
+          onClick={handleChangeTrackingStatus}
+          disabled={isLoading}
+        >
+          {account.isTracked ? (
+            <>
+              <X /> Stop Tracking
+            </>
+          ) : (
+            <>
+              <Spinner /> Start Tracking
+            </>
+          )}
+        </Button>
+        <Button
+          variant="outline"
+          className="bg-white"
+          size="sm"
+          onClick={handleUpgradeTH}
+          disabled={isLoading}
+        >
+          <CircleFadingArrowUp /> Upgrade TH
+        </Button>
+      </div>
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button variant="destructive" size="icon-sm" disabled={isLoading}>
