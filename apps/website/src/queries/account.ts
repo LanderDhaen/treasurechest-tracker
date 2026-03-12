@@ -196,6 +196,7 @@ export const updateAccount = async (
   const updatedAccount = await db
     .updateTable("account")
     .set({
+      updatedAt: new Date(),
       isActive,
       name,
       tag,
