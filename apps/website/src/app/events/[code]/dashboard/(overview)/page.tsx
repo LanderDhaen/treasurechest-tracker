@@ -3,11 +3,16 @@ import EventInformationItem from "@/components/event-information-item";
 import { FilterConfig } from "@/types/common";
 import { notFound } from "next/navigation";
 import Dashboard from "@/components/dashboard";
+import { dashboardFiltersSchema } from "@/schemas/common";
+import DashboardFilters from "@/components/dashboard-filters";
+import { Separator } from "@/components/ui/separator";
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: Promise<{ code: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { code } = await params;
 
@@ -17,14 +22,20 @@ export default async function Page({
     return notFound();
   }
 
+  const rawParams = await searchParams;
+  const parsedParams = dashboardFiltersSchema.parse(rawParams);
+  const { untracked } = parsedParams;
+
   const filters = {
-    excludeUntrackedAccounts: false,
+    excludeUntrackedAccounts: untracked,
     eventId: event.id,
   } satisfies FilterConfig;
 
   return (
     <div className="flex flex-col gap-4">
       <EventInformationItem event={event} />
+      <Separator />
+      <DashboardFilters excludeUntrackedAccounts={untracked} />
       <Dashboard filters={filters} hideEventCards />
     </div>
   );

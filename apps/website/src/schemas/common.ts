@@ -9,3 +9,7 @@ export const paginationSchema = z.object({
   page: z.coerce.number().int().min(1).catch(DEFAULT_PAGE),
   pageSize: z.coerce.number().int().catch(DEFAULT_PAGE_SIZE),
 });
+
+export const dashboardFiltersSchema = z.object({
+  untracked: z.stringbool().catch(false),
+});
