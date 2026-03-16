@@ -8,6 +8,9 @@ import {
 
 export interface EventTable {
   id: Generated<number>;
+  createdAt: ColumnType<Date, never, never>;
+  updatedAt: ColumnType<Date, never, Date>;
+  isActive: ColumnType<boolean>;
   edition: ColumnType<number>;
   code: ColumnType<string>;
   startDate: ColumnType<Date>;

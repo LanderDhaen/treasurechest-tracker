@@ -6,6 +6,8 @@ import Dashboard from "@/components/dashboard";
 import { dashboardFiltersSchema } from "@/schemas/common";
 import DashboardFilters from "@/components/dashboard-filters";
 import { Separator } from "@/components/ui/separator";
+import AuthGuard from "@/components/auth-guard";
+import EventActions from "@/components/event-actions";
 
 export default async function Page({
   params,
@@ -34,6 +36,9 @@ export default async function Page({
   return (
     <div className="flex flex-col gap-4">
       <EventInformationItem event={event} />
+      <AuthGuard>
+        <EventActions event={event} />
+      </AuthGuard>
       <Separator />
       <DashboardFilters excludeUntrackedAccounts={untracked} />
       <Dashboard filters={filters} hideEventCards />

@@ -7,6 +7,7 @@ import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 import { withFilteredAccounts } from "./account";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
+import { UpdateableEvent } from "@/db/types/event";
 
 export const getTotalEvents = async () => {
   const result = await db
@@ -161,6 +162,17 @@ export const getEventByCode = async (code: string) => {
   return event;
 };
 
+export const getEventById = async (eventId: number) => {
+  const event = await db
+    .selectFrom("event")
+    .select(["event.id"])
+    .where("event.id", "=", eventId)
+    .where("event.isActive", "=", true)
+    .executeTakeFirst();
+
+  return event;
+};
+
 export const getChestCountPerEvent = async (filters: FilterConfig) => {
   const events = await db
     .with("filtered_chest", () => withFilteredChests(filters))
@@ -234,4 +246,22 @@ export const deriveEventStatus = (
     .then(EventStatus.Upcoming)
     .else(EventStatus.Ongoing)
     .end();
+};
+
+export const updateEvent = async (eventId: number, data: UpdateableEvent) => {
+  const { isActive } = data;
+
+  const updatedEvent = await db
+    .updateTable("event")
+    .set({
+      updatedAt: new Date(),
+      isActive,
+    })
+    .from("series")
+    .whereRef("series.id", "=", "event.seriesId")
+    .where("event.id", "=", eventId)
+    .returning(["event.id", "series.name", "event.edition"])
+    .executeTakeFirst();
+
+  return updatedEvent;
 };
