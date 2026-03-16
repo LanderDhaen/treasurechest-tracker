@@ -13,6 +13,7 @@ export const getTotalEvents = async () => {
   const result = await db
     .selectFrom("event")
     .select((eb) => eb.fn.countAll<number>().as("total"))
+    .where("event.isActive", "=", true)
     .executeTakeFirstOrThrow();
 
   return result.total;
@@ -32,6 +33,7 @@ export const getPossibleChestCount = async (filters: FilterConfig) => {
           .select(eb.fn.countAll<number>().as("count")),
       ).as("possibleChestCount"),
     )
+    .where("filtered_event.isActive", "=", true)
     .executeTakeFirstOrThrow();
 
   return result.possibleChestCount;
@@ -46,6 +48,7 @@ export const getAllEvents = async ({
 }: EventSearchParams) => {
   let query = db
     .selectFrom("event")
+    .where("event.isActive", "=", true)
     .innerJoin("type", "type.id", "event.typeId")
     .innerJoin("series", "series.id", "event.seriesId");
 
@@ -144,6 +147,7 @@ export const getEventByCode = async (code: string) => {
     .innerJoin("type", "type.id", "event.typeId")
     .innerJoin("series", "series.id", "event.seriesId")
     .where("event.code", "=", code)
+    .where("event.isActive", "=", true)
     .select((eb) => [
       "event.id",
       "event.code",
@@ -221,7 +225,7 @@ export const getChestCountPerEvent = async (filters: FilterConfig) => {
 export const withFilteredEvents = (filters: FilterConfig) => {
   const eb = expressionBuilder<Database>();
 
-  let query = eb.selectFrom("event");
+  let query = eb.selectFrom("event").where("event.isActive", "=", true);
 
   const { eventId } = filters;
 
