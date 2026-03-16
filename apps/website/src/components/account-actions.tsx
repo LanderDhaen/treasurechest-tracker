@@ -97,7 +97,7 @@ export default function AccountActions({ account }: AccountActionsProps) {
 
   return (
     <div className="flex justify-between">
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-center">
         <Button
           variant="outline"
           className="bg-white"
@@ -107,7 +107,10 @@ export default function AccountActions({ account }: AccountActionsProps) {
         >
           <CircleFadingArrowUp /> Upgrade TH
         </Button>
-        <Separator orientation="vertical" />
+        <Separator
+          orientation="vertical"
+          className="data-[orientation=vertical]:h-4"
+        />
         <div className="flex items-center gap-2">
           <Switch
             id="tracking"
