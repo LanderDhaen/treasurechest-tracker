@@ -1,6 +1,5 @@
 import Dashboard from "@/components/dashboard";
 import DashboardFilters from "@/components/dashboard-filters";
-import { Separator } from "@/components/ui/separator";
 import { dashboardFiltersSchema } from "@/schemas/common";
 import { FilterConfig } from "@/types/common";
 
