@@ -43,7 +43,7 @@ export default async function Page({
       <CardHeader>
         <CardTitle>Events</CardTitle>
         <CardDescription>
-          {`Currently tracking ${totalEvents} event${totalEvents !== 1 ? "s" : ""}.`}
+          {`Currently ${totalEvents} event${totalEvents !== 1 ? "s" : ""} have been created.`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">

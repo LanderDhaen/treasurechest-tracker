@@ -31,7 +31,7 @@ export default function RootLayout({
       <body className={cn(montserrat.className)}>
         <SidebarProvider>
           <AppSidebar />
-          <div className="flex flex-col flex-1 px-4 pb-4">
+          <div className="flex flex-col flex-1 px-4 pb-4 max-w-dvw">
             <Header />
             {children}
           </div>

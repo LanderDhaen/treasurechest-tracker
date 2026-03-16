@@ -2,9 +2,14 @@
 
 import { getClanByTag } from "@/queries/clan";
 import { accountFormSchema, AccountFormValues } from "@/schemas/account";
-import { createAccount } from "@/queries/account";
+import {
+  createAccount,
+  getAccountById,
+  updateAccount,
+} from "@/queries/account";
 import { getServerSession } from "@/queries/auth";
 import { DatabaseError } from "pg";
+import { revalidatePath } from "next/cache";
 
 export const submitAccountForm = async (formData: AccountFormValues) => {
   const result = accountFormSchema.safeParse(formData);
@@ -73,4 +78,147 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
       };
     }
   }
+};
+
+export const upgradeTownhall = async (accountId: number) => {
+  const session = await getServerSession();
+
+  if (!session) {
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to update an account.",
+      },
+    };
+  }
+
+  const account = await getAccountById(accountId);
+
+  if (!account) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
+
+  const updatedAccount = await updateAccount(account.id, {
+    townhall: account.townhall + 1,
+  });
+
+  if (!updatedAccount) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
+
+  revalidatePath(`/accounts/${updatedAccount.tag}`);
+
+  return {
+    data: {
+      name: updatedAccount.name,
+      townhall: updatedAccount.townhall,
+    },
+    error: null,
+  };
+};
+
+export const changeTrackingStatus = async (accountId: number) => {
+  const session = await getServerSession();
+
+  if (!session) {
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to update an account.",
+      },
+    };
+  }
+
+  const account = await getAccountById(accountId);
+
+  if (!account) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
+
+  const updatedAccount = await updateAccount(account.id, {
+    isTracked: !account.isTracked,
+  });
+
+  if (!updatedAccount) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
+
+  revalidatePath(`/accounts/${updatedAccount.tag}`);
+
+  return {
+    data: {
+      name: updatedAccount.name,
+      isTracked: updatedAccount.isTracked,
+    },
+    error: null,
+  };
+};
+
+export const deleteAccount = async (accountId: number) => {
+  const session = await getServerSession();
+
+  if (!session) {
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to delete an account.",
+      },
+    };
+  }
+
+  const account = await getAccountById(accountId);
+
+  if (!account) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
+
+  const updatedAccount = await updateAccount(account.id, { isActive: false });
+
+  if (!updatedAccount) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_FOUND",
+        message: "The specified account was not found.",
+      },
+    };
+  }
+
+  return {
+    data: updatedAccount,
+    error: null,
+  };
 };

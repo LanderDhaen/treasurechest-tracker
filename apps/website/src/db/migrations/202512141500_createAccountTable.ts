@@ -11,11 +11,12 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("name", "varchar", (c) => c.notNull())
     .addColumn("tag", "varchar", (c) => c.notNull().unique())
     .addColumn("townhall", "integer", (c) => c.notNull())
+    .addColumn("isTracked", "boolean", (c) => c.notNull().defaultTo(true))
 
     // Foreign keys
 
     .addColumn("clanId", "integer", (c) =>
-      c.references("clan.id").notNull().onDelete("restrict")
+      c.references("clan.id").notNull().onDelete("restrict"),
     )
 
     .execute();

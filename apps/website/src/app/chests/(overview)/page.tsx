@@ -40,7 +40,7 @@ export default async function Page({
       <CardHeader>
         <CardTitle>Treasure Chests</CardTitle>
         <CardDescription>
-          {`Currently opened ${count} treasure chest${count !== 1 ? "s" : ""}.`}
+          {`Currently ${count} treasure chest${count !== 1 ? "s" : ""} have been opened.`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">

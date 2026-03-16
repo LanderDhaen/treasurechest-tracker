@@ -5,7 +5,7 @@ import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 import { expressionBuilder } from "kysely";
 import { Database } from "@/db/types/database";
-import { InsertableAccount } from "@/db/types/account";
+import { InsertableAccount, UpdateableAccount } from "@/db/types/account";
 
 export const getTotalAccounts = async () => {
   const result = await db
@@ -70,6 +70,7 @@ export const getAllAccounts = async ({
       "account.name",
       "account.tag",
       "account.townhall",
+      "account.isTracked",
       jsonObjectFrom(
         eb
           .selectFrom("clan")
@@ -96,6 +97,7 @@ export const getAccountByTag = async (tag: string) => {
       "account.tag",
       "account.townhall",
       "account.name",
+      "account.isTracked",
       jsonObjectFrom(
         eb
           .selectFrom("clan")
@@ -112,13 +114,29 @@ export const getAccountByTag = async (tag: string) => {
   return account;
 };
 
+export const getAccountById = async (accountId: number) => {
+  const account = await db
+    .selectFrom("account")
+    .select(["account.id", "account.townhall", "account.isTracked"])
+    .where("account.id", "=", accountId)
+    .where("account.isActive", "=", true)
+    .executeTakeFirst();
+
+  return account;
+};
+
 export const getChestCountPerAccount = async (filters: FilterConfig) => {
   const accounts = await db
     .with("filtered_chest", () => withFilteredChests(filters))
-    .selectFrom("account")
-    .leftJoin("filtered_chest", "filtered_chest.accountId", "account.id")
+    .with("filtered_account", () => withFilteredAccounts(filters))
+    .selectFrom("filtered_account")
+    .leftJoin(
+      "filtered_chest",
+      "filtered_chest.accountId",
+      "filtered_account.id",
+    )
     .select((eb) => [
-      "account.name",
+      "filtered_account.name",
       eb.fn.count<number>("filtered_chest.id").as("count"),
       jsonArrayFrom(
         eb
@@ -128,14 +146,14 @@ export const getChestCountPerAccount = async (filters: FilterConfig) => {
             "rarity.name",
             eb.fn.count<number>("filtered_chest.id").as("count"),
           ])
-          .whereRef("filtered_chest.accountId", "=", "account.id")
+          .whereRef("filtered_chest.accountId", "=", "filtered_account.id")
           .groupBy(["rarity.id", "rarity.name"])
           .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
       ).as("rarities"),
     ])
-    .groupBy(["account.id", "account.name"])
+    .groupBy(["filtered_account.id", "filtered_account.name"])
     .orderBy("count", "desc")
-    .orderBy("account.name", "asc")
+    .orderBy("filtered_account.name", "asc")
     .execute();
 
   return accounts;
@@ -144,9 +162,13 @@ export const getChestCountPerAccount = async (filters: FilterConfig) => {
 export const withFilteredAccounts = (filters: FilterConfig) => {
   const eb = expressionBuilder<Database>();
 
-  let query = eb.selectFrom("account");
+  let query = eb.selectFrom("account").where("account.isActive", "=", true);
 
-  const { accountId } = filters;
+  const { excludeUntrackedAccounts, accountId } = filters;
+
+  if (excludeUntrackedAccounts === true) {
+    query = query.where("account.isTracked", "=", true);
+  }
 
   if (accountId) {
     query = query.where("account.id", "=", accountId);
@@ -173,4 +195,30 @@ export const createAccount = async ({
     .executeTakeFirstOrThrow();
 
   return account;
+};
+
+export const updateAccount = async (
+  accountId: number,
+  data: UpdateableAccount,
+) => {
+  const { isActive, townhall, isTracked } = data;
+
+  const updatedAccount = await db
+    .updateTable("account")
+    .set({
+      updatedAt: new Date(),
+      isActive,
+      townhall,
+      isTracked,
+    })
+    .where("account.id", "=", accountId)
+    .returning([
+      "account.name",
+      "account.townhall",
+      "account.tag",
+      "account.isTracked",
+    ])
+    .executeTakeFirst();
+
+  return updatedAccount;
 };

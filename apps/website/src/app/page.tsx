@@ -1,8 +1,25 @@
 import Dashboard from "@/components/dashboard";
+import DashboardFilters from "@/components/dashboard-filters";
+import { dashboardFiltersSchema } from "@/schemas/common";
 import { FilterConfig } from "@/types/common";
 
-export default function Page() {
-  const filters = {} satisfies FilterConfig;
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const rawParams = await searchParams;
+  const parsedParams = dashboardFiltersSchema.parse(rawParams);
+  const { untracked } = parsedParams;
 
-  return <Dashboard filters={filters} />;
+  const filters = {
+    excludeUntrackedAccounts: untracked,
+  } satisfies FilterConfig;
+
+  return (
+    <div className="flex flex-col gap-4">
+      <DashboardFilters excludeUntrackedAccounts={untracked} />
+      <Dashboard filters={filters} />
+    </div>
+  );
 }
