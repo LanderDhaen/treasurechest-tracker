@@ -4,7 +4,7 @@ import { CircleFadingArrowUp, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   changeTrackingStatus,
-  deleteAccount,
+  deleteAccountAction,
   upgradeTownhall,
 } from "@/actions/account";
 import { useState } from "react";
@@ -82,12 +82,16 @@ export default function AccountActions({ account }: AccountActionsProps) {
   const handleDeleteAccount = async () => {
     setIsLoading(true);
 
-    const { data: updatedAccount, error } = await deleteAccount(account.id);
+    const { data, error } = await deleteAccountAction(account.id);
 
     if (error) {
       toast.error(error.message);
     } else {
-      toast.success(`${updatedAccount.name} has been deleted.`);
+      const { deletedAccount, deletedChestsCount } = data;
+
+      toast.success(
+        `${deletedAccount.name} and ${deletedChestsCount} treasure chests have been deleted.`,
+      );
 
       redirect("/accounts");
     }
@@ -137,7 +141,8 @@ export default function AccountActions({ account }: AccountActionsProps) {
             </AlertDialogMedia>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete this account.
+              This will permanently delete this account and all associated
+              treasure chests.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

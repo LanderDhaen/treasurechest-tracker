@@ -200,3 +200,14 @@ export const deleteChestsByEventId = async (eventId: number) => {
 
   return deletedChests;
 };
+
+export const deleteChestsByAccountId = async (accountId: number) => {
+  const deletedChests = await db
+    .updateTable("chest")
+    .set({ updatedAt: new Date(), isActive: false })
+    .where("accountId", "=", accountId)
+    .returning(["id"])
+    .execute();
+
+  return deletedChests;
+};
