@@ -222,3 +222,17 @@ export const updateAccount = async (
 
   return updatedAccount;
 };
+
+export const deleteAccount = async (accountId: number) => {
+  const deletedAccount = await db
+    .updateTable("account")
+    .set({
+      updatedAt: new Date(),
+      isActive: false,
+    })
+    .where("account.id", "=", accountId)
+    .returning(["account.name"])
+    .executeTakeFirst();
+
+  return deletedAccount;
+};

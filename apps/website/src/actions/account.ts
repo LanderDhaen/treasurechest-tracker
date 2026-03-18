@@ -4,12 +4,14 @@ import { getClanByTag } from "@/queries/clan";
 import { accountFormSchema, AccountFormValues } from "@/schemas/account";
 import {
   createAccount,
+  deleteAccount,
   getAccountById,
   updateAccount,
 } from "@/queries/account";
 import { getServerSession } from "@/queries/auth";
 import { DatabaseError } from "pg";
 import { revalidatePath } from "next/cache";
+import { deleteChestsByAccountId } from "@/queries/chest";
 
 export const submitAccountForm = async (formData: AccountFormValues) => {
   const result = accountFormSchema.safeParse(formData);
@@ -180,7 +182,7 @@ export const changeTrackingStatus = async (accountId: number) => {
   };
 };
 
-export const deleteAccount = async (accountId: number) => {
+export const deleteAccountAction = async (accountId: number) => {
   const session = await getServerSession();
 
   if (!session) {
@@ -205,9 +207,9 @@ export const deleteAccount = async (accountId: number) => {
     };
   }
 
-  const updatedAccount = await updateAccount(account.id, { isActive: false });
+  const deletedAccount = await deleteAccount(account.id);
 
-  if (!updatedAccount) {
+  if (!deletedAccount) {
     return {
       data: null,
       error: {
@@ -217,8 +219,13 @@ export const deleteAccount = async (accountId: number) => {
     };
   }
 
+  const deletedChests = await deleteChestsByAccountId(account.id);
+
   return {
-    data: updatedAccount,
+    data: {
+      deletedAccount: deletedAccount,
+      deletedChestsCount: deletedChests.length,
+    },
     error: null,
   };
 };

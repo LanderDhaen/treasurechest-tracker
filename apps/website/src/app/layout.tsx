@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarRail,
+} from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import Header from "@/components/header";
 import { Toaster } from "sonner";
@@ -31,10 +35,10 @@ export default function RootLayout({
       <body className={cn(montserrat.className)}>
         <SidebarProvider>
           <AppSidebar />
-          <div className="flex flex-col flex-1 px-4 pb-4 max-w-dvw">
+          <SidebarInset>
             <Header />
-            {children}
-          </div>
+            <main className="p-4 pt-0">{children}</main>
+          </SidebarInset>
         </SidebarProvider>
         <Toaster position="bottom-right" />
       </body>

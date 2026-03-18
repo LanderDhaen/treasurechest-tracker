@@ -33,7 +33,7 @@ export default function EventTable({ events }: EventTableProps) {
   const router = useRouter();
 
   const handleClick = (eventCode: string) => {
-    router.push(`/events/${eventCode}/dashboard`);
+    router.push(`/events/${eventCode}`);
   };
 
   return (
