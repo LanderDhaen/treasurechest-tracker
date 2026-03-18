@@ -62,7 +62,7 @@ export default function EventActions({ event }: EventActionsProps) {
     <div className="flex justify-end">
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="destructive" disabled={isLoading}>
+          <Button variant="destructive" size="icon-sm" disabled={isLoading}>
             <Trash2 />
           </Button>
         </AlertDialogTrigger>
