@@ -155,6 +155,7 @@ export const getEventByCode = async (code: string) => {
       "event.startDate",
       "event.endDate",
       "event.maxChests",
+      "event.isChestSubmissionOpen",
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
@@ -169,7 +170,7 @@ export const getEventByCode = async (code: string) => {
 export const getEventById = async (eventId: number) => {
   const event = await db
     .selectFrom("event")
-    .select(["event.id"])
+    .select(["event.id", "event.isChestSubmissionOpen"])
     .where("event.id", "=", eventId)
     .where("event.isActive", "=", true)
     .executeTakeFirst();
@@ -250,6 +251,30 @@ export const deriveEventStatus = (
     .then(EventStatus.Upcoming)
     .else(EventStatus.Ongoing)
     .end();
+};
+
+export const updateEvent = async (eventId: number, data: UpdateableEvent) => {
+  const { isChestSubmissionOpen } = data;
+
+  const updatedEvent = await db
+    .updateTable("event")
+    .set({
+      updatedAt: new Date(),
+      isChestSubmissionOpen,
+    })
+    .from("series")
+    .whereRef("series.id", "=", "event.seriesId")
+    .where("event.id", "=", eventId)
+    .returning([
+      "event.id",
+      "series.name",
+      "event.edition",
+      "event.code",
+      "event.isChestSubmissionOpen",
+    ])
+    .executeTakeFirst();
+
+  return updatedEvent;
 };
 
 export const deleteEvent = async (eventId: number) => {

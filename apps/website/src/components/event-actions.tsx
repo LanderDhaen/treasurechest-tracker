@@ -1,6 +1,9 @@
 "use client";
 
-import { deleteEventAction } from "@/actions/event";
+import {
+  changeIsChestSubmissionOpenStatus,
+  deleteEventAction,
+} from "@/actions/event";
 import { EventStatus } from "@/constants/event";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -20,6 +23,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "./ui/button";
 import { Trash2 } from "lucide-react";
+import { Switch } from "./ui/switch";
+import { Label } from "./ui/label";
 
 interface EventActionsProps {
   event: {
@@ -29,6 +34,7 @@ interface EventActionsProps {
     startDate: Date;
     endDate: Date;
     maxChests: number;
+    isChestSubmissionOpen: boolean;
     status: EventStatus;
     name: string;
     type: string;
@@ -37,6 +43,25 @@ interface EventActionsProps {
 
 export default function EventActions({ event }: EventActionsProps) {
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleChangeIsChestSubmissionOpenStatus = async () => {
+    setIsLoading(true);
+
+    const { data: updatedEvent, error } =
+      await changeIsChestSubmissionOpenStatus(event.id);
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      const message = updatedEvent.isChestSubmissionOpen
+        ? `${formatEventName(updatedEvent.name, updatedEvent.edition)} is now accepting submissions.`
+        : `${formatEventName(updatedEvent.name, updatedEvent.edition)} is no longer accepting submissions.`;
+
+      toast.success(message);
+    }
+
+    setIsLoading(false);
+  };
 
   const handleDeleteEvent = async () => {
     setIsLoading(true);
@@ -59,7 +84,19 @@ export default function EventActions({ event }: EventActionsProps) {
   };
 
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-between ">
+      <div className="flex items-center gap-2">
+        <Switch
+          id="tracking"
+          className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500"
+          checked={event.isChestSubmissionOpen}
+          onCheckedChange={handleChangeIsChestSubmissionOpenStatus}
+          disabled={isLoading}
+        />
+        <Label htmlFor="tracking" className="text-sm text-muted-foreground">
+          Allow submissions
+        </Label>
+      </div>
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button variant="destructive" size="icon-sm" disabled={isLoading}>
