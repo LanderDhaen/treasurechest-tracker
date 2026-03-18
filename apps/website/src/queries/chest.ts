@@ -1,4 +1,5 @@
 import { db } from "@/db";
+import { UpdateableChest } from "@/db/types/chest";
 import { Database } from "@/db/types/database";
 import { ChestSearchParams } from "@/schemas/chest";
 import { FilterConfig } from "@/types/common";
@@ -187,4 +188,20 @@ export const withFilteredChests = (filters: FilterConfig) => {
     "chest.amount",
     "chest.openedAt",
   ]);
+};
+
+export const updateChestsByEventId = async (
+  eventId: number,
+  data: UpdateableChest,
+) => {
+  const { isActive } = data;
+
+  const updatedChests = await db
+    .updateTable("chest")
+    .set({ updatedAt: new Date(), isActive: isActive })
+    .where("eventId", "=", eventId)
+    .returning(["id"])
+    .execute();
+
+  return updatedChests;
 };

@@ -41,13 +41,15 @@ export default function EventActions({ event }: EventActionsProps) {
   const handleDeleteEvent = async () => {
     setIsLoading(true);
 
-    const { data: updatedEvent, error } = await deleteEvent(event.id);
+    const { data, error } = await deleteEvent(event.id);
 
     if (error) {
       toast.error(error.message);
     } else {
+      const { updatedEvent, updatedChestsCount } = data;
+
       toast.success(
-        `${formatEventName(updatedEvent.name, updatedEvent.edition)} has been deleted.`,
+        `${formatEventName(updatedEvent.name, updatedEvent.edition)} and ${updatedChestsCount} treasure chests have been deleted.`,
       );
 
       redirect("/events");
@@ -60,7 +62,7 @@ export default function EventActions({ event }: EventActionsProps) {
     <div className="flex justify-end">
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="destructive" size="icon-sm" disabled={isLoading}>
+          <Button variant="destructive" disabled={isLoading}>
             <Trash2 />
           </Button>
         </AlertDialogTrigger>
@@ -71,7 +73,8 @@ export default function EventActions({ event }: EventActionsProps) {
             </AlertDialogMedia>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete this event.
+              This will permanently delete this event and all associated
+              treasure chests.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

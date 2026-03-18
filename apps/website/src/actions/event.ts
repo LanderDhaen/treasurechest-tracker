@@ -1,6 +1,7 @@
 "use server";
 
 import { getServerSession } from "@/queries/auth";
+import { updateChestsByEventId } from "@/queries/chest";
 import { getEventById, updateEvent } from "@/queries/event";
 
 export const deleteEvent = async (eventId: number) => {
@@ -40,8 +41,15 @@ export const deleteEvent = async (eventId: number) => {
     };
   }
 
+  const deletedChests = await updateChestsByEventId(event.id, {
+    isActive: false,
+  });
+
   return {
-    data: updatedEvent,
+    data: {
+      updatedEvent: updatedEvent,
+      updatedChestsCount: deletedChests.length,
+    },
     error: null,
   };
 };
