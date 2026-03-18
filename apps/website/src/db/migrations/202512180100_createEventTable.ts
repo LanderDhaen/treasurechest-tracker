@@ -12,8 +12,8 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("code", "varchar", (c) => c.notNull().unique())
     .addColumn("startDate", "date", (c) => c.notNull())
     .addColumn("endDate", "date", (c) => c.notNull())
-    .addColumn("maxChests", "integer", (c) => c.notNull().defaultTo(0))
-    .addColumn("isChestSubmissionOpen", "boolean", (c) =>
+    .addColumn("maxChests", "integer", (c) => c.notNull())
+    .addColumn("isChestCreationAllowed", "boolean", (c) =>
       c.notNull().defaultTo(true),
     )
 

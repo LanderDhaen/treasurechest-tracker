@@ -5,7 +5,7 @@ import { deleteChestsByEventId } from "@/queries/chest";
 import { getEventById, deleteEvent, updateEvent } from "@/queries/event";
 import { revalidatePath } from "next/cache";
 
-export const changeIsChestSubmissionOpenStatus = async (eventId: number) => {
+export const changeChestCreationAllowedStatus = async (eventId: number) => {
   const session = await getServerSession();
 
   if (!session) {
@@ -31,7 +31,7 @@ export const changeIsChestSubmissionOpenStatus = async (eventId: number) => {
   }
 
   const updatedEvent = await updateEvent(event.id, {
-    isChestSubmissionOpen: !event.isChestSubmissionOpen,
+    isChestCreationAllowed: !event.isChestCreationAllowed,
   });
 
   if (!updatedEvent) {
@@ -50,7 +50,7 @@ export const changeIsChestSubmissionOpenStatus = async (eventId: number) => {
     data: {
       name: updatedEvent.name,
       edition: updatedEvent.edition,
-      isChestSubmissionOpen: updatedEvent.isChestSubmissionOpen,
+      isChestCreationAllowed: updatedEvent.isChestCreationAllowed,
     },
     error: null,
   };

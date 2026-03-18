@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  changeIsChestSubmissionOpenStatus,
+  changeChestCreationAllowedStatus,
   deleteEventAction,
 } from "@/actions/event";
 import { EventStatus } from "@/constants/event";
@@ -34,7 +34,7 @@ interface EventActionsProps {
     startDate: Date;
     endDate: Date;
     maxChests: number;
-    isChestSubmissionOpen: boolean;
+    isChestCreationAllowed: boolean;
     status: EventStatus;
     name: string;
     type: string;
@@ -44,17 +44,17 @@ interface EventActionsProps {
 export default function EventActions({ event }: EventActionsProps) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChangeIsChestSubmissionOpenStatus = async () => {
+  const handleChangeChestCreationAllowedStatus = async () => {
     setIsLoading(true);
 
     const { data: updatedEvent, error } =
-      await changeIsChestSubmissionOpenStatus(event.id);
+      await changeChestCreationAllowedStatus(event.id);
 
     if (error) {
       toast.error(error.message);
     } else {
-      const message = updatedEvent.isChestSubmissionOpen
-        ? `${formatEventName(updatedEvent.name, updatedEvent.edition)} is now accepting submissions.`
+      const message = updatedEvent.isChestCreationAllowed
+        ? `${formatEventName(updatedEvent.name, updatedEvent.edition)} is now accepting new treasure chests.`
         : `${formatEventName(updatedEvent.name, updatedEvent.edition)} is no longer accepting submissions.`;
 
       toast.success(message);
@@ -89,12 +89,12 @@ export default function EventActions({ event }: EventActionsProps) {
         <Switch
           id="tracking"
           className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500"
-          checked={event.isChestSubmissionOpen}
-          onCheckedChange={handleChangeIsChestSubmissionOpenStatus}
+          checked={event.isChestCreationAllowed}
+          onCheckedChange={handleChangeChestCreationAllowedStatus}
           disabled={isLoading}
         />
         <Label htmlFor="tracking" className="text-sm text-muted-foreground">
-          Allow submissions
+          Allow new treasure chests
         </Label>
       </div>
       <AlertDialog>
