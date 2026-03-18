@@ -1,5 +1,4 @@
 import { db } from "@/db";
-import { UpdateableChest } from "@/db/types/chest";
 import { Database } from "@/db/types/database";
 import { ChestSearchParams } from "@/schemas/chest";
 import { FilterConfig } from "@/types/common";
@@ -23,12 +22,13 @@ export const getAllChests = async ({
   direction,
 }: ChestSearchParams) => {
   let query = db
-    .selectFrom("chest")
-    .innerJoin("rarity", "chest.rarityId", "rarity.id")
-    .innerJoin("reward", "chest.rewardId", "reward.id")
-    .innerJoin("event", "chest.eventId", "event.id")
+    .with("filtered_chest", () => withFilteredChests({}))
+    .selectFrom("filtered_chest")
+    .innerJoin("rarity", "filtered_chest.rarityId", "rarity.id")
+    .innerJoin("reward", "filtered_chest.rewardId", "reward.id")
+    .innerJoin("event", "filtered_chest.eventId", "event.id")
     .innerJoin("series", "event.seriesId", "series.id")
-    .innerJoin("account", "chest.accountId", "account.id");
+    .innerJoin("account", "filtered_chest.accountId", "account.id");
 
   // Filtering
 
@@ -53,13 +53,13 @@ export const getAllChests = async ({
     query = query
       .orderBy("rarity.chance", direction == "asc" ? "desc" : "asc") // Invert sorting for rarity because lower chance means higher rarity
       .orderBy("reward.name", direction)
-      .orderBy("chest.amount", direction);
+      .orderBy("filtered_chest.amount", direction);
   }
 
   if (sortBy == "reward") {
     query = query
       .orderBy("reward.name", direction)
-      .orderBy("chest.amount", direction);
+      .orderBy("filtered_chest.amount", direction);
   }
 
   if (sortBy == "account") {
@@ -75,8 +75,8 @@ export const getAllChests = async ({
   }
 
   query = query
-    .orderBy("chest.openedAt", direction)
-    .orderBy("chest.id", direction); // Secondary sort to ensure consistent order
+    .orderBy("filtered_chest.openedAt", direction)
+    .orderBy("filtered_chest.id", direction); // Secondary sort to ensure consistent order
 
   // Pagination
 
@@ -86,16 +86,16 @@ export const getAllChests = async ({
 
   const chests = await query
     .select((eb) => [
-      "chest.id",
-      "chest.amount",
-      "chest.openedAt",
+      "filtered_chest.id",
+      "filtered_chest.amount",
+      "filtered_chest.openedAt",
       "rarity.name as rarity",
       "reward.name as reward",
       jsonObjectFrom(
         eb
           .selectFrom("account")
           .select(["account.name", "account.townhall"])
-          .whereRef("account.id", "=", "chest.accountId"),
+          .whereRef("account.id", "=", "filtered_chest.accountId"),
       )
         .$notNull()
         .as("account"),
@@ -104,7 +104,7 @@ export const getAllChests = async ({
           .selectFrom("event")
           .innerJoin("series", "event.seriesId", "series.id")
           .select(["event.edition", "series.name"])
-          .whereRef("event.id", "=", "chest.eventId"),
+          .whereRef("event.id", "=", "filtered_chest.eventId"),
       )
         .$notNull()
         .as("event"),
@@ -162,6 +162,7 @@ export const withFilteredChests = (filters: FilterConfig) => {
     .selectFrom("chest")
     .innerJoin("account", "chest.accountId", "account.id")
     .innerJoin("event", "chest.eventId", "event.id")
+    .where("chest.isActive", "=", true)
     .where("account.isActive", "=", true)
     .where("event.isActive", "=", true);
 
