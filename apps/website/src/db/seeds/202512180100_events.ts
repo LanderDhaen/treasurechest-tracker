@@ -15,6 +15,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 5,
         typeId: 1,
         seriesId: 1,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
@@ -24,6 +25,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 30,
         typeId: 2,
         seriesId: 2,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
@@ -33,6 +35,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 20,
         typeId: 2,
         seriesId: 3,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
@@ -42,6 +45,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 1,
         typeId: 1,
         seriesId: 4,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
@@ -51,6 +55,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 5,
         typeId: 1,
         seriesId: 5,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 2,
@@ -60,6 +65,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 24,
         typeId: 2,
         seriesId: 2,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
@@ -69,6 +75,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 20,
         typeId: 3,
         seriesId: 6,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
@@ -78,6 +85,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 1,
         typeId: 1,
         seriesId: 7,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 3,
@@ -87,6 +95,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 20,
         typeId: 2,
         seriesId: 2,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 4,
@@ -96,6 +105,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 20,
         typeId: 2,
         seriesId: 2,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
@@ -105,6 +115,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 1,
         typeId: 2,
         seriesId: 8,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
@@ -114,6 +125,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 20,
         typeId: 3,
         seriesId: 9,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 5,
@@ -123,6 +135,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 20,
         typeId: 2,
         seriesId: 2,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 6,
@@ -132,6 +145,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 12,
         typeId: 2,
         seriesId: 2,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
@@ -141,6 +155,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 13,
         typeId: 4,
         seriesId: 10,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 7,
@@ -150,6 +165,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 20,
         typeId: 2,
         seriesId: 2,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
@@ -159,6 +175,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 20,
         typeId: 3,
         seriesId: 11,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 8,
@@ -168,6 +185,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 20,
         typeId: 2,
         seriesId: 2,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
@@ -177,6 +195,7 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 12,
         typeId: 4,
         seriesId: 12,
+        isChestSubmissionOpen: false,
       },
       {
         edition: 1,
