@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteEvent } from "@/actions/event";
+import { deleteEventAction } from "@/actions/event";
 import { EventStatus } from "@/constants/event";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -41,15 +41,15 @@ export default function EventActions({ event }: EventActionsProps) {
   const handleDeleteEvent = async () => {
     setIsLoading(true);
 
-    const { data, error } = await deleteEvent(event.id);
+    const { data, error } = await deleteEventAction(event.id);
 
     if (error) {
       toast.error(error.message);
     } else {
-      const { updatedEvent, updatedChestsCount } = data;
+      const { deletedEvent, deletedChestsCount } = data;
 
       toast.success(
-        `${formatEventName(updatedEvent.name, updatedEvent.edition)} and ${updatedChestsCount} treasure chests have been deleted.`,
+        `${formatEventName(deletedEvent.name, deletedEvent.edition)} and ${deletedChestsCount} treasure chests have been deleted.`,
       );
 
       redirect("/events");

@@ -1,10 +1,10 @@
 "use server";
 
 import { getServerSession } from "@/queries/auth";
-import { updateChestsByEventId } from "@/queries/chest";
-import { getEventById, updateEvent } from "@/queries/event";
+import { deleteChestsByEventId } from "@/queries/chest";
+import { getEventById, deleteEvent } from "@/queries/event";
 
-export const deleteEvent = async (eventId: number) => {
+export const deleteEventAction = async (eventId: number) => {
   const session = await getServerSession();
 
   if (!session) {
@@ -29,9 +29,9 @@ export const deleteEvent = async (eventId: number) => {
     };
   }
 
-  const updatedEvent = await updateEvent(event.id, { isActive: false });
+  const deletedEvent = await deleteEvent(event.id);
 
-  if (!updatedEvent) {
+  if (!deletedEvent) {
     return {
       data: null,
       error: {
@@ -41,14 +41,12 @@ export const deleteEvent = async (eventId: number) => {
     };
   }
 
-  const deletedChests = await updateChestsByEventId(event.id, {
-    isActive: false,
-  });
+  const deletedChests = await deleteChestsByEventId(event.id);
 
   return {
     data: {
-      updatedEvent: updatedEvent,
-      updatedChestsCount: deletedChests.length,
+      deletedEvent: deletedEvent,
+      deletedChestsCount: deletedChests.length,
     },
     error: null,
   };

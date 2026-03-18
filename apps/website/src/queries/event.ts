@@ -252,14 +252,12 @@ export const deriveEventStatus = (
     .end();
 };
 
-export const updateEvent = async (eventId: number, data: UpdateableEvent) => {
-  const { isActive } = data;
-
-  const updatedEvent = await db
+export const deleteEvent = async (eventId: number) => {
+  const deletedEvent = await db
     .updateTable("event")
     .set({
       updatedAt: new Date(),
-      isActive,
+      isActive: false,
     })
     .from("series")
     .whereRef("series.id", "=", "event.seriesId")
@@ -267,5 +265,5 @@ export const updateEvent = async (eventId: number, data: UpdateableEvent) => {
     .returning(["event.id", "series.name", "event.edition"])
     .executeTakeFirst();
 
-  return updatedEvent;
+  return deletedEvent;
 };
