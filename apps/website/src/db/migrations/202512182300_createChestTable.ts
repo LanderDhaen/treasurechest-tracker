@@ -5,6 +5,9 @@ export const up = async (db: Kysely<any>) => {
   await db.schema
     .createTable("chest")
     .addColumn("id", "serial", (c) => c.primaryKey())
+    .addColumn("createdAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
+    .addColumn("updatedAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
+    .addColumn("isActive", "boolean", (c) => c.notNull().defaultTo(true))
     .addColumn("amount", "integer", (c) => c.notNull().defaultTo(1))
     .addColumn("openedAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
 
