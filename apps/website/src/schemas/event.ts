@@ -20,3 +20,15 @@ export const eventSearchParamsSchema = z.object({
 });
 
 export type EventSearchParams = z.infer<typeof eventSearchParamsSchema>;
+
+export const eventFormSchema = z.object({
+  dateRange: z.object({
+    from: z.date(),
+    to: z.date(),
+  }),
+  maxChests: z.number(),
+  type: z.string(),
+  seriesCode: z.string(),
+});
+
+export type EventFormValues = z.infer<typeof eventFormSchema>;

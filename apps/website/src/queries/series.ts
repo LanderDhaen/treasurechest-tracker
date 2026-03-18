@@ -3,6 +3,17 @@ import { jsonArrayFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 
+export const getAllSeries = async () => {
+  const series = await db
+    .selectFrom("series")
+    .select(["series.code", "series.name"])
+    .where("series.isActive", "=", true)
+    .orderBy("series.name", "asc")
+    .execute();
+
+  return series;
+};
+
 export const getChestCountPerSeries = async (filters: FilterConfig) => {
   const series = await db
     .with("filtered_chest", () => withFilteredChests(filters))

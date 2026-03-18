@@ -3,6 +3,17 @@ import { withFilteredChests } from "./chest";
 import { db } from "@/db";
 import { jsonArrayFrom } from "kysely/helpers/postgres";
 
+export const getAllTypes = async () => {
+  const types = await db
+    .selectFrom("type")
+    .select(["type.name"])
+    .where("type.isActive", "=", true)
+    .orderBy("type.name", "asc")
+    .execute();
+
+  return types;
+};
+
 export const getChestCountPerType = async (filters: FilterConfig) => {
   const types = await db
     .with("filtered_chest", () => withFilteredChests(filters))
