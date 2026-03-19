@@ -26,6 +26,18 @@ export const createEventAction = async (formData: EventFormValues) => {
     };
   }
 
+  const session = await getServerSession();
+
+  if (!session) {
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to create an event.",
+      },
+    };
+  }
+
   const { dateRange, maxChests, typeName, seriesCode } = result.data;
 
   const event = await createEvent({
