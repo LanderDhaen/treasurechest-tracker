@@ -48,6 +48,10 @@ interface EventFormProps {
   }[];
 }
 
+const DEFAULT_FROM_DATE = new Date();
+const DEFAULT_TO_DATE = new Date();
+const DEFAULT_MAX_CHESTS = 1;
+
 export default function EventForm({ series, types }: EventFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -55,10 +59,10 @@ export default function EventForm({ series, types }: EventFormProps) {
     resolver: zodResolver(eventFormSchema),
     defaultValues: {
       dateRange: {
-        from: new Date(),
-        to: new Date(),
+        from: DEFAULT_FROM_DATE,
+        to: DEFAULT_TO_DATE,
       },
-      maxChests: 1,
+      maxChests: DEFAULT_MAX_CHESTS,
       typeName: types[0].name || "",
       seriesCode: series[0].code || "",
     },
