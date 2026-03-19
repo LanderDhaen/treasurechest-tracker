@@ -72,7 +72,25 @@ export default function EventForm({ series, types }: EventFormProps) {
     setIsLoading(false);
 
     if (error) {
-      toast.error(error.message);
+      switch (error.code) {
+        case "VALIDATION_ERROR":
+          toast.error(error.message);
+          break;
+        case "UNAUTHORIZED":
+          toast.error(error.message);
+          break;
+        case "TYPE_NOT_FOUND":
+          form.setError("typeName", { message: error.message });
+          break;
+        case "SERIES_NOT_FOUND":
+          form.setError("seriesCode", { message: error.message });
+          break;
+        case "EVENT_EXISTS":
+          toast.error(error.message);
+          break;
+        default:
+          toast.error("An unexpected error occurred. Please try again later.");
+      }
     } else {
       toast.success(
         `Event "${formatEventName(event.name, event.edition)}" created successfully!`,

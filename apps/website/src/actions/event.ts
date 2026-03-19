@@ -82,7 +82,7 @@ export const createEventAction = async (formData: EventFormValues) => {
     return {
       data: {
         name: series.name,
-        edition: edition,
+        edition: event.edition,
       },
       error: null,
     };

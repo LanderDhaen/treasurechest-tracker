@@ -274,7 +274,7 @@ export const createEvent = async ({
       seriesId,
     })
     .returning(["event.id", "event.code", "event.edition"])
-    .executeTakeFirst();
+    .executeTakeFirstOrThrow();
 
   return event;
 };
