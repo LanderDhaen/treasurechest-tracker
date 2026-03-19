@@ -14,6 +14,16 @@ export const getAllTypes = async () => {
   return types;
 };
 
+export const getTypeByName = async (name: string) => {
+  const type = await db
+    .selectFrom("type")
+    .select(["type.id"])
+    .where("type.name", "=", name)
+    .executeTakeFirst();
+
+  return type;
+};
+
 export const getChestCountPerType = async (filters: FilterConfig) => {
   const types = await db
     .with("filtered_chest", () => withFilteredChests(filters))

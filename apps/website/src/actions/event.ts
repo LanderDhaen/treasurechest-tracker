@@ -8,6 +8,7 @@ import {
   updateEvent,
   createEvent,
 } from "@/queries/event";
+import { getTypeByName } from "@/queries/type";
 import { eventFormSchema, EventFormValues } from "@/schemas/event";
 import { revalidatePath } from "next/cache";
 
@@ -40,13 +41,25 @@ export const createEventAction = async (formData: EventFormValues) => {
 
   const { dateRange, maxChests, typeName, seriesCode } = result.data;
 
+  const type = await getTypeByName(typeName);
+
+  if (!type) {
+    return {
+      data: null,
+      error: {
+        code: "TYPE_NOT_FOUND",
+        message: "The specified type was not found.",
+      },
+    };
+  }
+
   const event = await createEvent({
     code: seriesCode,
     edition: 1, // TODO: Get the latest edition number for the series and increment it
     startDate: dateRange.from,
     endDate: dateRange.to,
     maxChests: maxChests,
-    typeId: 1, // TODO: Get typeId based on typeName
+    typeId: type.id, // TODO: Get typeId based on typeName
     seriesId: 1, // TODO: Get seriesId based on formData.seriesCode
   });
 
