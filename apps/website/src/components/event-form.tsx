@@ -35,6 +35,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import { Calendar } from "./ui/calendar";
+import { createEventAction } from "@/actions/event";
 
 interface EventFormProps {
   series: {
@@ -63,8 +64,10 @@ export default function EventForm({ series, types }: EventFormProps) {
   });
 
   const onSubmit = async (formData: EventFormValues) => {
+    // TODO: Handle errors and show success message with redirect to event page on success
+
     setIsLoading(true);
-    console.log("Submitting form with data:", formData);
+    const event = await createEventAction(formData);
     setIsLoading(false);
   };
 

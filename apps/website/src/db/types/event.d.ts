@@ -10,13 +10,13 @@ export interface EventTable {
   id: Generated<number>;
   createdAt: ColumnType<Date, never, never>;
   updatedAt: ColumnType<Date, never, Date>;
-  isActive: ColumnType<boolean>;
+  isActive: ColumnType<boolean, never, boolean>;
   edition: ColumnType<number>;
   code: ColumnType<string>;
   startDate: ColumnType<Date>;
   endDate: ColumnType<Date>;
   maxChests: ColumnType<number>;
-  isChestCreationAllowed: ColumnType<boolean>;
+  isChestCreationAllowed: ColumnType<boolean, never, boolean>;
   typeId: ColumnType<number>;
   seriesId: ColumnType<number>;
 }
