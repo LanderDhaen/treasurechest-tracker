@@ -21,8 +21,6 @@ export const eventSearchParamsSchema = z.object({
 
 export type EventSearchParams = z.infer<typeof eventSearchParamsSchema>;
 
-// TODO: Improve validation
-
 export const eventFormSchema = z.object({
   dateRange: z.object({
     from: z.date("Start date is required"),

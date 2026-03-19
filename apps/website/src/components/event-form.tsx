@@ -36,6 +36,7 @@ import { CalendarIcon } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import { Calendar } from "./ui/calendar";
 import { createEventAction } from "@/actions/event";
+import { formatEventName } from "@/lib/event";
 
 interface EventFormProps {
   series: {
@@ -64,11 +65,20 @@ export default function EventForm({ series, types }: EventFormProps) {
   });
 
   const onSubmit = async (formData: EventFormValues) => {
-    // TODO: Handle errors and show success message with redirect to event page on success
-
     setIsLoading(true);
-    const event = await createEventAction(formData);
+
+    const { data: event, error } = await createEventAction(formData);
+
     setIsLoading(false);
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success(
+        `Event "${formatEventName(event.name, event.edition)}" created successfully!`,
+      );
+      redirect("/events");
+    }
   };
 
   return (

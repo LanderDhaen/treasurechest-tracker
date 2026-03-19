@@ -12,6 +12,7 @@ import { getSeriesByCode } from "@/queries/series";
 import { getTypeByName } from "@/queries/type";
 import { eventFormSchema, EventFormValues } from "@/schemas/event";
 import { revalidatePath } from "next/cache";
+import { DatabaseError } from "pg";
 
 export const createEventAction = async (formData: EventFormValues) => {
   const result = eventFormSchema.safeParse(formData);
@@ -65,18 +66,45 @@ export const createEventAction = async (formData: EventFormValues) => {
   }
 
   const edition = series.latestEvent ? series.latestEvent.edition + 1 : 1;
+  const code = `${seriesCode}${edition}`;
 
-  const event = await createEvent({
-    code: seriesCode,
-    edition: edition,
-    startDate: dateRange.from,
-    endDate: dateRange.to,
-    maxChests: maxChests,
-    typeId: type.id,
-    seriesId: series.id,
-  });
+  try {
+    const event = await createEvent({
+      code: code,
+      edition: edition,
+      startDate: dateRange.from,
+      endDate: dateRange.to,
+      maxChests: maxChests,
+      typeId: type.id,
+      seriesId: series.id,
+    });
 
-  return event;
+    return {
+      data: {
+        name: series.name,
+        edition: edition,
+      },
+      error: null,
+    };
+  } catch (error) {
+    if (error instanceof DatabaseError && error.code === "23505") {
+      return {
+        data: null,
+        error: {
+          code: "EVENT_EXISTS",
+          message: "An event with this code already exists.",
+        },
+      };
+    } else {
+      return {
+        data: null,
+        error: {
+          code: "UNKNOWN_ERROR",
+          message: "An unknown error occurred. Please try again later.",
+        },
+      };
+    }
+  }
 };
 
 export const changeChestCreationAllowedStatus = async (eventId: number) => {
