@@ -192,6 +192,8 @@ export default function EventForm({ series, types }: EventFormProps) {
                     placeholder="Max Chests"
                     disabled={isLoading}
                     required
+                    min={1}
+                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />

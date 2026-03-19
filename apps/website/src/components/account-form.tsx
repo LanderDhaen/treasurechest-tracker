@@ -160,6 +160,7 @@ export default function AccountForm({ clans }: AccountFormProps) {
                     disabled={isLoading}
                     min={1}
                     required
+                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
