@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { jsonArrayFrom } from "kysely/helpers/postgres";
+import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 
@@ -10,6 +10,29 @@ export const getAllSeries = async () => {
     .where("series.isActive", "=", true)
     .orderBy("series.name", "asc")
     .execute();
+
+  return series;
+};
+
+export const getSeriesByCode = async (code: string) => {
+  const series = await db
+    .selectFrom("series")
+    .select((eb) => [
+      "series.id",
+      "series.code",
+      "series.name",
+      jsonObjectFrom(
+        eb
+          .selectFrom("event")
+          .select(["event.edition"])
+          .where("event.isActive", "=", true)
+          .whereRef("event.seriesId", "=", "series.id")
+          .orderBy("event.edition", "desc")
+          .limit(1),
+      ).as("latestEvent"),
+    ])
+    .where("series.code", "=", code)
+    .executeTakeFirst();
 
   return series;
 };

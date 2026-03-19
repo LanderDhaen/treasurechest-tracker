@@ -8,13 +8,12 @@ import {
   updateEvent,
   createEvent,
 } from "@/queries/event";
+import { getSeriesByCode } from "@/queries/series";
 import { getTypeByName } from "@/queries/type";
 import { eventFormSchema, EventFormValues } from "@/schemas/event";
 import { revalidatePath } from "next/cache";
 
 export const createEventAction = async (formData: EventFormValues) => {
-  // TODO: Add more robust validation and error handling for the form data, including checking for valid seriesCode and type values.
-
   const result = eventFormSchema.safeParse(formData);
 
   if (!result.success) {
@@ -53,14 +52,28 @@ export const createEventAction = async (formData: EventFormValues) => {
     };
   }
 
+  const series = await getSeriesByCode(seriesCode);
+
+  if (!series) {
+    return {
+      data: null,
+      error: {
+        code: "SERIES_NOT_FOUND",
+        message: "The specified series was not found.",
+      },
+    };
+  }
+
+  const edition = series.latestEvent ? series.latestEvent.edition + 1 : 1;
+
   const event = await createEvent({
     code: seriesCode,
-    edition: 1, // TODO: Get the latest edition number for the series and increment it
+    edition: edition,
     startDate: dateRange.from,
     endDate: dateRange.to,
     maxChests: maxChests,
-    typeId: type.id, // TODO: Get typeId based on typeName
-    seriesId: 1, // TODO: Get seriesId based on formData.seriesCode
+    typeId: type.id,
+    seriesId: series.id,
   });
 
   return event;
