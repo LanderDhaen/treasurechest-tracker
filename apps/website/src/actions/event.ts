@@ -14,13 +14,27 @@ import { revalidatePath } from "next/cache";
 export const createEventAction = async (formData: EventFormValues) => {
   // TODO: Add more robust validation and error handling for the form data, including checking for valid seriesCode and type values.
 
+  const result = eventFormSchema.safeParse(formData);
+
+  if (!result.success) {
+    return {
+      data: null,
+      error: {
+        code: "VALIDATION_ERROR",
+        message: "These values are invalid.",
+      },
+    };
+  }
+
+  const { dateRange, maxChests, typeName, seriesCode } = result.data;
+
   const event = await createEvent({
-    code: formData.seriesCode,
+    code: seriesCode,
     edition: 1, // TODO: Get the latest edition number for the series and increment it
-    startDate: formData.dateRange.from,
-    endDate: formData.dateRange.to,
-    maxChests: formData.maxChests,
-    typeId: 1, // TODO: Get typeId based on formData.type
+    startDate: dateRange.from,
+    endDate: dateRange.to,
+    maxChests: maxChests,
+    typeId: 1, // TODO: Get typeId based on typeName
     seriesId: 1, // TODO: Get seriesId based on formData.seriesCode
   });
 

@@ -58,7 +58,7 @@ export default function EventForm({ series, types }: EventFormProps) {
         to: new Date(),
       },
       maxChests: 1,
-      type: types[0].name || "",
+      typeName: types[0].name || "",
       seriesCode: series[0].code || "",
     },
   });
@@ -116,7 +116,7 @@ export default function EventForm({ series, types }: EventFormProps) {
               )}
             />
             <Controller
-              name="type"
+              name="typeName"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -163,7 +163,6 @@ export default function EventForm({ series, types }: EventFormProps) {
                     type="number"
                     placeholder="Max Chests"
                     disabled={isLoading}
-                    min={1}
                     required
                   />
                   {fieldState.invalid && (

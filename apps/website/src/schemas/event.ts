@@ -25,12 +25,12 @@ export type EventSearchParams = z.infer<typeof eventSearchParamsSchema>;
 
 export const eventFormSchema = z.object({
   dateRange: z.object({
-    from: z.date(),
-    to: z.date(),
+    from: z.date("Start date is required"),
+    to: z.date("End date is required"),
   }),
-  maxChests: z.number(),
-  type: z.string(),
-  seriesCode: z.string(),
+  maxChests: z.int("Max chests must be an integer"),
+  typeName: z.string().min(1, "Type is required"),
+  seriesCode: z.string().min(1, "Series is required"),
 });
 
 export type EventFormValues = z.infer<typeof eventFormSchema>;
