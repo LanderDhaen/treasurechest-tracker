@@ -7,7 +7,7 @@ import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 import { withFilteredAccounts } from "./account";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
-import { UpdateableEvent } from "@/db/types/event";
+import { InsertableEvent, UpdateableEvent } from "@/db/types/event";
 
 export const getTotalEvents = async () => {
   const result = await db
@@ -251,6 +251,32 @@ export const deriveEventStatus = (
     .then(EventStatus.Upcoming)
     .else(EventStatus.Ongoing)
     .end();
+};
+
+export const createEvent = async ({
+  code,
+  edition,
+  startDate,
+  endDate,
+  maxChests,
+  typeId,
+  seriesId,
+}: InsertableEvent) => {
+  const event = await db
+    .insertInto("event")
+    .values({
+      code,
+      edition,
+      startDate,
+      endDate,
+      maxChests,
+      typeId,
+      seriesId,
+    })
+    .returning(["event.id", "event.code", "event.edition"])
+    .executeTakeFirstOrThrow();
+
+  return event;
 };
 
 export const updateEvent = async (eventId: number, data: UpdateableEvent) => {

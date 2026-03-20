@@ -41,6 +41,8 @@ interface AccountFormProps {
   }[];
 }
 
+const DEFAULT_TOWNHALL = 18;
+
 export default function AccountForm({ clans }: AccountFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,7 +51,7 @@ export default function AccountForm({ clans }: AccountFormProps) {
     defaultValues: {
       name: "",
       tag: "",
-      townhall: 18,
+      townhall: DEFAULT_TOWNHALL,
       clanTag: clans[0].tag || "",
     },
   });
@@ -160,6 +162,7 @@ export default function AccountForm({ clans }: AccountFormProps) {
                     disabled={isLoading}
                     min={1}
                     required
+                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />

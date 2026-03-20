@@ -12,6 +12,7 @@ export interface TypeTable {
   updatedAt: ColumnType<Date>;
   isActive: ColumnType<boolean>;
   name: ColumnType<string>;
+  slug: ColumnType<string>;
 }
 
 export type Type = Selectable<TypeTable>;
