@@ -9,7 +9,7 @@ import {
   createEvent,
 } from "@/queries/event";
 import { getSeriesByCode } from "@/queries/series";
-import { getTypeByName } from "@/queries/type";
+import { getTypeBySlug } from "@/queries/type";
 import { eventFormSchema, EventFormValues } from "@/schemas/event";
 import { revalidatePath } from "next/cache";
 import { DatabaseError } from "pg";
@@ -39,9 +39,9 @@ export const createEventAction = async (formData: EventFormValues) => {
     };
   }
 
-  const { dateRange, maxChests, typeName, seriesCode } = result.data;
+  const { dateRange, maxChests, typeSlug, seriesCode } = result.data;
 
-  const type = await getTypeByName(typeName);
+  const type = await getTypeBySlug(typeSlug);
 
   if (!type) {
     return {

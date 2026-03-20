@@ -6,7 +6,7 @@ import { jsonArrayFrom } from "kysely/helpers/postgres";
 export const getAllTypes = async () => {
   const types = await db
     .selectFrom("type")
-    .select(["type.name"])
+    .select(["type.name", "type.slug"])
     .where("type.isActive", "=", true)
     .orderBy("type.name", "asc")
     .execute();
@@ -14,11 +14,12 @@ export const getAllTypes = async () => {
   return types;
 };
 
-export const getTypeByName = async (name: string) => {
+export const getTypeBySlug = async (slug: string) => {
   const type = await db
     .selectFrom("type")
     .select(["type.id"])
-    .where("type.name", "=", name)
+    .where("type.isActive", "=", true)
+    .where("type.slug", "=", slug)
     .executeTakeFirst();
 
   return type;

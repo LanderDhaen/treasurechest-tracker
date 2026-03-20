@@ -45,6 +45,7 @@ interface EventFormProps {
   }[];
   types: {
     name: string;
+    slug: string;
   }[];
 }
 
@@ -63,7 +64,7 @@ export default function EventForm({ series, types }: EventFormProps) {
         to: DEFAULT_TO_DATE,
       },
       maxChests: DEFAULT_MAX_CHESTS,
-      typeName: types[0].name || "",
+      typeSlug: types[0].slug || "",
       seriesCode: series[0].code || "",
     },
   });
@@ -84,7 +85,7 @@ export default function EventForm({ series, types }: EventFormProps) {
           toast.error(error.message);
           break;
         case "TYPE_NOT_FOUND":
-          form.setError("typeName", { message: error.message });
+          form.setError("typeSlug", { message: error.message });
           break;
         case "SERIES_NOT_FOUND":
           form.setError("seriesCode", { message: error.message });
@@ -148,7 +149,7 @@ export default function EventForm({ series, types }: EventFormProps) {
               )}
             />
             <Controller
-              name="typeName"
+              name="typeSlug"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -168,7 +169,7 @@ export default function EventForm({ series, types }: EventFormProps) {
                     </SelectTrigger>
                     <SelectContent position="popper">
                       {types.map((t) => (
-                        <SelectItem key={t.name} value={t.name}>
+                        <SelectItem key={t.slug} value={t.slug}>
                           {t.name}
                         </SelectItem>
                       ))}

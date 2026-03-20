@@ -27,7 +27,7 @@ export const eventFormSchema = z.object({
     to: z.date("End date is required"),
   }),
   maxChests: z.int("Max chests must be an integer"),
-  typeName: z.string().min(1, "Type is required"),
+  typeSlug: z.string().min(1, "Type is required"),
   seriesCode: z.string().min(1, "Series is required"),
 });
 
