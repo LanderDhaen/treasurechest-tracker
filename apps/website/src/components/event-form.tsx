@@ -32,11 +32,13 @@ import { toast } from "sonner";
 import { redirect } from "next/navigation";
 import { eventFormSchema, EventFormValues } from "@/schemas/event";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, PlusIcon } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import { Calendar } from "./ui/calendar";
 import { createEventAction } from "@/actions/event";
 import { formatEventName } from "@/lib/event";
+import { ButtonGroup } from "./ui/button-group";
+import Link from "next/link";
 
 interface EventFormProps {
   series: {
@@ -72,7 +74,10 @@ export default function EventForm({ series, types }: EventFormProps) {
   const onSubmit = async (formData: EventFormValues) => {
     setIsLoading(true);
 
-    const { data: event, error } = await createEventAction(formData);
+    const { data: event, error } = await createEventAction({
+      ...formData,
+      typeSlug: "error",
+    });
 
     setIsLoading(false);
 
@@ -156,25 +161,43 @@ export default function EventForm({ series, types }: EventFormProps) {
                   <FieldLabel htmlFor={field.name}>
                     Type<span className="text-red-500 -ml-1">*</span>
                   </FieldLabel>
-                  <Select
-                    name={field.name}
-                    value={field.value}
-                    onValueChange={field.onChange}
-                  >
-                    <SelectTrigger
-                      id="form-rhf-select-language"
-                      aria-invalid={fieldState.invalid}
-                    >
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent position="popper">
-                      {types.map((t) => (
-                        <SelectItem key={t.slug} value={t.slug}>
-                          {t.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <ButtonGroup>
+                    <ButtonGroup className="w-full">
+                      <Select
+                        name={field.name}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger
+                          id="form-rhf-select-language"
+                          aria-invalid={fieldState.invalid}
+                          className="w-full"
+                        >
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                          {types.map((t) => (
+                            <SelectItem key={t.slug} value={t.slug}>
+                              {t.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="text-black"
+                        disabled={isLoading}
+                        asChild
+                      >
+                        <Link href="/types/add">
+                          <PlusIcon />
+                        </Link>
+                      </Button>
+                    </ButtonGroup>
+                  </ButtonGroup>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
