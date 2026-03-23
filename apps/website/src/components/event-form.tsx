@@ -74,10 +74,7 @@ export default function EventForm({ series, types }: EventFormProps) {
   const onSubmit = async (formData: EventFormValues) => {
     setIsLoading(true);
 
-    const { data: event, error } = await createEventAction({
-      ...formData,
-      typeSlug: "error",
-    });
+    const { data: event, error } = await createEventAction(formData);
 
     setIsLoading(false);
 
