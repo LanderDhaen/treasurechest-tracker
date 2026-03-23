@@ -2,6 +2,7 @@ import { FilterConfig } from "@/types/common";
 import { withFilteredChests } from "./chest";
 import { db } from "@/db";
 import { jsonArrayFrom } from "kysely/helpers/postgres";
+import { InsertableType } from "@/db/types/type";
 
 export const getAllTypes = async () => {
   const types = await db
@@ -54,4 +55,17 @@ export const getChestCountPerType = async (filters: FilterConfig) => {
     .execute();
 
   return types;
+};
+
+export const createType = async ({ name, slug }: InsertableType) => {
+  const type = await db
+    .insertInto("type")
+    .values({
+      name,
+      slug,
+    })
+    .returning(["type.name"])
+    .executeTakeFirst();
+
+  return type;
 };

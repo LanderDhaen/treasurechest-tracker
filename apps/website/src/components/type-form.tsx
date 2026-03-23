@@ -24,6 +24,7 @@ import { Spinner } from "./ui/spinner";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
 import { typeFormSchema, TypeFormValues } from "@/schemas/type";
+import { createTypeAction } from "@/actions/type";
 
 export default function TypeForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,8 +38,19 @@ export default function TypeForm() {
 
   const onSubmit = async (formData: TypeFormValues) => {
     setIsLoading(true);
-    console.log("Submitting form with data:", formData);
+
+    const { data: type, error } = await createTypeAction(formData);
+
     setIsLoading(false);
+
+    if (error) {
+      toast.error(error.message);
+      setIsLoading(false);
+    } else {
+      toast.success(`Type "${type.name}" created successfully!`);
+
+      redirect("/events/add");
+    }
   };
 
   return (
