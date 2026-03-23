@@ -45,10 +45,8 @@ export default function TypeForm() {
 
     if (error) {
       toast.error(error.message);
-      setIsLoading(false);
     } else {
       toast.success(`Type "${type.name}" created successfully!`);
-
       redirect("/events/add");
     }
   };

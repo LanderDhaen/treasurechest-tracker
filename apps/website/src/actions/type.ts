@@ -3,6 +3,7 @@
 import { getServerSession } from "@/queries/auth";
 import { createType } from "@/queries/type";
 import { typeFormSchema, TypeFormValues } from "@/schemas/type";
+import { DatabaseError } from "pg";
 
 export const createTypeAction = async (formData: TypeFormValues) => {
   const result = typeFormSchema.safeParse(formData);
@@ -36,10 +37,30 @@ export const createTypeAction = async (formData: TypeFormValues) => {
     .replace(/\s+/g, "-")
     .replace(/[^a-z0-9\-]/g, "");
 
-  const type = await createType({ name, slug });
+  try {
+    const type = await createType({ name, slug });
 
-  return {
-    data: type,
-    error: null,
-  };
+    return {
+      data: type,
+      error: null,
+    };
+  } catch (error) {
+    if (error instanceof DatabaseError && error.code === "23505") {
+      return {
+        data: null,
+        error: {
+          code: "TYPE_EXISTS",
+          message: "A type with this name already exists.",
+        },
+      };
+    } else {
+      return {
+        data: null,
+        error: {
+          code: "UNKNOWN_ERROR",
+          message: "An unknown error occurred. Please try again later.",
+        },
+      };
+    }
+  }
 };
