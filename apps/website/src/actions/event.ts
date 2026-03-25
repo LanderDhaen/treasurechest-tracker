@@ -21,13 +21,13 @@ export const createEventAction = async (formData: EventFormValues) => {
   const result = eventFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return ValidationError("These type details are invalid.");
+    return ValidationError();
   }
 
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError("You must be logged in to create a type.");
+    return UnauthorizedError();
   }
 
   const { dateRange, maxChests, typeSlug, seriesCode } = result.data;
@@ -96,7 +96,7 @@ export const changeChestCreationAllowedStatus = async (eventId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError("You must be logged in to create a type.");
+    return UnauthorizedError();
   }
 
   const event = await getEventById(eventId);
@@ -141,7 +141,7 @@ export const deleteEventAction = async (eventId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError("You must be logged in to create a type.");
+    return UnauthorizedError();
   }
 
   const event = await getEventById(eventId);

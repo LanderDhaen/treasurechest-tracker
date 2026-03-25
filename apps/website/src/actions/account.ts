@@ -20,13 +20,13 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
   const result = accountFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return ValidationError("These type details are invalid.");
+    return ValidationError();
   }
 
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError("You must be logged in to create a type.");
+    return UnauthorizedError();
   }
 
   const { name, tag, townhall, clanTag } = result.data;
@@ -71,7 +71,7 @@ export const upgradeTownhall = async (accountId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError("You must be logged in to create a type.");
+    return UnauthorizedError();
   }
 
   const account = await getAccountById(accountId);
@@ -115,7 +115,7 @@ export const changeTrackingStatus = async (accountId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError("You must be logged in to create a type.");
+    return UnauthorizedError();
   }
 
   const account = await getAccountById(accountId);
@@ -159,7 +159,7 @@ export const deleteAccountAction = async (accountId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError("You must be logged in to create a type.");
+    return UnauthorizedError();
   }
 
   const account = await getAccountById(accountId);

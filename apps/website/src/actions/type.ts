@@ -12,13 +12,13 @@ export const createTypeAction = async (formData: TypeFormValues) => {
   const result = typeFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return ValidationError("These type details are invalid.");
+    return ValidationError();
   }
 
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError("You must be logged in to create a type.");
+    return UnauthorizedError();
   }
 
   const { name, slug } = result.data;
