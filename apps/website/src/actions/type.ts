@@ -30,12 +30,7 @@ export const createTypeAction = async (formData: TypeFormValues) => {
     };
   }
 
-  const { name } = result.data;
-
-  const slug = name
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9\-]/g, "");
+  const { name, slug } = result.data;
 
   try {
     const type = await createType({ name, slug });

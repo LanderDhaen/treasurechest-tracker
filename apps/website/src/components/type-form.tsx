@@ -33,6 +33,7 @@ export default function TypeForm() {
     resolver: zodResolver(typeFormSchema),
     defaultValues: {
       name: "",
+      slug: "",
     },
   });
 
@@ -44,7 +45,15 @@ export default function TypeForm() {
     setIsLoading(false);
 
     if (error) {
-      toast.error(error.message);
+      switch (error.code) {
+        case "TYPE_EXISTS":
+          form.setError("name", {
+            message: error.message,
+          });
+          break;
+        default:
+          toast.error(error.message);
+      }
     } else {
       toast.success(`Type "${type.name}" created successfully!`);
       redirect("/events/add");
@@ -76,6 +85,29 @@ export default function TypeForm() {
                     aria-invalid={fieldState.invalid}
                     type="text"
                     placeholder="Name"
+                    disabled={isLoading}
+                    required
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />{" "}
+            <Controller
+              name="slug"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    Slug<span className="text-red-500 -ml-1">*</span>
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id={field.name}
+                    aria-invalid={fieldState.invalid}
+                    type="text"
+                    placeholder="Slug"
                     disabled={isLoading}
                     required
                   />
