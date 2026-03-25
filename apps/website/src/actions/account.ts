@@ -14,6 +14,7 @@ import { revalidatePath } from "next/cache";
 import { deleteChestsByAccountId } from "@/queries/chest";
 import UnauthorizedError from "@/errors/unauthorized-error";
 import ValidationError from "@/errors/validation-error";
+import UnknownError from "@/errors/unknown-error";
 
 export const submitAccountForm = async (formData: AccountFormValues) => {
   const result = accountFormSchema.safeParse(formData);
@@ -61,13 +62,7 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
         },
       };
     } else {
-      return {
-        data: null,
-        error: {
-          code: "UNKNOWN_ERROR",
-          message: "An unknown error occurred. Please try again later.",
-        },
-      };
+      return UnknownError();
     }
   }
 };
