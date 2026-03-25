@@ -1,5 +1,7 @@
 "use server";
 
+import UnauthorizedError from "@/errors/unauthorized-error";
+import ValidationError from "@/errors/validation-error";
 import { getServerSession } from "@/queries/auth";
 import { deleteChestsByEventId } from "@/queries/chest";
 import {
@@ -18,25 +20,13 @@ export const createEventAction = async (formData: EventFormValues) => {
   const result = eventFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return {
-      data: null,
-      error: {
-        code: "VALIDATION_ERROR",
-        message: "These values are invalid.",
-      },
-    };
+    return ValidationError("These type details are invalid.");
   }
 
   const session = await getServerSession();
 
   if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to create an event.",
-      },
-    };
+    return UnauthorizedError("You must be logged in to create a type.");
   }
 
   const { dateRange, maxChests, typeSlug, seriesCode } = result.data;
@@ -111,13 +101,7 @@ export const changeChestCreationAllowedStatus = async (eventId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to update an event.",
-      },
-    };
+    return UnauthorizedError("You must be logged in to create a type.");
   }
 
   const event = await getEventById(eventId);
@@ -162,13 +146,7 @@ export const deleteEventAction = async (eventId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to delete an event.",
-      },
-    };
+    return UnauthorizedError("You must be logged in to create a type.");
   }
 
   const event = await getEventById(eventId);

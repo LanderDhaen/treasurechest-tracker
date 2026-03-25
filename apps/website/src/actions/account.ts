@@ -12,33 +12,23 @@ import { getServerSession } from "@/queries/auth";
 import { DatabaseError } from "pg";
 import { revalidatePath } from "next/cache";
 import { deleteChestsByAccountId } from "@/queries/chest";
+import UnauthorizedError from "@/errors/unauthorized-error";
+import ValidationError from "@/errors/validation-error";
 
 export const submitAccountForm = async (formData: AccountFormValues) => {
   const result = accountFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return {
-      data: null,
-      error: {
-        code: "VALIDATION_ERROR",
-        message: "These values are invalid.",
-      },
-    };
+    return ValidationError("These type details are invalid.");
   }
-
-  const { name, tag, townhall, clanTag } = result.data;
 
   const session = await getServerSession();
 
   if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to create an account.",
-      },
-    };
+    return UnauthorizedError("You must be logged in to create a type.");
   }
+
+  const { name, tag, townhall, clanTag } = result.data;
 
   const clan = await getClanByTag(clanTag);
 
@@ -86,13 +76,7 @@ export const upgradeTownhall = async (accountId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to update an account.",
-      },
-    };
+    return UnauthorizedError("You must be logged in to create a type.");
   }
 
   const account = await getAccountById(accountId);
@@ -136,13 +120,7 @@ export const changeTrackingStatus = async (accountId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to update an account.",
-      },
-    };
+    return UnauthorizedError("You must be logged in to create a type.");
   }
 
   const account = await getAccountById(accountId);
@@ -186,13 +164,7 @@ export const deleteAccountAction = async (accountId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to delete an account.",
-      },
-    };
+    return UnauthorizedError("You must be logged in to create a type.");
   }
 
   const account = await getAccountById(accountId);

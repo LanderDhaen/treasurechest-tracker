@@ -1,5 +1,7 @@
 "use server";
 
+import UnauthorizedError from "@/errors/unauthorized-error";
+import ValidationError from "@/errors/validation-error";
 import { getServerSession } from "@/queries/auth";
 import { createType } from "@/queries/type";
 import { typeFormSchema, TypeFormValues } from "@/schemas/type";
@@ -9,25 +11,13 @@ export const createTypeAction = async (formData: TypeFormValues) => {
   const result = typeFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return {
-      data: null,
-      error: {
-        code: "VALIDATION_ERROR",
-        message: "These values are invalid.",
-      },
-    };
+    return ValidationError("These type details are invalid.");
   }
 
   const session = await getServerSession();
 
   if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to create a type.",
-      },
-    };
+    return UnauthorizedError("You must be logged in to create a type.");
   }
 
   const { name, slug } = result.data;
