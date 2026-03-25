@@ -31,16 +31,31 @@ export const createTypeAction = async (formData: TypeFormValues) => {
       error: null,
     };
   } catch (error) {
-    if (error instanceof DatabaseError && error.code === "23505") {
-      return {
-        data: null,
-        error: {
-          code: "TYPE_EXISTS",
-          message: "A type with this name already exists.",
-        },
-      };
-    } else {
+    if (!(error instanceof DatabaseError) || error.code !== "23505") {
       return UnknownError();
+    }
+    switch (error.constraint) {
+      case "type_name_key":
+        return {
+          data: null,
+          error: {
+            code: "TYPE_NAME_EXISTS",
+            message: "A type with this name already exists.",
+          },
+        };
+      case "type_slug_key":
+        return {
+          data: null,
+          error: {
+            code: "TYPE_SLUG_EXISTS",
+            message: "A type with this slug already exists.",
+          },
+        };
+
+      // Required field violations
+
+      default:
+        return UnknownError();
     }
   }
 };

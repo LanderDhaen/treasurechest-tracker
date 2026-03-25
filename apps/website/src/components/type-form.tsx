@@ -56,8 +56,13 @@ export default function TypeForm() {
 
     if (error) {
       switch (error.code) {
-        case "TYPE_EXISTS":
+        case "TYPE_NAME_EXISTS":
           form.setError("name", {
+            message: error.message,
+          });
+          break;
+        case "TYPE_SLUG_EXISTS":
+          form.setError("slug", {
             message: error.message,
           });
           break;
