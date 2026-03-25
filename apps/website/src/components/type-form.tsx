@@ -18,8 +18,8 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { Spinner } from "./ui/spinner";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
@@ -36,6 +36,20 @@ export default function TypeForm() {
       slug: "",
     },
   });
+
+  const name = useWatch({
+    control: form.control,
+    name: "name",
+  });
+
+  useEffect(() => {
+    const slug = name
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9\-]/g, "");
+    form.setValue("slug", slug);
+  }, [name, form]);
 
   const onSubmit = async (formData: TypeFormValues) => {
     setIsLoading(true);
@@ -93,7 +107,7 @@ export default function TypeForm() {
                   )}
                 </Field>
               )}
-            />{" "}
+            />
             <Controller
               name="slug"
               control={form.control}
