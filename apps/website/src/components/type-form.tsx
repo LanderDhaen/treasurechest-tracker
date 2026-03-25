@@ -25,6 +25,7 @@ import { toast } from "sonner";
 import { redirect } from "next/navigation";
 import { typeFormSchema, TypeFormValues } from "@/schemas/type";
 import { createTypeAction } from "@/actions/type";
+import { slugify } from "@/lib/utils";
 
 export default function TypeForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -43,12 +44,7 @@ export default function TypeForm() {
   });
 
   useEffect(() => {
-    const slug = name
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^a-z0-9\-]/g, "");
-    form.setValue("slug", slug);
+    form.setValue("slug", slugify(name));
   }, [name, form]);
 
   const onSubmit = async (formData: TypeFormValues) => {
