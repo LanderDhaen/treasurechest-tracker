@@ -52,8 +52,6 @@ export const createTypeAction = async (formData: TypeFormValues) => {
           },
         };
 
-      // Required field violations
-
       default:
         return UnknownError();
     }
