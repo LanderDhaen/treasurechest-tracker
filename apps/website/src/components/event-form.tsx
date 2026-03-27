@@ -49,13 +49,22 @@ interface EventFormProps {
     name: string;
     slug: string;
   }[];
+
+  defaultValues: {
+    seriesCode?: string;
+    typeSlug?: string;
+  };
 }
 
 const DEFAULT_FROM_DATE = new Date();
 const DEFAULT_TO_DATE = new Date();
 const DEFAULT_MAX_CHESTS = 1;
 
-export default function EventForm({ series, types }: EventFormProps) {
+export default function EventForm({
+  series,
+  types,
+  defaultValues,
+}: EventFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<EventFormValues>({
@@ -66,8 +75,8 @@ export default function EventForm({ series, types }: EventFormProps) {
         to: DEFAULT_TO_DATE,
       },
       maxChests: DEFAULT_MAX_CHESTS,
-      typeSlug: types[0].slug || "",
-      seriesCode: series[0].code || "",
+      typeSlug: defaultValues.typeSlug || types[0].slug || "",
+      seriesCode: defaultValues.seriesCode || series[0].code || "",
     },
   });
 

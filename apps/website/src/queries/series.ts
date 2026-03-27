@@ -76,7 +76,7 @@ export const createSeries = async ({ name, code }: InsertableSeries) => {
       name,
       code,
     })
-    .returning(["series.name"])
+    .returning(["series.name", "series.code"])
     .executeTakeFirstOrThrow();
 
   return series;

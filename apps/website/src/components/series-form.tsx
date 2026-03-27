@@ -61,7 +61,7 @@ export default function SeriesForm() {
       }
     } else {
       toast.success(`Series "${data.name}" created successfully!`);
-      redirect(`/events/add`);
+      redirect(`/events/add?series=${data.code}`);
     }
 
     setIsLoading(false);

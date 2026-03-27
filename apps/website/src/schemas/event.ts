@@ -32,3 +32,8 @@ export const eventFormSchema = z.object({
 });
 
 export type EventFormValues = z.infer<typeof eventFormSchema>;
+
+export const eventFormSearchParamsSchema = z.object({
+  series: z.string().optional(),
+  type: z.string().optional(),
+});

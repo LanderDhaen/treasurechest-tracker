@@ -71,7 +71,7 @@ export default function TypeForm() {
       }
     } else {
       toast.success(`Type "${type.name}" created successfully!`);
-      redirect("/events/add");
+      redirect(`/events/add?type=${type.slug}`);
     }
   };
 
