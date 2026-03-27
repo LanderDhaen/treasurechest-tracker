@@ -35,6 +35,14 @@ export const createSeriesAction = async (formData: SeriesFormValues) => {
       return UnknownError();
     }
     switch (error.constraint) {
+      case "series_name_key":
+        return {
+          data: null,
+          error: {
+            code: "SERIES_NAME_EXISTS",
+            message: "A series with this name already exists.",
+          },
+        };
       case "series_code_key":
         return {
           data: null,
@@ -43,7 +51,6 @@ export const createSeriesAction = async (formData: SeriesFormValues) => {
             message: "A series with this code already exists.",
           },
         };
-
       default:
         return UnknownError();
     }
