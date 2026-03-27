@@ -1,0 +1,108 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldSeparator,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { Spinner } from "./ui/spinner";
+import { toast } from "sonner";
+import { redirect } from "next/navigation";
+import { chestFormSchema, ChestFormValues } from "@/schemas/chest";
+
+export default function ChestForm() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<ChestFormValues>({
+    resolver: zodResolver(chestFormSchema),
+    defaultValues: {
+      amount: 1,
+    },
+  });
+
+  const onSubmit = async (formData: ChestFormValues) => {
+    setIsLoading(true);
+
+    console.log(formData);
+
+    setIsLoading(false);
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-center">Treasure Chest Form</CardTitle>
+        <CardDescription className="text-center">
+          Enter the details below to create a treasure chest.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FieldGroup>
+            <Controller
+              name="amount"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    Amount<span className="text-red-500 -ml-1">*</span>
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id={field.name}
+                    aria-invalid={fieldState.invalid}
+                    type="number"
+                    placeholder="Amount"
+                    disabled={isLoading}
+                    required
+                    min={1}
+                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <FieldSeparator />
+            <Field>
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Spinner data-icon="inline-start" />
+                    Creating...
+                  </>
+                ) : (
+                  "Create"
+                )}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => form.reset()}
+                disabled={isLoading}
+              >
+                Reset
+              </Button>
+            </Field>
+          </FieldGroup>
+        </form>
+      </CardContent>
+    </Card>
+  );
+}
