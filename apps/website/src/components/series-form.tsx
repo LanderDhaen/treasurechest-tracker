@@ -42,6 +42,26 @@ export default function SeriesForm() {
 
     const { data, error } = await createSeriesAction(formData);
 
+    if (error) {
+      switch (error.code) {
+        case "SERIES_NAME_EXISTS":
+          form.setError("name", {
+            message: error.message,
+          });
+          break;
+        case "SERIES_CODE_EXISTS":
+          form.setError("code", {
+            message: error.message,
+          });
+          break;
+        default:
+          toast.error(error.message);
+      }
+    } else {
+      toast.success(`Series "${data.name}" created successfully!`);
+      redirect(`/events/add`);
+    }
+
     setIsLoading(false);
   };
 
