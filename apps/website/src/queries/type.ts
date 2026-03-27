@@ -64,7 +64,7 @@ export const createType = async ({ name, slug }: InsertableType) => {
       name,
       slug,
     })
-    .returning(["type.name"])
+    .returning(["type.name", "type.slug"])
     .executeTakeFirstOrThrow();
 
   return type;

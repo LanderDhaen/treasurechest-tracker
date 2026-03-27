@@ -49,13 +49,22 @@ interface EventFormProps {
     name: string;
     slug: string;
   }[];
+
+  defaultValues: {
+    seriesCode?: string;
+    typeSlug?: string;
+  };
 }
 
 const DEFAULT_FROM_DATE = new Date();
 const DEFAULT_TO_DATE = new Date();
 const DEFAULT_MAX_CHESTS = 1;
 
-export default function EventForm({ series, types }: EventFormProps) {
+export default function EventForm({
+  series,
+  types,
+  defaultValues,
+}: EventFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<EventFormValues>({
@@ -66,8 +75,8 @@ export default function EventForm({ series, types }: EventFormProps) {
         to: DEFAULT_TO_DATE,
       },
       maxChests: DEFAULT_MAX_CHESTS,
-      typeSlug: types[0].slug || "",
-      seriesCode: series[0].code || "",
+      typeSlug: defaultValues.typeSlug || types[0].slug || "",
+      seriesCode: defaultValues.seriesCode || series[0].code || "",
     },
   });
 
@@ -125,25 +134,43 @@ export default function EventForm({ series, types }: EventFormProps) {
                   <FieldLabel htmlFor={field.name}>
                     Series<span className="text-red-500 -ml-1">*</span>
                   </FieldLabel>
-                  <Select
-                    name={field.name}
-                    value={field.value}
-                    onValueChange={field.onChange}
-                  >
-                    <SelectTrigger
-                      id="form-rhf-select-language"
-                      aria-invalid={fieldState.invalid}
-                    >
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent position="popper">
-                      {series.map((s) => (
-                        <SelectItem key={s.code} value={s.code}>
-                          {s.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <ButtonGroup>
+                    <ButtonGroup className="w-full">
+                      <Select
+                        name={field.name}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger
+                          id="form-rhf-select-language"
+                          aria-invalid={fieldState.invalid}
+                          className="w-full"
+                        >
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                          {series.map((s) => (
+                            <SelectItem key={s.code} value={s.code}>
+                              {s.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="text-black"
+                        disabled={isLoading}
+                        asChild
+                      >
+                        <Link href="/series/add">
+                          <PlusIcon />
+                        </Link>
+                      </Button>
+                    </ButtonGroup>
+                  </ButtonGroup>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}

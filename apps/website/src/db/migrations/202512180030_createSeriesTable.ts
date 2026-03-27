@@ -8,7 +8,7 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("createdAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
     .addColumn("updatedAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
     .addColumn("isActive", "boolean", (c) => c.notNull().defaultTo(true))
-    .addColumn("name", "varchar", (c) => c.notNull())
+    .addColumn("name", "varchar", (c) => c.notNull().unique())
     .addColumn("code", "varchar", (c) => c.notNull().unique())
     .execute();
 };

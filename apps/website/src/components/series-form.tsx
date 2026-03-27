@@ -18,51 +18,41 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { Spinner } from "./ui/spinner";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
-import { typeFormSchema, TypeFormValues } from "@/schemas/type";
-import { createTypeAction } from "@/actions/type";
-import { slugify } from "@/lib/utils";
+import { seriesFormSchema, SeriesFormValues } from "@/schemas/series";
+import { createSeriesAction } from "@/actions/series";
+import { generateCode } from "@/lib/utils";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
-export default function TypeForm() {
+export default function SeriesForm() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<TypeFormValues>({
-    resolver: zodResolver(typeFormSchema),
+  const form = useForm<SeriesFormValues>({
+    resolver: zodResolver(seriesFormSchema),
     defaultValues: {
       name: "",
-      slug: "",
+      code: "",
     },
   });
 
-  const name = useWatch({
-    control: form.control,
-    name: "name",
-  });
-
-  useEffect(() => {
-    form.setValue("slug", slugify(name));
-  }, [name, form]);
-
-  const onSubmit = async (formData: TypeFormValues) => {
+  const onSubmit = async (formData: SeriesFormValues) => {
     setIsLoading(true);
 
-    const { data: type, error } = await createTypeAction(formData);
-
-    setIsLoading(false);
+    const { data, error } = await createSeriesAction(formData);
 
     if (error) {
       switch (error.code) {
-        case "TYPE_NAME_EXISTS":
+        case "SERIES_NAME_EXISTS":
           form.setError("name", {
             message: error.message,
           });
           break;
-        case "TYPE_SLUG_EXISTS":
-          form.setError("slug", {
+        case "SERIES_CODE_EXISTS":
+          form.setError("code", {
             message: error.message,
           });
           break;
@@ -70,17 +60,19 @@ export default function TypeForm() {
           toast.error(error.message);
       }
     } else {
-      toast.success(`Type "${type.name}" created successfully!`);
-      redirect(`/events/add?type=${type.slug}`);
+      toast.success(`Series "${data.name}" created successfully!`);
+      redirect(`/events/add?series=${data.code}`);
     }
+
+    setIsLoading(false);
   };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-center">Type Form</CardTitle>
+        <CardTitle className="text-center">Series Form</CardTitle>
         <CardDescription className="text-center">
-          Enter the details below to create a type.
+          Enter the details below to create a series.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -102,6 +94,15 @@ export default function TypeForm() {
                     placeholder="Name"
                     disabled={isLoading}
                     required
+                    onChange={(e) => {
+                      const value = e.target.value;
+
+                      form.setValue("code", generateCode(value), {
+                        shouldValidate: true,
+                      });
+
+                      field.onChange(value);
+                    }}
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
@@ -110,22 +111,25 @@ export default function TypeForm() {
               )}
             />
             <Controller
-              name="slug"
+              name="code"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor={field.name}>
-                    Slug<span className="text-red-500 -ml-1">*</span>
+                    Code<span className="text-red-500 -ml-1">*</span>
                   </FieldLabel>
-                  <Input
-                    {...field}
-                    id={field.name}
-                    aria-invalid={fieldState.invalid}
-                    type="text"
-                    placeholder="Slug"
-                    disabled={isLoading}
-                    required
-                  />
+                  <InputGroup>
+                    <InputGroupInput
+                      {...field}
+                      id={field.name}
+                      aria-invalid={fieldState.invalid}
+                      type="text"
+                      placeholder="Code"
+                      disabled={isLoading}
+                      required
+                    />
+                    <InputGroupAddon>#</InputGroupAddon>
+                  </InputGroup>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}

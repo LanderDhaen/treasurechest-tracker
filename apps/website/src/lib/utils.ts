@@ -88,3 +88,15 @@ export const slugify = (text: string) =>
     .replace(/&/g, "and") // Replace & with "and"
     .replace(/-+/g, "-") // Replace multiple hyphens with a single one
     .replace(/[^a-z0-9\-]/g, ""); // Remove non-alphanumeric characters except hyphens
+
+export function generateCode(name: string) {
+  return name
+    .trim()
+    .toUpperCase()
+    .normalize("NFKD") // Decompose accented characters into their base characters and diacritical marks
+    .replace(/[\u0300-\u036f]/g, "") // Remove diacritical marks
+    .split(/[^A-Za-z]+/) // Split on anything that's NOT a letter
+    .filter(Boolean) // Remove empty strings
+    .map((word) => word[0]) // Take the first letter of each word
+    .join(""); // Join them together
+}
