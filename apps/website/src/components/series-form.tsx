@@ -25,6 +25,8 @@ import { toast } from "sonner";
 import { redirect } from "next/navigation";
 import { seriesFormSchema, SeriesFormValues } from "@/schemas/series";
 import { createSeriesAction } from "@/actions/series";
+import { generateCode } from "@/lib/utils";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
 export default function SeriesForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -92,6 +94,15 @@ export default function SeriesForm() {
                     placeholder="Name"
                     disabled={isLoading}
                     required
+                    onChange={(e) => {
+                      const value = e.target.value;
+
+                      form.setValue("code", generateCode(value), {
+                        shouldValidate: true,
+                      });
+
+                      field.onChange(value);
+                    }}
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
@@ -107,15 +118,18 @@ export default function SeriesForm() {
                   <FieldLabel htmlFor={field.name}>
                     Code<span className="text-red-500 -ml-1">*</span>
                   </FieldLabel>
-                  <Input
-                    {...field}
-                    id={field.name}
-                    aria-invalid={fieldState.invalid}
-                    type="text"
-                    placeholder="Code"
-                    disabled={isLoading}
-                    required
-                  />
+                  <InputGroup>
+                    <InputGroupInput
+                      {...field}
+                      id={field.name}
+                      aria-invalid={fieldState.invalid}
+                      type="text"
+                      placeholder="Code"
+                      disabled={isLoading}
+                      required
+                    />
+                    <InputGroupAddon>#</InputGroupAddon>
+                  </InputGroup>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
