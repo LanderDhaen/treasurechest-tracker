@@ -24,6 +24,7 @@ import { Spinner } from "./ui/spinner";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
 import { seriesFormSchema, SeriesFormValues } from "@/schemas/series";
+import { createSeriesAction } from "@/actions/series";
 
 export default function SeriesForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -32,13 +33,14 @@ export default function SeriesForm() {
     resolver: zodResolver(seriesFormSchema),
     defaultValues: {
       name: "",
+      code: "",
     },
   });
 
   const onSubmit = async (formData: SeriesFormValues) => {
     setIsLoading(true);
 
-    console.log(formData);
+    const { data, error } = await createSeriesAction(formData);
 
     setIsLoading(false);
   };
@@ -68,6 +70,29 @@ export default function SeriesForm() {
                     aria-invalid={fieldState.invalid}
                     type="text"
                     placeholder="Name"
+                    disabled={isLoading}
+                    required
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <Controller
+              name="code"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    Code<span className="text-red-500 -ml-1">*</span>
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id={field.name}
+                    aria-invalid={fieldState.invalid}
+                    type="text"
+                    placeholder="Code"
                     disabled={isLoading}
                     required
                   />

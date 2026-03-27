@@ -8,9 +8,9 @@ import {
 
 export interface SeriesTable {
   id: Generated<number>;
-  createdAt: ColumnType<Date>;
-  updatedAt: ColumnType<Date>;
-  isActive: ColumnType<boolean>;
+  createdAt: ColumnType<Date, never, never>;
+  updatedAt: ColumnType<Date, never, Date>;
+  isActive: ColumnType<boolean, never, boolean>;
   name: ColumnType<string>;
   code: ColumnType<string>;
 }

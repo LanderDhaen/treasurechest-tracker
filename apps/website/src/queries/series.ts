@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
+import { InsertableSeries } from "@/db/types/series";
 
 export const getAllSeries = async () => {
   const series = await db
@@ -64,6 +65,19 @@ export const getChestCountPerSeries = async (filters: FilterConfig) => {
     .orderBy("count", "desc")
     .orderBy("series.name", "asc")
     .execute();
+
+  return series;
+};
+
+export const createSeries = async ({ name, code }: InsertableSeries) => {
+  const series = await db
+    .insertInto("series")
+    .values({
+      name,
+      code,
+    })
+    .returning(["series.name"])
+    .executeTakeFirstOrThrow();
 
   return series;
 };
