@@ -1,5 +1,8 @@
 "use server";
 
+import UnauthorizedError from "@/errors/unauthorized-error";
+import UnknownError from "@/errors/unknown-error";
+import ValidationError from "@/errors/validation-error";
 import { getServerSession } from "@/queries/auth";
 import { deleteChestsByEventId } from "@/queries/chest";
 import {
@@ -18,25 +21,13 @@ export const createEventAction = async (formData: EventFormValues) => {
   const result = eventFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return {
-      data: null,
-      error: {
-        code: "VALIDATION_ERROR",
-        message: "These values are invalid.",
-      },
-    };
+    return ValidationError();
   }
 
   const session = await getServerSession();
 
   if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to create an event.",
-      },
-    };
+    return UnauthorizedError();
   }
 
   const { dateRange, maxChests, typeSlug, seriesCode } = result.data;
@@ -96,13 +87,7 @@ export const createEventAction = async (formData: EventFormValues) => {
         },
       };
     } else {
-      return {
-        data: null,
-        error: {
-          code: "UNKNOWN_ERROR",
-          message: "An unknown error occurred. Please try again later.",
-        },
-      };
+      return UnknownError();
     }
   }
 };
@@ -111,13 +96,7 @@ export const changeChestCreationAllowedStatus = async (eventId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to update an event.",
-      },
-    };
+    return UnauthorizedError();
   }
 
   const event = await getEventById(eventId);
@@ -162,13 +141,7 @@ export const deleteEventAction = async (eventId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return {
-      data: null,
-      error: {
-        code: "UNAUTHORIZED",
-        message: "You must be logged in to delete an event.",
-      },
-    };
+    return UnauthorizedError();
   }
 
   const event = await getEventById(eventId);

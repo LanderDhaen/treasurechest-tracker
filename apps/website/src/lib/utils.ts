@@ -77,3 +77,14 @@ export function formatHourRange(hour: number) {
   const endHour = ((hour + 1) % 24).toString().padStart(2, "0");
   return `${startHour}:00 - ${endHour}:00`;
 }
+
+export const slugify = (text: string) =>
+  text
+    .trim()
+    .toLowerCase()
+    .normalize("NFKD") // Decompose accented characters into their base characters and diacritical marks
+    .replace(/[\u0300-\u036f]/g, "") // Remove diacritical marks
+    .replace(/\s+/g, "-") // Replace spaces with "-"
+    .replace(/&/g, "and") // Replace & with "and"
+    .replace(/-+/g, "-") // Replace multiple hyphens with a single one
+    .replace(/[^a-z0-9\-]/g, ""); // Remove non-alphanumeric characters except hyphens
