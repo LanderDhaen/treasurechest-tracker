@@ -10,15 +10,11 @@ import {
 } from "@/components/ui/card";
 import {
   Field,
-  FieldContent,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
   FieldSeparator,
   FieldSet,
-  FieldTitle,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
@@ -45,9 +41,8 @@ import UnobtainableBadge from "./unobtainable-badge";
 import { formatEventName } from "@/lib/event";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { formatDate } from "@/lib/utils";
-import { CalendarIcon, ChevronDown } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { Calendar } from "./ui/calendar";
-import { date } from "zod/v3";
 
 interface ChestFormProps {
   accounts: {
@@ -331,6 +326,9 @@ export default function ChestForm({
                         />
                       </PopoverContent>
                     </Popover>
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
                   </Field>
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel htmlFor={`${field.name}-time`}>
@@ -353,9 +351,6 @@ export default function ChestForm({
                       aria-invalid={fieldState.invalid}
                       className="appearance-none bg-white [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
                     />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
                   </Field>
                 </FieldGroup>
               )}
