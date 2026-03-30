@@ -15,7 +15,7 @@ export const getAllRarities = async () => {
 export const getRarityBySlug = async (slug: string) => {
   const rarity = await db
     .selectFrom("rarity")
-    .select(["rarity.id"])
+    .select(["rarity.id", "rarity.name", "rarity.chance"])
     .where("rarity.slug", "=", slug)
     .where("rarity.isActive", "=", true)
     .executeTakeFirst();

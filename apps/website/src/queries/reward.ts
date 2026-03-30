@@ -1,12 +1,41 @@
 import { db } from "@/db";
-import { jsonArrayFrom } from "kysely/helpers/postgres";
+import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 
 export const getRewardBySlug = async (slug: string) => {
   const reward = await db
     .selectFrom("reward")
-    .select(["reward.id"])
+    .select((eb) => [
+      "reward.id",
+      "reward.name",
+      jsonObjectFrom(
+        eb
+          .selectFrom("category")
+          .select((eb) => [
+            "category.name",
+            jsonObjectFrom(
+              eb
+                .selectFrom("rarity")
+                .select(["rarity.name", "rarity.chance"])
+                .whereRef("rarity.id", "=", "category.minRarityId"),
+            )
+              .$notNull()
+              .as("minRarity"),
+            jsonObjectFrom(
+              eb
+                .selectFrom("rarity")
+                .select(["rarity.name", "rarity.chance"])
+                .whereRef("rarity.id", "=", "category.maxRarityId"),
+            )
+              .$notNull()
+              .as("maxRarity"),
+          ])
+          .whereRef("category.id", "=", "reward.categoryId"),
+      )
+        .$notNull()
+        .as("category"),
+    ])
     .where("reward.slug", "=", slug)
     .where("reward.isActive", "=", true)
     .executeTakeFirst();

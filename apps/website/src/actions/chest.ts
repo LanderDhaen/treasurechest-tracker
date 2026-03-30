@@ -50,7 +50,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
     };
   }
 
-  if (account.isTracked === true) {
+  if (account.isTracked === false) {
     return {
       data: null,
       error: {
@@ -107,6 +107,21 @@ export const createChestAction = async (formData: ChestFormValues) => {
         code: "REWARD_NOT_FOUND",
         field: "rewardSlug",
         message: "The specified reward was not found.",
+      },
+    };
+  }
+
+  const isCorrectRarity =
+    reward.category.minRarity.chance <= rarity.chance &&
+    reward.category.maxRarity.chance >= rarity.chance;
+
+  if (!isCorrectRarity) {
+    return {
+      data: null,
+      error: {
+        code: "RARITY_REWARD_MISMATCH",
+        field: "raritySlug",
+        message: `${reward.name} can only be between ${reward.category.minRarity.name} and ${reward.category.maxRarity.name}.`,
       },
     };
   }
