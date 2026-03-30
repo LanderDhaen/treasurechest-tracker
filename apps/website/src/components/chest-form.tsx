@@ -41,10 +41,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { Badge } from "./ui/badge";
 import UnobtainableBadge from "./unobtainable-badge";
 
 interface ChestFormProps {
+  accounts: {
+    tag: string;
+    name: string;
+    townhall: number;
+  }[];
   rarities: {
     name: string;
     slug: string;
@@ -59,12 +63,17 @@ interface ChestFormProps {
   }[];
 }
 
-export default function ChestForm({ rarities, categories }: ChestFormProps) {
+export default function ChestForm({
+  accounts,
+  rarities,
+  categories,
+}: ChestFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<ChestFormValues>({
     resolver: zodResolver(chestFormSchema),
     defaultValues: {
+      accountTag: accounts[0]?.tag || "",
       raritySlug: rarities[0]?.slug || "",
       amount: 1,
       rewardSlug: categories[0]?.rewards[0]?.slug || "",
@@ -90,6 +99,45 @@ export default function ChestForm({ rarities, categories }: ChestFormProps) {
       <CardContent>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
+            <Controller
+              name="accountTag"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    Account<span className="text-red-500 -ml-1">*</span>
+                  </FieldLabel>
+                  <Select
+                    name={field.name}
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    aria-invalid={fieldState.invalid}
+                  >
+                    <SelectTrigger
+                      id="form-rhf-select-account"
+                      aria-invalid={fieldState.invalid}
+                      className="w-full"
+                    >
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent position="popper">
+                      {accounts.map((account) => (
+                        <SelectItem
+                          key={account.tag}
+                          value={account.tag}
+                          disabled={isLoading}
+                        >
+                          {account.name}・TH{account.townhall}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
             <Controller
               name="raritySlug"
               control={form.control}
