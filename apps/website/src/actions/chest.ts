@@ -3,8 +3,8 @@
 import UnknownError from "@/errors/unknown-error";
 import { getAccountByTag } from "@/queries/account";
 import { getServerSession } from "@/queries/auth";
-import { createChest } from "@/queries/chest";
-import { getEventByCode } from "@/queries/event";
+import { createChest, getTotalChests } from "@/queries/chest";
+import { getEventByCode, getPossibleChestCount } from "@/queries/event";
 import { getRarityBySlug } from "@/queries/rarity";
 import { getRewardBySlug } from "@/queries/reward";
 import { chestFormSchema, ChestFormValues } from "@/schemas/chest";
@@ -122,6 +122,23 @@ export const createChestAction = async (formData: ChestFormValues) => {
         code: "RARITY_REWARD_MISMATCH",
         field: "raritySlug",
         message: `${reward.name} can only be between ${reward.category.minRarity.name} and ${reward.category.maxRarity.name}.`,
+      },
+    };
+  }
+
+  const totalChests = await getTotalChests({
+    eventId: event.id,
+    accountId: account.id,
+  });
+
+  const isExceedingMaxChests = totalChests >= event.maxChests;
+
+  if (isExceedingMaxChests) {
+    return {
+      data: null,
+      error: {
+        code: "MAX_CHESTS_REACHED",
+        message: `The maximum number of chests for this event (${event.maxChests}) has already been reached for this account.`,
       },
     };
   }
