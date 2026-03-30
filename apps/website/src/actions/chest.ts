@@ -50,6 +50,17 @@ export const createChestAction = async (formData: ChestFormValues) => {
     };
   }
 
+  if (account.isTracked === true) {
+    return {
+      data: null,
+      error: {
+        code: "ACCOUNT_NOT_TRACKED",
+        field: "accountTag",
+        message: "The specified account is not tracked.",
+      },
+    };
+  }
+
   const event = await getEventByCode(eventCode);
 
   if (!event) {
