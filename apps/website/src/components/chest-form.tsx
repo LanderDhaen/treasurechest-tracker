@@ -41,6 +41,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { Badge } from "./ui/badge";
+import UnobtainableBadge from "./unobtainable-badge";
 
 interface ChestFormProps {
   rarities: {
@@ -183,6 +185,9 @@ export default function ChestForm({ rarities, categories }: ChestFormProps) {
                               disabled={isLoading}
                             >
                               {reward.name}
+                              <UnobtainableBadge
+                                isObtainable={reward.isObtainable}
+                              />
                             </SelectItem>
                           ))}
                           {index < categories.length - 1 && <SelectSeparator />}
