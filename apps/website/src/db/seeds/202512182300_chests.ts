@@ -344,7 +344,7 @@ export const seed = async (db: Kysely<any>) => {
         rewardId: 42, // Home Village (Shop)
       },
       {
-        openedAt: "2024-12-10T10:00:01Z",
+        openedAt: "2024-12-10T10:00:03Z",
         rarityId: 2, // Rare
         accountId: 1, // DL✨Lander
         eventId: 3, // Controllable Heroes
@@ -2931,14 +2931,14 @@ export const seed = async (db: Kysely<any>) => {
       },
 
       {
-        openedAt: "2025-10-28T11:14:00Z",
+        openedAt: "2025-10-28T15:02:00Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
         eventId: 14, // Treasure Hunt 6
         rewardId: 6, // Mighty Morsel
       },
       {
-        openedAt: "2025-10-28T11:18:00Z",
+        openedAt: "2025-10-28T15:02:01Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
         eventId: 14, // Treasure Hunt 6
@@ -2946,14 +2946,14 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 1150000,
-        openedAt: "2025-10-28T13:34:00Z",
+        openedAt: "2025-10-28T15:03:00Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
         eventId: 14, // Treasure Hunt 6
         rewardId: 7, // Gold
       },
       {
-        openedAt: "2025-10-28T15:03:00Z",
+        openedAt: "2025-10-28T15:03:01Z",
         rarityId: 3, // Epic
         accountId: 3, // DL✨Lander™
         eventId: 14, // Treasure Hunt 6
@@ -4067,7 +4067,7 @@ export const seed = async (db: Kysely<any>) => {
         rewardId: 4, // Power Pancakes
       },
       {
-        openedAt: "2025-08-15T00:08:00Z",
+        openedAt: "2025-08-15T00:07:00Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
         eventId: 12, // Hero Rush
@@ -4075,7 +4075,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 12100,
-        openedAt: "2025-08-15T00:08:01Z",
+        openedAt: "2025-08-15T00:07:01Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
         eventId: 12, // Hero Rush
@@ -4083,7 +4083,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 523000,
-        openedAt: "2025-08-15T00:08:02Z",
+        openedAt: "2025-08-15T00:07:02Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
         eventId: 12, // Hero Rush
@@ -4091,35 +4091,35 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 543,
-        openedAt: "2025-08-15T00:08:03Z",
+        openedAt: "2025-08-15T00:07:03Z",
         rarityId: 2, // Rare
         accountId: 4, // Lander
         eventId: 12, // Hero Rush
         rewardId: 39, // Shiny Ore
       },
       {
-        openedAt: "2025-08-15T00:08:04Z",
+        openedAt: "2025-08-15T00:07:04Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
         eventId: 12, // Hero Rush
         rewardId: 4, // Power Pancakes
       },
       {
-        openedAt: "2025-08-15T00:09:00Z",
+        openedAt: "2025-08-15T00:08:00Z",
         rarityId: 2, // Rare
         accountId: 4, // Lander
         eventId: 12, // Hero Rush
         rewardId: 15, // Builder Potion
       },
       {
-        openedAt: "2025-08-15T00:09:01Z",
+        openedAt: "2025-08-15T00:08:01Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
         eventId: 12, // Hero Rush
         rewardId: 5, // Clan Castle Cake
       },
       {
-        openedAt: "2025-08-15T00:09:02Z",
+        openedAt: "2025-08-15T00:08:02Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
         eventId: 12, // Hero Rush
@@ -4127,7 +4127,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 1110000,
-        openedAt: "2025-08-15T00:09:03Z",
+        openedAt: "2025-08-15T00:08:03Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
         eventId: 12, // Hero Rush
@@ -4135,7 +4135,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 1070,
-        openedAt: "2025-08-15T00:09:04Z",
+        openedAt: "2025-08-15T00:08:04Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
         eventId: 12, // Hero Rush
@@ -4297,7 +4297,7 @@ export const seed = async (db: Kysely<any>) => {
       },
 
       {
-        openedAt: "2025-10-28T15:09:00Z",
+        openedAt: "2025-10-28T15:09:01Z",
         rarityId: 2, // Rare
         accountId: 4, // Lander
         eventId: 14, // Treasure Hunt 6
@@ -4636,7 +4636,7 @@ export const seed = async (db: Kysely<any>) => {
       },
 
       {
-        openedAt: "2025-12-19T01:02:00Z",
+        openedAt: "2025-12-19T01:02:10Z",
         rarityId: 2, // Rare
         accountId: 4, // Lander
         eventId: 17, // Clan Rush
@@ -4644,28 +4644,28 @@ export const seed = async (db: Kysely<any>) => {
         amount: 26200,
       },
       {
-        openedAt: "2025-12-19T01:02:01Z",
+        openedAt: "2025-12-19T01:02:11Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
         eventId: 17, // Clan Rush
         rewardId: 5, // Clan Castle Cake
       },
       {
-        openedAt: "2025-12-19T01:02:02Z",
+        openedAt: "2025-12-19T01:02:12Z",
         rarityId: 3, // Epic
         accountId: 4, // Lander
         eventId: 17, // Clan Rush
         rewardId: 43, // Home Village (Limited)
       },
       {
-        openedAt: "2025-12-19T01:03:00Z",
+        openedAt: "2025-12-19T01:03:13Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
         eventId: 17, // Clan Rush
         rewardId: 2, // Builder Bite,
       },
       {
-        openedAt: "2025-12-19T01:03:01Z",
+        openedAt: "2025-12-19T01:03:14Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
         eventId: 17, // Clan Rush
@@ -5803,7 +5803,7 @@ export const seed = async (db: Kysely<any>) => {
         rewardId: 10, // Builder Gold
       },
       {
-        openedAt: "2024-12-08T10:30:00Z",
+        openedAt: "2024-12-08T10:30:01Z",
         rarityId: 3, // Epic
         accountId: 8, // DL Lander
         eventId: 3, // Controllable Heroes
@@ -5819,7 +5819,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 940000,
-        openedAt: "2024-12-09T10:30:00Z",
+        openedAt: "2024-12-09T10:30:01Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
         eventId: 3, // Controllable Heroes
@@ -5834,7 +5834,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 3,
-        openedAt: "2024-12-10T10:30:00Z",
+        openedAt: "2024-12-10T10:30:01Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
         eventId: 3, // Controllable Heroes
@@ -5842,7 +5842,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 518000,
-        openedAt: "2024-12-10T10:30:00Z",
+        openedAt: "2024-12-10T10:30:02Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
         eventId: 3, // Controllable Heroes
@@ -5899,7 +5899,7 @@ export const seed = async (db: Kysely<any>) => {
       },
 
       {
-        openedAt: "2025-07-22T00:01:00Z",
+        openedAt: "2025-07-22T00:01:01Z",
         rarityId: 3, // Epic
         accountId: 8, // DL Lander
         eventId: 11, // Splash Bash
@@ -6091,7 +6091,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 661000,
-        openedAt: "2025-10-28T15:33:00Z",
+        openedAt: "2025-10-28T15:33:01Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
         eventId: 14, // Treasure Hunt 6
@@ -6384,7 +6384,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 46,
-        openedAt: "2024-12-08T11:00:00Z",
+        openedAt: "2024-12-08T11:00:01Z",
         rarityId: 2, // Rare
         accountId: 9, // Lvl.1 Lander
         eventId: 3, // Controllable Heroes
@@ -6399,7 +6399,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 11700,
-        openedAt: "2024-12-09T11:00:00Z",
+        openedAt: "2024-12-09T11:00:01Z",
         rarityId: 1, // Common
         accountId: 9, // Lvl.1 Lander
         eventId: 3, // Controllable Heroes
@@ -6414,7 +6414,7 @@ export const seed = async (db: Kysely<any>) => {
         rewardId: 9, // Dark Elixer
       },
       {
-        openedAt: "2024-12-10T11:00:00Z",
+        openedAt: "2024-12-10T11:00:01Z",
         rarityId: 2, // Rare
         accountId: 9, // Lvl.1 Lander
         eventId: 3, // Controllable Heroes
@@ -6499,7 +6499,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 895000,
-        openedAt: "2025-07-18T21:18:00Z",
+        openedAt: "2025-07-18T21:18:01Z",
         rarityId: 1, // Common
         accountId: 9, // Lvl.1 Lander
         eventId: 10, // Treasure Hunt 4
@@ -6507,7 +6507,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 7510,
-        openedAt: "2025-07-18T21:18:00Z",
+        openedAt: "2025-07-18T21:18:02Z",
         rarityId: 1, // Common
         accountId: 9, // Lvl.1 Lander
         eventId: 10, // Treasure Hunt 4
@@ -6523,7 +6523,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         amount: 1670000,
-        openedAt: "2025-07-18T21:19:00Z",
+        openedAt: "2025-07-18T21:19:01Z",
         rarityId: 2, // Rare
         accountId: 9, // Lvl.1 Lander
         eventId: 10, // Treasure Hunt 4
