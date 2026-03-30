@@ -1,8 +1,6 @@
 "use server";
 
-import UnauthorizedError from "@/errors/unauthorized-error";
 import UnknownError from "@/errors/unknown-error";
-import ValidationError from "@/errors/validation-error";
 import { getAccountByTag } from "@/queries/account";
 import { getServerSession } from "@/queries/auth";
 import { createChest } from "@/queries/chest";
@@ -10,19 +8,30 @@ import { getEventByCode } from "@/queries/event";
 import { getRarityBySlug } from "@/queries/rarity";
 import { getRewardBySlug } from "@/queries/reward";
 import { chestFormSchema, ChestFormValues } from "@/schemas/chest";
-import { DatabaseError } from "pg";
 
 export const createChestAction = async (formData: ChestFormValues) => {
   const result = chestFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return ValidationError();
+    return {
+      data: null,
+      error: {
+        code: "VALIDATION_ERROR",
+        message: "There were validation errors with the provided data.",
+      },
+    };
   }
 
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError();
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to perform this action.",
+      },
+    };
   }
 
   const { accountTag, eventCode, raritySlug, amount, rewardSlug, openedAt } =
@@ -35,6 +44,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       data: null,
       error: {
         code: "ACCOUNT_NOT_FOUND",
+        field: "accountTag",
         message: "The specified account was not found.",
       },
     };
@@ -47,6 +57,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       data: null,
       error: {
         code: "EVENT_NOT_FOUND",
+        field: "eventCode",
         message: "The specified event was not found.",
       },
     };
@@ -59,6 +70,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       data: null,
       error: {
         code: "RARITY_NOT_FOUND",
+        field: "raritySlug",
         message: "The specified rarity was not found.",
       },
     };
@@ -71,6 +83,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       data: null,
       error: {
         code: "REWARD_NOT_FOUND",
+        field: "rewardSlug",
         message: "The specified reward was not found.",
       },
     };

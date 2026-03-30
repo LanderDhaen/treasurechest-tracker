@@ -96,9 +96,16 @@ export default function ChestForm({
     const { data: chest, error } = await createChestAction(formData);
 
     if (error) {
-      toast.error(error.message);
+      if (error.field) {
+        form.setError(error.field as keyof ChestFormValues, {
+          message: error.message,
+        });
+      } else {
+        toast.error(error.message);
+      }
     } else {
       toast.success("Chest created successfully!");
+      redirect(`/chests/${chest.id}`);
     }
 
     setIsLoading(false);
@@ -298,6 +305,9 @@ export default function ChestForm({
                       ))}
                     </SelectContent>
                   </Select>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
                 </Field>
               )}
             />
