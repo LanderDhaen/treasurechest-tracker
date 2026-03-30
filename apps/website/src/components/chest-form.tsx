@@ -42,12 +42,18 @@ import {
   SelectValue,
 } from "./ui/select";
 import UnobtainableBadge from "./unobtainable-badge";
+import { formatEventName } from "@/lib/event";
 
 interface ChestFormProps {
   accounts: {
     tag: string;
     name: string;
     townhall: number;
+  }[];
+  events: {
+    code: string;
+    name: string;
+    edition: number;
   }[];
   rarities: {
     name: string;
@@ -65,6 +71,7 @@ interface ChestFormProps {
 
 export default function ChestForm({
   accounts,
+  events,
   rarities,
   categories,
 }: ChestFormProps) {
@@ -74,6 +81,7 @@ export default function ChestForm({
     resolver: zodResolver(chestFormSchema),
     defaultValues: {
       accountTag: accounts[0]?.tag || "",
+      eventCode: events[0]?.code || "",
       raritySlug: rarities[0]?.slug || "",
       amount: 1,
       rewardSlug: categories[0]?.rewards[0]?.slug || "",
@@ -128,6 +136,45 @@ export default function ChestForm({
                           disabled={isLoading}
                         >
                           {account.name}・TH{account.townhall}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <Controller
+              name="eventCode"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    Event<span className="text-red-500 -ml-1">*</span>
+                  </FieldLabel>
+                  <Select
+                    name={field.name}
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    aria-invalid={fieldState.invalid}
+                  >
+                    <SelectTrigger
+                      id="form-rhf-select-event"
+                      aria-invalid={fieldState.invalid}
+                      className="w-full"
+                    >
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent position="popper">
+                      {events.map((event) => (
+                        <SelectItem
+                          key={event.code}
+                          value={event.code}
+                          disabled={isLoading}
+                        >
+                          {formatEventName(event.name, event.edition)}
                         </SelectItem>
                       ))}
                     </SelectContent>
