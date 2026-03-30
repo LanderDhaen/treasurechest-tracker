@@ -13,6 +13,10 @@ import {
 import { SORT_OPTIONS } from "@/constants/chest";
 import { chestSearchParamsSchema } from "@/schemas/chest";
 import { FilterConfig } from "@/types/common";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Plus } from "lucide-react";
+import { getServerSession } from "@/queries/auth";
 
 export default async function Page({
   searchParams,
@@ -35,6 +39,8 @@ export default async function Page({
 
   const count = await getTotalChests(filters);
 
+  const session = await getServerSession();
+
   return (
     <Card className="shadow-md">
       <CardHeader>
@@ -51,6 +57,13 @@ export default async function Page({
             currentDirection={direction}
             sortingOptions={SORT_OPTIONS}
           />
+          {session && (
+            <Button asChild variant="outline" size="icon">
+              <Link href="/chests/add">
+                <Plus />
+              </Link>
+            </Button>
+          )}
         </div>
         <ChestTable chests={chests} />
         {totalPages > 0 && (
