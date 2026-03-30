@@ -14,7 +14,10 @@ export const chestSearchParamsSchema = z.object({
 export type ChestSearchParams = z.infer<typeof chestSearchParamsSchema>;
 
 export const chestFormSchema = z.object({
-  amount: z.number().min(1, "Amount must be a positive number"),
+  raritySlug: z.string().min(1, "Rarity is required"),
+  amount: z
+    .int("Amount must be an integer")
+    .min(1, "Amount must be at least 1"),
 });
 
 export type ChestFormValues = z.infer<typeof chestFormSchema>;

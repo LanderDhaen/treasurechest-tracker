@@ -10,10 +10,15 @@ import {
 } from "@/components/ui/card";
 import {
   Field,
+  FieldContent,
+  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
+  FieldLegend,
   FieldSeparator,
+  FieldSet,
+  FieldTitle,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
@@ -24,13 +29,23 @@ import { Spinner } from "./ui/spinner";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
 import { chestFormSchema, ChestFormValues } from "@/schemas/chest";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import RarityBadge from "./rarity-badge";
 
-export default function ChestForm() {
+interface ChestFormProps {
+  rarities: {
+    name: string;
+    slug: string;
+  }[];
+}
+
+export default function ChestForm({ rarities }: ChestFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<ChestFormValues>({
     resolver: zodResolver(chestFormSchema),
     defaultValues: {
+      raritySlug: rarities[0]?.slug || "",
       amount: 1,
     },
   });
@@ -54,6 +69,45 @@ export default function ChestForm() {
       <CardContent>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
+            <Controller
+              name="raritySlug"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <FieldSet data-invalid={fieldState.invalid}>
+                  <FieldLabel>
+                    Rarity<span className="text-red-500 -ml-1">*</span>
+                  </FieldLabel>
+                  <RadioGroup
+                    name={field.name}
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    aria-invalid={fieldState.invalid}
+                  >
+                    {rarities.map((rarity) => (
+                      <Field
+                        key={rarity.slug}
+                        orientation="horizontal"
+                        data-invalid={fieldState.invalid}
+                      >
+                        <RadioGroupItem
+                          value={rarity.slug}
+                          id={`form-rhf-radiogroup-${rarity.slug}`}
+                          aria-invalid={fieldState.invalid}
+                        />
+                        <FieldLabel
+                          htmlFor={`form-rhf-radiogroup-${rarity.slug}`}
+                        >
+                          <RarityBadge rarity={rarity.name} />
+                        </FieldLabel>
+                      </Field>
+                    ))}
+                  </RadioGroup>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </FieldSet>
+              )}
+            />
             <Controller
               name="amount"
               control={form.control}
