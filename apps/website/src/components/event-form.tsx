@@ -267,7 +267,7 @@ export default function EventForm({
                       <Button
                         variant="outline"
                         id="date-picker-range"
-                        className="justify-start px-2.5 font-normal"
+                        className="justify-start bg-white"
                       >
                         <CalendarIcon />
                         {field?.value.from ? (

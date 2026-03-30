@@ -43,6 +43,11 @@ import {
 } from "./ui/select";
 import UnobtainableBadge from "./unobtainable-badge";
 import { formatEventName } from "@/lib/event";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { formatDate } from "@/lib/utils";
+import { CalendarIcon, ChevronDown } from "lucide-react";
+import { Calendar } from "./ui/calendar";
+import { date } from "zod/v3";
 
 interface ChestFormProps {
   accounts: {
@@ -85,6 +90,7 @@ export default function ChestForm({
       raritySlug: rarities[0]?.slug || "",
       amount: 1,
       rewardSlug: categories[0]?.rewards[0]?.slug || "",
+      openedAt: new Date(),
     },
   });
 
@@ -291,6 +297,67 @@ export default function ChestForm({
                     </SelectContent>
                   </Select>
                 </Field>
+              )}
+            />
+            <Controller
+              name="openedAt"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <FieldGroup className="flex-row">
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor={field.name}>
+                      Date<span className="text-red-500 -ml-1">*</span>
+                    </FieldLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          id="date-picker-range"
+                          className="justify-start bg-white"
+                          disabled={isLoading}
+                          aria-invalid={fieldState.invalid}
+                        >
+                          <CalendarIcon />
+                          {field.value
+                            ? formatDate(field.value)
+                            : "Select date"}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          defaultMonth={field.value}
+                          onSelect={field.onChange}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </Field>
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor={`${field.name}-time`}>
+                      Time<span className="text-red-500 -ml-1">*</span>
+                    </FieldLabel>
+                    <Input
+                      type="time"
+                      id={field.name}
+                      step="1"
+                      value={field.value.toTimeString().slice(0, 8)}
+                      onChange={(e) => {
+                        const [hours, minutes, seconds] = e.target.value
+                          .split(":")
+                          .map(Number);
+                        const updatedDate = new Date(field.value);
+                        updatedDate.setHours(hours, minutes, seconds);
+                        field.onChange(updatedDate);
+                      }}
+                      disabled={isLoading}
+                      aria-invalid={fieldState.invalid}
+                      className="appearance-none bg-white [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                    />
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                </FieldGroup>
               )}
             />
             <FieldSeparator />
