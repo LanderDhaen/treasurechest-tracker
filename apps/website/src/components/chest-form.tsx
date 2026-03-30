@@ -204,7 +204,7 @@ export default function ChestForm({
               name="raritySlug"
               control={form.control}
               render={({ field, fieldState }) => (
-                <FieldSet data-invalid={fieldState.invalid}>
+                <Field data-invalid={fieldState.invalid}>
                   <FieldLabel>
                     Rarity<span className="text-red-500 -ml-1">*</span>
                   </FieldLabel>
@@ -233,10 +233,11 @@ export default function ChestForm({
                       </Field>
                     ))}
                   </RadioGroup>
+
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
-                </FieldSet>
+                </Field>
               )}
             />
             <Controller
