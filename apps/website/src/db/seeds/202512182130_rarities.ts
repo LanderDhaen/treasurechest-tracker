@@ -11,24 +11,28 @@ export const seed = async (db: Kysely<any>) => {
         createdAt: "2025-12-18 21:30:00",
         updatedAt: "2025-12-18 21:30:00",
         name: "Common",
+        slug: "common",
         chance: 58,
       },
       {
         createdAt: "2025-12-18 21:30:00",
         updatedAt: "2025-12-18 21:30:00",
         name: "Rare",
+        slug: "rare",
         chance: 32,
       },
       {
         createdAt: "2025-12-18 21:30:00",
         updatedAt: "2025-12-18 21:30:00",
         name: "Epic",
+        slug: "epic",
         chance: 8,
       },
       {
         createdAt: "2025-12-18 21:30:00",
         updatedAt: "2025-12-18 21:30:00",
         name: "Legendary",
+        slug: "legendary",
         chance: 2,
       },
     ])
