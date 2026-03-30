@@ -3,6 +3,31 @@ import { jsonArrayFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 
+export const getAllCategories = async () => {
+  const categories = await db
+    .selectFrom("category")
+    .innerJoin("rarity as minRarity", "minRarity.id", "category.minRarityId")
+    .innerJoin("rarity as maxRarity", "maxRarity.id", "category.maxRarityId")
+    .select((eb) => [
+      "category.name",
+      jsonArrayFrom(
+        eb
+          .selectFrom("reward")
+          .select(["reward.name", "reward.slug", "reward.isObtainable"])
+          .whereRef("reward.categoryId", "=", "category.id")
+          .orderBy("reward.categoryId", "asc")
+          .orderBy("reward.name", "asc"),
+      ).as("rewards"),
+    ])
+    .where("category.isActive", "=", true)
+    .orderBy("minRarity.chance", "desc")
+    .orderBy("maxRarity.chance", "desc")
+    .orderBy("category.name", "asc")
+    .execute();
+
+  return categories;
+};
+
 export const getChestCountPerCategory = async (filters: FilterConfig) => {
   const categories = await db
     .with("filtered_chest", () => withFilteredChests(filters))

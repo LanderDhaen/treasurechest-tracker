@@ -12,7 +12,7 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: "2025-12-18 22:00:00",
         name: "Magic Snacks",
         minRarityId: 1, // Common
-        maxRarityId: 2, // Rare
+        maxRarityId: 1, // Common
       },
       {
         createdAt: "2025-12-18 22:00:00",

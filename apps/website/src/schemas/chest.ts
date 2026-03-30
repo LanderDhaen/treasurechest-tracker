@@ -18,6 +18,7 @@ export const chestFormSchema = z.object({
   amount: z
     .int("Amount must be an integer")
     .min(1, "Amount must be at least 1"),
+  rewardSlug: z.string().min(1, "Reward is required"),
 });
 
 export type ChestFormValues = z.infer<typeof chestFormSchema>;

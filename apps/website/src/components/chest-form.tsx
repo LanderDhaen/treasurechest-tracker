@@ -31,15 +31,33 @@ import { redirect } from "next/navigation";
 import { chestFormSchema, ChestFormValues } from "@/schemas/chest";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import RarityBadge from "./rarity-badge";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 interface ChestFormProps {
   rarities: {
     name: string;
     slug: string;
   }[];
+  categories: {
+    name: string;
+    rewards: {
+      name: string;
+      slug: string;
+      isObtainable: boolean;
+    }[];
+  }[];
 }
 
-export default function ChestForm({ rarities }: ChestFormProps) {
+export default function ChestForm({ rarities, categories }: ChestFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<ChestFormValues>({
@@ -47,6 +65,7 @@ export default function ChestForm({ rarities }: ChestFormProps) {
     defaultValues: {
       raritySlug: rarities[0]?.slug || "",
       amount: 1,
+      rewardSlug: categories[0]?.rewards[0]?.slug || "",
     },
   });
 
@@ -130,6 +149,47 @@ export default function ChestForm({ rarities }: ChestFormProps) {
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
+                </Field>
+              )}
+            />
+            <Controller
+              name="rewardSlug"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    Reward<span className="text-red-500 -ml-1">*</span>
+                  </FieldLabel>
+                  <Select
+                    name={field.name}
+                    value={field.value}
+                    onValueChange={field.onChange}
+                  >
+                    <SelectTrigger
+                      id="form-rhf-select-language"
+                      aria-invalid={fieldState.invalid}
+                      className="w-full"
+                    >
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent position="popper">
+                      {categories.map((category, index) => (
+                        <SelectGroup key={category.name}>
+                          <SelectLabel>{category.name}</SelectLabel>
+                          {category.rewards.map((reward) => (
+                            <SelectItem
+                              key={reward.slug}
+                              value={reward.slug}
+                              disabled={isLoading}
+                            >
+                              {reward.name}
+                            </SelectItem>
+                          ))}
+                          {index < categories.length - 1 && <SelectSeparator />}
+                        </SelectGroup>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </Field>
               )}
             />
