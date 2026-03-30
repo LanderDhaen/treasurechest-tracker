@@ -43,6 +43,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { formatDate } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "./ui/calendar";
+import { createChestAction } from "@/actions/chest";
 
 interface ChestFormProps {
   accounts: {
@@ -92,7 +93,13 @@ export default function ChestForm({
   const onSubmit = async (formData: ChestFormValues) => {
     setIsLoading(true);
 
-    console.log(formData);
+    const { data: chest, error } = await createChestAction(formData);
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Chest created successfully!");
+    }
 
     setIsLoading(false);
   };

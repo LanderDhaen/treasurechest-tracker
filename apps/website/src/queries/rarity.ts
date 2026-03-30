@@ -12,6 +12,17 @@ export const getAllRarities = async () => {
   return rarities;
 };
 
+export const getRarityBySlug = async (slug: string) => {
+  const rarity = await db
+    .selectFrom("rarity")
+    .select(["rarity.id"])
+    .where("rarity.slug", "=", slug)
+    .where("rarity.isActive", "=", true)
+    .executeTakeFirst();
+
+  return rarity;
+};
+
 export const getChestCountPerRarity = async (filters: {
   accountId?: number;
   eventId?: number;

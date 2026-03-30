@@ -3,6 +3,17 @@ import { jsonArrayFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 
+export const getRewardBySlug = async (slug: string) => {
+  const reward = await db
+    .selectFrom("reward")
+    .select(["reward.id"])
+    .where("reward.slug", "=", slug)
+    .where("reward.isActive", "=", true)
+    .executeTakeFirst();
+
+  return reward;
+};
+
 export const getChestCountPerReward = async (filters: FilterConfig) => {
   const rewards = await db
     .with("filtered_chest", () => withFilteredChests(filters))
