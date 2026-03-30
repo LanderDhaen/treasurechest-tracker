@@ -8,6 +8,7 @@ import { getEventByCode, getPossibleChestCount } from "@/queries/event";
 import { getRarityBySlug } from "@/queries/rarity";
 import { getRewardBySlug } from "@/queries/reward";
 import { chestFormSchema, ChestFormValues } from "@/schemas/chest";
+import { DatabaseError } from "pg";
 
 export const createChestAction = async (formData: ChestFormValues) => {
   const result = chestFormSchema.safeParse(formData);
@@ -158,7 +159,36 @@ export const createChestAction = async (formData: ChestFormValues) => {
       error: null,
     };
   } catch (error) {
-    console.error("Error creating chest:", error);
-    return UnknownError();
+    if (error instanceof DatabaseError && error.code === "23505") {
+      return {
+        data: null,
+        error: {
+          code: "CHEST_EXISTS",
+          field: "openedAt",
+          message:
+            "A treasure chest with the same opening time already exists.",
+        },
+      };
+    } else {
+      if (error instanceof DatabaseError && error.code === "23505") {
+        return {
+          data: null,
+          error: {
+            code: "CHEST_EXISTS",
+            field: "openedAt",
+            message:
+              "A treasure chest with the same opening time already exists.",
+          },
+        };
+      } else {
+        return {
+          data: null,
+          error: {
+            code: "UNKNOWN_ERROR",
+            message: "An unknown error occurred while creating the chest.",
+          },
+        };
+      }
+    }
   }
 };
