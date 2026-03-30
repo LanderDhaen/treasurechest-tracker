@@ -1,6 +1,8 @@
 "use server";
 
 import UnknownError from "@/errors/unknown-error";
+import { formatEventName } from "@/lib/event";
+import { formatDate } from "@/lib/utils";
 import { getAccountByTag } from "@/queries/account";
 import { getServerSession } from "@/queries/auth";
 import { createChest, getTotalChests } from "@/queries/chest";
@@ -82,6 +84,20 @@ export const createChestAction = async (formData: ChestFormValues) => {
         code: "CHEST_CREATION_NOT_ALLOWED",
         field: "eventCode",
         message: "The specified event does not allow new treasure chests.",
+      },
+    };
+  }
+
+  const isDuringEvent =
+    openedAt >= event.startDate && openedAt <= event.endDate;
+
+  if (!isDuringEvent) {
+    return {
+      data: null,
+      error: {
+        code: "CHEST_OUTSIDE_EVENT_DURATION",
+        field: "openedAt",
+        message: `The opening time must be during ${formatEventName(event.name, event.edition)} (${formatDate(event.startDate)} - ${formatDate(event.endDate)}).`,
       },
     };
   }
