@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { jsonArrayFrom } from "kysely/helpers/postgres";
+import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 
@@ -10,6 +10,22 @@ export const getAllCategories = async () => {
     .innerJoin("rarity as maxRarity", "maxRarity.id", "category.maxRarityId")
     .select((eb) => [
       "category.name",
+      jsonObjectFrom(
+        eb
+          .selectFrom("rarity")
+          .select(["rarity.name", "rarity.chance"])
+          .whereRef("rarity.id", "=", "category.minRarityId"),
+      )
+        .$notNull()
+        .as("minRarity"),
+      jsonObjectFrom(
+        eb
+          .selectFrom("rarity")
+          .select(["rarity.name", "rarity.chance"])
+          .whereRef("rarity.id", "=", "category.maxRarityId"),
+      )
+        .$notNull()
+        .as("maxRarity"),
       jsonArrayFrom(
         eb
           .selectFrom("reward")

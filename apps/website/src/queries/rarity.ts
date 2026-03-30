@@ -4,7 +4,7 @@ import { withFilteredChests } from "./chest";
 export const getAllRarities = async () => {
   const rarities = await db
     .selectFrom("rarity")
-    .select(["rarity.name", "rarity.slug"])
+    .select(["rarity.name", "rarity.slug", "rarity.chance"])
     .where("rarity.isActive", "=", true)
     .orderBy("chance", "desc")
     .execute();

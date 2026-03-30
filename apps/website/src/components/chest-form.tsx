@@ -59,9 +59,18 @@ interface ChestFormProps {
   rarities: {
     name: string;
     slug: string;
+    chance: number;
   }[];
   categories: {
     name: string;
+    minRarity: {
+      name: string;
+      chance: number;
+    };
+    maxRarity: {
+      name: string;
+      chance: number;
+    };
     rewards: {
       name: string;
       slug: string;
@@ -77,6 +86,8 @@ export default function ChestForm({
   categories,
 }: ChestFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [possibleCategories, setPossibleCategories] =
+    useState<ChestFormProps["categories"]>(categories);
 
   const form = useForm<ChestFormValues>({
     resolver: zodResolver(chestFormSchema),
@@ -85,7 +96,7 @@ export default function ChestForm({
       eventCode: events[0]?.code || "",
       raritySlug: rarities[0]?.slug || "",
       amount: 1,
-      rewardSlug: categories[0]?.rewards[0]?.slug || "",
+      rewardSlug: "",
       openedAt: new Date(),
     },
   });
@@ -211,7 +222,21 @@ export default function ChestForm({
                   <RadioGroup
                     name={field.name}
                     value={field.value}
-                    onValueChange={field.onChange}
+                    onValueChange={(e) => {
+                      const selectedRarity = rarities.find((r) => r.slug === e);
+
+                      if (selectedRarity) {
+                        const filteredCategories = categories.filter(
+                          (category) =>
+                            category.minRarity.chance >=
+                              selectedRarity.chance &&
+                            category.maxRarity.chance <= selectedRarity.chance,
+                        );
+                        setPossibleCategories(filteredCategories);
+                      }
+
+                      field.onChange(e);
+                    }}
                     aria-invalid={fieldState.invalid}
                   >
                     {rarities.map((rarity) => (
@@ -286,7 +311,7 @@ export default function ChestForm({
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent position="popper">
-                      {categories.map((category, index) => (
+                      {possibleCategories.map((category, index) => (
                         <SelectGroup key={category.name}>
                           <SelectLabel>{category.name}</SelectLabel>
                           {category.rewards.map((reward) => (
@@ -301,7 +326,9 @@ export default function ChestForm({
                               />
                             </SelectItem>
                           ))}
-                          {index < categories.length - 1 && <SelectSeparator />}
+                          {index < possibleCategories.length - 1 && (
+                            <SelectSeparator />
+                          )}
                         </SelectGroup>
                       ))}
                     </SelectContent>
