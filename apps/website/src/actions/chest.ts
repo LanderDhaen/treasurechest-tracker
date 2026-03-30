@@ -74,6 +74,17 @@ export const createChestAction = async (formData: ChestFormValues) => {
     };
   }
 
+  if (event.isChestCreationAllowed === false) {
+    return {
+      data: null,
+      error: {
+        code: "CHEST_CREATION_NOT_ALLOWED",
+        field: "eventCode",
+        message: "The specified event does not allow new treasure chests.",
+      },
+    };
+  }
+
   const rarity = await getRarityBySlug(raritySlug);
 
   if (!rarity) {
