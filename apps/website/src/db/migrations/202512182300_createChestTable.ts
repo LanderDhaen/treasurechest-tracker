@@ -9,7 +9,9 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("updatedAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
     .addColumn("isActive", "boolean", (c) => c.notNull().defaultTo(true))
     .addColumn("amount", "integer", (c) => c.notNull().defaultTo(1))
-    .addColumn("openedAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
+    .addColumn("openedAt", "timestamp", (c) =>
+      c.notNull().unique().defaultTo("now()"),
+    )
 
     // Foreign Keys
 

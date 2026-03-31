@@ -16,6 +16,19 @@ export const getTotalAccounts = async () => {
   return result.total;
 };
 
+export const getAllTrackedAccounts = async () => {
+  const accounts = await db
+    .selectFrom("account")
+    .select(["account.tag", "account.name", "account.townhall"])
+    .where("account.isActive", "=", true)
+    .where("account.isTracked", "=", true)
+    .orderBy("account.townhall", "desc")
+    .orderBy("account.name", "asc")
+    .execute();
+
+  return accounts;
+};
+
 export const getAllAccounts = async ({
   search,
   page,

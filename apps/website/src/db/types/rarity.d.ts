@@ -12,6 +12,7 @@ export interface RarityTable {
   updatedAt: ColumnType<Date>;
   isActive: ColumnType<boolean>;
   name: ColumnType<string>;
+  slug: ColumnType<string>;
   chance: ColumnType<number>;
 }
 

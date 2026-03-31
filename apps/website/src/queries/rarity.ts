@@ -1,6 +1,28 @@
 import { db } from "@/db";
 import { withFilteredChests } from "./chest";
 
+export const getAllRarities = async () => {
+  const rarities = await db
+    .selectFrom("rarity")
+    .select(["rarity.name", "rarity.slug", "rarity.chance"])
+    .where("rarity.isActive", "=", true)
+    .orderBy("chance", "desc")
+    .execute();
+
+  return rarities;
+};
+
+export const getRarityBySlug = async (slug: string) => {
+  const rarity = await db
+    .selectFrom("rarity")
+    .select(["rarity.id", "rarity.name", "rarity.chance"])
+    .where("rarity.slug", "=", slug)
+    .where("rarity.isActive", "=", true)
+    .executeTakeFirst();
+
+  return rarity;
+};
+
 export const getChestCountPerRarity = async (filters: {
   accountId?: number;
   eventId?: number;

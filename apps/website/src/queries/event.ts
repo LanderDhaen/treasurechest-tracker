@@ -39,6 +39,18 @@ export const getPossibleChestCount = async (filters: FilterConfig) => {
   return result.possibleChestCount;
 };
 
+export const getAllAllowedEvents = async () => {
+  const events = await db
+    .selectFrom("event")
+    .innerJoin("series", "series.id", "event.seriesId")
+    .select(["event.code", "series.name", "event.edition"])
+    .where("event.isActive", "=", true)
+    .where("event.isChestCreationAllowed", "=", true)
+    .execute();
+
+  return events;
+};
+
 export const getAllEvents = async ({
   search,
   page,

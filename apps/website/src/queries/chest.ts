@@ -1,4 +1,5 @@
 import { db } from "@/db";
+import { InsertableChest } from "@/db/types/chest";
 import { Database } from "@/db/types/database";
 import { ChestSearchParams } from "@/schemas/chest";
 import { FilterConfig } from "@/types/common";
@@ -189,6 +190,30 @@ export const withFilteredChests = (filters: FilterConfig) => {
     "chest.amount",
     "chest.openedAt",
   ]);
+};
+
+export const createChest = async ({
+  amount,
+  openedAt,
+  rarityId,
+  accountId,
+  eventId,
+  rewardId,
+}: InsertableChest) => {
+  const chest = await db
+    .insertInto("chest")
+    .values({
+      amount,
+      openedAt,
+      rarityId,
+      accountId,
+      eventId,
+      rewardId,
+    })
+    .returning(["id"])
+    .executeTakeFirstOrThrow();
+
+  return chest;
 };
 
 export const deleteChestsByEventId = async (eventId: number) => {

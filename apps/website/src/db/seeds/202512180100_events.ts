@@ -185,7 +185,6 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 20,
         typeId: 2,
         seriesId: 2,
-        isChestCreationAllowed: false,
       },
       {
         edition: 1,
@@ -195,7 +194,6 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 12,
         typeId: 4,
         seriesId: 12,
-        isChestCreationAllowed: false,
       },
       {
         edition: 1,

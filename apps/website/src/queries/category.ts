@@ -1,7 +1,53 @@
 import { db } from "@/db";
-import { jsonArrayFrom } from "kysely/helpers/postgres";
+import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
 import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
+
+export const getAllCategories = async () => {
+  const categories = await db
+    .selectFrom("category")
+    .innerJoin("rarity as minRarity", "minRarity.id", "category.minRarityId")
+    .innerJoin("rarity as maxRarity", "maxRarity.id", "category.maxRarityId")
+    .select((eb) => [
+      "category.name",
+      jsonObjectFrom(
+        eb
+          .selectFrom("rarity")
+          .select(["rarity.name", "rarity.chance"])
+          .whereRef("rarity.id", "=", "category.minRarityId"),
+      )
+        .$notNull()
+        .as("minRarity"),
+      jsonObjectFrom(
+        eb
+          .selectFrom("rarity")
+          .select(["rarity.name", "rarity.chance"])
+          .whereRef("rarity.id", "=", "category.maxRarityId"),
+      )
+        .$notNull()
+        .as("maxRarity"),
+      jsonArrayFrom(
+        eb
+          .selectFrom("reward")
+          .select([
+            "reward.name",
+            "reward.slug",
+            "reward.minTownhall",
+            "reward.isObtainable",
+          ])
+          .whereRef("reward.categoryId", "=", "category.id")
+          .orderBy("reward.categoryId", "asc")
+          .orderBy("reward.name", "asc"),
+      ).as("rewards"),
+    ])
+    .where("category.isActive", "=", true)
+    .orderBy("minRarity.chance", "desc")
+    .orderBy("maxRarity.chance", "desc")
+    .orderBy("category.name", "asc")
+    .execute();
+
+  return categories;
+};
 
 export const getChestCountPerCategory = async (filters: FilterConfig) => {
   const categories = await db
