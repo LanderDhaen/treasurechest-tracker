@@ -90,8 +90,6 @@ export default function ChestForm({
   categories,
 }: ChestFormProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const [possibleCategories, setPossibleCategories] =
-    useState<ChestFormProps["categories"]>(categories);
 
   const form = useForm<ChestFormValues>({
     resolver: zodResolver(chestFormSchema),
@@ -124,19 +122,6 @@ export default function ChestForm({
     }
 
     setIsLoading(false);
-  };
-
-  const updateCategories = (raritySlug: string) => {
-    const selectedRarity = rarities.find((r) => r.slug === raritySlug);
-
-    if (selectedRarity) {
-      const filteredCategories = categories.filter(
-        (category) =>
-          category.minRarity.chance >= selectedRarity.chance &&
-          category.maxRarity.chance <= selectedRarity.chance,
-      );
-      setPossibleCategories(filteredCategories);
-    }
   };
 
   const updatedDate = (date: Date, time: string) => {
@@ -246,10 +231,7 @@ export default function ChestForm({
                   <RadioGroup
                     name={field.name}
                     value={field.value}
-                    onValueChange={(e) => {
-                      updateCategories(e);
-                      field.onChange(e);
-                    }}
+                    onValueChange={field.onChange}
                     aria-invalid={fieldState.invalid}
                   >
                     {rarities.map((rarity) => (
@@ -324,7 +306,7 @@ export default function ChestForm({
                       <SelectValue placeholder="Select a reward" />
                     </SelectTrigger>
                     <SelectContent position="popper">
-                      {possibleCategories.map((category, index) => (
+                      {categories.map((category, index) => (
                         <SelectGroup key={category.name}>
                           <SelectLabel>{category.name}</SelectLabel>
                           {category.rewards.map((reward) => (
@@ -339,9 +321,7 @@ export default function ChestForm({
                               />
                             </SelectItem>
                           ))}
-                          {index < possibleCategories.length - 1 && (
-                            <SelectSeparator />
-                          )}
+                          {index < categories.length - 1 && <SelectSeparator />}
                         </SelectGroup>
                       ))}
                     </SelectContent>
