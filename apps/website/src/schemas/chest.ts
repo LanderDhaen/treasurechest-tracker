@@ -1,6 +1,8 @@
 import * as z from "zod";
 import { paginationSchema, searchSchema } from "./common";
 import { DEFAULT_SORT_DIRECTION, DEFAULT_SORT_OPTION } from "@/constants/chest";
+import { FIRST_EVENT_START_DATE } from "@/constants/event";
+import { formatDate } from "@/lib/utils";
 
 export const chestSearchParamsSchema = z.object({
   ...searchSchema.shape,
@@ -22,8 +24,15 @@ export const chestFormSchema = z.object({
     .min(1, "Amount must be at least 1"),
   rewardSlug: z.string().min(1, "Reward is required"),
   openedAt: z
-    .date("Opened at must be a valid date")
-    .refine((date) => date <= new Date(), "Opened at cannot be in the future"),
+    .date("Opening time must be a valid date")
+    .refine(
+      (date) => date >= FIRST_EVENT_START_DATE,
+      `Opening time cannot be before the first event start date ${formatDate(FIRST_EVENT_START_DATE)}`,
+    )
+    .refine(
+      (date) => date <= new Date(),
+      "Opening time cannot be in the future",
+    ),
 });
 
 export type ChestFormValues = z.infer<typeof chestFormSchema>;

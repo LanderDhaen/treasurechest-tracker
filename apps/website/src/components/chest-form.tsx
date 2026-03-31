@@ -43,6 +43,7 @@ import { formatDate } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "./ui/calendar";
 import { createChestAction } from "@/actions/chest";
+import { FIRST_EVENT_START_DATE } from "@/constants/event";
 
 interface ChestFormProps {
   accounts: {
@@ -78,6 +79,9 @@ interface ChestFormProps {
   }[];
 }
 
+const TODAY = new Date();
+const DEFAULT_OPENED_AT = TODAY;
+
 export default function ChestForm({
   accounts,
   events,
@@ -96,7 +100,7 @@ export default function ChestForm({
       raritySlug: rarities[0]?.slug || "",
       amount: 1,
       rewardSlug: "",
-      openedAt: new Date(),
+      openedAt: DEFAULT_OPENED_AT,
     },
   });
 
@@ -375,6 +379,10 @@ export default function ChestForm({
                         <Calendar
                           mode="single"
                           defaultMonth={field.value}
+                          selected={field.value}
+                          disabled={(date) =>
+                            date > TODAY || date < FIRST_EVENT_START_DATE
+                          }
                           onSelect={field.onChange}
                         />
                       </PopoverContent>
