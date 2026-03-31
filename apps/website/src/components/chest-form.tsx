@@ -94,8 +94,8 @@ export default function ChestForm({
   const form = useForm<ChestFormValues>({
     resolver: zodResolver(chestFormSchema),
     defaultValues: {
-      accountTag: accounts[0]?.tag || "",
-      eventCode: events[0]?.code || "",
+      accountTag: "",
+      eventCode: "",
       raritySlug: rarities[0]?.slug || "",
       amount: 1,
       rewardSlug: "",
@@ -131,6 +131,11 @@ export default function ChestForm({
     return date;
   };
 
+  // TODO: Show event duration in the date picker, possibly disable dates outside of the event durations
+  // TODO: Update dates based on selected event (start date, end date, duration)
+  // TODO: Update rewards based on selected account (min townhall requirement)
+  // TODO: Update rewards based on selected rarity (min/max rarity requirement)
+
   return (
     <Card>
       <CardHeader>
@@ -161,7 +166,7 @@ export default function ChestForm({
                       aria-invalid={fieldState.invalid}
                       className="w-full"
                     >
-                      <SelectValue placeholder="Select" />
+                      <SelectValue placeholder="Select an account" />
                     </SelectTrigger>
                     <SelectContent position="popper">
                       {accounts.map((account) => (
@@ -200,7 +205,7 @@ export default function ChestForm({
                       aria-invalid={fieldState.invalid}
                       className="w-full"
                     >
-                      <SelectValue placeholder="Select" />
+                      <SelectValue placeholder="Select an event" />
                     </SelectTrigger>
                     <SelectContent position="popper">
                       {events.map((event) => (
