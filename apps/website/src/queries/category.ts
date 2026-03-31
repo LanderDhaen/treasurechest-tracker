@@ -29,7 +29,12 @@ export const getAllCategories = async () => {
       jsonArrayFrom(
         eb
           .selectFrom("reward")
-          .select(["reward.name", "reward.slug", "reward.isObtainable"])
+          .select([
+            "reward.name",
+            "reward.slug",
+            "reward.minTownhall",
+            "reward.isObtainable",
+          ])
           .whereRef("reward.categoryId", "=", "category.id")
           .orderBy("reward.categoryId", "asc")
           .orderBy("reward.name", "asc"),

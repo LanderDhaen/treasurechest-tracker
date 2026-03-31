@@ -128,6 +128,19 @@ export const createChestAction = async (formData: ChestFormValues) => {
     };
   }
 
+  const isValidTownhall = reward.minTownhall <= account.townhall;
+
+  if (!isValidTownhall) {
+    return {
+      data: null,
+      error: {
+        code: "TOWNHALL_TOO_LOW",
+        field: "accountTag",
+        message: `The specified reward requires at least TH${reward.minTownhall}.`,
+      },
+    };
+  }
+
   const isCorrectRarity =
     reward.category.minRarity.chance <= rarity.chance &&
     reward.category.maxRarity.chance >= rarity.chance;

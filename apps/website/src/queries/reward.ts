@@ -9,6 +9,7 @@ export const getRewardBySlug = async (slug: string) => {
     .select((eb) => [
       "reward.id",
       "reward.name",
+      "reward.minTownhall",
       jsonObjectFrom(
         eb
           .selectFrom("category")

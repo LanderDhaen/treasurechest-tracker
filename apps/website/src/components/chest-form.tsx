@@ -74,6 +74,7 @@ interface ChestFormProps {
     rewards: {
       name: string;
       slug: string;
+      minTownhall: number;
       isObtainable: boolean;
     }[];
   }[];
