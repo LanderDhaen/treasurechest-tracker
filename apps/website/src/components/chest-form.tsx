@@ -320,7 +320,7 @@ export default function ChestForm({
                       aria-invalid={fieldState.invalid}
                       className="w-full"
                     >
-                      <SelectValue placeholder="Select" />
+                      <SelectValue placeholder="Select a reward" />
                     </SelectTrigger>
                     <SelectContent position="popper">
                       {possibleCategories.map((category, index) => (
