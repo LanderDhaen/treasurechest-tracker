@@ -14,7 +14,6 @@ import {
   FieldGroup,
   FieldLabel,
   FieldSeparator,
-  FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
@@ -122,6 +121,26 @@ export default function ChestForm({
     setIsLoading(false);
   };
 
+  const updateCategories = (raritySlug: string) => {
+    const selectedRarity = rarities.find((r) => r.slug === raritySlug);
+
+    if (selectedRarity) {
+      const filteredCategories = categories.filter(
+        (category) =>
+          category.minRarity.chance >= selectedRarity.chance &&
+          category.maxRarity.chance <= selectedRarity.chance,
+      );
+      setPossibleCategories(filteredCategories);
+    }
+  };
+
+  const updatedDate = (date: Date, time: string) => {
+    const [hours, minutes, seconds] = time.split(":").map(Number);
+    date.setHours(hours, minutes, seconds);
+
+    return date;
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -223,18 +242,7 @@ export default function ChestForm({
                     name={field.name}
                     value={field.value}
                     onValueChange={(e) => {
-                      const selectedRarity = rarities.find((r) => r.slug === e);
-
-                      if (selectedRarity) {
-                        const filteredCategories = categories.filter(
-                          (category) =>
-                            category.minRarity.chance >=
-                              selectedRarity.chance &&
-                            category.maxRarity.chance <= selectedRarity.chance,
-                        );
-                        setPossibleCategories(filteredCategories);
-                      }
-
+                      updateCategories(e);
                       field.onChange(e);
                     }}
                     aria-invalid={fieldState.invalid}
@@ -385,12 +393,9 @@ export default function ChestForm({
                       step="1"
                       value={field.value.toTimeString().slice(0, 8)}
                       onChange={(e) => {
-                        const [hours, minutes, seconds] = e.target.value
-                          .split(":")
-                          .map(Number);
-                        const updatedDate = new Date(field.value);
-                        updatedDate.setHours(hours, minutes, seconds);
-                        field.onChange(updatedDate);
+                        field.onChange(
+                          updatedDate(field.value, e.target.value),
+                        );
                       }}
                       disabled={isLoading}
                       aria-invalid={fieldState.invalid}
