@@ -35,8 +35,8 @@ export const getChestCountPerRarity = async (filters: {
       "rarity.name",
       eb.fn.count<number>("filtered_chest.id").as("count"),
     ])
-    .groupBy(["rarity.name", "rarity.chance"])
-    .orderBy("rarity.chance", "desc") // Common - Rare - Epic - Legendary
+    .groupBy(["rarity.name", "rarity.rank"])
+    .orderBy("rarity.rank", "asc")
     .execute();
 
   return rarities;

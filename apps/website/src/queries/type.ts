@@ -47,7 +47,7 @@ export const getChestCountPerType = async (filters: FilterConfig) => {
           ])
           .whereRef("event.typeId", "=", "type.id")
           .groupBy(["rarity.id", "rarity.name"])
-          .orderBy("rarity.chance", "desc"),
+          .orderBy("rarity.rank", "asc"),
       ).as("rarities"),
     ])
     .groupBy(["type.id", "type.name"])

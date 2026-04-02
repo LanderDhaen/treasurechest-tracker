@@ -161,7 +161,7 @@ export const getChestCountPerAccount = async (filters: FilterConfig) => {
           ])
           .whereRef("filtered_chest.accountId", "=", "filtered_account.id")
           .groupBy(["rarity.id", "rarity.name"])
-          .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
+          .orderBy("rarity.rank", "asc"),
       ).as("rarities"),
     ])
     .groupBy(["filtered_account.id", "filtered_account.name"])

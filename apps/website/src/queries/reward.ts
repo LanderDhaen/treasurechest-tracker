@@ -62,7 +62,7 @@ export const getChestCountPerReward = async (filters: FilterConfig) => {
           ])
           .whereRef("filtered_chest.rewardId", "=", "reward.id")
           .groupBy(["rarity.id", "rarity.name"])
-          .orderBy("rarity.chance", "desc"),
+          .orderBy("rarity.rank", "asc"),
       ).as("rarities"),
     ])
     .groupBy(["reward.id", "reward.name"])

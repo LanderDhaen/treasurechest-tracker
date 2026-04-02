@@ -58,7 +58,7 @@ export const getChestCountPerSeries = async (filters: FilterConfig) => {
           ])
           .whereRef("event.seriesId", "=", "series.id")
           .groupBy(["rarity.id", "rarity.name"])
-          .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
+          .orderBy("rarity.rank", "asc"),
       ).as("rarities"),
     ])
     .groupBy(["series.id", "series.name"])
