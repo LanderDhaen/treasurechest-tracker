@@ -41,8 +41,8 @@ export const getAllCategories = async () => {
       ).as("rewards"),
     ])
     .where("category.isActive", "=", true)
-    .orderBy("minRarity.chance", "desc")
-    .orderBy("maxRarity.chance", "desc")
+    .orderBy("minRarity.rank", "asc")
+    .orderBy("maxRarity.rank", "asc")
     .orderBy("category.name", "asc")
     .execute();
 

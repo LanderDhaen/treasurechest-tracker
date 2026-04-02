@@ -7,7 +7,7 @@ export const getAllRarities = async () => {
     .selectFrom("rarity")
     .select(["rarity.name", "rarity.slug", "rarity.chance"])
     .where("rarity.isActive", "=", true)
-    .orderBy("chance", "desc")
+    .orderBy("rarity.rank", "asc")
     .execute();
 
   return rarities;
