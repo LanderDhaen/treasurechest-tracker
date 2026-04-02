@@ -1,5 +1,6 @@
 import { db } from "@/db";
 import { withFilteredChests } from "./chest";
+import { FilterConfig } from "@/types/common";
 
 export const getAllRarities = async () => {
   const rarities = await db
@@ -23,10 +24,7 @@ export const getRarityBySlug = async (slug: string) => {
   return rarity;
 };
 
-export const getChestCountPerRarity = async (filters: {
-  accountId?: number;
-  eventId?: number;
-}) => {
+export const getChestCountPerRarity = async (filters: FilterConfig) => {
   const rarities = await db
     .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("rarity")
