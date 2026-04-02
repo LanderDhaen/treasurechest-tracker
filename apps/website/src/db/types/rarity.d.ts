@@ -14,6 +14,7 @@ export interface RarityTable {
   name: ColumnType<string>;
   slug: ColumnType<string>;
   chance: ColumnType<number>;
+  rank: ColumnType<number>;
 }
 
 export type Rarity = Selectable<RarityTable>;
