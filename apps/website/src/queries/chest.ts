@@ -52,7 +52,7 @@ export const getAllChests = async ({
 
   if (sortBy == "rarity") {
     query = query
-      .orderBy("rarity.chance", direction == "asc" ? "desc" : "asc") // Invert sorting for rarity because lower chance means higher rarity
+      .orderBy("rarity.rank", direction)
       .orderBy("reward.name", direction)
       .orderBy("filtered_chest.amount", direction);
   }

@@ -41,8 +41,8 @@ export const getAllCategories = async () => {
       ).as("rewards"),
     ])
     .where("category.isActive", "=", true)
-    .orderBy("minRarity.chance", "desc")
-    .orderBy("maxRarity.chance", "desc")
+    .orderBy("minRarity.rank", "asc")
+    .orderBy("maxRarity.rank", "asc")
     .orderBy("category.name", "asc")
     .execute();
 
@@ -69,7 +69,7 @@ export const getChestCountPerCategory = async (filters: FilterConfig) => {
           ])
           .whereRef("reward.categoryId", "=", "category.id")
           .groupBy(["rarity.id", "rarity.name"])
-          .orderBy("rarity.chance", "desc"), // Common - Rare - Epic - Legendary
+          .orderBy("rarity.rank", "asc"),
       ).as("rarities"),
     ])
     .groupBy(["category.id", "category.name"])

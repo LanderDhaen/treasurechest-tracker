@@ -1,12 +1,13 @@
 import { db } from "@/db";
 import { withFilteredChests } from "./chest";
+import { FilterConfig } from "@/types/common";
 
 export const getAllRarities = async () => {
   const rarities = await db
     .selectFrom("rarity")
     .select(["rarity.name", "rarity.slug", "rarity.chance"])
     .where("rarity.isActive", "=", true)
-    .orderBy("chance", "desc")
+    .orderBy("rarity.rank", "asc")
     .execute();
 
   return rarities;
@@ -23,10 +24,7 @@ export const getRarityBySlug = async (slug: string) => {
   return rarity;
 };
 
-export const getChestCountPerRarity = async (filters: {
-  accountId?: number;
-  eventId?: number;
-}) => {
+export const getChestCountPerRarity = async (filters: FilterConfig) => {
   const rarities = await db
     .with("filtered_chest", () => withFilteredChests(filters))
     .selectFrom("rarity")
@@ -35,8 +33,8 @@ export const getChestCountPerRarity = async (filters: {
       "rarity.name",
       eb.fn.count<number>("filtered_chest.id").as("count"),
     ])
-    .groupBy(["rarity.name", "rarity.chance"])
-    .orderBy("rarity.chance", "desc") // Common - Rare - Epic - Legendary
+    .groupBy(["rarity.name", "rarity.rank"])
+    .orderBy("rarity.rank", "asc")
     .execute();
 
   return rarities;

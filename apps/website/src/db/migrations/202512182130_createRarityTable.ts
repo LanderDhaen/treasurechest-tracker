@@ -11,6 +11,7 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("name", "varchar", (c) => c.notNull().unique())
     .addColumn("slug", "varchar", (c) => c.notNull().unique())
     .addColumn("chance", "smallint", (c) => c.notNull())
+    .addColumn("rank", "smallint", (c) => c.notNull().unique())
     .execute();
 };
 
