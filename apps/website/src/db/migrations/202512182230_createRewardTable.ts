@@ -14,6 +14,14 @@ export const up = async (db: Kysely<any>) => {
 
     // Foreign keys
 
+    .addColumn("minRarityId", "integer", (c) =>
+      c.references("rarity.id").notNull().onDelete("restrict"),
+    )
+
+    .addColumn("maxRarityId", "integer", (c) =>
+      c.references("rarity.id").notNull().onDelete("restrict"),
+    )
+
     .addColumn("minTownhallId", "integer", (c) =>
       c.references("townhall.id").notNull().onDelete("restrict"),
     )
