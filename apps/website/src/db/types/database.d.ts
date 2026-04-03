@@ -7,8 +7,10 @@ import { CategoryTable } from "./category";
 import { RewardTable } from "./reward";
 import { SeriesTable } from "./series";
 import { TypeTable } from "./type";
+import { TownhallTable } from "./townhall";
 
 export interface Database {
+  townhall: TownhallTable;
   clan: ClanTable;
   account: AccountTable;
   type: TypeTable;
