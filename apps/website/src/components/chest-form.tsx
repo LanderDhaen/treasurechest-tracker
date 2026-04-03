@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import {
   Field,
+  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -361,11 +362,17 @@ export default function ChestForm({
                               />
                             </SelectItem>
                           ))}
-                          {index < categories.length - 1 && <SelectSeparator />}
+                          {index < filteredCategories.length - 1 && (
+                            <SelectSeparator />
+                          )}
                         </SelectGroup>
                       ))}
                     </SelectContent>
                   </Select>
+                  <FieldDescription>
+                    Changing account or rarity will filter the rewards based on
+                    their minimal townhall and rarity.
+                  </FieldDescription>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
