@@ -146,12 +146,17 @@ export const createChestAction = async (formData: ChestFormValues) => {
     reward.maxRarity.rank >= rarity.rank;
 
   if (!isCorrectRarity) {
+    const message =
+      reward.minRarity.rank === reward.maxRarity.rank
+        ? `${reward.name} can only be ${reward.minRarity.name}.`
+        : `${reward.name} can only be between ${reward.minRarity.name} and ${reward.maxRarity.name}.`;
+
     return {
       data: null,
       error: {
         code: "RARITY_REWARD_MISMATCH",
         field: "raritySlug",
-        message: `${reward.name} can only be between ${reward.minRarity.name} and ${reward.maxRarity.name}.`,
+        message: message,
       },
     };
   }
