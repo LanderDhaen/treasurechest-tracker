@@ -29,7 +29,8 @@ export const getAllChests = async ({
     .innerJoin("reward", "filtered_chest.rewardId", "reward.id")
     .innerJoin("event", "filtered_chest.eventId", "event.id")
     .innerJoin("series", "event.seriesId", "series.id")
-    .innerJoin("account", "filtered_chest.accountId", "account.id");
+    .innerJoin("account", "filtered_chest.accountId", "account.id")
+    .innerJoin("townhall", "account.townhallId", "townhall.id");
 
   // Filtering
 
@@ -66,7 +67,7 @@ export const getAllChests = async ({
   if (sortBy == "account") {
     query = query
       .orderBy("account.name", direction)
-      .orderBy("account.townhall", direction);
+      .orderBy("townhall.rank", direction);
   }
 
   if (sortBy == "event") {
@@ -95,7 +96,8 @@ export const getAllChests = async ({
       jsonObjectFrom(
         eb
           .selectFrom("account")
-          .select(["account.name", "account.townhall"])
+          .innerJoin("townhall", "account.townhallId", "townhall.id")
+          .select(["account.name", "townhall.level as townhall"])
           .whereRef("account.id", "=", "filtered_chest.accountId"),
       )
         .$notNull()

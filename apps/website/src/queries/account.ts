@@ -19,10 +19,11 @@ export const getTotalAccounts = async () => {
 export const getAllTrackedAccounts = async () => {
   const accounts = await db
     .selectFrom("account")
-    .select(["account.tag", "account.name", "account.townhall"])
+    .innerJoin("townhall", "account.townhallId", "townhall.id")
+    .select(["account.tag", "account.name", "townhall.level as townhall"])
     .where("account.isActive", "=", true)
     .where("account.isTracked", "=", true)
-    .orderBy("account.townhall", "desc")
+    .orderBy("townhall.rank", "desc")
     .orderBy("account.name", "asc")
     .execute();
 
@@ -38,6 +39,7 @@ export const getAllAccounts = async ({
 }: AccountSearchParams) => {
   let query = db
     .selectFrom("account")
+    .innerJoin("townhall", "account.townhallId", "townhall.id")
     .innerJoin("clan", "account.clanId", "clan.id")
     .where("account.isActive", "=", true);
 
@@ -59,7 +61,7 @@ export const getAllAccounts = async ({
   // Sorting
 
   if (sortBy === "townhall") {
-    query = query.orderBy("account.townhall", direction);
+    query = query.orderBy("townhall.rank", direction);
   }
 
   if (sortBy === "name") {
@@ -82,7 +84,7 @@ export const getAllAccounts = async ({
     .select((eb) => [
       "account.name",
       "account.tag",
-      "account.townhall",
+      "townhall.level as townhall",
       "account.isTracked",
       jsonObjectFrom(
         eb
@@ -105,10 +107,11 @@ export const getAllAccounts = async ({
 export const getAccountByTag = async (tag: string) => {
   const account = await db
     .selectFrom("account")
+    .innerJoin("townhall", "account.townhallId", "townhall.id")
     .select((eb) => [
       "account.id",
       "account.tag",
-      "account.townhall",
+      "townhall.level as townhall",
       "account.name",
       "account.isTracked",
       jsonObjectFrom(
@@ -130,7 +133,8 @@ export const getAccountByTag = async (tag: string) => {
 export const getAccountById = async (accountId: number) => {
   const account = await db
     .selectFrom("account")
-    .select(["account.id", "account.townhall", "account.isTracked"])
+    .innerJoin("townhall", "account.townhallId", "townhall.id")
+    .select(["account.id", "townhall.level as townhall", "account.isTracked"])
     .where("account.id", "=", accountId)
     .where("account.isActive", "=", true)
     .executeTakeFirst();
