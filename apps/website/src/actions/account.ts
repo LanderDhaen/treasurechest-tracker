@@ -16,6 +16,7 @@ import UnauthorizedError from "@/errors/unauthorized-error";
 import ValidationError from "@/errors/validation-error";
 import UnknownError from "@/errors/unknown-error";
 import { getTownhallByLevel } from "@/queries/townhall";
+import { cp } from "fs";
 
 export const submitAccountForm = async (formData: AccountFormValues) => {
   const result = accountFormSchema.safeParse(formData);
@@ -99,8 +100,20 @@ export const upgradeTownhall = async (accountId: number) => {
     };
   }
 
+  const nextTownhall = await getTownhallByLevel(account.townhall + 1);
+
+  if (!nextTownhall) {
+    return {
+      data: null,
+      error: {
+        code: "MAX_TOWNHALL_REACHED",
+        message: "The account has already reached the maximum townhall level.",
+      },
+    };
+  }
+
   const updatedAccount = await updateAccount(account.id, {
-    townhall: account.townhall + 1,
+    townhallId: nextTownhall.id,
   });
 
   if (!updatedAccount) {
@@ -118,7 +131,7 @@ export const upgradeTownhall = async (accountId: number) => {
   return {
     data: {
       name: updatedAccount.name,
-      townhall: updatedAccount.townhall,
+      townhall: nextTownhall.level,
     },
     error: null,
   };

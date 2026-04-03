@@ -218,23 +218,18 @@ export const updateAccount = async (
   accountId: number,
   data: UpdateableAccount,
 ) => {
-  const { isActive, townhall, isTracked } = data;
+  const { isActive, townhallId, isTracked } = data;
 
   const updatedAccount = await db
     .updateTable("account")
     .set({
       updatedAt: new Date(),
       isActive,
-      townhall,
+      townhallId,
       isTracked,
     })
     .where("account.id", "=", accountId)
-    .returning([
-      "account.name",
-      "account.townhall",
-      "account.tag",
-      "account.isTracked",
-    ])
+    .returning(["account.name", "account.tag", "account.isTracked"])
     .executeTakeFirst();
 
   return updatedAccount;
