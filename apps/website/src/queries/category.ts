@@ -47,7 +47,7 @@ export const getAllCategories = async () => {
               eb
                 .selectFrom("rarity")
                 .select(["rarity.name", "rarity.rank"])
-                .whereRef("rarity.id", "=", "category.maxRarityId"),
+                .whereRef("rarity.id", "=", "reward.maxRarityId"),
             )
               .$notNull()
               .as("maxRarity"),
