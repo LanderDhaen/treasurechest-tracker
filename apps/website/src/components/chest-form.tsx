@@ -59,23 +59,31 @@ interface ChestFormProps {
   rarities: {
     name: string;
     slug: string;
-    chance: number;
+    rank: number;
   }[];
   categories: {
     name: string;
     minRarity: {
       name: string;
-      chance: number;
+      rank: number;
     };
     maxRarity: {
       name: string;
-      chance: number;
+      rank: number;
     };
     rewards: {
       name: string;
       slug: string;
       minTownhall: number;
       isObtainable: boolean;
+      minRarity: {
+        name: string;
+        rank: number;
+      };
+      maxRarity: {
+        name: string;
+        rank: number;
+      };
     }[];
   }[];
 }

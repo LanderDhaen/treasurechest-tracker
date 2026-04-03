@@ -5,7 +5,7 @@ import { FilterConfig } from "@/types/common";
 export const getAllRarities = async () => {
   const rarities = await db
     .selectFrom("rarity")
-    .select(["rarity.name", "rarity.slug", "rarity.chance"])
+    .select(["rarity.name", "rarity.slug", "rarity.rank"])
     .where("rarity.isActive", "=", true)
     .orderBy("rarity.rank", "asc")
     .execute();

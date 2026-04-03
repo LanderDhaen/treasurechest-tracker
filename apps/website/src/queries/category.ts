@@ -30,11 +30,27 @@ export const getAllCategories = async () => {
         eb
           .selectFrom("reward")
           .innerJoin("townhall", "townhall.id", "reward.minTownhallId")
-          .select([
+          .select((eb) => [
             "reward.name",
             "reward.slug",
             "townhall.level as minTownhall",
             "reward.isObtainable",
+            jsonObjectFrom(
+              eb
+                .selectFrom("rarity")
+                .select(["rarity.name", "rarity.rank"])
+                .whereRef("rarity.id", "=", "reward.minRarityId"),
+            )
+              .$notNull()
+              .as("minRarity"),
+            jsonObjectFrom(
+              eb
+                .selectFrom("rarity")
+                .select(["rarity.name", "rarity.rank"])
+                .whereRef("rarity.id", "=", "category.maxRarityId"),
+            )
+              .$notNull()
+              .as("maxRarity"),
           ])
           .whereRef("reward.categoryId", "=", "category.id")
           .orderBy("reward.categoryId", "asc")

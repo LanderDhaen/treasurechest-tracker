@@ -14,6 +14,8 @@ export interface RewardTable {
   name: ColumnType<string>;
   slug: ColumnType<string>;
   isObtainable: ColumnType<boolean>;
+  minRarityId: ColumnType<number>;
+  maxRarityId: ColumnType<number>;
   minTownhallId: ColumnType<number>;
   categoryId: ColumnType<number>;
 }
