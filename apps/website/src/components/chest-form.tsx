@@ -99,6 +99,8 @@ export default function ChestForm({
 }: ChestFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log("reward categories", categories);
+
   const form = useForm<ChestFormValues>({
     resolver: zodResolver(chestFormSchema),
     defaultValues: {
@@ -120,13 +122,27 @@ export default function ChestForm({
     (account) => account.tag === selectedAccountTag,
   );
 
+  const selectedRaritySlug = useWatch({
+    control: form.control,
+    name: "raritySlug",
+  });
+
+  const selectedRarity = rarities.find(
+    (rarity) => rarity.slug === selectedRaritySlug,
+  );
+
   const filteredCategories = categories.map((category) => ({
     ...category,
     rewards: category.rewards.filter((reward) => {
-      const isValidTownhall =
+      const shouldExcludeForTownhallRule =
         !selectedAccount || reward.minTownhall <= selectedAccount.townhall;
 
-      return isValidTownhall;
+      const shouldExcludeForRarityRule =
+        !selectedRarity ||
+        (reward.minRarity.rank <= selectedRarity.rank &&
+          reward.maxRarity.rank >= selectedRarity.rank);
+
+      return shouldExcludeForTownhallRule && shouldExcludeForRarityRule;
     }),
   }));
 
