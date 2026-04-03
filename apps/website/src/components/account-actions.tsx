@@ -38,9 +38,13 @@ interface AccountActionsProps {
       name: string;
     };
   };
+  isMaxTownhall: boolean;
 }
 
-export default function AccountActions({ account }: AccountActionsProps) {
+export default function AccountActions({
+  account,
+  isMaxTownhall,
+}: AccountActionsProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleUpgradeTH = async () => {
@@ -107,7 +111,7 @@ export default function AccountActions({ account }: AccountActionsProps) {
           className="bg-white"
           size="sm"
           onClick={handleUpgradeTH}
-          disabled={isLoading}
+          disabled={isLoading || isMaxTownhall}
         >
           <CircleFadingArrowUp /> Upgrade TH
         </Button>
