@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import {
   Field,
+  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -39,11 +40,15 @@ interface AccountFormProps {
     tag: string;
     name: string;
   }[];
+  maxTownhallLevel: number;
 }
 
 const DEFAULT_TOWNHALL = 18;
 
-export default function AccountForm({ clans }: AccountFormProps) {
+export default function AccountForm({
+  clans,
+  maxTownhallLevel,
+}: AccountFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<AccountFormValues>({
@@ -51,7 +56,7 @@ export default function AccountForm({ clans }: AccountFormProps) {
     defaultValues: {
       name: "",
       tag: "",
-      townhall: DEFAULT_TOWNHALL,
+      townhallLevel: DEFAULT_TOWNHALL,
       clanTag: clans[0].tag || "",
     },
   });
@@ -73,6 +78,9 @@ export default function AccountForm({ clans }: AccountFormProps) {
           break;
         case "CLAN_NOT_FOUND":
           form.setError("clanTag", { message: error.message });
+          break;
+        case "TOWNHALL_NOT_FOUND":
+          form.setError("townhallLevel", { message: error.message });
           break;
         case "ACCOUNT_EXISTS":
           form.setError("tag", { message: error.message });
@@ -146,12 +154,12 @@ export default function AccountForm({ clans }: AccountFormProps) {
               )}
             />
             <Controller
-              name="townhall"
+              name="townhallLevel"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor={field.name}>
-                    Townhall<span className="text-red-500 -ml-1">*</span>
+                    Townhall<span className="text-red-500 -ml-1">*</span>{" "}
                   </FieldLabel>
                   <Input
                     {...field}
@@ -161,9 +169,14 @@ export default function AccountForm({ clans }: AccountFormProps) {
                     placeholder="Townhall"
                     disabled={isLoading}
                     min={1}
+                    max={maxTownhallLevel}
                     required
                     onChange={(e) => field.onChange(e.target.valueAsNumber)}
                   />
+                  <FieldDescription>
+                    Currently TH{maxTownhallLevel} is the highest townhall
+                    level.
+                  </FieldDescription>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}

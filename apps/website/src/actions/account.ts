@@ -15,6 +15,8 @@ import { deleteChestsByAccountId } from "@/queries/chest";
 import UnauthorizedError from "@/errors/unauthorized-error";
 import ValidationError from "@/errors/validation-error";
 import UnknownError from "@/errors/unknown-error";
+import { getTownhallByLevel } from "@/queries/townhall";
+import { cp } from "fs";
 
 export const submitAccountForm = async (formData: AccountFormValues) => {
   const result = accountFormSchema.safeParse(formData);
@@ -29,7 +31,19 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
     return UnauthorizedError();
   }
 
-  const { name, tag, townhall, clanTag } = result.data;
+  const { name, tag, townhallLevel, clanTag } = result.data;
+
+  const townhall = await getTownhallByLevel(townhallLevel);
+
+  if (!townhall) {
+    return {
+      data: null,
+      error: {
+        code: "TOWNHALL_NOT_FOUND",
+        message: "The specified townhall level was not found.",
+      },
+    };
+  }
 
   const clan = await getClanByTag(clanTag);
 
@@ -47,7 +61,7 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
     const account = await createAccount({
       name,
       tag,
-      townhall,
+      townhallId: townhall.id,
       clanId: clan.id,
     });
 
@@ -86,8 +100,20 @@ export const upgradeTownhall = async (accountId: number) => {
     };
   }
 
+  const nextTownhall = await getTownhallByLevel(account.townhall + 1);
+
+  if (!nextTownhall) {
+    return {
+      data: null,
+      error: {
+        code: "MAX_TOWNHALL_REACHED",
+        message: "The account has already reached the maximum townhall level.",
+      },
+    };
+  }
+
   const updatedAccount = await updateAccount(account.id, {
-    townhall: account.townhall + 1,
+    townhallId: nextTownhall.id,
   });
 
   if (!updatedAccount) {
@@ -105,7 +131,7 @@ export const upgradeTownhall = async (accountId: number) => {
   return {
     data: {
       name: updatedAccount.name,
-      townhall: updatedAccount.townhall,
+      townhall: nextTownhall.level,
     },
     error: null,
   };

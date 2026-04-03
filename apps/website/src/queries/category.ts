@@ -29,10 +29,11 @@ export const getAllCategories = async () => {
       jsonArrayFrom(
         eb
           .selectFrom("reward")
+          .innerJoin("townhall", "townhall.id", "reward.minTownhallId")
           .select([
             "reward.name",
             "reward.slug",
-            "reward.minTownhall",
+            "townhall.level as minTownhall",
             "reward.isObtainable",
           ])
           .whereRef("reward.categoryId", "=", "category.id")

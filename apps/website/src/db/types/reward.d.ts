@@ -13,8 +13,8 @@ export interface RewardTable {
   isActive: ColumnType<boolean>;
   name: ColumnType<string>;
   slug: ColumnType<string>;
-  minTownhall: ColumnType<number>;
   isObtainable: ColumnType<boolean>;
+  minTownhallId: ColumnType<number>;
   categoryId: ColumnType<number>;
 }
 

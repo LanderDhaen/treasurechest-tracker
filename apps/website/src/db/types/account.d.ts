@@ -13,8 +13,8 @@ export interface AccountTable {
   isActive: ColumnType<boolean, never, boolean>;
   name: ColumnType<string>;
   tag: ColumnType<string>;
-  townhall: ColumnType<number>;
   isTracked: ColumnType<boolean, never, boolean>;
+  townhallId: ColumnType<number>;
   clanId: ColumnType<number>;
 }
 

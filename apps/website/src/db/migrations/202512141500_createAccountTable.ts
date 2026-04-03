@@ -10,10 +10,13 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("isActive", "boolean", (c) => c.notNull().defaultTo(true))
     .addColumn("name", "varchar", (c) => c.notNull())
     .addColumn("tag", "varchar", (c) => c.notNull().unique())
-    .addColumn("townhall", "integer", (c) => c.notNull())
     .addColumn("isTracked", "boolean", (c) => c.notNull().defaultTo(true))
 
     // Foreign keys
+
+    .addColumn("townhallId", "integer", (c) =>
+      c.references("townhall.id").notNull().onDelete("restrict"),
+    )
 
     .addColumn("clanId", "integer", (c) =>
       c.references("clan.id").notNull().onDelete("restrict"),

@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { Spinner } from "./ui/spinner";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
@@ -94,7 +94,7 @@ export default function ChestForm({
   const form = useForm<ChestFormValues>({
     resolver: zodResolver(chestFormSchema),
     defaultValues: {
-      accountTag: "",
+      accountTag: accounts[0]?.tag || "",
       eventCode: "",
       raritySlug: rarities[0]?.slug || "",
       amount: 1,
@@ -102,6 +102,26 @@ export default function ChestForm({
       openedAt: DEFAULT_OPENED_AT,
     },
   });
+
+  const selectedAccountTag = useWatch({
+    control: form.control,
+    name: "accountTag",
+  });
+
+  const filteredCategories = categories.map((category) => ({
+    ...category,
+    rewards: category.rewards.filter((reward) => {
+      const selectedAccount = accounts.find(
+        (account) => account.tag === selectedAccountTag,
+      );
+
+      if (!selectedAccount) {
+        return true;
+      }
+
+      return reward.minTownhall <= selectedAccount.townhall;
+    }),
+  }));
 
   const onSubmit = async (formData: ChestFormValues) => {
     setIsLoading(true);
@@ -133,7 +153,6 @@ export default function ChestForm({
 
   // TODO: Show event duration in the date picker, possibly disable dates outside of the event durations
   // TODO: Update dates based on selected event (start date, end date, duration)
-  // TODO: Update rewards based on selected account (min townhall requirement)
   // TODO: Update rewards based on selected rarity (min/max rarity requirement)
 
   return (
@@ -311,7 +330,7 @@ export default function ChestForm({
                       <SelectValue placeholder="Select a reward" />
                     </SelectTrigger>
                     <SelectContent position="popper">
-                      {categories.map((category, index) => (
+                      {filteredCategories.map((category, index) => (
                         <SelectGroup key={category.name}>
                           <SelectLabel>{category.name}</SelectLabel>
                           {category.rewards.map((reward) => (
