@@ -131,20 +131,22 @@ export default function ChestForm({
     (rarity) => rarity.slug === selectedRaritySlug,
   );
 
-  const filteredCategories = categories.map((category) => ({
-    ...category,
-    rewards: category.rewards.filter((reward) => {
-      const shouldExcludeForTownhallRule =
-        !selectedAccount || reward.minTownhall <= selectedAccount.townhall;
+  const filteredCategories = categories
+    .map((category) => ({
+      ...category,
+      rewards: category.rewards.filter((reward) => {
+        const shouldExcludeForTownhallRule =
+          !selectedAccount || reward.minTownhall <= selectedAccount.townhall;
 
-      const shouldExcludeForRarityRule =
-        !selectedRarity ||
-        (reward.minRarity.rank <= selectedRarity.rank &&
-          reward.maxRarity.rank >= selectedRarity.rank);
+        const shouldExcludeForRarityRule =
+          !selectedRarity ||
+          (reward.minRarity.rank <= selectedRarity.rank &&
+            reward.maxRarity.rank >= selectedRarity.rank);
 
-      return shouldExcludeForTownhallRule && shouldExcludeForRarityRule;
-    }),
-  }));
+        return shouldExcludeForTownhallRule && shouldExcludeForRarityRule;
+      }),
+    }))
+    .filter((category) => category.rewards.length > 0);
 
   const onSubmit = async (formData: ChestFormValues) => {
     setIsLoading(true);
@@ -176,7 +178,6 @@ export default function ChestForm({
 
   // TODO: Show event duration in the date picker, possibly disable dates outside of the event durations
   // TODO: Update dates based on selected event (start date, end date, duration)
-  // TODO: Update rewards based on selected rarity (min/max rarity requirement)
 
   return (
     <Card>
@@ -355,7 +356,9 @@ export default function ChestForm({
                     <SelectContent position="popper">
                       {filteredCategories.map((category, index) => (
                         <SelectGroup key={category.name}>
-                          <SelectLabel>{category.name}</SelectLabel>
+                          <SelectLabel>
+                            {category.name} ({category.rewards.length})
+                          </SelectLabel>
                           {category.rewards.map((reward) => (
                             <SelectItem
                               key={reward.slug}
