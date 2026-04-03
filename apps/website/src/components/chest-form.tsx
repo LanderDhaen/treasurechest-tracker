@@ -63,14 +63,6 @@ interface ChestFormProps {
   }[];
   categories: {
     name: string;
-    minRarity: {
-      name: string;
-      rank: number;
-    };
-    maxRarity: {
-      name: string;
-      rank: number;
-    };
     rewards: {
       name: string;
       slug: string;
@@ -98,8 +90,6 @@ export default function ChestForm({
   categories,
 }: ChestFormProps) {
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log("reward categories", categories);
 
   const form = useForm<ChestFormValues>({
     resolver: zodResolver(chestFormSchema),
