@@ -9,3 +9,13 @@ export const getTownhallByLevel = async (level: number) => {
 
   return townhall;
 };
+
+export const getHighestTownhall = async () => {
+  const townhall = await db
+    .selectFrom("townhall")
+    .select(["townhall.level", "townhall.releasedOn"])
+    .orderBy("townhall.rank", "desc")
+    .executeTakeFirstOrThrow();
+
+  return townhall;
+};

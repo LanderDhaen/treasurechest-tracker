@@ -39,11 +39,15 @@ interface AccountFormProps {
     tag: string;
     name: string;
   }[];
+  maxTownhallLevel: number;
 }
 
 const DEFAULT_TOWNHALL = 18;
 
-export default function AccountForm({ clans }: AccountFormProps) {
+export default function AccountForm({
+  clans,
+  maxTownhallLevel,
+}: AccountFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<AccountFormValues>({
@@ -164,6 +168,7 @@ export default function AccountForm({ clans }: AccountFormProps) {
                     placeholder="Townhall"
                     disabled={isLoading}
                     min={1}
+                    max={maxTownhallLevel}
                     required
                     onChange={(e) => field.onChange(e.target.valueAsNumber)}
                   />
