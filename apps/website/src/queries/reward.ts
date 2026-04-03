@@ -6,10 +6,11 @@ import { FilterConfig } from "@/types/common";
 export const getRewardBySlug = async (slug: string) => {
   const reward = await db
     .selectFrom("reward")
+    .innerJoin("townhall", "townhall.id", "reward.minTownhallId")
     .select((eb) => [
       "reward.id",
       "reward.name",
-      "reward.minTownhall",
+      "townhall.level as minTownhall",
       jsonObjectFrom(
         eb
           .selectFrom("category")
