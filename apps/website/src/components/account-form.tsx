@@ -51,7 +51,7 @@ export default function AccountForm({ clans }: AccountFormProps) {
     defaultValues: {
       name: "",
       tag: "",
-      townhall: DEFAULT_TOWNHALL,
+      townhallLevel: DEFAULT_TOWNHALL,
       clanTag: clans[0].tag || "",
     },
   });
@@ -73,6 +73,9 @@ export default function AccountForm({ clans }: AccountFormProps) {
           break;
         case "CLAN_NOT_FOUND":
           form.setError("clanTag", { message: error.message });
+          break;
+        case "TOWNHALL_NOT_FOUND":
+          form.setError("townhallLevel", { message: error.message });
           break;
         case "ACCOUNT_EXISTS":
           form.setError("tag", { message: error.message });
@@ -146,7 +149,7 @@ export default function AccountForm({ clans }: AccountFormProps) {
               )}
             />
             <Controller
-              name="townhall"
+              name="townhallLevel"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>

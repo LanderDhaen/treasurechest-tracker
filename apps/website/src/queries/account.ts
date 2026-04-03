@@ -197,7 +197,7 @@ export const withFilteredAccounts = (filters: FilterConfig) => {
 export const createAccount = async ({
   name,
   tag,
-  townhall,
+  townhallId,
   clanId,
 }: InsertableAccount) => {
   const account = await db
@@ -205,7 +205,7 @@ export const createAccount = async ({
     .values({
       name,
       tag,
-      townhall,
+      townhallId,
       clanId,
     })
     .returning("account.name")

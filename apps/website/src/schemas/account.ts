@@ -17,7 +17,7 @@ export type AccountSearchParams = z.infer<typeof accountSearchParamsSchema>;
 export const accountFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
   tag: z.string().min(1, "Tag is required"),
-  townhall: z.number().min(1, "Townhall is required"),
+  townhallLevel: z.number().min(1, "Townhall is required"),
   clanTag: z.string().min(1, "Clan is required"),
 });
 
