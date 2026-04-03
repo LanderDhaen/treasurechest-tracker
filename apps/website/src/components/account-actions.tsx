@@ -1,6 +1,6 @@
 "use client";
 
-import { CircleFadingArrowUp, Trash2 } from "lucide-react";
+import { CheckCheck, CircleFadingArrowUp, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   changeTrackingStatus,
@@ -113,7 +113,15 @@ export default function AccountActions({
           onClick={handleUpgradeTH}
           disabled={isLoading || isMaxTownhall}
         >
-          <CircleFadingArrowUp /> Upgrade TH
+          {isMaxTownhall ? (
+            <>
+              <CheckCheck /> Maxed TH
+            </>
+          ) : (
+            <>
+              <CircleFadingArrowUp /> Upgrade TH
+            </>
+          )}
         </Button>
         <Separator
           orientation="vertical"
