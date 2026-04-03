@@ -116,18 +116,17 @@ export default function ChestForm({
     name: "accountTag",
   });
 
+  const selectedAccount = accounts.find(
+    (account) => account.tag === selectedAccountTag,
+  );
+
   const filteredCategories = categories.map((category) => ({
     ...category,
     rewards: category.rewards.filter((reward) => {
-      const selectedAccount = accounts.find(
-        (account) => account.tag === selectedAccountTag,
-      );
+      const isValidTownhall =
+        !selectedAccount || reward.minTownhall <= selectedAccount.townhall;
 
-      if (!selectedAccount) {
-        return true;
-      }
-
-      return reward.minTownhall <= selectedAccount.townhall;
+      return isValidTownhall;
     }),
   }));
 
