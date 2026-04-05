@@ -83,28 +83,36 @@ interface ChestFormProps {
       };
     }[];
   }[];
+  defaultValues: {
+    accountTag: string;
+    eventCode: string;
+    raritySlug: string;
+    amount: number;
+    rewardSlug: string;
+    openedAt: Date;
+  };
 }
 
 const TODAY = new Date();
-const DEFAULT_OPENED_AT = TODAY;
 
 export default function ChestForm({
   accounts,
   events,
   rarities,
   categories,
+  defaultValues,
 }: ChestFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<ChestFormValues>({
     resolver: zodResolver(chestFormSchema),
     defaultValues: {
-      accountTag: accounts[0]?.tag || "",
-      eventCode: events[0]?.code || "",
-      raritySlug: rarities[0]?.slug || "",
-      amount: 1,
-      rewardSlug: "",
-      openedAt: DEFAULT_OPENED_AT,
+      accountTag: defaultValues.accountTag,
+      eventCode: defaultValues.eventCode,
+      raritySlug: defaultValues.raritySlug,
+      amount: defaultValues.amount,
+      rewardSlug: defaultValues.rewardSlug,
+      openedAt: defaultValues.openedAt,
     },
   });
 

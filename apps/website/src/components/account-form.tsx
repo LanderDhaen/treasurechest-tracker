@@ -17,7 +17,11 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { accountFormSchema, AccountFormValues } from "@/schemas/account";
+import {
+  accountFormSchema,
+  AccountFormSearchParams,
+  AccountFormValues,
+} from "@/schemas/account";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -41,7 +45,7 @@ interface AccountFormProps {
     name: string;
   }[];
   maxTownhallLevel: number;
-  returnTo: string;
+  returnTo: AccountFormSearchParams["returnTo"];
 }
 
 const DEFAULT_TOWNHALL = 18;
@@ -92,7 +96,12 @@ export default function AccountForm({
       }
     } else {
       toast.success(`Account "${data.name}" created successfully!`);
-      redirect(returnTo);
+
+      if (returnTo === "/chests/add") {
+        redirect(`/chests/add?account=${data.tag}`);
+      } else {
+        redirect(returnTo);
+      }
     }
   };
 
