@@ -22,7 +22,7 @@ export default async function Page({
 
   const rawParams = await searchParams;
   const parsedParams = chestFormSearchParamsSchema.parse(rawParams);
-  const { account: accountTag } = parsedParams;
+  const { account: accountTag, event: eventCode } = parsedParams;
 
   const accounts = await getAllTrackedAccounts();
   const events = await getAllAllowedEvents();
@@ -31,7 +31,7 @@ export default async function Page({
 
   const defaultValues = {
     accountTag: accountTag || accounts[0]?.tag || "",
-    eventCode: events[0]?.code || "",
+    eventCode: eventCode || events[0]?.code || "",
     raritySlug: rarities[0]?.slug || "",
     amount: 1,
     rewardSlug: "",

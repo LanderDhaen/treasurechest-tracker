@@ -299,31 +299,53 @@ export default function ChestForm({
                   <FieldLabel htmlFor={field.name}>
                     Event<span className="text-red-500 -ml-1">*</span>
                   </FieldLabel>
-                  <Select
-                    name={field.name}
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    aria-invalid={fieldState.invalid}
-                  >
-                    <SelectTrigger
-                      id="form-rhf-select-event"
-                      aria-invalid={fieldState.invalid}
-                      className="w-full"
-                    >
-                      <SelectValue placeholder="Select an event" />
-                    </SelectTrigger>
-                    <SelectContent position="popper">
-                      {events.map((event) => (
-                        <SelectItem
-                          key={event.code}
-                          value={event.code}
-                          disabled={isLoading}
+                  <ButtonGroup>
+                    <ButtonGroup className="w-full">
+                      <Select
+                        name={field.name}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        aria-invalid={fieldState.invalid}
+                      >
+                        <SelectTrigger
+                          id="form-rhf-select-event"
+                          aria-invalid={fieldState.invalid}
+                          className="w-full"
                         >
-                          {formatEventName(event.name, event.edition)}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                          <SelectValue placeholder="Select an event" />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                          {events.map((event) => (
+                            <SelectItem
+                              key={event.code}
+                              value={event.code}
+                              disabled={isLoading}
+                            >
+                              {formatEventName(event.name, event.edition)}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="text-black"
+                        disabled={isLoading}
+                        asChild
+                      >
+                        <Link
+                          href={{
+                            pathname: "/events/add",
+                            query: { returnTo: "/chests/add" },
+                          }}
+                        >
+                          <Plus />
+                        </Link>
+                      </Button>
+                    </ButtonGroup>
+                  </ButtonGroup>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}

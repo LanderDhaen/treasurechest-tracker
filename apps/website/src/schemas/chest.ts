@@ -39,6 +39,7 @@ export type ChestFormValues = z.infer<typeof chestFormSchema>;
 
 export const chestFormSearchParamsSchema = z.object({
   account: z.string().optional(),
+  event: z.string().optional(),
 });
 
 export type ChestFormSearchParams = z.infer<typeof chestFormSearchParamsSchema>;

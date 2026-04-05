@@ -18,7 +18,7 @@ export default async function Page({
 
   const rawParams = await searchParams;
   const parsedParams = eventFormSearchParamsSchema.parse(rawParams);
-  const { series: seriesCode, type: typeSlug } = parsedParams;
+  const { series: seriesCode, type: typeSlug, returnTo } = parsedParams;
 
   const series = await getAllSeries();
   const types = await getAllTypes();
@@ -30,6 +30,7 @@ export default async function Page({
           series={series}
           types={types}
           defaultValues={{ seriesCode: seriesCode, typeSlug: typeSlug }}
+          returnTo={returnTo}
         />
       </div>
     </div>
