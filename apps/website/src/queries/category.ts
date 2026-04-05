@@ -10,31 +10,31 @@ export const getAllCategories = async () => {
     .innerJoin("rarity as maxRarity", "maxRarity.id", "category.maxRarityId")
     .select((eb) => [
       "category.name",
-      jsonObjectFrom(
-        eb
-          .selectFrom("rarity")
-          .select(["rarity.name", "rarity.chance"])
-          .whereRef("rarity.id", "=", "category.minRarityId"),
-      )
-        .$notNull()
-        .as("minRarity"),
-      jsonObjectFrom(
-        eb
-          .selectFrom("rarity")
-          .select(["rarity.name", "rarity.chance"])
-          .whereRef("rarity.id", "=", "category.maxRarityId"),
-      )
-        .$notNull()
-        .as("maxRarity"),
       jsonArrayFrom(
         eb
           .selectFrom("reward")
           .innerJoin("townhall", "townhall.id", "reward.minTownhallId")
-          .select([
+          .select((eb) => [
             "reward.name",
             "reward.slug",
             "townhall.level as minTownhall",
             "reward.isObtainable",
+            jsonObjectFrom(
+              eb
+                .selectFrom("rarity")
+                .select(["rarity.name", "rarity.rank"])
+                .whereRef("rarity.id", "=", "reward.minRarityId"),
+            )
+              .$notNull()
+              .as("minRarity"),
+            jsonObjectFrom(
+              eb
+                .selectFrom("rarity")
+                .select(["rarity.name", "rarity.rank"])
+                .whereRef("rarity.id", "=", "reward.maxRarityId"),
+            )
+              .$notNull()
+              .as("maxRarity"),
           ])
           .whereRef("reward.categoryId", "=", "category.id")
           .orderBy("reward.categoryId", "asc")

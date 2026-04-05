@@ -5,7 +5,7 @@ import { FilterConfig } from "@/types/common";
 export const getAllRarities = async () => {
   const rarities = await db
     .selectFrom("rarity")
-    .select(["rarity.name", "rarity.slug", "rarity.chance"])
+    .select(["rarity.name", "rarity.slug", "rarity.rank"])
     .where("rarity.isActive", "=", true)
     .orderBy("rarity.rank", "asc")
     .execute();
@@ -16,7 +16,7 @@ export const getAllRarities = async () => {
 export const getRarityBySlug = async (slug: string) => {
   const rarity = await db
     .selectFrom("rarity")
-    .select(["rarity.id", "rarity.name", "rarity.chance"])
+    .select(["rarity.id", "rarity.name", "rarity.rank"])
     .where("rarity.slug", "=", slug)
     .where("rarity.isActive", "=", true)
     .executeTakeFirst();

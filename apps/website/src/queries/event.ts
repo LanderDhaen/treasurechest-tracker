@@ -46,6 +46,8 @@ export const getAllAllowedEvents = async () => {
     .select(["event.code", "series.name", "event.edition"])
     .where("event.isActive", "=", true)
     .where("event.isChestCreationAllowed", "=", true)
+    .orderBy("event.startDate", "desc")
+    .orderBy("event.endDate", "desc")
     .execute();
 
   return events;

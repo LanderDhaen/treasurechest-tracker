@@ -204,6 +204,15 @@ export const seed = async (db: Kysely<any>) => {
         typeId: 1,
         seriesId: 13,
       },
+      {
+        edition: 2,
+        code: "GP2",
+        startDate: "2026-04-01",
+        endDate: "2026-05-01",
+        maxChests: 11,
+        typeId: 1,
+        seriesId: 13,
+      },
     ])
     .execute();
 };

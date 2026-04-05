@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import {
   Field,
+  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -59,23 +60,23 @@ interface ChestFormProps {
   rarities: {
     name: string;
     slug: string;
-    chance: number;
+    rank: number;
   }[];
   categories: {
     name: string;
-    minRarity: {
-      name: string;
-      chance: number;
-    };
-    maxRarity: {
-      name: string;
-      chance: number;
-    };
     rewards: {
       name: string;
       slug: string;
       minTownhall: number;
       isObtainable: boolean;
+      minRarity: {
+        name: string;
+        rank: number;
+      };
+      maxRarity: {
+        name: string;
+        rank: number;
+      };
     }[];
   }[];
 }
@@ -95,7 +96,7 @@ export default function ChestForm({
     resolver: zodResolver(chestFormSchema),
     defaultValues: {
       accountTag: accounts[0]?.tag || "",
-      eventCode: "",
+      eventCode: events[0]?.code || "",
       raritySlug: rarities[0]?.slug || "",
       amount: 1,
       rewardSlug: "",
@@ -108,20 +109,35 @@ export default function ChestForm({
     name: "accountTag",
   });
 
-  const filteredCategories = categories.map((category) => ({
-    ...category,
-    rewards: category.rewards.filter((reward) => {
-      const selectedAccount = accounts.find(
-        (account) => account.tag === selectedAccountTag,
-      );
+  const selectedAccount = accounts.find(
+    (account) => account.tag === selectedAccountTag,
+  );
 
-      if (!selectedAccount) {
-        return true;
-      }
+  const selectedRaritySlug = useWatch({
+    control: form.control,
+    name: "raritySlug",
+  });
 
-      return reward.minTownhall <= selectedAccount.townhall;
-    }),
-  }));
+  const selectedRarity = rarities.find(
+    (rarity) => rarity.slug === selectedRaritySlug,
+  );
+
+  const filteredCategories = categories
+    .map((category) => ({
+      ...category,
+      rewards: category.rewards.filter((reward) => {
+        const shouldExcludeForTownhallRule =
+          !selectedAccount || reward.minTownhall <= selectedAccount.townhall;
+
+        const shouldExcludeForRarityRule =
+          !selectedRarity ||
+          (reward.minRarity.rank <= selectedRarity.rank &&
+            reward.maxRarity.rank >= selectedRarity.rank);
+
+        return shouldExcludeForTownhallRule && shouldExcludeForRarityRule;
+      }),
+    }))
+    .filter((category) => category.rewards.length > 0);
 
   const onSubmit = async (formData: ChestFormValues) => {
     setIsLoading(true);
@@ -153,7 +169,6 @@ export default function ChestForm({
 
   // TODO: Show event duration in the date picker, possibly disable dates outside of the event durations
   // TODO: Update dates based on selected event (start date, end date, duration)
-  // TODO: Update rewards based on selected rarity (min/max rarity requirement)
 
   return (
     <Card>
@@ -332,7 +347,9 @@ export default function ChestForm({
                     <SelectContent position="popper">
                       {filteredCategories.map((category, index) => (
                         <SelectGroup key={category.name}>
-                          <SelectLabel>{category.name}</SelectLabel>
+                          <SelectLabel>
+                            {category.name} ({category.rewards.length})
+                          </SelectLabel>
                           {category.rewards.map((reward) => (
                             <SelectItem
                               key={reward.slug}
@@ -345,11 +362,17 @@ export default function ChestForm({
                               />
                             </SelectItem>
                           ))}
-                          {index < categories.length - 1 && <SelectSeparator />}
+                          {index < filteredCategories.length - 1 && (
+                            <SelectSeparator />
+                          )}
                         </SelectGroup>
                       ))}
                     </SelectContent>
                   </Select>
+                  <FieldDescription>
+                    Changing account or rarity will filter the rewards based on
+                    their minimal townhall and rarity.
+                  </FieldDescription>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}

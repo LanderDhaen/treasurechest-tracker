@@ -13,30 +13,20 @@ export const getRewardBySlug = async (slug: string) => {
       "townhall.level as minTownhall",
       jsonObjectFrom(
         eb
-          .selectFrom("category")
-          .select((eb) => [
-            "category.name",
-            jsonObjectFrom(
-              eb
-                .selectFrom("rarity")
-                .select(["rarity.name", "rarity.chance"])
-                .whereRef("rarity.id", "=", "category.minRarityId"),
-            )
-              .$notNull()
-              .as("minRarity"),
-            jsonObjectFrom(
-              eb
-                .selectFrom("rarity")
-                .select(["rarity.name", "rarity.chance"])
-                .whereRef("rarity.id", "=", "category.maxRarityId"),
-            )
-              .$notNull()
-              .as("maxRarity"),
-          ])
-          .whereRef("category.id", "=", "reward.categoryId"),
+          .selectFrom("rarity")
+          .select(["rarity.name", "rarity.rank"])
+          .whereRef("rarity.id", "=", "reward.minRarityId"),
       )
         .$notNull()
-        .as("category"),
+        .as("minRarity"),
+      jsonObjectFrom(
+        eb
+          .selectFrom("rarity")
+          .select(["rarity.name", "rarity.rank"])
+          .whereRef("rarity.id", "=", "reward.maxRarityId"),
+      )
+        .$notNull()
+        .as("maxRarity"),
     ])
     .where("reward.slug", "=", slug)
     .where("reward.isActive", "=", true)
