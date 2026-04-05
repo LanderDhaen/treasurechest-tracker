@@ -41,10 +41,12 @@ import UnobtainableBadge from "./unobtainable-badge";
 import { formatEventName } from "@/lib/event";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { formatDate } from "@/lib/utils";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Plus } from "lucide-react";
 import { Calendar } from "./ui/calendar";
 import { createChestAction } from "@/actions/chest";
 import { FIRST_EVENT_START_DATE } from "@/constants/event";
+import { ButtonGroup } from "./ui/button-group";
+import Link from "next/link";
 
 interface ChestFormProps {
   accounts: {
@@ -228,31 +230,48 @@ export default function ChestForm({
                   <FieldLabel htmlFor={field.name}>
                     Account<span className="text-red-500 -ml-1">*</span>
                   </FieldLabel>
-                  <Select
-                    name={field.name}
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    aria-invalid={fieldState.invalid}
-                  >
-                    <SelectTrigger
-                      id="form-rhf-select-account"
-                      aria-invalid={fieldState.invalid}
-                      className="w-full"
-                    >
-                      <SelectValue placeholder="Select an account" />
-                    </SelectTrigger>
-                    <SelectContent position="popper">
-                      {accounts.map((account) => (
-                        <SelectItem
-                          key={account.tag}
-                          value={account.tag}
-                          disabled={isLoading}
+                  <ButtonGroup>
+                    <ButtonGroup className="w-full">
+                      <Select
+                        name={field.name}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        aria-invalid={fieldState.invalid}
+                      >
+                        <SelectTrigger
+                          id="form-rhf-select-account"
+                          aria-invalid={fieldState.invalid}
+                          className="w-full"
                         >
-                          {account.name}・TH{account.townhall}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                          <SelectValue placeholder="Select an account" />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                          {accounts.map((account) => (
+                            <SelectItem
+                              key={account.tag}
+                              value={account.tag}
+                              disabled={isLoading}
+                            >
+                              {account.name}・TH{account.townhall}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="text-black"
+                        disabled={isLoading}
+                        asChild
+                      >
+                        <Link href="/accounts/add">
+                          <Plus />
+                        </Link>
+                      </Button>
+                    </ButtonGroup>
+                  </ButtonGroup>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
