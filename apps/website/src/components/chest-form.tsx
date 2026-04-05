@@ -96,7 +96,7 @@ export default function ChestForm({
     resolver: zodResolver(chestFormSchema),
     defaultValues: {
       accountTag: accounts[0]?.tag || "",
-      eventCode: "",
+      eventCode: events[0]?.code || "",
       raritySlug: rarities[0]?.slug || "",
       amount: 1,
       rewardSlug: "",
