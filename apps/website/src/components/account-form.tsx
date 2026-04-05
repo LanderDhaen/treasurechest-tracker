@@ -32,8 +32,8 @@ import {
 } from "./ui/select";
 import { submitAccountForm } from "@/actions/account";
 import { toast } from "sonner";
-import { redirect } from "next/navigation";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
+import { redirect } from "next/navigation";
 
 interface AccountFormProps {
   clans: {
@@ -41,6 +41,7 @@ interface AccountFormProps {
     name: string;
   }[];
   maxTownhallLevel: number;
+  returnTo: string;
 }
 
 const DEFAULT_TOWNHALL = 18;
@@ -48,6 +49,7 @@ const DEFAULT_TOWNHALL = 18;
 export default function AccountForm({
   clans,
   maxTownhallLevel,
+  returnTo,
 }: AccountFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -90,7 +92,7 @@ export default function AccountForm({
       }
     } else {
       toast.success(`Account "${data.name}" created successfully!`);
-      redirect("/accounts");
+      redirect(returnTo);
     }
   };
 

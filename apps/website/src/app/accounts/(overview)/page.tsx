@@ -54,7 +54,12 @@ export default async function Page({
           />
           <AuthGuard>
             <Button asChild variant="outline" size="icon">
-              <Link href="/accounts/add">
+              <Link
+                href={{
+                  pathname: "/accounts/add",
+                  query: { returnTo: "/accounts" },
+                }}
+              >
                 <Plus />
               </Link>
             </Button>

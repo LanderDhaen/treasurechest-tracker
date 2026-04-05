@@ -22,3 +22,7 @@ export const accountFormSchema = z.object({
 });
 
 export type AccountFormValues = z.infer<typeof accountFormSchema>;
+
+export const accountFormSearchParamsSchema = z.object({
+  returnTo: z.enum(["/accounts", "/chests/add"]).catch("/accounts"),
+});

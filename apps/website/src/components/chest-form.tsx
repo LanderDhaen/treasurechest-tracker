@@ -266,7 +266,12 @@ export default function ChestForm({
                         disabled={isLoading}
                         asChild
                       >
-                        <Link href="/accounts/add">
+                        <Link
+                          href={{
+                            pathname: "/accounts/add",
+                            query: { returnTo: "/chests/add" },
+                          }}
+                        >
                           <Plus />
                         </Link>
                       </Button>
