@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { Spinner } from "./ui/spinner";
 import { toast } from "sonner";
@@ -170,6 +170,22 @@ export default function ChestForm({
   const selectedEvent = events.find(
     (event) => event.code === selectedEventCode,
   );
+
+  useEffect(() => {
+    const currentOpenedAt = form.getValues("openedAt");
+
+    if (!selectedEvent) return;
+
+    if (currentOpenedAt > selectedEvent.endDate) {
+      return form.setValue("openedAt", selectedEvent.startDate);
+    }
+
+    if (currentOpenedAt < selectedEvent.startDate) {
+      return form.setValue("openedAt", selectedEvent.startDate);
+    }
+
+    return form.setValue("openedAt", currentOpenedAt);
+  }, [selectedEvent, form]);
 
   const handleDisabledDates = (date: Date) => {
     if (!selectedEvent) {
