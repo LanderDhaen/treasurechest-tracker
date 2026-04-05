@@ -176,8 +176,7 @@ export default function ChestForm({
       return date < FIRST_EVENT_START_DATE || date > TODAY;
     }
 
-    const minDate =
-      selectedEvent.startDate < TODAY ? selectedEvent.startDate : TODAY;
+    const minDate = selectedEvent.startDate;
 
     const maxDate =
       selectedEvent.endDate > TODAY ? TODAY : selectedEvent.endDate;
