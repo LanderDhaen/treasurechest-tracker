@@ -173,15 +173,17 @@ export default function ChestForm({
 
   const handleDisabledDates = (date: Date) => {
     if (!selectedEvent) {
-      return date < FIRST_EVENT_START_DATE || date > TODAY;
+      const isOutsideOfEventRange =
+        date < FIRST_EVENT_START_DATE || date > TODAY;
+      return isOutsideOfEventRange;
     }
 
     const minDate = selectedEvent.startDate;
-
     const maxDate =
       selectedEvent.endDate > TODAY ? TODAY : selectedEvent.endDate;
+    const isOutsideOfEventRange = date < minDate || date > maxDate;
 
-    return date < minDate || date > maxDate;
+    return isOutsideOfEventRange;
   };
 
   const updatedDate = (date: Date, time: string) => {
