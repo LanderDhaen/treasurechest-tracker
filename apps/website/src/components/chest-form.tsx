@@ -56,6 +56,8 @@ interface ChestFormProps {
     code: string;
     name: string;
     edition: number;
+    startDate: Date;
+    endDate: Date;
   }[];
   rarities: {
     name: string;
@@ -104,6 +106,27 @@ export default function ChestForm({
     },
   });
 
+  const onSubmit = async (formData: ChestFormValues) => {
+    setIsLoading(true);
+
+    const { data: chest, error } = await createChestAction(formData);
+
+    if (error) {
+      if (error.field) {
+        form.setError(error.field as keyof ChestFormValues, {
+          message: error.message,
+        });
+      } else {
+        toast.error(error.message);
+      }
+    } else {
+      toast.success("Chest created successfully!");
+      redirect(`/chests/${chest.id}`);
+    }
+
+    setIsLoading(false);
+  };
+
   const selectedAccountTag = useWatch({
     control: form.control,
     name: "accountTag",
@@ -139,25 +162,27 @@ export default function ChestForm({
     }))
     .filter((category) => category.rewards.length > 0);
 
-  const onSubmit = async (formData: ChestFormValues) => {
-    setIsLoading(true);
+  const selectedEventCode = useWatch({
+    control: form.control,
+    name: "eventCode",
+  });
 
-    const { data: chest, error } = await createChestAction(formData);
+  const selectedEvent = events.find(
+    (event) => event.code === selectedEventCode,
+  );
 
-    if (error) {
-      if (error.field) {
-        form.setError(error.field as keyof ChestFormValues, {
-          message: error.message,
-        });
-      } else {
-        toast.error(error.message);
-      }
-    } else {
-      toast.success("Chest created successfully!");
-      redirect(`/chests/${chest.id}`);
+  const handleDisabledDates = (date: Date) => {
+    if (!selectedEvent) {
+      return date < FIRST_EVENT_START_DATE || date > TODAY;
     }
 
-    setIsLoading(false);
+    const minDate =
+      selectedEvent.startDate < TODAY ? selectedEvent.startDate : TODAY;
+
+    const maxDate =
+      selectedEvent.endDate > TODAY ? TODAY : selectedEvent.endDate;
+
+    return date < minDate || date > maxDate;
   };
 
   const updatedDate = (date: Date, time: string) => {
@@ -168,7 +193,6 @@ export default function ChestForm({
   };
 
   // TODO: Show event duration in the date picker, possibly disable dates outside of the event durations
-  // TODO: Update dates based on selected event (start date, end date, duration)
 
   return (
     <Card>
@@ -408,9 +432,7 @@ export default function ChestForm({
                           mode="single"
                           defaultMonth={field.value}
                           selected={field.value}
-                          disabled={(date) =>
-                            date > TODAY || date < FIRST_EVENT_START_DATE
-                          }
+                          disabled={(date) => handleDisabledDates(date)}
                           onSelect={field.onChange}
                         />
                       </PopoverContent>
