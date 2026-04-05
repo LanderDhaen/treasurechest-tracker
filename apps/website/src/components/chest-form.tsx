@@ -506,6 +506,10 @@ export default function ChestForm({
                         />
                       </PopoverContent>
                     </Popover>
+                    <FieldDescription>
+                      Changing the event will adjust disabled dates based on the
+                      event start and end date.
+                    </FieldDescription>
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />
                     )}
