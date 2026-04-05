@@ -191,8 +191,6 @@ export default function ChestForm({
     return date;
   };
 
-  // TODO: Show event duration in the date picker, possibly disable dates outside of the event durations
-
   return (
     <Card>
       <CardHeader>
