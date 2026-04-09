@@ -130,7 +130,9 @@ export default function ChestForm({
         toast.error(error.message);
       }
     } else {
-      toast.success("Chest created successfully!");
+      toast.success(
+        `Chest for account "${chest.account}" during "${chest.event}" created successfully!`,
+      );
       redirect(`/chests/${chest.id}`);
     }
 
