@@ -133,7 +133,7 @@ export default function ChestForm({
       toast.success(
         `Chest for account "${chest.account}" during "${chest.event}" created successfully!`,
       );
-      redirect(`/chests/${chest.id}`);
+      redirect("/chests");
     }
 
     setIsLoading(false);
