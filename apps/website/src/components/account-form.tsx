@@ -17,7 +17,11 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { accountFormSchema, AccountFormValues } from "@/schemas/account";
+import {
+  accountFormSchema,
+  AccountFormSearchParams,
+  AccountFormValues,
+} from "@/schemas/account";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -32,8 +36,8 @@ import {
 } from "./ui/select";
 import { submitAccountForm } from "@/actions/account";
 import { toast } from "sonner";
-import { redirect } from "next/navigation";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
+import { redirect } from "next/navigation";
 
 interface AccountFormProps {
   clans: {
@@ -41,6 +45,7 @@ interface AccountFormProps {
     name: string;
   }[];
   maxTownhallLevel: number;
+  returnTo: AccountFormSearchParams["returnTo"];
 }
 
 const DEFAULT_TOWNHALL = 18;
@@ -48,6 +53,7 @@ const DEFAULT_TOWNHALL = 18;
 export default function AccountForm({
   clans,
   maxTownhallLevel,
+  returnTo,
 }: AccountFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -90,7 +96,12 @@ export default function AccountForm({
       }
     } else {
       toast.success(`Account "${data.name}" created successfully!`);
-      redirect("/accounts");
+
+      if (returnTo === "/chests/add") {
+        redirect(`/chests/add?account=${data.tag}`);
+      } else {
+        redirect(returnTo);
+      }
     }
   };
 

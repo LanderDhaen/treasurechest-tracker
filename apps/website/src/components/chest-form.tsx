@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { Spinner } from "./ui/spinner";
 import { toast } from "sonner";
@@ -41,10 +41,12 @@ import UnobtainableBadge from "./unobtainable-badge";
 import { formatEventName } from "@/lib/event";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { formatDate } from "@/lib/utils";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Plus } from "lucide-react";
 import { Calendar } from "./ui/calendar";
 import { createChestAction } from "@/actions/chest";
 import { FIRST_EVENT_START_DATE } from "@/constants/event";
+import { ButtonGroup } from "./ui/button-group";
+import Link from "next/link";
 
 interface ChestFormProps {
   accounts: {
@@ -56,6 +58,8 @@ interface ChestFormProps {
     code: string;
     name: string;
     edition: number;
+    startDate: Date;
+    endDate: Date;
   }[];
   rarities: {
     name: string;
@@ -79,30 +83,61 @@ interface ChestFormProps {
       };
     }[];
   }[];
+  defaultValues: {
+    accountTag: string;
+    eventCode: string;
+    raritySlug: string;
+    amount: number;
+    rewardSlug: string;
+    openedAt: Date;
+  };
 }
 
 const TODAY = new Date();
-const DEFAULT_OPENED_AT = TODAY;
 
 export default function ChestForm({
   accounts,
   events,
   rarities,
   categories,
+  defaultValues,
 }: ChestFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<ChestFormValues>({
     resolver: zodResolver(chestFormSchema),
     defaultValues: {
-      accountTag: accounts[0]?.tag || "",
-      eventCode: events[0]?.code || "",
-      raritySlug: rarities[0]?.slug || "",
-      amount: 1,
-      rewardSlug: "",
-      openedAt: DEFAULT_OPENED_AT,
+      accountTag: defaultValues.accountTag,
+      eventCode: defaultValues.eventCode,
+      raritySlug: defaultValues.raritySlug,
+      amount: defaultValues.amount,
+      rewardSlug: defaultValues.rewardSlug,
+      openedAt: defaultValues.openedAt,
     },
   });
+
+  const onSubmit = async (formData: ChestFormValues) => {
+    setIsLoading(true);
+
+    const { data: chest, error } = await createChestAction(formData);
+
+    if (error) {
+      if (error.field) {
+        form.setError(error.field as keyof ChestFormValues, {
+          message: error.message,
+        });
+      } else {
+        toast.error(error.message);
+      }
+    } else {
+      toast.success(
+        `Chest for account "${chest.account}" during "${chest.event}" created successfully!`,
+      );
+      redirect("/chests");
+    }
+
+    setIsLoading(false);
+  };
 
   const selectedAccountTag = useWatch({
     control: form.control,
@@ -139,25 +174,44 @@ export default function ChestForm({
     }))
     .filter((category) => category.rewards.length > 0);
 
-  const onSubmit = async (formData: ChestFormValues) => {
-    setIsLoading(true);
+  const selectedEventCode = useWatch({
+    control: form.control,
+    name: "eventCode",
+  });
 
-    const { data: chest, error } = await createChestAction(formData);
+  const selectedEvent = events.find(
+    (event) => event.code === selectedEventCode,
+  );
 
-    if (error) {
-      if (error.field) {
-        form.setError(error.field as keyof ChestFormValues, {
-          message: error.message,
-        });
-      } else {
-        toast.error(error.message);
-      }
-    } else {
-      toast.success("Chest created successfully!");
-      redirect(`/chests/${chest.id}`);
+  useEffect(() => {
+    const currentOpenedAt = form.getValues("openedAt");
+
+    if (!selectedEvent) return;
+
+    if (currentOpenedAt > selectedEvent.endDate) {
+      return form.setValue("openedAt", selectedEvent.startDate);
     }
 
-    setIsLoading(false);
+    if (currentOpenedAt < selectedEvent.startDate) {
+      return form.setValue("openedAt", selectedEvent.startDate);
+    }
+
+    return form.setValue("openedAt", currentOpenedAt);
+  }, [selectedEvent, form]);
+
+  const handleDisabledDates = (date: Date) => {
+    if (!selectedEvent) {
+      const isOutsideOfEventRange =
+        date < FIRST_EVENT_START_DATE || date > TODAY;
+      return isOutsideOfEventRange;
+    }
+
+    const minDate = selectedEvent.startDate;
+    const maxDate =
+      selectedEvent.endDate > TODAY ? TODAY : selectedEvent.endDate;
+    const isOutsideOfEventRange = date < minDate || date > maxDate;
+
+    return isOutsideOfEventRange;
   };
 
   const updatedDate = (date: Date, time: string) => {
@@ -166,9 +220,6 @@ export default function ChestForm({
 
     return date;
   };
-
-  // TODO: Show event duration in the date picker, possibly disable dates outside of the event durations
-  // TODO: Update dates based on selected event (start date, end date, duration)
 
   return (
     <Card>
@@ -189,31 +240,53 @@ export default function ChestForm({
                   <FieldLabel htmlFor={field.name}>
                     Account<span className="text-red-500 -ml-1">*</span>
                   </FieldLabel>
-                  <Select
-                    name={field.name}
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    aria-invalid={fieldState.invalid}
-                  >
-                    <SelectTrigger
-                      id="form-rhf-select-account"
-                      aria-invalid={fieldState.invalid}
-                      className="w-full"
-                    >
-                      <SelectValue placeholder="Select an account" />
-                    </SelectTrigger>
-                    <SelectContent position="popper">
-                      {accounts.map((account) => (
-                        <SelectItem
-                          key={account.tag}
-                          value={account.tag}
-                          disabled={isLoading}
+                  <ButtonGroup>
+                    <ButtonGroup className="w-full">
+                      <Select
+                        name={field.name}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        aria-invalid={fieldState.invalid}
+                      >
+                        <SelectTrigger
+                          id="form-rhf-select-account"
+                          aria-invalid={fieldState.invalid}
+                          className="w-full"
                         >
-                          {account.name}・TH{account.townhall}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                          <SelectValue placeholder="Select an account" />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                          {accounts.map((account) => (
+                            <SelectItem
+                              key={account.tag}
+                              value={account.tag}
+                              disabled={isLoading}
+                            >
+                              {account.name}・TH{account.townhall}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="text-black"
+                        disabled={isLoading}
+                        asChild
+                      >
+                        <Link
+                          href={{
+                            pathname: "/accounts/add",
+                            query: { returnTo: "/chests/add" },
+                          }}
+                        >
+                          <Plus />
+                        </Link>
+                      </Button>
+                    </ButtonGroup>
+                  </ButtonGroup>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
@@ -228,31 +301,53 @@ export default function ChestForm({
                   <FieldLabel htmlFor={field.name}>
                     Event<span className="text-red-500 -ml-1">*</span>
                   </FieldLabel>
-                  <Select
-                    name={field.name}
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    aria-invalid={fieldState.invalid}
-                  >
-                    <SelectTrigger
-                      id="form-rhf-select-event"
-                      aria-invalid={fieldState.invalid}
-                      className="w-full"
-                    >
-                      <SelectValue placeholder="Select an event" />
-                    </SelectTrigger>
-                    <SelectContent position="popper">
-                      {events.map((event) => (
-                        <SelectItem
-                          key={event.code}
-                          value={event.code}
-                          disabled={isLoading}
+                  <ButtonGroup>
+                    <ButtonGroup className="w-full">
+                      <Select
+                        name={field.name}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        aria-invalid={fieldState.invalid}
+                      >
+                        <SelectTrigger
+                          id="form-rhf-select-event"
+                          aria-invalid={fieldState.invalid}
+                          className="w-full"
                         >
-                          {formatEventName(event.name, event.edition)}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                          <SelectValue placeholder="Select an event" />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                          {events.map((event) => (
+                            <SelectItem
+                              key={event.code}
+                              value={event.code}
+                              disabled={isLoading}
+                            >
+                              {formatEventName(event.name, event.edition)}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="text-black"
+                        disabled={isLoading}
+                        asChild
+                      >
+                        <Link
+                          href={{
+                            pathname: "/events/add",
+                            query: { returnTo: "/chests/add" },
+                          }}
+                        >
+                          <Plus />
+                        </Link>
+                      </Button>
+                    </ButtonGroup>
+                  </ButtonGroup>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
@@ -408,13 +503,15 @@ export default function ChestForm({
                           mode="single"
                           defaultMonth={field.value}
                           selected={field.value}
-                          disabled={(date) =>
-                            date > TODAY || date < FIRST_EVENT_START_DATE
-                          }
+                          disabled={(date) => handleDisabledDates(date)}
                           onSelect={field.onChange}
                         />
                       </PopoverContent>
                     </Popover>
+                    <FieldDescription>
+                      Changing the event will adjust disabled dates based on the
+                      event start and end date.
+                    </FieldDescription>
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />
                     )}

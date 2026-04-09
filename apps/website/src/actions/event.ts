@@ -72,6 +72,7 @@ export const createEventAction = async (formData: EventFormValues) => {
 
     return {
       data: {
+        code: event.code,
         name: series.name,
         edition: event.edition,
       },

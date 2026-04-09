@@ -4,19 +4,39 @@ import { getServerSession } from "@/queries/auth";
 import { getAllCategories } from "@/queries/category";
 import { getAllAllowedEvents } from "@/queries/event";
 import { getAllRarities } from "@/queries/rarity";
+import { chestFormSearchParamsSchema } from "@/schemas/chest";
 import { notFound } from "next/navigation";
 
-export default async function Page() {
+const DEFAULT_OPENED_AT = new Date();
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const session = await getServerSession();
 
   if (!session) {
     notFound();
   }
 
+  const rawParams = await searchParams;
+  const parsedParams = chestFormSearchParamsSchema.parse(rawParams);
+  const { account: accountTag, event: eventCode } = parsedParams;
+
   const accounts = await getAllTrackedAccounts();
   const events = await getAllAllowedEvents();
   const rarities = await getAllRarities();
   const categories = await getAllCategories();
+
+  const defaultValues = {
+    accountTag: accountTag || accounts[0]?.tag || "",
+    eventCode: eventCode || events[0]?.code || "",
+    raritySlug: rarities[0]?.slug || "",
+    amount: 1,
+    rewardSlug: "",
+    openedAt: DEFAULT_OPENED_AT,
+  };
 
   return (
     <div className="flex items-center justify-center">
@@ -26,6 +46,7 @@ export default async function Page() {
           events={events}
           rarities={rarities}
           categories={categories}
+          defaultValues={defaultValues}
         />
       </div>
     </div>

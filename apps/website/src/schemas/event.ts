@@ -36,4 +36,7 @@ export type EventFormValues = z.infer<typeof eventFormSchema>;
 export const eventFormSearchParamsSchema = z.object({
   series: z.string().optional(),
   type: z.string().optional(),
+  returnTo: z.enum(["/events", "/chests/add"]).catch("/events"),
 });
+
+export type EventFormSearchParams = z.infer<typeof eventFormSearchParamsSchema>;

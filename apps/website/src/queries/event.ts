@@ -43,7 +43,13 @@ export const getAllAllowedEvents = async () => {
   const events = await db
     .selectFrom("event")
     .innerJoin("series", "series.id", "event.seriesId")
-    .select(["event.code", "series.name", "event.edition"])
+    .select([
+      "event.code",
+      "series.name",
+      "event.edition",
+      "event.startDate",
+      "event.endDate",
+    ])
     .where("event.isActive", "=", true)
     .where("event.isChestCreationAllowed", "=", true)
     .orderBy("event.startDate", "desc")

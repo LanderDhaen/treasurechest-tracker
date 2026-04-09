@@ -208,7 +208,7 @@ export const createAccount = async ({
       townhallId,
       clanId,
     })
-    .returning("account.name")
+    .returning(["account.tag", "account.name"])
     .executeTakeFirstOrThrow();
 
   return account;

@@ -189,7 +189,11 @@ export const createChestAction = async (formData: ChestFormValues) => {
     });
 
     return {
-      data: chest,
+      data: {
+        id: chest.id,
+        account: account.name,
+        event: formatEventName(event.name, event.edition),
+      },
       error: null,
     };
   } catch (error) {

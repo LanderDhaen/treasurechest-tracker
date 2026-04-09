@@ -30,7 +30,12 @@ import {
 } from "./ui/select";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
-import { eventFormSchema, EventFormValues } from "@/schemas/event";
+import {
+  eventFormSchema,
+  EventFormSearchParams,
+  EventFormValues,
+  EventSearchParams,
+} from "@/schemas/event";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { CalendarIcon, PlusIcon } from "lucide-react";
 import { formatDate } from "@/lib/utils";
@@ -54,6 +59,7 @@ interface EventFormProps {
     seriesCode?: string;
     typeSlug?: string;
   };
+  returnTo: EventFormSearchParams["returnTo"];
 }
 
 const DEFAULT_FROM_DATE = new Date();
@@ -64,6 +70,7 @@ export default function EventForm({
   series,
   types,
   defaultValues,
+  returnTo,
 }: EventFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -111,7 +118,12 @@ export default function EventForm({
       toast.success(
         `Event "${formatEventName(event.name, event.edition)}" created successfully!`,
       );
-      redirect("/events");
+
+      if (returnTo === "/chests/add") {
+        redirect(`/chests/add?event=${event.code}`);
+      } else {
+        redirect(returnTo);
+      }
     }
   };
 

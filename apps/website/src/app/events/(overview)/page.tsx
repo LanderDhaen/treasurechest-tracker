@@ -56,7 +56,14 @@ export default async function Page({
           />
           {session && (
             <Button asChild variant="outline" size="icon">
-              <Link href="/events/add">
+              <Link
+                href={{
+                  pathname: "/events/add",
+                  query: {
+                    returnTo: "/events",
+                  },
+                }}
+              >
                 <Plus />
               </Link>
             </Button>
