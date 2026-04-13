@@ -21,6 +21,7 @@ export const getAllChests = async ({
   pageSize,
   sortBy,
   direction,
+  accounts,
 }: ChestSearchParams) => {
   let query = db
     .with("filtered_chest", () => withFilteredChests({}))
@@ -43,6 +44,10 @@ export const getAllChests = async ({
         eb("series.name", "ilike", `%${search}%`),
       ]),
     );
+  }
+
+  if (accounts && accounts.length > 0) {
+    query = query.where("account.tag", "in", accounts);
   }
 
   const countQuery = await query

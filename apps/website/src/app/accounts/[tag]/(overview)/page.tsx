@@ -7,6 +7,7 @@ import AccountActions from "@/components/account-actions";
 import AuthGuard from "@/components/auth-guard";
 import { Separator } from "@/components/ui/separator";
 import { getHighestTownhall } from "@/queries/townhall";
+import AccountTabs from "@/components/account-tabs";
 
 export default async function Page({
   params,
@@ -21,8 +22,12 @@ export default async function Page({
     return notFound();
   }
 
+  // Actions
+
   const highestTownhall = await getHighestTownhall();
   const isMaxTownhall = account.townhall >= highestTownhall.level;
+
+  // Dashboard
 
   const filters = {
     accountId: account.id,
@@ -32,9 +37,10 @@ export default async function Page({
     <div className="flex flex-col gap-4">
       <AccountInformationItem account={account} />
       <AuthGuard>
-        <AccountActions account={account} isMaxTownhall={isMaxTownhall} />
+        <AccountActions account={account} />
       </AuthGuard>
       <Separator />
+      <AccountTabs accountTag={account.tag} />
       <Dashboard filters={filters} hideAccountCard />
     </div>
   );
