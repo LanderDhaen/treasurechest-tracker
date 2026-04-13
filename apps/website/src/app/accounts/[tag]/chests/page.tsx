@@ -17,6 +17,7 @@ import { chestSearchParamsSchema } from "@/schemas/chest";
 import SearchBar from "@/components/searchbar";
 import SortingMenu from "@/components/sorting-menu";
 import { SORT_OPTIONS } from "@/constants/chest";
+import AccountTabs from "@/components/account-tabs";
 
 export default async function Page({
   params,
@@ -56,28 +57,7 @@ export default async function Page({
         <AccountActions account={account} isMaxTownhall={isMaxTownhall} />
       </AuthGuard>
       <Separator />
-      <ButtonGroup>
-        <Button
-          variant="outline"
-          size="sm"
-          className="text-muted-foreground"
-          asChild
-        >
-          <Link href={`/accounts/${account.tag}`}>
-            <LayoutDashboard data-icon="inline-start" /> Dashboard
-          </Link>
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="bg-white hover:bg-white"
-          asChild
-        >
-          <Link href={`/accounts/${account.tag}/chests`}>
-            <Box data-icon="inline-start" /> Treasure Chests
-          </Link>
-        </Button>
-      </ButtonGroup>
+      <AccountTabs accountTag={account.tag} />
       <Card>
         <CardContent className="flex flex-col gap-4">
           <div className="flex justify-between gap-2">
