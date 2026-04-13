@@ -4,11 +4,6 @@ import { notFound } from "next/navigation";
 import AccountActions from "@/components/account-actions";
 import AuthGuard from "@/components/auth-guard";
 import { Separator } from "@/components/ui/separator";
-import { getHighestTownhall } from "@/queries/townhall";
-import { ButtonGroup } from "@/components/ui/button-group";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { Box, LayoutDashboard } from "lucide-react";
 import { getAllChests } from "@/queries/chest";
 import ChestTable from "@/components/chest-table";
 import { Card, CardContent } from "@/components/ui/card";
@@ -34,13 +29,6 @@ export default async function Page({
     return notFound();
   }
 
-  // Actions
-
-  const highestTownhall = await getHighestTownhall();
-  const isMaxTownhall = account.townhall >= highestTownhall.level;
-
-  // Table
-
   const rawParams = await searchParams;
   const parsedParams = chestSearchParamsSchema.parse(rawParams);
   const { search, page, pageSize, sortBy, direction } = parsedParams;
@@ -58,7 +46,7 @@ export default async function Page({
     <div className="flex flex-col gap-4">
       <AccountInformationItem account={account} />
       <AuthGuard>
-        <AccountActions account={account} isMaxTownhall={isMaxTownhall} />
+        <AccountActions account={account} />
       </AuthGuard>
       <Separator />
       <AccountTabs accountTag={account.tag} />

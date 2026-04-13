@@ -37,7 +37,7 @@ export default async function Page({
     <div className="flex flex-col gap-4">
       <AccountInformationItem account={account} />
       <AuthGuard>
-        <AccountActions account={account} isMaxTownhall={isMaxTownhall} />
+        <AccountActions account={account} />
       </AuthGuard>
       <Separator />
       <AccountTabs accountTag={account.tag} />
