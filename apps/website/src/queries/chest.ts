@@ -21,6 +21,7 @@ export const getAllChests = async ({
   pageSize,
   sortBy,
   direction,
+  accounts,
 }: ChestSearchParams) => {
   let query = db
     .with("filtered_chest", () => withFilteredChests({}))
@@ -43,6 +44,10 @@ export const getAllChests = async ({
         eb("series.name", "ilike", `%${search}%`),
       ]),
     );
+  }
+
+  if (accounts && accounts.length > 0) {
+    query = query.where("account.tag", "in", accounts);
   }
 
   const countQuery = await query
@@ -118,62 +123,6 @@ export const getAllChests = async ({
     chests,
     rows: countQuery.result,
     totalPages: Math.ceil(countQuery.result / pageSize),
-  };
-};
-
-export const getChestsByAccountId = async (
-  accountId: number,
-  page: number,
-  pageSize: number,
-) => {
-  let query = db
-    .with("filtered_chest", () => withFilteredChests({ accountId }))
-    .selectFrom("filtered_chest");
-
-  const countQuery = await query
-    .select(db.fn.countAll<number>().as("result"))
-    .executeTakeFirstOrThrow();
-
-  // Pagination
-
-  query = query.limit(pageSize).offset((page - 1) * pageSize);
-
-  // Selecting
-
-  const chests = await query
-    .innerJoin("rarity", "filtered_chest.rarityId", "rarity.id")
-    .innerJoin("reward", "filtered_chest.rewardId", "reward.id")
-    .select((eb) => [
-      "filtered_chest.id",
-      "filtered_chest.amount",
-      "filtered_chest.openedAt",
-      "rarity.name as rarity",
-      "reward.name as reward",
-      jsonObjectFrom(
-        eb
-          .selectFrom("account")
-          .innerJoin("townhall", "account.townhallId", "townhall.id")
-          .select(["account.name", "townhall.level as townhall"])
-          .whereRef("account.id", "=", "filtered_chest.accountId"),
-      )
-        .$notNull()
-        .as("account"),
-      jsonObjectFrom(
-        eb
-          .selectFrom("event")
-          .innerJoin("series", "event.seriesId", "series.id")
-          .select(["event.edition", "series.name"])
-          .whereRef("event.id", "=", "filtered_chest.eventId"),
-      )
-        .$notNull()
-        .as("event"),
-    ])
-    .orderBy("filtered_chest.openedAt", "desc")
-    .execute();
-
-  return {
-    chests,
-    totalPages: Math.ceil(countQuery.result / 10),
   };
 };
 

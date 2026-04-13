@@ -9,11 +9,11 @@ import { ButtonGroup } from "@/components/ui/button-group";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Box, LayoutDashboard } from "lucide-react";
-import { getChestsByAccountId } from "@/queries/chest";
+import { getAllChests } from "@/queries/chest";
 import ChestTable from "@/components/chest-table";
 import { Card, CardContent } from "@/components/ui/card";
 import Pagination from "@/components/pagination";
-import { paginationSchema } from "@/schemas/common";
+import { chestSearchParamsSchema } from "@/schemas/chest";
 
 export default async function Page({
   params,
@@ -34,14 +34,17 @@ export default async function Page({
   const isMaxTownhall = account.townhall >= highestTownhall.level;
 
   const rawParams = await searchParams;
-  const parsedParams = paginationSchema.parse(rawParams);
-  const { page, pageSize } = parsedParams;
+  const parsedParams = chestSearchParamsSchema.parse(rawParams);
+  const { search, page, pageSize, sortBy, direction } = parsedParams;
 
-  const { chests, totalPages } = await getChestsByAccountId(
-    account.id,
+  const { chests, totalPages } = await getAllChests({
+    search,
     page,
     pageSize,
-  );
+    sortBy,
+    direction,
+    accounts: [account.tag],
+  });
 
   return (
     <div className="flex flex-col gap-4">
