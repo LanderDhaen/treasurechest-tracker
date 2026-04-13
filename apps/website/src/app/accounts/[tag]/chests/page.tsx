@@ -40,12 +40,22 @@ export default async function Page({
       </AuthGuard>
       <Separator />
       <ButtonGroup>
-        <Button variant="link" size="sm" asChild>
+        <Button
+          variant="outline"
+          size="sm"
+          className="text-muted-foreground"
+          asChild
+        >
           <Link href={`/accounts/${account.tag}`}>
             <LayoutDashboard data-icon="inline-start" /> Dashboard
           </Link>
         </Button>
-        <Button variant="link" size="sm" className="underline" asChild>
+        <Button
+          variant="outline"
+          size="sm"
+          className="bg-white hover:bg-white"
+          asChild
+        >
           <Link href={`/accounts/${account.tag}/chests`}>
             <Box data-icon="inline-start" /> Treasure Chests
           </Link>
