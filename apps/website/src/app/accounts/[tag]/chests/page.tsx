@@ -2,7 +2,6 @@ import { getAccountByTag } from "@/queries/account";
 import AccountInformationItem from "@/components/account-information-item";
 import { FilterConfig } from "@/types/common";
 import { notFound } from "next/navigation";
-import Dashboard from "@/components/dashboard";
 import AccountActions from "@/components/account-actions";
 import AuthGuard from "@/components/auth-guard";
 import { Separator } from "@/components/ui/separator";
@@ -11,6 +10,10 @@ import { ButtonGroup } from "@/components/ui/button-group";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Box, LayoutDashboard } from "lucide-react";
+import { getChestsByAccountId } from "@/queries/chest";
+import { Table } from "@/components/ui/table";
+import ChestTable from "@/components/chest-table";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default async function Page({
   params,
@@ -28,9 +31,7 @@ export default async function Page({
   const highestTownhall = await getHighestTownhall();
   const isMaxTownhall = account.townhall >= highestTownhall.level;
 
-  const filters = {
-    accountId: account.id,
-  } satisfies FilterConfig;
+  const chest = await getChestsByAccountId(account.id);
 
   return (
     <div className="flex flex-col gap-4">
@@ -61,9 +62,11 @@ export default async function Page({
           </Link>
         </Button>
       </ButtonGroup>
-      <div>
-        Treasure Chests for {account.name} (Tag: {account.tag})
-      </div>
+      <Card>
+        <CardContent>
+          <ChestTable chests={chest} />
+        </CardContent>
+      </Card>
     </div>
   );
 }

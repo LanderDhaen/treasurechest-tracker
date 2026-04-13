@@ -121,6 +121,43 @@ export const getAllChests = async ({
   };
 };
 
+export const getChestsByAccountId = async (accountId: number) => {
+  const chests = await db
+    .with("filtered_chest", () => withFilteredChests({ accountId }))
+    .selectFrom("filtered_chest")
+    .innerJoin("rarity", "filtered_chest.rarityId", "rarity.id")
+    .innerJoin("reward", "filtered_chest.rewardId", "reward.id")
+    .select((eb) => [
+      "filtered_chest.id",
+      "filtered_chest.amount",
+      "filtered_chest.openedAt",
+      "rarity.name as rarity",
+      "reward.name as reward",
+      jsonObjectFrom(
+        eb
+          .selectFrom("account")
+          .innerJoin("townhall", "account.townhallId", "townhall.id")
+          .select(["account.name", "townhall.level as townhall"])
+          .whereRef("account.id", "=", "filtered_chest.accountId"),
+      )
+        .$notNull()
+        .as("account"),
+      jsonObjectFrom(
+        eb
+          .selectFrom("event")
+          .innerJoin("series", "event.seriesId", "series.id")
+          .select(["event.edition", "series.name"])
+          .whereRef("event.id", "=", "filtered_chest.eventId"),
+      )
+        .$notNull()
+        .as("event"),
+    ])
+    .orderBy("filtered_chest.openedAt", "desc")
+    .execute();
+
+  return chests;
+};
+
 export const getLatestChest = async (filters: FilterConfig) => {
   const chest = await db
     .with("filtered_chest", () => withFilteredChests(filters))
