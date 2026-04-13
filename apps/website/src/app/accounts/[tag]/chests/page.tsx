@@ -34,8 +34,12 @@ export default async function Page({
     return notFound();
   }
 
+  // Actions
+
   const highestTownhall = await getHighestTownhall();
   const isMaxTownhall = account.townhall >= highestTownhall.level;
+
+  // Table
 
   const rawParams = await searchParams;
   const parsedParams = chestSearchParamsSchema.parse(rawParams);

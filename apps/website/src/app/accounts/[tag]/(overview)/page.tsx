@@ -22,8 +22,12 @@ export default async function Page({
     return notFound();
   }
 
+  // Actions
+
   const highestTownhall = await getHighestTownhall();
   const isMaxTownhall = account.townhall >= highestTownhall.level;
+
+  // Dashboard
 
   const filters = {
     accountId: account.id,
