@@ -121,10 +121,26 @@ export const getAllChests = async ({
   };
 };
 
-export const getChestsByAccountId = async (accountId: number) => {
-  const chests = await db
+export const getChestsByAccountId = async (
+  accountId: number,
+  page: number,
+  pageSize: number,
+) => {
+  let query = db
     .with("filtered_chest", () => withFilteredChests({ accountId }))
-    .selectFrom("filtered_chest")
+    .selectFrom("filtered_chest");
+
+  const countQuery = await query
+    .select(db.fn.countAll<number>().as("result"))
+    .executeTakeFirstOrThrow();
+
+  // Pagination
+
+  query = query.limit(pageSize).offset((page - 1) * pageSize);
+
+  // Selecting
+
+  const chests = await query
     .innerJoin("rarity", "filtered_chest.rarityId", "rarity.id")
     .innerJoin("reward", "filtered_chest.rewardId", "reward.id")
     .select((eb) => [
@@ -155,7 +171,10 @@ export const getChestsByAccountId = async (accountId: number) => {
     .orderBy("filtered_chest.openedAt", "desc")
     .execute();
 
-  return chests;
+  return {
+    chests,
+    totalPages: Math.ceil(countQuery.result / 10),
+  };
 };
 
 export const getLatestChest = async (filters: FilterConfig) => {

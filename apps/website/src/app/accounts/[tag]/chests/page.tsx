@@ -1,6 +1,5 @@
 import { getAccountByTag } from "@/queries/account";
 import AccountInformationItem from "@/components/account-information-item";
-import { FilterConfig } from "@/types/common";
 import { notFound } from "next/navigation";
 import AccountActions from "@/components/account-actions";
 import AuthGuard from "@/components/auth-guard";
@@ -11,14 +10,17 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Box, LayoutDashboard } from "lucide-react";
 import { getChestsByAccountId } from "@/queries/chest";
-import { Table } from "@/components/ui/table";
 import ChestTable from "@/components/chest-table";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import Pagination from "@/components/pagination";
+import { paginationSchema } from "@/schemas/common";
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: Promise<{ tag: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { tag } = await params;
 
@@ -31,7 +33,15 @@ export default async function Page({
   const highestTownhall = await getHighestTownhall();
   const isMaxTownhall = account.townhall >= highestTownhall.level;
 
-  const chest = await getChestsByAccountId(account.id);
+  const rawParams = await searchParams;
+  const parsedParams = paginationSchema.parse(rawParams);
+  const { page, pageSize } = parsedParams;
+
+  const { chests, totalPages } = await getChestsByAccountId(
+    account.id,
+    page,
+    pageSize,
+  );
 
   return (
     <div className="flex flex-col gap-4">
@@ -63,8 +73,15 @@ export default async function Page({
         </Button>
       </ButtonGroup>
       <Card>
-        <CardContent>
-          <ChestTable chests={chest} />
+        <CardContent className="flex flex-col gap-4">
+          <ChestTable chests={chests} />
+          {totalPages > 0 && (
+            <Pagination
+              currentPage={page}
+              currentPageSize={pageSize}
+              totalPages={totalPages}
+            />
+          )}
         </CardContent>
       </Card>
     </div>
