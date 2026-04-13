@@ -11,6 +11,7 @@ import {
 } from "./ui/table";
 import RarityBadge from "./rarity-badge";
 import { formatEventName } from "@/lib/event";
+import { formatReward } from "@/lib/chest";
 
 interface ChestTableProps {
   chests: {
@@ -58,9 +59,7 @@ export default function ChestTable({ chests }: ChestTableProps) {
                   <RarityBadge rarity={chest.rarity} />
                 </TableCell>
                 <TableCell>
-                  {chest.amount === 1
-                    ? `${chest.reward}`
-                    : `${chest.amount.toLocaleString()} ${chest.reward}`}
+                  {formatReward(chest.amount, chest.reward)}
                 </TableCell>
                 <TableCell>{formatDateTime(chest.openedAt)}</TableCell>
                 <TableCell>{chest.account.name}</TableCell>
