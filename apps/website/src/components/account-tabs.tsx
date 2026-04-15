@@ -3,7 +3,7 @@
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Box, LayoutDashboard } from "lucide-react";
+import { Box, LayoutDashboard, Scroll } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 export default function AccountTabs({ accountTag }: { accountTag: string }) {
@@ -19,6 +19,11 @@ export default function AccountTabs({ accountTag }: { accountTag: string }) {
       name: "Treasure Chests",
       href: `/accounts/${accountTag}/chests`,
       icon: Box,
+    },
+    {
+      name: "Timeline",
+      href: `/accounts/${accountTag}/timeline`,
+      icon: Scroll,
     },
   ];
 
