@@ -13,14 +13,14 @@ import {
   CircleFadingArrowUp,
   XCircle,
 } from "lucide-react";
-import { formatDateTime } from "@/lib/utils";
+import TimelineItem from "@/components/timeline-item";
 
-type TimelineItem = {
+export interface TimelineItem {
   title: string;
   description: string;
   date: Date;
   icon: LucideIcon;
-};
+}
 
 export default async function Page({
   params,
@@ -94,29 +94,7 @@ export default async function Page({
       <Card className="shadow-md">
         <CardContent className="flex flex-col gap-2">
           {timeline.map((item, index) => (
-            <div
-              key={index}
-              className="grid grid-cols-[24px_1fr] md:grid-cols-[150px_24px_1fr] gap-x-4"
-            >
-              <div className="hidden md:text-muted-foreground md:italic md:block md:text-sm md:text-right">
-                {formatDateTime(new Date(item.date))}
-              </div>
-              <div className="flex flex-col items-center gap-2">
-                <div className="flex h-5 place-items-center">
-                  <item.icon className="h-4.5 w-4.5" />
-                </div>
-                <span className="h-12 w-px bg-black" />
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className="text-sm italic text-muted-foreground md:hidden">
-                  {formatDateTime(new Date(item.date))}
-                </div>
-                <div className="text-sm">{item.title}</div>
-                <div className="text-sm text-muted-foreground">
-                  {item.description}
-                </div>
-              </div>
-            </div>
+            <TimelineItem key={index} {...item} />
           ))}
         </CardContent>
       </Card>
