@@ -6,7 +6,7 @@ import AuthGuard from "@/components/auth-guard";
 import { Separator } from "@/components/ui/separator";
 import AccountTabs from "@/components/account-tabs";
 import { Card, CardContent } from "@/components/ui/card";
-import { ToggleRight, CircleFadingArrowUp, Pencil } from "lucide-react";
+import { LoaderCircle, CircleFadingArrowUp, SquarePen } from "lucide-react";
 import { formatDateTime } from "@/lib/utils";
 
 const TIMELINE = [
@@ -21,14 +21,14 @@ const TIMELINE = [
     id: 2,
     date: "15 Oct 2026",
     title: "Status changed",
-    icon: ToggleRight,
+    icon: LoaderCircle,
     description: "from untracked to tracked",
   },
   {
     id: 3,
     date: "20 Oct 2026",
     title: "Name changed",
-    icon: Pencil,
+    icon: SquarePen,
     description: "from Lander to DL✨Lander",
   },
 ];
