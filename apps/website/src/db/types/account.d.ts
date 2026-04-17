@@ -21,3 +21,15 @@ export interface AccountTable {
 export type Account = Selectable<AccountTable>;
 export type InsertableAccount = Insertable<AccountTable>;
 export type UpdateableAccount = Updateable<AccountTable>;
+
+export interface AccountHistoryTable {
+  id: Generated<number>;
+  validFrom: ColumnType<Date>;
+  validTo: ColumnType<Date>;
+  name: ColumnType<string>;
+  tag: ColumnType<string>;
+  isTracked: ColumnType<boolean>;
+  townhallId: ColumnType<number>;
+  clanId: ColumnType<number>;
+  accountId: ColumnType<number>;
+}

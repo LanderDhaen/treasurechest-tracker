@@ -52,8 +52,8 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: "2025-12-14 15:00:00",
         name: "Lander™",
         tag: "8UQ9LGYQ",
-        townhallId: 16,
         isTracked: false,
+        townhallId: 16,
         clanId: 4, // DL Mini
       },
       {
@@ -85,8 +85,8 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: "2025-12-14 15:00:00",
         name: "FC Gods",
         tag: "PULUP0L9",
-        townhallId: 11,
         isTracked: false,
+        townhallId: 11,
         clanId: 4, // DL Mini
       },
       {
@@ -94,8 +94,8 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: "2025-12-14 15:00:00",
         name: "EXP Flickzie",
         tag: "88G9UPCU",
-        townhallId: 10,
         isTracked: false,
+        townhallId: 10,
         clanId: 4, // DL Mini
       },
       {
@@ -103,8 +103,8 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: "2025-12-14 15:00:00",
         name: "Lvl.10 Lander",
         tag: "L2VP2C2P0",
-        townhallId: 10,
         isTracked: false,
+        townhallId: 10,
         clanId: 4, // DL Mini
       },
       {
@@ -112,8 +112,8 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: "2025-12-14 15:00:00",
         name: "Peace",
         tag: "28U8RUVL",
-        townhallId: 10,
         isTracked: false,
+        townhallId: 10,
         clanId: 4, // DL Mini
       },
       {
@@ -121,8 +121,8 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: "2025-12-14 15:00:00",
         name: "Lvl.9 Lander",
         tag: "PUCV28QP9",
-        townhallId: 9,
         isTracked: false,
+        townhallId: 9,
         clanId: 4, // DL Mini
       },
       {
@@ -130,8 +130,8 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: "2025-12-14 15:00:00",
         name: "Lander - TH8",
         tag: "YGJL820VP",
-        townhallId: 8,
         isTracked: false,
+        townhallId: 8,
         clanId: 4, // DL Mini
       },
       {
@@ -147,10 +147,58 @@ export const seed = async (db: Kysely<any>) => {
         createdAt: "2025-12-14 15:00:00",
         updatedAt: "2025-12-14 15:00:00",
         name: "Lvl.7 Lander",
-        isTracked: false,
         tag: "LYC0RRUUL",
+        isTracked: false,
         townhallId: 7,
         clanId: 4, // DL Mini
+      },
+    ])
+    .execute();
+
+  // History
+
+  await db
+    .insertInto("account_history")
+    .values([
+      {
+        validFrom: "2026-01-18 21:12:58",
+        validTo: "2026-02-02 10:31:01",
+        name: "DL✨Lander",
+        tag: "8RRG0LJR2",
+        isTracked: false,
+        townhallId: 18,
+        clanId: 1, // Dutch Legion 3
+        accountId: 1, // DL✨Lander
+      },
+      {
+        validFrom: "2026-01-18 21:12:58",
+        validTo: "2026-01-24 18:04:31",
+        name: "DL✨Lander",
+        tag: "8RRG0LJR2",
+        isTracked: false,
+        townhallId: 17,
+        clanId: 1, // Dutch Legion 3
+        accountId: 1, // DL✨Lander
+      },
+      {
+        validFrom: "2026-01-02 09:44:23",
+        validTo: "2026-01-18 21:12:58",
+        name: "DL✨Lander",
+        tag: "8RRG0LJR2",
+        isTracked: true,
+        townhallId: 17,
+        clanId: 1, // Dutch Legion 3
+        accountId: 1, // DL✨Lander
+      },
+      {
+        validFrom: "2025-12-14 15:00:00",
+        validTo: "2026-01-02 09:44:23",
+        name: "Lander",
+        tag: "8RRG0LJR2",
+        isTracked: true,
+        townhallId: 17,
+        clanId: 1, // Dutch Legion 3
+        accountId: 1, // DL✨Lander
       },
     ])
     .execute();
