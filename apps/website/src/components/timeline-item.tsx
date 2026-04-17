@@ -25,7 +25,7 @@ export default function TimelineItem({
         <div className="flex h-5 place-items-center">
           <Icon className="h-4.5 w-4.5" />
         </div>
-        {!isLast && <span className="h-12 w-px bg-black" />}
+        {!isLast && <span className="h-12 w-0.5 bg-black rounded-full" />}
       </div>
       <div className="flex flex-col gap-1">
         <div className="text-sm italic text-muted-foreground md:hidden">
