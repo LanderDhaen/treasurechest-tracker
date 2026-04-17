@@ -16,7 +16,7 @@ export default function AccountTabs({ accountTag }: { accountTag: string }) {
       icon: LayoutDashboard,
     },
     {
-      name: "Treasure Chests",
+      name: "Chests",
       href: `/accounts/${accountTag}/chests`,
       icon: Box,
     },
