@@ -55,7 +55,7 @@ export default async function Page({
       <Separator />
       <AccountTabs accountTag={account.tag} />
       <Card className="shadow-md">
-        <CardContent className="flex flex-col gap-3">
+        <CardContent className="flex flex-col gap-2">
           {TIMELINE.map((item) => (
             <div
               key={item.id}
