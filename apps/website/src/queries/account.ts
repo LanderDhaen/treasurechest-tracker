@@ -110,6 +110,7 @@ export const getAccountByTag = async (tag: string) => {
     .innerJoin("townhall", "account.townhallId", "townhall.id")
     .select((eb) => [
       "account.id",
+      "account.updatedAt",
       "account.tag",
       "townhall.level as townhall",
       "account.name",
@@ -247,4 +248,26 @@ export const deleteAccount = async (accountId: number) => {
     .executeTakeFirst();
 
   return deletedAccount;
+};
+
+// History
+
+export const getAccountHistory = async (accountId: number) => {
+  const history = await db
+    .selectFrom("account_history")
+    .innerJoin("townhall", "account_history.townhallId", "townhall.id")
+    .select([
+      "account_history.id",
+      "account_history.validFrom",
+      "account_history.validTo",
+      "account_history.name",
+      "account_history.tag",
+      "account_history.isTracked",
+      "townhall.level as townhall",
+    ])
+    .where("account_history.accountId", "=", accountId)
+    .orderBy("account_history.validFrom", "desc")
+    .execute();
+
+  return history;
 };
