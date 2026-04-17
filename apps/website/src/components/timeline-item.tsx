@@ -6,6 +6,7 @@ interface TimelineItemProps {
   description: string;
   date: Date;
   icon: LucideIcon;
+  isLast?: boolean;
 }
 
 export default function TimelineItem({
@@ -13,6 +14,7 @@ export default function TimelineItem({
   description,
   date,
   icon: Icon,
+  isLast = false,
 }: TimelineItemProps) {
   return (
     <div className="grid grid-cols-[24px_1fr] md:grid-cols-[150px_24px_1fr] gap-x-4">
@@ -23,7 +25,7 @@ export default function TimelineItem({
         <div className="flex h-5 place-items-center">
           <Icon className="h-4.5 w-4.5" />
         </div>
-        <span className="h-12 w-px bg-black" />
+        {!isLast && <span className="h-12 w-px bg-black" />}
       </div>
       <div className="flex flex-col gap-1">
         <div className="text-sm italic text-muted-foreground md:hidden">

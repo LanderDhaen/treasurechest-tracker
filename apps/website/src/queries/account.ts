@@ -110,6 +110,7 @@ export const getAccountByTag = async (tag: string) => {
     .innerJoin("townhall", "account.townhallId", "townhall.id")
     .select((eb) => [
       "account.id",
+      "account.createdAt",
       "account.updatedAt",
       "account.tag",
       "townhall.level as townhall",

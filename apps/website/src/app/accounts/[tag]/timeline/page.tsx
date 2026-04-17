@@ -96,6 +96,13 @@ export default async function Page({
           {timeline.map((item, index) => (
             <TimelineItem key={index} {...item} />
           ))}
+          <TimelineItem
+            title="Account created"
+            description={`with tag #${account.tag}`}
+            date={account.updatedAt}
+            icon={LoaderCircle}
+            isLast
+          />
         </CardContent>
       </Card>
     </div>
