@@ -1,6 +1,6 @@
 import { ClanTable } from "./clan";
 import { AccountHistoryTable, AccountTable } from "./account";
-import { EventTable } from "./event";
+import { EventHistoryTable, EventTable } from "./event";
 import { ChestTable } from "./chest";
 import { RarityTable } from "./rarity";
 import { CategoryTable } from "./category";
@@ -17,6 +17,7 @@ export interface Database {
   type: TypeTable;
   series: SeriesTable;
   event: EventTable;
+  event_history: EventHistoryTable;
   rarity: RarityTable;
   category: CategoryTable;
   reward: RewardTable;

@@ -1,5 +1,7 @@
 import { Kysely } from "kysely";
 
+const NOW = new Date();
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const seed = async (db: Kysely<any>) => {
   await db.deleteFrom("event").execute();
@@ -8,6 +10,8 @@ export const seed = async (db: Kysely<any>) => {
     .insertInto("event")
     .values([
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "TCL1",
         startDate: "2024-09-19",
@@ -18,6 +22,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "TH1",
         startDate: "2024-09-19",
@@ -28,6 +34,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "CH",
         startDate: "2024-12-04",
@@ -38,6 +46,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "CC1",
         startDate: "2024-12-25",
@@ -48,6 +58,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "CCC1",
         startDate: "2025-03-17",
@@ -58,6 +70,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 2,
         code: "TH2",
         startDate: "2025-03-17",
@@ -68,6 +82,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "GR1",
         startDate: "2025-04-14",
@@ -78,6 +94,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "FF1",
         startDate: "2025-04-24",
@@ -88,6 +106,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 3,
         code: "TH3",
         startDate: "2025-05-17",
@@ -98,6 +118,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 4,
         code: "TH4",
         startDate: "2025-07-17",
@@ -108,6 +130,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "SB1",
         startDate: "2025-08-08",
@@ -118,6 +142,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "HR1",
         startDate: "2025-08-13",
@@ -128,6 +154,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 5,
         code: "TH5",
         startDate: "2025-09-28",
@@ -138,6 +166,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 6,
         code: "TH6",
         startDate: "2025-10-24",
@@ -148,6 +178,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "MC1",
         startDate: "2025-10-24",
@@ -158,6 +190,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 7,
         code: "TH7",
         startDate: "2025-11-28",
@@ -168,6 +202,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "CR1",
         startDate: "2025-12-12",
@@ -178,6 +214,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 8,
         code: "TH8",
         startDate: "2026-01-28",
@@ -187,6 +225,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 2,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "UTD1",
         startDate: "2026-02-24",
@@ -196,6 +236,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 12,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 1,
         code: "GP1",
         startDate: "2026-03-01",
@@ -205,6 +247,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 13,
       },
       {
+        createdAt: "2025-12-18T01:00:00Z",
+        updatedAt: NOW,
         edition: 2,
         code: "GP2",
         startDate: "2026-04-01",
@@ -212,6 +256,26 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 11,
         typeId: 1,
         seriesId: 13,
+      },
+    ])
+    .execute();
+
+  // History
+
+  db.insertInto("event_history")
+    .values([
+      {
+        validFrom: "2025-12-18T01:00:00Z",
+        validTo: NOW,
+        edition: 1,
+        code: "TCL1",
+        startDate: "2024-09-11",
+        endDate: "2024-09-30",
+        maxChests: 5,
+        typeId: 1,
+        seriesId: 1,
+        isChestCreationAllowed: false,
+        eventId: 2,
       },
     ])
     .execute();
