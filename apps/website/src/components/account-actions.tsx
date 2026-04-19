@@ -9,7 +9,10 @@ interface AccountActionsProps {
     id: number;
     name: string;
     tag: string;
-    townhall: number;
+    townhall: {
+      id: number;
+      level: number;
+    };
     isTracked: boolean;
     clan: {
       id: number;
@@ -20,7 +23,7 @@ interface AccountActionsProps {
 
 export default async function AccountActions({ account }: AccountActionsProps) {
   const highestTownhall = await getHighestTownhall();
-  const isMaxTownhall = account.townhall >= highestTownhall.level;
+  const isMaxTownhall = account.townhall.level >= highestTownhall.level;
 
   return (
     <div className="flex justify-between">

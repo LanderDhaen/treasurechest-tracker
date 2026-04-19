@@ -11,7 +11,10 @@ interface AccountInformationItemProps {
     id: number;
     name: string;
     tag: string;
-    townhall: number;
+    townhall: {
+      id: number;
+      level: number;
+    };
     isTracked: boolean;
     clan: {
       id: number;
@@ -32,7 +35,7 @@ export default function AccountInformationItem({
         </ItemTitle>
         <ItemDescription className="italic">#{account.tag}</ItemDescription>
         <ItemDescription className="text-sm text-muted-foreground">
-          TH{account.townhall}・{account.clan.name}
+          TH{account.townhall.level}・{account.clan.name}
         </ItemDescription>
       </ItemContent>
     </Item>

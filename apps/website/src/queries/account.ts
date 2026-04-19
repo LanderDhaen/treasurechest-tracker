@@ -117,9 +117,16 @@ export const getAccountByTag = async (tag: string) => {
       "account.createdAt",
       "account.updatedAt",
       "account.tag",
-      "townhall.level as townhall",
       "account.name",
       "account.isTracked",
+      jsonObjectFrom(
+        eb
+          .selectFrom("townhall")
+          .select(["townhall.id", "townhall.level"])
+          .whereRef("townhall.id", "=", "account.townhallId"),
+      )
+        .$notNull()
+        .as("townhall"),
       jsonObjectFrom(
         eb
           .selectFrom("clan")
@@ -282,14 +289,21 @@ export const getAccountHistory = async (accountId: number) => {
   const history = await db
     .selectFrom("account_history")
     .innerJoin("townhall", "account_history.townhallId", "townhall.id")
-    .select([
+    .select((eb) => [
       "account_history.id",
       "account_history.validFrom",
       "account_history.validTo",
       "account_history.name",
       "account_history.tag",
       "account_history.isTracked",
-      "townhall.level as townhall",
+      jsonObjectFrom(
+        eb
+          .selectFrom("townhall")
+          .select(["townhall.id", "townhall.level"])
+          .whereRef("townhall.id", "=", "account_history.townhallId"),
+      )
+        .$notNull()
+        .as("townhall"),
     ])
     .where("account_history.accountId", "=", accountId)
     .orderBy("account_history.validFrom", "desc")

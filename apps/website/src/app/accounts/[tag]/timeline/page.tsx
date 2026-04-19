@@ -74,10 +74,10 @@ export default async function Page({
       });
     }
 
-    if (current.townhall !== prev.townhall) {
+    if (current.townhall.id !== prev.townhall.id) {
       timeline.push({
         title: "Townhall changed",
-        description: `from level ${prev.townhall} to level ${current.townhall}`,
+        description: `from level ${prev.townhall.level} to level ${current.townhall.level}`,
         date: current.validFrom,
         icon: CircleFadingArrowUp,
       });

@@ -128,7 +128,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
     };
   }
 
-  const isValidTownhall = reward.minTownhall <= account.townhall;
+  const isValidTownhall = reward.minTownhall <= account.townhall.level;
 
   if (!isValidTownhall) {
     return {
