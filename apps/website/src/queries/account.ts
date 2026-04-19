@@ -5,7 +5,11 @@ import { withFilteredChests } from "./chest";
 import { FilterConfig } from "@/types/common";
 import { expressionBuilder } from "kysely";
 import { Database } from "@/db/types/database";
-import { InsertableAccount, UpdateableAccount } from "@/db/types/account";
+import {
+  InsertableAccount,
+  InsertableAccountHistory,
+  UpdateableAccount,
+} from "@/db/types/account";
 
 export const getTotalAccounts = async () => {
   const result = await db
@@ -135,8 +139,29 @@ export const getAccountByTag = async (tag: string) => {
 export const getAccountById = async (accountId: number) => {
   const account = await db
     .selectFrom("account")
-    .innerJoin("townhall", "account.townhallId", "townhall.id")
-    .select(["account.id", "townhall.level as townhall", "account.isTracked"])
+    .select((eb) => [
+      "account.id",
+      "account.updatedAt",
+      "account.name",
+      "account.tag",
+      "account.isTracked",
+      jsonObjectFrom(
+        eb
+          .selectFrom("townhall")
+          .select(["townhall.id", "townhall.level"])
+          .whereRef("townhall.id", "=", "account.townhallId"),
+      )
+        .$notNull()
+        .as("townhall"),
+      jsonObjectFrom(
+        eb
+          .selectFrom("clan")
+          .select(["clan.id", "clan.name", "clan.tag"])
+          .whereRef("clan.id", "=", "account.clanId"),
+      )
+        .$notNull()
+        .as("clan"),
+    ])
     .where("account.id", "=", accountId)
     .where("account.isActive", "=", true)
     .executeTakeFirst();
@@ -268,7 +293,36 @@ export const getAccountHistory = async (accountId: number) => {
     ])
     .where("account_history.accountId", "=", accountId)
     .orderBy("account_history.validFrom", "desc")
+    .orderBy("account_history.id", "desc")
     .execute();
 
   return history;
+};
+
+export const createAccountHistory = async ({
+  validFrom,
+  validTo,
+  name,
+  tag,
+  isTracked,
+  townhallId,
+  clanId,
+  accountId,
+}: InsertableAccountHistory) => {
+  const accountHistory = await db
+    .insertInto("account_history")
+    .values({
+      validFrom,
+      validTo,
+      name,
+      tag,
+      isTracked,
+      townhallId,
+      clanId,
+      accountId,
+    })
+    .returning(["account_history.id"])
+    .executeTakeFirst();
+
+  return accountHistory;
 };

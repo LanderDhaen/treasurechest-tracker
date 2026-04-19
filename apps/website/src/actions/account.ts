@@ -4,6 +4,7 @@ import { getClanByTag } from "@/queries/clan";
 import { accountFormSchema, AccountFormValues } from "@/schemas/account";
 import {
   createAccount,
+  createAccountHistory,
   deleteAccount,
   getAccountById,
   updateAccount,
@@ -16,7 +17,6 @@ import UnauthorizedError from "@/errors/unauthorized-error";
 import ValidationError from "@/errors/validation-error";
 import UnknownError from "@/errors/unknown-error";
 import { getTownhallByLevel } from "@/queries/townhall";
-import { cp } from "fs";
 
 export const submitAccountForm = async (formData: AccountFormValues) => {
   const result = accountFormSchema.safeParse(formData);
@@ -100,7 +100,7 @@ export const upgradeTownhall = async (accountId: number) => {
     };
   }
 
-  const nextTownhall = await getTownhallByLevel(account.townhall + 1);
+  const nextTownhall = await getTownhallByLevel(account.townhall.level + 1);
 
   if (!nextTownhall) {
     return {
@@ -169,6 +169,17 @@ export const changeTrackingStatus = async (accountId: number) => {
       },
     };
   }
+
+  await createAccountHistory({
+    validFrom: account.updatedAt,
+    validTo: new Date(),
+    name: account.name,
+    tag: account.tag,
+    isTracked: account.isTracked,
+    townhallId: account.townhall.id,
+    clanId: account.clan.id,
+    accountId: account.id,
+  });
 
   revalidatePath(`/accounts/${updatedAccount.tag}`);
 

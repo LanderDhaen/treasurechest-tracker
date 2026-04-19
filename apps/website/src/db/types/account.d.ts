@@ -33,3 +33,7 @@ export interface AccountHistoryTable {
   clanId: ColumnType<number>;
   accountId: ColumnType<number>;
 }
+
+export type AccountHistory = Selectable<AccountHistoryTable>;
+export type InsertableAccountHistory = Insertable<AccountHistoryTable>;
+export type UpdateableAccountHistory = Updateable<AccountHistoryTable>;
