@@ -8,11 +8,18 @@ import EventTabs from "@/components/event-tabs";
 import { getAllChests } from "@/queries/chest";
 import { Card, CardContent } from "@/components/ui/card";
 import ChestTable from "@/components/chest-table";
+import { chestSearchParamsSchema } from "@/schemas/chest";
+import SearchBar from "@/components/searchbar";
+import SortingMenu from "@/components/sorting-menu";
+import { SORT_OPTIONS } from "@/constants/chest";
+import Pagination from "@/components/pagination";
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: Promise<{ code: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { code } = await params;
 
@@ -22,12 +29,16 @@ export default async function Page({
     return notFound();
   }
 
-  const { chests } = await getAllChests({
-    search: undefined,
-    page: 1,
-    pageSize: 10,
-    sortBy: "openedAt",
-    direction: "desc",
+  const rawParams = await searchParams;
+  const parsedParams = chestSearchParamsSchema.parse(rawParams);
+  const { search, page, pageSize, sortBy, direction } = parsedParams;
+
+  const { chests, rows, totalPages } = await getAllChests({
+    search,
+    page,
+    pageSize,
+    sortBy,
+    direction,
   });
 
   return (
@@ -40,7 +51,22 @@ export default async function Page({
       <EventTabs eventCode={code} />
       <Card>
         <CardContent className="flex flex-col gap-4">
+          <div className="flex justify-between gap-2">
+            <SearchBar currentSearch={search} rows={rows} />
+            <SortingMenu
+              currentSort={sortBy}
+              currentDirection={direction}
+              sortingOptions={SORT_OPTIONS}
+            />
+          </div>
           <ChestTable chests={chests} />
+          {totalPages > 0 && (
+            <Pagination
+              currentPage={page}
+              currentPageSize={pageSize}
+              totalPages={totalPages}
+            />
+          )}
         </CardContent>
       </Card>
     </div>
