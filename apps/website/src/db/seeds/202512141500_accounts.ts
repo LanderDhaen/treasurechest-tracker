@@ -183,9 +183,19 @@ export const seed = async (db: Kysely<any>) => {
         accountId: 1, // DL✨Lander
       },
       {
-        validFrom: "2026-01-02 09:44:23",
+        validFrom: "2026-01-11 12:27:43",
         validTo: "2026-01-18 21:12:58",
         name: "DL✨Lander",
+        tag: "8RRG0LJR2",
+        isTracked: true,
+        townhallId: 17,
+        clanId: 1, // Dutch Legion 3
+        accountId: 1, // DL✨Lander
+      },
+      {
+        validFrom: "2026-01-02 09:44:23",
+        validTo: "2026-01-11 12:27:43",
+        name: "Lander",
         tag: "8RRG0LJR2",
         isTracked: true,
         townhallId: 17,
@@ -199,7 +209,7 @@ export const seed = async (db: Kysely<any>) => {
         tag: "8RRG0LJR2",
         isTracked: true,
         townhallId: 17,
-        clanId: 1, // Dutch Legion 3
+        clanId: 2, // Dutch Legion CW
         accountId: 1, // DL✨Lander
       },
     ])

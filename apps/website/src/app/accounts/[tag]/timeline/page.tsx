@@ -13,6 +13,7 @@ import {
   CircleFadingArrowUp,
   XCircle,
   Power,
+  ArrowLeftRight,
 } from "lucide-react";
 import TimelineItem from "@/components/timeline-item";
 
@@ -46,6 +47,7 @@ export default async function Page({
       tag: account.tag,
       isTracked: account.isTracked,
       townhall: account.townhall,
+      clan: account.clan,
     },
     ...history,
   ];
@@ -80,6 +82,15 @@ export default async function Page({
         description: `from level ${prev.townhall.level} to level ${current.townhall.level}`,
         date: current.validFrom,
         icon: CircleFadingArrowUp,
+      });
+    }
+
+    if (current.clan.id !== prev.clan.id) {
+      timeline.push({
+        title: "Clan changed",
+        description: `from ${prev.clan.name} to ${current.clan.name}`,
+        date: current.validFrom,
+        icon: ArrowLeftRight,
       });
     }
   }

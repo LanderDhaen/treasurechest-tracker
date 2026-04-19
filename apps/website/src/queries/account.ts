@@ -304,6 +304,14 @@ export const getAccountHistory = async (accountId: number) => {
       )
         .$notNull()
         .as("townhall"),
+      jsonObjectFrom(
+        eb
+          .selectFrom("clan")
+          .select(["clan.id", "clan.name", "clan.tag"])
+          .whereRef("clan.id", "=", "account_history.clanId"),
+      )
+        .$notNull()
+        .as("clan"),
     ])
     .where("account_history.accountId", "=", accountId)
     .orderBy("account_history.validFrom", "desc")
