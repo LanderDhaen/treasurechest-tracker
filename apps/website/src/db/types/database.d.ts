@@ -1,5 +1,5 @@
 import { ClanTable } from "./clan";
-import { AccountTable } from "./account";
+import { AccountHistoryTable, AccountTable } from "./account";
 import { EventTable } from "./event";
 import { ChestTable } from "./chest";
 import { RarityTable } from "./rarity";
@@ -13,6 +13,7 @@ export interface Database {
   townhall: TownhallTable;
   clan: ClanTable;
   account: AccountTable;
+  account_history: AccountHistoryTable;
   type: TypeTable;
   series: SeriesTable;
   event: EventTable;
