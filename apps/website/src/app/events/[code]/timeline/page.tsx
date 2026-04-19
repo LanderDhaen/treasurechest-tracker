@@ -6,15 +6,18 @@ import AuthGuard from "@/components/auth-guard";
 import EventActions from "@/components/event-actions";
 import EventTabs from "@/components/event-tabs";
 import {
+  BadgeCheck,
   CalendarCheck2,
   CalendarSync,
   CalendarX2,
+  Loader2,
   LucideIcon,
   Power,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import TimelineItem from "@/components/timeline-item";
 import { formatDate } from "@/lib/utils";
+import { EventStatus } from "@/constants/event";
 
 export interface TimelineItem {
   title: string;
@@ -84,18 +87,20 @@ export default async function Page({
   }
 
   timeline.push({
-    title: "Event started",
-    description: `from ${formatDate(event.startDate)} to ${formatDate(event.endDate)}`,
+    title: "Status changed",
+    description: `from ${EventStatus.Upcoming.toLowerCase()} to ${EventStatus.Ongoing.toLowerCase()}`,
     date: event.startDate,
-    icon: CalendarCheck2,
+    icon: Loader2,
   });
 
-  timeline.push({
-    title: "Event ended",
-    description: `from ${formatDate(event.startDate)} to ${formatDate(event.endDate)}`,
-    date: event.endDate,
-    icon: CalendarX2,
-  });
+  if (event.endDate < new Date()) {
+    timeline.push({
+      title: "Status changed",
+      description: `from ${EventStatus.Ongoing.toLowerCase()} to ${EventStatus.Finished.toLowerCase()}`,
+      date: event.endDate,
+      icon: Loader2,
+    });
+  }
 
   timeline.sort((a, b) => b.date.getTime() - a.date.getTime());
 
