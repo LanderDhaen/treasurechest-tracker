@@ -100,7 +100,7 @@ export default async function Page({
           <TimelineItem
             title="Account created"
             description={`with tag #${account.tag}`}
-            date={account.updatedAt}
+            date={account.createdAt}
             icon={Power}
             isLast
           />
