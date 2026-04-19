@@ -8,6 +8,7 @@ import DashboardFilters from "@/components/dashboard-filters";
 import { Separator } from "@/components/ui/separator";
 import AuthGuard from "@/components/auth-guard";
 import EventActions from "@/components/event-actions";
+import EventTabs from "@/components/event-tabs";
 
 export default async function Page({
   params,
@@ -40,6 +41,7 @@ export default async function Page({
         <EventActions event={event} />
       </AuthGuard>
       <Separator />
+      <EventTabs eventCode={code} />
       <DashboardFilters excludeUntrackedAccounts={untracked} />
       <Dashboard filters={filters} hideEventCards />
     </div>
