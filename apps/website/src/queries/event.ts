@@ -170,6 +170,8 @@ export const getEventByCode = async (code: string) => {
     .where("event.isActive", "=", true)
     .select((eb) => [
       "event.id",
+      "event.createdAt",
+      "event.updatedAt",
       "event.code",
       "event.edition",
       "event.startDate",
@@ -337,4 +339,43 @@ export const deleteEvent = async (eventId: number) => {
     .executeTakeFirst();
 
   return deletedEvent;
+};
+
+// History
+
+export const getEventHistory = async (eventId: number) => {
+  const history = await db
+    .selectFrom("event_history")
+    .select((eb) => [
+      "event_history.validFrom",
+      "event_history.validTo",
+      "event_history.edition",
+      "event_history.code",
+      "event_history.startDate",
+      "event_history.endDate",
+      "event_history.maxChests",
+      "event_history.isChestCreationAllowed",
+      jsonObjectFrom(
+        eb
+          .selectFrom("type")
+          .select(["type.name"])
+          .whereRef("type.id", "=", "event_history.typeId"),
+      )
+        .$notNull()
+        .as("type"),
+      jsonObjectFrom(
+        eb
+          .selectFrom("series")
+          .select(["series.name"])
+          .whereRef("series.id", "=", "event_history.seriesId"),
+      )
+        .$notNull()
+        .as("series"),
+    ])
+    .where("event_history.eventId", "=", eventId)
+    .orderBy("event_history.validFrom", "desc")
+    .orderBy("event_history.id", "desc")
+    .execute();
+
+  return history;
 };
