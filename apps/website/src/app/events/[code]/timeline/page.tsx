@@ -5,7 +5,13 @@ import { Separator } from "@/components/ui/separator";
 import AuthGuard from "@/components/auth-guard";
 import EventActions from "@/components/event-actions";
 import EventTabs from "@/components/event-tabs";
-import { CalendarSync, LucideIcon } from "lucide-react";
+import {
+  CalendarCheck2,
+  CalendarSync,
+  CalendarX2,
+  LucideIcon,
+  Power,
+} from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import TimelineItem from "@/components/timeline-item";
 import { formatDate } from "@/lib/utils";
@@ -60,8 +66,8 @@ export default async function Page({
 
     if (current.startDate !== prev.startDate) {
       timeline.push({
-        title: "Start Date Changed",
-        description: `Start date changed from ${formatDate(prev.startDate)} to ${formatDate(current.startDate)}`,
+        title: "Start date changed",
+        description: `from ${formatDate(prev.startDate)} to ${formatDate(current.startDate)}`,
         date: current.validFrom,
         icon: CalendarSync,
       });
@@ -69,13 +75,29 @@ export default async function Page({
 
     if (current.endDate !== prev.endDate) {
       timeline.push({
-        title: "End Date Changed",
-        description: `End date changed from ${formatDate(prev.endDate)} to ${formatDate(current.endDate)}`,
+        title: "End date changed",
+        description: `from ${formatDate(prev.endDate)} to ${formatDate(current.endDate)}`,
         date: current.validFrom,
         icon: CalendarSync,
       });
     }
   }
+
+  timeline.push({
+    title: "Event started",
+    description: `from ${formatDate(event.startDate)} to ${formatDate(event.endDate)}`,
+    date: event.startDate,
+    icon: CalendarCheck2,
+  });
+
+  timeline.push({
+    title: "Event ended",
+    description: `from ${formatDate(event.startDate)} to ${formatDate(event.endDate)}`,
+    date: event.endDate,
+    icon: CalendarX2,
+  });
+
+  timeline.sort((a, b) => b.date.getTime() - a.date.getTime());
 
   return (
     <div className="flex flex-col gap-4">
@@ -90,6 +112,13 @@ export default async function Page({
           {timeline.map((item, index) => (
             <TimelineItem key={index} {...item} />
           ))}
+          <TimelineItem
+            title="Event created"
+            description={`with code #${event.code}`}
+            date={event.createdAt}
+            icon={Power}
+            isLast
+          />
         </CardContent>
       </Card>
     </div>
