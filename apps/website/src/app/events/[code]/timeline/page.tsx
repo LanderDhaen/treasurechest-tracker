@@ -64,7 +64,7 @@ export default async function Page({
     const current = fullHistory[i];
     const prev = fullHistory[i + 1];
 
-    if (current.startDate !== prev.startDate) {
+    if (current.startDate.getTime() !== prev.startDate.getTime()) {
       timeline.push({
         title: "Start date changed",
         description: `from ${formatDate(prev.startDate)} to ${formatDate(current.startDate)}`,
@@ -73,7 +73,7 @@ export default async function Page({
       });
     }
 
-    if (current.endDate !== prev.endDate) {
+    if (current.endDate.getTime() !== prev.endDate.getTime()) {
       timeline.push({
         title: "End date changed",
         description: `from ${formatDate(prev.endDate)} to ${formatDate(current.endDate)}`,
