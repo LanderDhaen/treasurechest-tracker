@@ -39,6 +39,7 @@ export default async function Page({
     pageSize,
     sortBy,
     direction,
+    events: [event.code],
   });
 
   return (

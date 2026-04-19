@@ -12,6 +12,7 @@ export const chestSearchParamsSchema = z.object({
     .catch(DEFAULT_SORT_OPTION),
   direction: z.enum(["asc", "desc"]).catch(DEFAULT_SORT_DIRECTION),
   accounts: z.array(z.string()).optional(),
+  events: z.array(z.string()).optional(),
 });
 
 export type ChestSearchParams = z.infer<typeof chestSearchParamsSchema>;

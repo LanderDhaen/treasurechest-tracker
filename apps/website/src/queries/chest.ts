@@ -22,6 +22,7 @@ export const getAllChests = async ({
   sortBy,
   direction,
   accounts,
+  events,
 }: ChestSearchParams) => {
   let query = db
     .with("filtered_chest", () => withFilteredChests({}))
@@ -48,6 +49,10 @@ export const getAllChests = async ({
 
   if (accounts && accounts.length > 0) {
     query = query.where("account.tag", "in", accounts);
+  }
+
+  if (events && events.length > 0) {
+    query = query.where("event.code", "in", events);
   }
 
   const countQuery = await query
