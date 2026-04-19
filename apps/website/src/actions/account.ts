@@ -126,6 +126,17 @@ export const upgradeTownhall = async (accountId: number) => {
     };
   }
 
+  await createAccountHistory({
+    validFrom: account.updatedAt,
+    validTo: new Date(),
+    name: account.name,
+    tag: account.tag,
+    isTracked: account.isTracked,
+    townhallId: account.townhall.id,
+    clanId: account.clan.id,
+    accountId: account.id,
+  });
+
   revalidatePath(`/accounts/${updatedAccount.tag}`);
 
   return {
