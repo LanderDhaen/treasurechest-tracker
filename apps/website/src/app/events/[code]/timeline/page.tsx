@@ -11,6 +11,8 @@ import {
   CalendarSync,
   Loader2,
   LucideIcon,
+  PackageMinus,
+  PackagePlus,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import TimelineItem from "@/components/timeline-item";
@@ -80,6 +82,15 @@ export default async function Page({
         description: `from ${formatDate(prev.endDate)} to ${formatDate(current.endDate)}`,
         date: current.validFrom,
         icon: CalendarSync,
+      });
+    }
+
+    if (current.maxChests !== prev.maxChests) {
+      timeline.push({
+        title: "Rewards changed",
+        description: `from ${prev.maxChests} to ${current.maxChests === 1 ? "1 chest" : `${current.maxChests} chests`}`,
+        date: current.validFrom,
+        icon: current.maxChests > prev.maxChests ? PackagePlus : PackageMinus,
       });
     }
   }
