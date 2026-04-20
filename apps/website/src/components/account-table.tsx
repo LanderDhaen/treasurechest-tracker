@@ -18,7 +18,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "./ui/empty";
-import { Plus, Users2 } from "lucide-react";
+import { Plus, SearchIcon, Users2, X } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
@@ -59,30 +59,51 @@ export default function AccountTable({
             <TableHead className="font-bold">Clan</TableHead>
           </TableRow>
         </TableHeader>
-
         <TableBody>
           {accounts.length === 0 ? (
             <TableRow className="bg-white hover:bg-white">
               <TableCell colSpan={5}>
-                <Empty>
-                  <EmptyHeader>
-                    <EmptyMedia variant="icon">
-                      <Users2 />
-                    </EmptyMedia>
-                    <EmptyTitle>No accounts yet</EmptyTitle>
-                    <EmptyDescription>
-                      Create your first account and it will show up here.
-                    </EmptyDescription>
-                  </EmptyHeader>
-                  <EmptyContent>
-                    <Button variant="outline" asChild>
-                      <Link href="/accounts/add">
-                        <Plus />
-                        Add account
-                      </Link>
-                    </Button>
-                  </EmptyContent>
-                </Empty>
+                {totalAccounts === 0 ? (
+                  <Empty>
+                    <EmptyHeader>
+                      <EmptyMedia variant="icon">
+                        <Users2 />
+                      </EmptyMedia>
+                      <EmptyTitle>No accounts yet</EmptyTitle>
+                      <EmptyDescription>
+                        Create your first account and it will show up here.
+                      </EmptyDescription>
+                    </EmptyHeader>
+                    <EmptyContent>
+                      <Button variant="outline" asChild>
+                        <Link href="/accounts/add">
+                          <Plus />
+                          Add account
+                        </Link>
+                      </Button>
+                    </EmptyContent>
+                  </Empty>
+                ) : (
+                  <Empty>
+                    <EmptyHeader>
+                      <EmptyMedia variant="icon">
+                        <SearchIcon />
+                      </EmptyMedia>
+                      <EmptyTitle>No matches found</EmptyTitle>
+                      <EmptyDescription>
+                        Try different keywords or check your spelling.
+                      </EmptyDescription>
+                    </EmptyHeader>
+                    <EmptyContent>
+                      <Button variant="outline" asChild>
+                        <Link href="/accounts">
+                          <X />
+                          Clear search
+                        </Link>
+                      </Button>
+                    </EmptyContent>
+                  </Empty>
+                )}
               </TableCell>
             </TableRow>
           ) : (
