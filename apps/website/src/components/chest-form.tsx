@@ -83,14 +83,7 @@ interface ChestFormProps {
       };
     }[];
   }[];
-  defaultValues: {
-    accountTag: string;
-    eventCode: string;
-    raritySlug: string;
-    amount: number;
-    rewardSlug: string;
-    openedAt: Date;
-  };
+  defaultValues: ChestFormValues;
 }
 
 const TODAY = new Date();

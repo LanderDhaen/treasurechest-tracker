@@ -44,12 +44,7 @@ interface AccountFormProps {
     tag: string;
     name: string;
   }[];
-  defaultValues: {
-    name: string;
-    tag: string;
-    townhallLevel: number;
-    clanTag: string;
-  };
+  defaultValues: AccountFormValues;
   maxTownhallLevel: number;
   returnTo: AccountFormSearchParams["returnTo"];
 }
