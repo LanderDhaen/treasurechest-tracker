@@ -7,12 +7,10 @@ import EventActions from "@/components/event-actions";
 import EventTabs from "@/components/event-tabs";
 import {
   BadgeCheck,
-  CalendarCheck2,
+  CalendarPlus,
   CalendarSync,
-  CalendarX2,
   Loader2,
   LucideIcon,
-  Power,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import TimelineItem from "@/components/timeline-item";
@@ -98,7 +96,7 @@ export default async function Page({
       title: "Status changed",
       description: `from ${EventStatus.Ongoing.toLowerCase()} to ${EventStatus.Finished.toLowerCase()}`,
       date: event.endDate,
-      icon: Loader2,
+      icon: BadgeCheck,
     });
   }
 
@@ -121,7 +119,7 @@ export default async function Page({
             title="Event created"
             description={`with code #${event.code}`}
             date={event.createdAt}
-            icon={Power}
+            icon={CalendarPlus}
             isLast
           />
         </CardContent>
