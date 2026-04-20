@@ -34,14 +34,14 @@ export default async function Page({
     direction,
   });
 
-  const count = await getTotalAccounts();
+  const totalAccounts = await getTotalAccounts();
 
   return (
     <Card className="shadow-md">
       <CardHeader>
         <CardTitle>Accounts</CardTitle>
         <CardDescription>
-          {`Currently  ${count} account${count !== 1 ? "s" : ""} have been created.`}
+          {`Currently  ${totalAccounts} account${totalAccounts !== 1 ? "s" : ""} have been created.`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
@@ -65,7 +65,7 @@ export default async function Page({
             </Button>
           </AuthGuard>
         </div>
-        <AccountTable accounts={accounts} />
+        <AccountTable accounts={accounts} totalAccounts={totalAccounts} />
         {totalPages > 0 && (
           <Pagination
             currentPage={page}
