@@ -13,7 +13,6 @@ import { getServerSession } from "@/queries/auth";
 import { DatabaseError } from "pg";
 import { revalidatePath } from "next/cache";
 import { deleteChestsByAccountId } from "@/queries/chest";
-import ValidationError from "@/errors/validation-error";
 import UnknownError from "@/errors/unknown-error";
 import { getTownhallByLevel } from "@/queries/townhall";
 
@@ -21,7 +20,13 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
   const result = accountFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return ValidationError();
+    return {
+      data: null,
+      error: {
+        code: "VALIDATION_ERROR",
+        message: "The provided data is invalid.",
+      },
+    };
   }
 
   const session = await getServerSession();

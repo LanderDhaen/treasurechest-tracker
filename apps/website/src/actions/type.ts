@@ -1,7 +1,6 @@
 "use server";
 
 import UnknownError from "@/errors/unknown-error";
-import ValidationError from "@/errors/validation-error";
 import { getServerSession } from "@/queries/auth";
 import { createType } from "@/queries/type";
 import { typeFormSchema, TypeFormValues } from "@/schemas/type";
@@ -11,7 +10,13 @@ export const createTypeAction = async (formData: TypeFormValues) => {
   const result = typeFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return ValidationError();
+    return {
+      data: null,
+      error: {
+        code: "VALIDATION_ERROR",
+        message: "The provided data is invalid.",
+      },
+    };
   }
 
   const session = await getServerSession();

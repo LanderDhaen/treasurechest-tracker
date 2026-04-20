@@ -1,7 +1,6 @@
 "use server";
 
 import UnknownError from "@/errors/unknown-error";
-import ValidationError from "@/errors/validation-error";
 import { getServerSession } from "@/queries/auth";
 import { createSeries } from "@/queries/series";
 import { seriesFormSchema, SeriesFormValues } from "@/schemas/series";
@@ -11,7 +10,13 @@ export const createSeriesAction = async (formData: SeriesFormValues) => {
   const result = seriesFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return ValidationError();
+    return {
+      data: null,
+      error: {
+        code: "VALIDATION_ERROR",
+        message: "The provided data is invalid.",
+      },
+    };
   }
 
   const session = await getServerSession();
