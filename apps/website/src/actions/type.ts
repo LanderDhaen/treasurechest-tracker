@@ -1,8 +1,5 @@
 "use server";
 
-import UnauthorizedError from "@/errors/unauthorized-error";
-import UnknownError from "@/errors/unknown-error";
-import ValidationError from "@/errors/validation-error";
 import { getServerSession } from "@/queries/auth";
 import { createType } from "@/queries/type";
 import { typeFormSchema, TypeFormValues } from "@/schemas/type";
@@ -12,13 +9,25 @@ export const createTypeAction = async (formData: TypeFormValues) => {
   const result = typeFormSchema.safeParse(formData);
 
   if (!result.success) {
-    return ValidationError();
+    return {
+      data: null,
+      error: {
+        code: "VALIDATION_ERROR",
+        message: "The provided data is invalid.",
+      },
+    };
   }
 
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError();
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to create a type.",
+      },
+    };
   }
 
   const { name, slug } = result.data;
@@ -32,7 +41,13 @@ export const createTypeAction = async (formData: TypeFormValues) => {
     };
   } catch (error) {
     if (!(error instanceof DatabaseError) || error.code !== "23505") {
-      return UnknownError();
+      return {
+        data: null,
+        error: {
+          code: "UNKNOWN_ERROR",
+          message: "An unknown error occurred. Please try again later.",
+        },
+      };
     }
     switch (error.constraint) {
       case "type_name_key":
@@ -40,6 +55,7 @@ export const createTypeAction = async (formData: TypeFormValues) => {
           data: null,
           error: {
             code: "TYPE_NAME_EXISTS",
+            field: "name",
             message: "A type with this name already exists.",
           },
         };
@@ -48,12 +64,19 @@ export const createTypeAction = async (formData: TypeFormValues) => {
           data: null,
           error: {
             code: "TYPE_SLUG_EXISTS",
+            field: "slug",
             message: "A type with this slug already exists.",
           },
         };
 
       default:
-        return UnknownError();
+        return {
+          data: null,
+          error: {
+            code: "UNKNOWN_ERROR",
+            message: "An unknown error occurred. Please try again later.",
+          },
+        };
     }
   }
 };

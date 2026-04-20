@@ -34,7 +34,6 @@ import {
   eventFormSchema,
   EventFormSearchParams,
   EventFormValues,
-  EventSearchParams,
 } from "@/schemas/event";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { CalendarIcon, PlusIcon } from "lucide-react";
@@ -55,16 +54,9 @@ interface EventFormProps {
     slug: string;
   }[];
 
-  defaultValues: {
-    seriesCode?: string;
-    typeSlug?: string;
-  };
+  defaultValues: EventFormValues;
   returnTo: EventFormSearchParams["returnTo"];
 }
-
-const DEFAULT_FROM_DATE = new Date();
-const DEFAULT_TO_DATE = new Date();
-const DEFAULT_MAX_CHESTS = 1;
 
 export default function EventForm({
   series,
@@ -78,12 +70,12 @@ export default function EventForm({
     resolver: zodResolver(eventFormSchema),
     defaultValues: {
       dateRange: {
-        from: DEFAULT_FROM_DATE,
-        to: DEFAULT_TO_DATE,
+        from: defaultValues.dateRange.from,
+        to: defaultValues.dateRange.to,
       },
-      maxChests: DEFAULT_MAX_CHESTS,
-      typeSlug: defaultValues.typeSlug || types[0].slug || "",
-      seriesCode: defaultValues.seriesCode || series[0].code || "",
+      maxChests: defaultValues.maxChests,
+      typeSlug: defaultValues.typeSlug,
+      seriesCode: defaultValues.seriesCode,
     },
   });
 
@@ -95,24 +87,12 @@ export default function EventForm({
     setIsLoading(false);
 
     if (error) {
-      switch (error.code) {
-        case "VALIDATION_ERROR":
-          toast.error(error.message);
-          break;
-        case "UNAUTHORIZED":
-          toast.error(error.message);
-          break;
-        case "TYPE_NOT_FOUND":
-          form.setError("typeSlug", { message: error.message });
-          break;
-        case "SERIES_NOT_FOUND":
-          form.setError("seriesCode", { message: error.message });
-          break;
-        case "EVENT_EXISTS":
-          toast.error(error.message);
-          break;
-        default:
-          toast.error("An unexpected error occurred. Please try again later.");
+      if (error.field) {
+        form.setError(error.field as keyof EventFormValues, {
+          message: error.message,
+        });
+      } else {
+        toast.error(error.message);
       }
     } else {
       toast.success(

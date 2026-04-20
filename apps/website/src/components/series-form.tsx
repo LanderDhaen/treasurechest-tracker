@@ -28,14 +28,18 @@ import { createSeriesAction } from "@/actions/series";
 import { generateCode } from "@/lib/utils";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
-export default function SeriesForm() {
+export default function SeriesForm({
+  defaultValues,
+}: {
+  defaultValues: SeriesFormValues;
+}) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<SeriesFormValues>({
     resolver: zodResolver(seriesFormSchema),
     defaultValues: {
-      name: "",
-      code: "",
+      name: defaultValues.name,
+      code: defaultValues.code,
     },
   });
 
@@ -45,19 +49,10 @@ export default function SeriesForm() {
     const { data, error } = await createSeriesAction(formData);
 
     if (error) {
-      switch (error.code) {
-        case "SERIES_NAME_EXISTS":
-          form.setError("name", {
-            message: error.message,
-          });
-          break;
-        case "SERIES_CODE_EXISTS":
-          form.setError("code", {
-            message: error.message,
-          });
-          break;
-        default:
-          toast.error(error.message);
+      if (error.field) {
+        form.setError(error.field as keyof SeriesFormValues, {
+          message: error.message,
+        });
       }
     } else {
       toast.success(`Series "${data.name}" created successfully!`);

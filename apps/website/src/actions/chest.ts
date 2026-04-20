@@ -1,12 +1,11 @@
 "use server";
 
-import UnknownError from "@/errors/unknown-error";
 import { formatEventName } from "@/lib/event";
 import { formatDate } from "@/lib/utils";
 import { getAccountByTag } from "@/queries/account";
 import { getServerSession } from "@/queries/auth";
 import { createChest, getTotalChests } from "@/queries/chest";
-import { getEventByCode, getPossibleChestCount } from "@/queries/event";
+import { getEventByCode } from "@/queries/event";
 import { getRarityBySlug } from "@/queries/rarity";
 import { getRewardBySlug } from "@/queries/reward";
 import { chestFormSchema, ChestFormValues } from "@/schemas/chest";
@@ -20,7 +19,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       data: null,
       error: {
         code: "VALIDATION_ERROR",
-        message: "There were validation errors with the provided data.",
+        message: "The provided data is invalid.",
       },
     };
   }
@@ -32,7 +31,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       data: null,
       error: {
         code: "UNAUTHORIZED",
-        message: "You must be logged in to perform this action.",
+        message: "You must be logged in to create a treasure chest.",
       },
     };
   }
@@ -173,6 +172,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       data: null,
       error: {
         code: "MAX_CHESTS_REACHED",
+        field: "eventCode",
         message: `The maximum number of chests for this event (${event.maxChests}) has already been reached for this account.`,
       },
     };
@@ -223,7 +223,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
           data: null,
           error: {
             code: "UNKNOWN_ERROR",
-            message: "An unknown error occurred while creating the chest.",
+            message: "An unknown error occurred. Please try again later.",
           },
         };
       }

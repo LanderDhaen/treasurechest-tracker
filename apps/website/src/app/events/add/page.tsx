@@ -5,6 +5,10 @@ import { getAllTypes } from "@/queries/type";
 import { eventFormSearchParamsSchema } from "@/schemas/event";
 import { notFound } from "next/navigation";
 
+const DEFAULT_FROM_DATE = new Date();
+const DEFAULT_TO_DATE = new Date();
+const DEFAULT_MAX_CHESTS = 1;
+
 export default async function Page({
   searchParams,
 }: {
@@ -23,13 +27,23 @@ export default async function Page({
   const series = await getAllSeries();
   const types = await getAllTypes();
 
+  const defaultValues = {
+    dateRange: {
+      from: DEFAULT_FROM_DATE,
+      to: DEFAULT_TO_DATE,
+    },
+    maxChests: DEFAULT_MAX_CHESTS,
+    seriesCode: seriesCode || series[0]?.code || "",
+    typeSlug: typeSlug || types[0]?.slug || "",
+  };
+
   return (
     <div className="flex items-center justify-center">
       <div className="max-w-lg w-full">
         <EventForm
           series={series}
           types={types}
-          defaultValues={{ seriesCode: seriesCode, typeSlug: typeSlug }}
+          defaultValues={defaultValues}
           returnTo={returnTo}
         />
       </div>

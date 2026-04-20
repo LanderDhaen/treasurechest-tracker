@@ -23,11 +23,19 @@ export default async function Page({
   const townhall = await getHighestTownhall();
   const clans = await getAllClans();
 
+  const defaultValues = {
+    name: "",
+    tag: "",
+    townhallLevel: townhall.level,
+    clanTag: clans[0]?.tag || "",
+  };
+
   return (
     <div className="flex items-center justify-center">
       <div className="max-w-lg w-full">
         <AccountForm
           clans={clans}
+          defaultValues={defaultValues}
           maxTownhallLevel={townhall.level}
           returnTo={returnTo}
         />
