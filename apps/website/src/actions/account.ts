@@ -13,7 +13,6 @@ import { getServerSession } from "@/queries/auth";
 import { DatabaseError } from "pg";
 import { revalidatePath } from "next/cache";
 import { deleteChestsByAccountId } from "@/queries/chest";
-import UnauthorizedError from "@/errors/unauthorized-error";
 import ValidationError from "@/errors/validation-error";
 import UnknownError from "@/errors/unknown-error";
 import { getTownhallByLevel } from "@/queries/townhall";
@@ -28,7 +27,13 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError("You must be logged in to create an account.");
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to create an account.",
+      },
+    };
   }
 
   const { name, tag, townhallLevel, clanTag } = result.data;
@@ -88,7 +93,14 @@ export const upgradeTownhall = async (accountId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError();
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        field: undefined,
+        message: "You must be logged in to upgrade the townhall.",
+      },
+    };
   }
 
   const account = await getAccountById(accountId);
@@ -155,7 +167,13 @@ export const changeTrackingStatus = async (accountId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError();
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to change the tracking status.",
+      },
+    };
   }
 
   const account = await getAccountById(accountId);
@@ -210,7 +228,13 @@ export const deleteAccountAction = async (accountId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError();
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to delete an account.",
+      },
+    };
   }
 
   const account = await getAccountById(accountId);

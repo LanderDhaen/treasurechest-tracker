@@ -1,6 +1,5 @@
 "use server";
 
-import UnauthorizedError from "@/errors/unauthorized-error";
 import UnknownError from "@/errors/unknown-error";
 import ValidationError from "@/errors/validation-error";
 import { getServerSession } from "@/queries/auth";
@@ -27,7 +26,13 @@ export const createEventAction = async (formData: EventFormValues) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError();
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to create an event.",
+      },
+    };
   }
 
   const { dateRange, maxChests, typeSlug, seriesCode } = result.data;
@@ -99,7 +104,14 @@ export const changeChestCreationAllowedStatus = async (eventId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError();
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message:
+          "You must be logged in to change the chest creation allowed status.",
+      },
+    };
   }
 
   const event = await getEventById(eventId);
@@ -144,7 +156,13 @@ export const deleteEventAction = async (eventId: number) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError();
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to delete an event.",
+      },
+    };
   }
 
   const event = await getEventById(eventId);

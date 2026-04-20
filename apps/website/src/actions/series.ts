@@ -1,6 +1,5 @@
 "use server";
 
-import UnauthorizedError from "@/errors/unauthorized-error";
 import UnknownError from "@/errors/unknown-error";
 import ValidationError from "@/errors/validation-error";
 import { getServerSession } from "@/queries/auth";
@@ -18,7 +17,13 @@ export const createSeriesAction = async (formData: SeriesFormValues) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError();
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to create a series.",
+      },
+    };
   }
 
   const { name, code } = result.data;

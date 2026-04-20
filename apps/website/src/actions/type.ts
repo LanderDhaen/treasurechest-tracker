@@ -1,6 +1,5 @@
 "use server";
 
-import UnauthorizedError from "@/errors/unauthorized-error";
 import UnknownError from "@/errors/unknown-error";
 import ValidationError from "@/errors/validation-error";
 import { getServerSession } from "@/queries/auth";
@@ -18,7 +17,13 @@ export const createTypeAction = async (formData: TypeFormValues) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError();
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to create a type.",
+      },
+    };
   }
 
   const { name, slug } = result.data;

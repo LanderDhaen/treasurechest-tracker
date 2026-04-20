@@ -1,6 +1,5 @@
 "use server";
 
-import UnauthorizedError from "@/errors/unauthorized-error";
 import UnknownError from "@/errors/unknown-error";
 import ValidationError from "@/errors/validation-error";
 import { formatEventName } from "@/lib/event";
@@ -8,7 +7,7 @@ import { formatDate } from "@/lib/utils";
 import { getAccountByTag } from "@/queries/account";
 import { getServerSession } from "@/queries/auth";
 import { createChest, getTotalChests } from "@/queries/chest";
-import { getEventByCode, getPossibleChestCount } from "@/queries/event";
+import { getEventByCode } from "@/queries/event";
 import { getRarityBySlug } from "@/queries/rarity";
 import { getRewardBySlug } from "@/queries/reward";
 import { chestFormSchema, ChestFormValues } from "@/schemas/chest";
@@ -24,9 +23,13 @@ export const createChestAction = async (formData: ChestFormValues) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError(
-      "You must be logged in to create a treasure chest.",
-    );
+    return {
+      data: null,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to create a treasure chest.",
+      },
+    };
   }
 
   const { accountTag, eventCode, raritySlug, amount, rewardSlug, openedAt } =
