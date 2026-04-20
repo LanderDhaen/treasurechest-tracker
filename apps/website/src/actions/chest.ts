@@ -1,6 +1,5 @@
 "use server";
 
-import UnknownError from "@/errors/unknown-error";
 import { formatEventName } from "@/lib/event";
 import { formatDate } from "@/lib/utils";
 import { getAccountByTag } from "@/queries/account";
@@ -220,7 +219,13 @@ export const createChestAction = async (formData: ChestFormValues) => {
           },
         };
       } else {
-        return UnknownError();
+        return {
+          data: null,
+          error: {
+            code: "UNKNOWN_ERROR",
+            message: "An unknown error occurred. Please try again later.",
+          },
+        };
       }
     }
   }

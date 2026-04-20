@@ -1,6 +1,5 @@
 "use server";
 
-import UnknownError from "@/errors/unknown-error";
 import { getServerSession } from "@/queries/auth";
 import { createSeries } from "@/queries/series";
 import { seriesFormSchema, SeriesFormValues } from "@/schemas/series";
@@ -42,7 +41,13 @@ export const createSeriesAction = async (formData: SeriesFormValues) => {
     };
   } catch (error) {
     if (!(error instanceof DatabaseError) || error.code !== "23505") {
-      return UnknownError();
+      return {
+        data: null,
+        error: {
+          code: "UNKNOWN_ERROR",
+          message: "An unknown error occurred. Please try again later.",
+        },
+      };
     }
     switch (error.constraint) {
       case "series_name_key":
@@ -64,7 +69,13 @@ export const createSeriesAction = async (formData: SeriesFormValues) => {
           },
         };
       default:
-        return UnknownError();
+        return {
+          data: null,
+          error: {
+            code: "UNKNOWN_ERROR",
+            message: "An unknown error occurred. Please try again later.",
+          },
+        };
     }
   }
 };

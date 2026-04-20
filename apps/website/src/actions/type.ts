@@ -1,6 +1,5 @@
 "use server";
 
-import UnknownError from "@/errors/unknown-error";
 import { getServerSession } from "@/queries/auth";
 import { createType } from "@/queries/type";
 import { typeFormSchema, TypeFormValues } from "@/schemas/type";
@@ -42,7 +41,13 @@ export const createTypeAction = async (formData: TypeFormValues) => {
     };
   } catch (error) {
     if (!(error instanceof DatabaseError) || error.code !== "23505") {
-      return UnknownError();
+      return {
+        data: null,
+        error: {
+          code: "UNKNOWN_ERROR",
+          message: "An unknown error occurred. Please try again later.",
+        },
+      };
     }
     switch (error.constraint) {
       case "type_name_key":
@@ -65,7 +70,13 @@ export const createTypeAction = async (formData: TypeFormValues) => {
         };
 
       default:
-        return UnknownError();
+        return {
+          data: null,
+          error: {
+            code: "UNKNOWN_ERROR",
+            message: "An unknown error occurred. Please try again later.",
+          },
+        };
     }
   }
 };

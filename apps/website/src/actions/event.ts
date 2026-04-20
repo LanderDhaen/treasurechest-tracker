@@ -1,6 +1,5 @@
 "use server";
 
-import UnknownError from "@/errors/unknown-error";
 import { getServerSession } from "@/queries/auth";
 import { deleteChestsByEventId } from "@/queries/chest";
 import {
@@ -100,7 +99,13 @@ export const createEventAction = async (formData: EventFormValues) => {
         },
       };
     } else {
-      return UnknownError();
+      return {
+        data: null,
+        error: {
+          code: "UNKNOWN_ERROR",
+          message: "An unknown error occurred. Please try again later.",
+        },
+      };
     }
   }
 };

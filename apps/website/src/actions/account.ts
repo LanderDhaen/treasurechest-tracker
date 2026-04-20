@@ -13,7 +13,6 @@ import { getServerSession } from "@/queries/auth";
 import { DatabaseError } from "pg";
 import { revalidatePath } from "next/cache";
 import { deleteChestsByAccountId } from "@/queries/chest";
-import UnknownError from "@/errors/unknown-error";
 import { getTownhallByLevel } from "@/queries/townhall";
 
 export const submitAccountForm = async (formData: AccountFormValues) => {
@@ -89,7 +88,13 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
         },
       };
     } else {
-      return UnknownError();
+      return {
+        data: null,
+        error: {
+          code: "UNKNOWN_ERROR",
+          message: "An unknown error occurred. Please try again later.",
+        },
+      };
     }
   }
 };
