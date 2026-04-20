@@ -47,6 +47,9 @@ export default function AccountTable({
     router.push(`/accounts/${tag}`);
   };
 
+  const isEmpty = accounts.length === 0;
+  const hasAccounts = totalAccounts > 0;
+
   return (
     <div className="rounded-md border overflow-hidden">
       <Table>
@@ -60,30 +63,10 @@ export default function AccountTable({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {accounts.length === 0 ? (
+          {isEmpty ? (
             <TableRow className="bg-white hover:bg-white">
               <TableCell colSpan={5}>
-                {totalAccounts === 0 ? (
-                  <Empty>
-                    <EmptyHeader>
-                      <EmptyMedia variant="icon">
-                        <Users2 />
-                      </EmptyMedia>
-                      <EmptyTitle>No accounts yet</EmptyTitle>
-                      <EmptyDescription>
-                        Create your first account and it will show up here.
-                      </EmptyDescription>
-                    </EmptyHeader>
-                    <EmptyContent>
-                      <Button variant="outline" asChild>
-                        <Link href="/accounts/add">
-                          <Plus />
-                          Add account
-                        </Link>
-                      </Button>
-                    </EmptyContent>
-                  </Empty>
-                ) : (
+                {hasAccounts ? (
                   <Empty>
                     <EmptyHeader>
                       <EmptyMedia variant="icon">
@@ -99,6 +82,26 @@ export default function AccountTable({
                         <Link href="/accounts">
                           <X />
                           Clear search
+                        </Link>
+                      </Button>
+                    </EmptyContent>
+                  </Empty>
+                ) : (
+                  <Empty>
+                    <EmptyHeader>
+                      <EmptyMedia variant="icon">
+                        <Users2 />
+                      </EmptyMedia>
+                      <EmptyTitle>No accounts yet</EmptyTitle>
+                      <EmptyDescription>
+                        Create your first account and it will show up here.
+                      </EmptyDescription>
+                    </EmptyHeader>
+                    <EmptyContent>
+                      <Button variant="outline" asChild>
+                        <Link href="/accounts/add">
+                          <Plus />
+                          Add account
                         </Link>
                       </Button>
                     </EmptyContent>
