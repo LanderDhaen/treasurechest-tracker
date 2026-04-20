@@ -40,6 +40,7 @@ export const createSeriesAction = async (formData: SeriesFormValues) => {
           data: null,
           error: {
             code: "SERIES_NAME_EXISTS",
+            field: "name",
             message: "A series with this name already exists.",
           },
         };
@@ -48,6 +49,7 @@ export const createSeriesAction = async (formData: SeriesFormValues) => {
           data: null,
           error: {
             code: "SERIES_CODE_EXISTS",
+            field: "code",
             message: "A series with this code already exists.",
           },
         };
