@@ -1,10 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import PaginationSkeleton from "@/components/skeletons/pagination-skeleton";
+import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
@@ -40,10 +35,7 @@ export default function Loading() {
             </TableBody>
           </Table>
         </div>
-        <div className="flex flex-col items-end md:flex-row md:items-center md:justify-end gap-4">
-          <Skeleton className="w-52 h-9" />
-          <Skeleton className="w-72 h-9" />
-        </div>
+        <PaginationSkeleton />
       </CardContent>
     </Card>
   );
