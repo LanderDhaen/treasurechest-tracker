@@ -80,24 +80,12 @@ export default function AccountForm({
     setIsLoading(false);
 
     if (error) {
-      switch (error.code) {
-        case "VALIDATION_ERROR":
-          toast.error(error.message);
-          break;
-        case "UNAUTHORIZED":
-          toast.error(error.message);
-          break;
-        case "CLAN_NOT_FOUND":
-          form.setError("clanTag", { message: error.message });
-          break;
-        case "TOWNHALL_NOT_FOUND":
-          form.setError("townhallLevel", { message: error.message });
-          break;
-        case "ACCOUNT_EXISTS":
-          form.setError("tag", { message: error.message });
-          break;
-        default:
-          toast.error("An unexpected error occurred. Please try again later.");
+      if (error.field) {
+        form.setError(error.field as keyof AccountFormValues, {
+          message: error.message,
+        });
+      } else {
+        toast.error(error.message);
       }
     } else {
       toast.success(`Account "${data.name}" created successfully!`);

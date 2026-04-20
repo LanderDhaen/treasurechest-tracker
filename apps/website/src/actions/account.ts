@@ -28,7 +28,7 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
   const session = await getServerSession();
 
   if (!session) {
-    return UnauthorizedError();
+    return UnauthorizedError("You must be logged in to create an account.");
   }
 
   const { name, tag, townhallLevel, clanTag } = result.data;
@@ -40,6 +40,7 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
       data: null,
       error: {
         code: "TOWNHALL_NOT_FOUND",
+        field: "townhallLevel",
         message: "The specified townhall level was not found.",
       },
     };
@@ -52,6 +53,7 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
       data: null,
       error: {
         code: "CLAN_NOT_FOUND",
+        field: "clanTag",
         message: "The specified clan was not found.",
       },
     };
@@ -72,6 +74,7 @@ export const submitAccountForm = async (formData: AccountFormValues) => {
         data: null,
         error: {
           code: "ACCOUNT_EXISTS",
+          field: "tag",
           message: "An account with this tag already exists.",
         },
       };

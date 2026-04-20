@@ -3,6 +3,7 @@ export default function UnknownError(message?: string) {
     data: null,
     error: {
       code: "UNKNOWN_ERROR",
+      field: undefined,
       message: message || "An unknown error occurred. Please try again later.",
     },
   };
