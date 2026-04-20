@@ -27,14 +27,18 @@ import { typeFormSchema, TypeFormValues } from "@/schemas/type";
 import { createTypeAction } from "@/actions/type";
 import { slugify } from "@/lib/utils";
 
-export default function TypeForm() {
+export default function TypeForm({
+  defaultValues,
+}: {
+  defaultValues: TypeFormValues;
+}) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<TypeFormValues>({
     resolver: zodResolver(typeFormSchema),
     defaultValues: {
-      name: "",
-      slug: "",
+      name: defaultValues.name,
+      slug: defaultValues.slug,
     },
   });
 
@@ -55,19 +59,12 @@ export default function TypeForm() {
     setIsLoading(false);
 
     if (error) {
-      switch (error.code) {
-        case "TYPE_NAME_EXISTS":
-          form.setError("name", {
-            message: error.message,
-          });
-          break;
-        case "TYPE_SLUG_EXISTS":
-          form.setError("slug", {
-            message: error.message,
-          });
-          break;
-        default:
-          toast.error(error.message);
+      if (error.field) {
+        form.setError(error.field as keyof TypeFormValues, {
+          message: error.message,
+        });
+      } else {
+        toast.error(error.message);
       }
     } else {
       toast.success(`Type "${type.name}" created successfully!`);

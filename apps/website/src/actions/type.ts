@@ -40,6 +40,7 @@ export const createTypeAction = async (formData: TypeFormValues) => {
           data: null,
           error: {
             code: "TYPE_NAME_EXISTS",
+            field: "name",
             message: "A type with this name already exists.",
           },
         };
@@ -48,6 +49,7 @@ export const createTypeAction = async (formData: TypeFormValues) => {
           data: null,
           error: {
             code: "TYPE_SLUG_EXISTS",
+            field: "slug",
             message: "A type with this slug already exists.",
           },
         };

@@ -9,10 +9,15 @@ export default async function Page() {
     notFound();
   }
 
+  const defaultValues = {
+    name: "",
+    slug: "",
+  };
+
   return (
     <div className="flex items-center justify-center">
       <div className="max-w-lg w-full">
-        <TypeForm />
+        <TypeForm defaultValues={defaultValues} />
       </div>
     </div>
   );
