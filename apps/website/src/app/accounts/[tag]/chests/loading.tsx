@@ -1,4 +1,5 @@
 import PaginationSkeleton from "@/components/skeletons/pagination-skeleton";
+import ToolbarSkeleton from "@/components/skeletons/toolbar-skeleton";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -14,7 +15,7 @@ export default function Loading() {
   return (
     <Card className="shadow-md">
       <CardContent className="flex flex-col gap-4">
-        <Skeleton className="w-full h-9" />
+        <ToolbarSkeleton />
         <div className="rounded-md border overflow-hidden">
           <Table>
             <TableHeader>
