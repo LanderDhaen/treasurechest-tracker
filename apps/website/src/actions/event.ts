@@ -39,6 +39,7 @@ export const createEventAction = async (formData: EventFormValues) => {
       data: null,
       error: {
         code: "TYPE_NOT_FOUND",
+        field: "typeSlug",
         message: "The specified type was not found.",
       },
     };
@@ -51,6 +52,7 @@ export const createEventAction = async (formData: EventFormValues) => {
       data: null,
       error: {
         code: "SERIES_NOT_FOUND",
+        field: "seriesCode",
         message: "The specified series was not found.",
       },
     };
