@@ -44,26 +44,31 @@ interface AccountFormProps {
     tag: string;
     name: string;
   }[];
+  defaultValues: {
+    name: string;
+    tag: string;
+    townhallLevel: number;
+    clanTag: string;
+  };
   maxTownhallLevel: number;
   returnTo: AccountFormSearchParams["returnTo"];
 }
-
-const DEFAULT_TOWNHALL = 18;
 
 export default function AccountForm({
   clans,
   maxTownhallLevel,
   returnTo,
+  defaultValues,
 }: AccountFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues: {
-      name: "",
-      tag: "",
-      townhallLevel: DEFAULT_TOWNHALL,
-      clanTag: clans[0].tag || "",
+      name: defaultValues.name,
+      tag: defaultValues.tag,
+      townhallLevel: defaultValues.townhallLevel,
+      clanTag: defaultValues.clanTag,
     },
   });
 
