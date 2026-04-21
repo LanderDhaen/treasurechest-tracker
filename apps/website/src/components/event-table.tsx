@@ -1,7 +1,3 @@
-"use client";
-
-import { formatDate } from "@/lib/utils";
-import StatusBadge from "./event-status-badge";
 import {
   Table,
   TableBody,
@@ -10,12 +6,10 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { useRouter } from "next/navigation";
-import { formatEventName } from "@/lib/event";
 import { EventStatus } from "@/constants/event";
-import EventTypeBadge from "./event-type-badge";
 import NoSearchResults from "./no-search-results";
 import NoEvents from "./no-events";
+import EventTableRow from "./event-table-row";
 
 interface EventTableProps {
   events: {
@@ -32,12 +26,6 @@ interface EventTableProps {
 }
 
 export default function EventTable({ events, totalEvents }: EventTableProps) {
-  const router = useRouter();
-
-  const handleRowClick = (eventCode: string) => {
-    router.push(`/events/${eventCode}`);
-  };
-
   const isEmpty = events.length === 0;
   const hasStoredEvents = totalEvents > 0;
 
@@ -64,29 +52,7 @@ export default function EventTable({ events, totalEvents }: EventTableProps) {
             </TableRow>
           ) : (
             events.map((event) => (
-              <TableRow
-                key={event.code}
-                onClick={() => handleRowClick(event.code)}
-                className="hover:cursor-pointer"
-              >
-                <TableCell>#{event.code}</TableCell>
-                <TableCell>
-                  <StatusBadge status={event.status} />
-                </TableCell>
-                <TableCell>
-                  <EventTypeBadge type={event.type} />
-                </TableCell>
-                <TableCell>
-                  {formatEventName(event.name, event.edition)}
-                </TableCell>
-                <TableCell>{formatDate(event.startDate)}</TableCell>
-                <TableCell>{formatDate(event.endDate)}</TableCell>
-                <TableCell>
-                  {event.maxChests == 1
-                    ? "1 Chest"
-                    : `${event.maxChests} Chests`}
-                </TableCell>
-              </TableRow>
+              <EventTableRow key={event.code} event={event} />
             ))
           )}
         </TableBody>
