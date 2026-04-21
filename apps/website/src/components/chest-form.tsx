@@ -41,7 +41,7 @@ import UnobtainableBadge from "./unobtainable-badge";
 import { formatEventName } from "@/lib/event";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { formatDate } from "@/lib/utils";
-import { CalendarIcon, Plus } from "lucide-react";
+import { CalendarIcon, CalendarPlus, UserRoundPlus } from "lucide-react";
 import { Calendar } from "./ui/calendar";
 import { createChestAction } from "@/actions/chest";
 import { FIRST_EVENT_START_DATE } from "@/constants/event";
@@ -275,7 +275,7 @@ export default function ChestForm({
                             query: { returnTo: "/chests/add" },
                           }}
                         >
-                          <Plus />
+                          <UserRoundPlus />
                         </Link>
                       </Button>
                     </ButtonGroup>
@@ -336,7 +336,7 @@ export default function ChestForm({
                             query: { returnTo: "/chests/add" },
                           }}
                         >
-                          <Plus />
+                          <CalendarPlus />
                         </Link>
                       </Button>
                     </ButtonGroup>
