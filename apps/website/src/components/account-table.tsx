@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "./ui/table";
 import { useRouter } from "next/navigation";
-import AccountTrackedBage from "./account-tracked-badge";
+import AccountTrackedBadge from "./account-tracked-badge";
 import {
   Empty,
   EmptyContent,
@@ -43,7 +43,7 @@ export default function AccountTable({
 }: AccountTableProps & { totalAccounts: number }) {
   const router = useRouter();
 
-  const handeClick = (tag: string) => {
+  const handleClick = (tag: string) => {
     router.push(`/accounts/${tag}`);
   };
 
@@ -113,12 +113,12 @@ export default function AccountTable({
             accounts.map((account) => (
               <TableRow
                 key={account.tag}
-                onClick={() => handeClick(account.tag)}
+                onClick={() => handleClick(account.tag)}
                 className="hover:cursor-pointer"
               >
                 <TableCell>#{account.tag}</TableCell>
                 <TableCell>
-                  <AccountTrackedBage isTracked={account.isTracked} />
+                  <AccountTrackedBadge isTracked={account.isTracked} />
                 </TableCell>
                 <TableCell>{account.townhall}</TableCell>
                 <TableCell>{account.name}</TableCell>
