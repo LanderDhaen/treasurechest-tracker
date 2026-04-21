@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Table,
   TableBody,
@@ -8,10 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { useRouter } from "next/navigation";
-import AccountTrackedBadge from "./account-tracked-badge";
 import NoSearchResults from "./no-search-results";
 import NoAccounts from "./no-accounts";
+import AccountTableRow from "./account-table-row";
 
 interface AccountTableProps {
   accounts: {
@@ -32,12 +29,6 @@ export default function AccountTable({
   accounts,
   totalAccounts,
 }: AccountTableProps) {
-  const router = useRouter();
-
-  const handleRowClick = (tag: string) => {
-    router.push(`/accounts/${tag}`);
-  };
-
   const isEmpty = accounts.length === 0;
   const hasStoredAccounts = totalAccounts > 0;
 
@@ -62,19 +53,7 @@ export default function AccountTable({
             </TableRow>
           ) : (
             accounts.map((account) => (
-              <TableRow
-                key={account.tag}
-                onClick={() => handleRowClick(account.tag)}
-                className="hover:cursor-pointer"
-              >
-                <TableCell>#{account.tag}</TableCell>
-                <TableCell>
-                  <AccountTrackedBadge isTracked={account.isTracked} />
-                </TableCell>
-                <TableCell>{account.townhall}</TableCell>
-                <TableCell>{account.name}</TableCell>
-                <TableCell>{account.clan.name}</TableCell>
-              </TableRow>
+              <AccountTableRow key={account.tag} account={account} />
             ))
           )}
         </TableBody>

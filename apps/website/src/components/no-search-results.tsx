@@ -1,3 +1,5 @@
+"use client";
+
 import { SearchX, X } from "lucide-react";
 import {
   Empty,
