@@ -2,10 +2,9 @@
 
 import {
   LayoutDashboard,
-  Users,
   ChartNoAxesGantt,
   Balloon,
-  Box,
+  Package,
   UsersRound,
 } from "lucide-react";
 
@@ -31,7 +30,7 @@ const data = {
     {
       title: "Treasure Chests",
       url: "/chests",
-      icon: Box,
+      icon: Package,
     },
     {
       title: "Events",

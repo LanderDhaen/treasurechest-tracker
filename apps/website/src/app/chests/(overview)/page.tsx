@@ -15,7 +15,7 @@ import { chestSearchParamsSchema } from "@/schemas/chest";
 import { FilterConfig } from "@/types/common";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { PackagePlus } from "lucide-react";
 import { getServerSession } from "@/queries/auth";
 
 export default async function Page({
@@ -60,7 +60,7 @@ export default async function Page({
           {session && (
             <Button asChild variant="outline" size="icon">
               <Link href="/chests/add">
-                <Plus />
+                <PackagePlus />
               </Link>
             </Button>
           )}
