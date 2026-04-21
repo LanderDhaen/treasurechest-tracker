@@ -69,7 +69,7 @@ export default async function Page({
             </Button>
           )}
         </div>
-        <EventTable events={events} />
+        <EventTable events={events} totalEvents={totalEvents} />
         {totalPages > 0 && (
           <Pagination
             currentPage={page}
