@@ -1,4 +1,4 @@
-import { Plus, Users2 } from "lucide-react";
+import { Plus, UserRoundX } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import {
@@ -15,7 +15,7 @@ export default function NoAccounts() {
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="icon">
-          <Users2 />
+          <UserRoundX />
         </EmptyMedia>
         <EmptyTitle>Nothing here yet</EmptyTitle>
         <EmptyDescription>

@@ -1,4 +1,4 @@
-import { SearchIcon, X } from "lucide-react";
+import { SearchX, X } from "lucide-react";
 import {
   Empty,
   EmptyContent,
@@ -22,11 +22,12 @@ export default function NoSearchResults() {
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="icon">
-          <SearchIcon />
+          <SearchX />
         </EmptyMedia>
         <EmptyTitle>No matches found</EmptyTitle>
         <EmptyDescription>
-          Try different keywords or check your spelling.
+          Try adjusting your search criteria to find what you&apos;re looking
+          for.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
