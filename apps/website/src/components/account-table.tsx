@@ -40,15 +40,15 @@ interface AccountTableProps {
 export default function AccountTable({
   accounts,
   totalAccounts,
-}: AccountTableProps & { totalAccounts: number }) {
+}: AccountTableProps) {
   const router = useRouter();
 
-  const handleClick = (tag: string) => {
+  const handleRowClick = (tag: string) => {
     router.push(`/accounts/${tag}`);
   };
 
   const isEmpty = accounts.length === 0;
-  const hasAccounts = totalAccounts > 0;
+  const hasStoredAccounts = totalAccounts > 0;
 
   return (
     <div className="rounded-md border overflow-hidden">
@@ -66,7 +66,7 @@ export default function AccountTable({
           {isEmpty ? (
             <TableRow className="bg-white hover:bg-white">
               <TableCell colSpan={5}>
-                {hasAccounts ? (
+                {hasStoredAccounts ? (
                   <Empty>
                     <EmptyHeader>
                       <EmptyMedia variant="icon">
@@ -113,7 +113,7 @@ export default function AccountTable({
             accounts.map((account) => (
               <TableRow
                 key={account.tag}
-                onClick={() => handleClick(account.tag)}
+                onClick={() => handleRowClick(account.tag)}
                 className="hover:cursor-pointer"
               >
                 <TableCell>#{account.tag}</TableCell>
