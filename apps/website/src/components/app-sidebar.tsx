@@ -3,9 +3,9 @@
 import {
   LayoutDashboard,
   ChartNoAxesGantt,
-  Balloon,
   Package,
   UsersRound,
+  Calendar,
 } from "lucide-react";
 
 import {
@@ -35,7 +35,7 @@ const data = {
     {
       title: "Events",
       url: "/events",
-      icon: Balloon,
+      icon: Calendar,
     },
     {
       title: "Accounts",
