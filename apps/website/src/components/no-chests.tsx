@@ -9,8 +9,40 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "./ui/empty";
+import { getServerSession } from "@/queries/auth";
 
-export default function NoChests() {
+export default async function NoChests() {
+  const session = await getServerSession();
+
+  if (session) {
+    return (
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <PackageX />
+          </EmptyMedia>
+          <EmptyTitle>Nothing here yet</EmptyTitle>
+          <EmptyDescription>
+            Add your first treasure chest and watch this space come to life.
+          </EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent>
+          <Button variant="outline" asChild>
+            <Link
+              href={{
+                pathname: "/chests/add",
+                query: { returnTo: "/chests" },
+              }}
+            >
+              <PackagePlus />
+              Add chest
+            </Link>
+          </Button>
+        </EmptyContent>
+      </Empty>
+    );
+  }
+
   return (
     <Empty>
       <EmptyHeader>
@@ -19,22 +51,9 @@ export default function NoChests() {
         </EmptyMedia>
         <EmptyTitle>Nothing here yet</EmptyTitle>
         <EmptyDescription>
-          Add your first treasure chest and watch this space come to life.
+          Lander hasn&apos;t added any treasure chests yet, check back later.
         </EmptyDescription>
       </EmptyHeader>
-      <EmptyContent>
-        <Button variant="outline" asChild>
-          <Link
-            href={{
-              pathname: "/chests/add",
-              query: { returnTo: "/chests" },
-            }}
-          >
-            <PackagePlus />
-            Add chest
-          </Link>
-        </Button>
-      </EmptyContent>
     </Empty>
   );
 }
