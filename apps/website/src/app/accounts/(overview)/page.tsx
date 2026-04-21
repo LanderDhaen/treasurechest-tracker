@@ -15,7 +15,7 @@ import SearchBar from "@/components/searchbar";
 import AuthGuard from "@/components/auth-guard";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { UserRoundPlus } from "lucide-react";
 
 export default async function Page({
   searchParams,
@@ -60,7 +60,7 @@ export default async function Page({
                   query: { returnTo: "/accounts" },
                 }}
               >
-                <Plus />
+                <UserRoundPlus />
               </Link>
             </Button>
           </AuthGuard>

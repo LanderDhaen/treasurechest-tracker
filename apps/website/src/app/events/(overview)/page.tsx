@@ -15,7 +15,7 @@ import SearchBar from "@/components/searchbar";
 import { getServerSession } from "@/queries/auth";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { CalendarPlus } from "lucide-react";
 
 export default async function Page({
   searchParams,
@@ -64,7 +64,7 @@ export default async function Page({
                   },
                 }}
               >
-                <Plus />
+                <CalendarPlus />
               </Link>
             </Button>
           )}
