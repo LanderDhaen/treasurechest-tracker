@@ -1,4 +1,4 @@
-import { Plus, UserRoundX } from "lucide-react";
+import { UserRoundPlus, UserRoundX } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import {
@@ -30,7 +30,7 @@ export default function NoAccounts() {
               query: { returnTo: "/accounts" },
             }}
           >
-            <Plus />
+            <UserRoundPlus />
             Add account
           </Link>
         </Button>

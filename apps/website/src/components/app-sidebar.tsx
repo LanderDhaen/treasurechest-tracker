@@ -6,6 +6,7 @@ import {
   ChartNoAxesGantt,
   Balloon,
   Box,
+  UsersRound,
 } from "lucide-react";
 
 import {
@@ -40,7 +41,7 @@ const data = {
     {
       title: "Accounts",
       url: "/accounts",
-      icon: Users,
+      icon: UsersRound,
     },
   ],
 };
