@@ -12,8 +12,8 @@ import {
   LucideIcon,
   CircleFadingArrowUp,
   XCircle,
-  Power,
   ArrowLeftRight,
+  UserRoundPlus,
 } from "lucide-react";
 import TimelineItem from "@/components/timeline-item";
 
@@ -112,7 +112,7 @@ export default async function Page({
             title="Account created"
             description={`with tag #${account.tag}`}
             date={account.createdAt}
-            icon={Power}
+            icon={UserRoundPlus}
             isLast
           />
         </CardContent>
