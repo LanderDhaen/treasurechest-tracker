@@ -1,6 +1,3 @@
-"use client";
-
-import { formatDateTime } from "@/lib/utils";
 import {
   Table,
   TableBody,
@@ -9,11 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import RarityBadge from "./rarity-badge";
-import { formatEventName } from "@/lib/event";
-import { formatReward } from "@/lib/chest";
 import NoChests from "./no-chests";
 import NoSearchResults from "./no-search-results";
+import ChestTableRow from "./chest-table-row";
 
 interface ChestTableProps {
   chests: {
@@ -59,20 +54,7 @@ export default function ChestTable({ chests, totalChests }: ChestTableProps) {
             </TableRow>
           ) : (
             chests.map((chest) => (
-              <TableRow key={chest.id}>
-                <TableCell>{chest.id}</TableCell>
-                <TableCell>
-                  <RarityBadge rarity={chest.rarity} />
-                </TableCell>
-                <TableCell>
-                  {formatReward(chest.amount, chest.reward)}
-                </TableCell>
-                <TableCell>{formatDateTime(chest.openedAt)}</TableCell>
-                <TableCell>{chest.account.name}</TableCell>
-                <TableCell>
-                  {formatEventName(chest.event.name, chest.event.edition)}
-                </TableCell>
-              </TableRow>
+              <ChestTableRow key={chest.id} chest={chest} />
             ))
           )}
         </TableBody>
