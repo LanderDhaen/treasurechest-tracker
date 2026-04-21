@@ -18,9 +18,10 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "./ui/empty";
-import { Plus, SearchIcon, Users2, X } from "lucide-react";
+import { Plus, Users2 } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import NoSearchResults from "./no-search-results";
 
 interface AccountTableProps {
   accounts: {
@@ -67,25 +68,7 @@ export default function AccountTable({
             <TableRow className="bg-white hover:bg-white">
               <TableCell colSpan={5}>
                 {hasStoredAccounts ? (
-                  <Empty>
-                    <EmptyHeader>
-                      <EmptyMedia variant="icon">
-                        <SearchIcon />
-                      </EmptyMedia>
-                      <EmptyTitle>No matches found</EmptyTitle>
-                      <EmptyDescription>
-                        Try different keywords or check your spelling.
-                      </EmptyDescription>
-                    </EmptyHeader>
-                    <EmptyContent>
-                      <Button variant="outline" asChild>
-                        <Link href="/accounts">
-                          <X />
-                          Clear search
-                        </Link>
-                      </Button>
-                    </EmptyContent>
-                  </Empty>
+                  <NoSearchResults />
                 ) : (
                   <Empty>
                     <EmptyHeader>
