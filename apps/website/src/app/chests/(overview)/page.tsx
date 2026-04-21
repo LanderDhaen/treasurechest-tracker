@@ -37,7 +37,7 @@ export default async function Page({
 
   const filters = {} satisfies FilterConfig;
 
-  const count = await getTotalChests(filters);
+  const totalChests = await getTotalChests(filters);
 
   const session = await getServerSession();
 
@@ -46,7 +46,7 @@ export default async function Page({
       <CardHeader>
         <CardTitle>Treasure Chests</CardTitle>
         <CardDescription>
-          {`Currently ${count} treasure chest${count !== 1 ? "s" : ""} have been opened.`}
+          {`Currently ${totalChests} treasure chest${totalChests !== 1 ? "s" : ""} have been opened.`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
@@ -65,7 +65,7 @@ export default async function Page({
             </Button>
           )}
         </div>
-        <ChestTable chests={chests} />
+        <ChestTable chests={chests} totalChests={totalChests} />
         {totalPages > 0 && (
           <Pagination
             currentPage={page}
