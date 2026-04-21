@@ -10,18 +10,8 @@ import {
 } from "./ui/table";
 import { useRouter } from "next/navigation";
 import AccountTrackedBadge from "./account-tracked-badge";
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "./ui/empty";
-import { Plus, Users2 } from "lucide-react";
-import { Button } from "./ui/button";
-import Link from "next/link";
 import NoSearchResults from "./no-search-results";
+import NoAccounts from "./no-accounts";
 
 interface AccountTableProps {
   accounts: {
@@ -67,29 +57,7 @@ export default function AccountTable({
           {isEmpty ? (
             <TableRow className="bg-white hover:bg-white">
               <TableCell colSpan={5}>
-                {hasStoredAccounts ? (
-                  <NoSearchResults />
-                ) : (
-                  <Empty>
-                    <EmptyHeader>
-                      <EmptyMedia variant="icon">
-                        <Users2 />
-                      </EmptyMedia>
-                      <EmptyTitle>No accounts yet</EmptyTitle>
-                      <EmptyDescription>
-                        Create your first account and it will show up here.
-                      </EmptyDescription>
-                    </EmptyHeader>
-                    <EmptyContent>
-                      <Button variant="outline" asChild>
-                        <Link href="/accounts/add">
-                          <Plus />
-                          Add account
-                        </Link>
-                      </Button>
-                    </EmptyContent>
-                  </Empty>
-                )}
+                {hasStoredAccounts ? <NoSearchResults /> : <NoAccounts />}
               </TableCell>
             </TableRow>
           ) : (
