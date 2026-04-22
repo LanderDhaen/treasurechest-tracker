@@ -1,18 +1,16 @@
 "use client";
 
+import { useSearch } from "@/hooks/use-search";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 import { SearchIcon } from "lucide-react";
-import { debounce, useQueryState } from "nuqs";
+import { debounce } from "nuqs";
 
 interface SearchBarProps {
   rows: number;
 }
 
 export default function SearchBar({ rows }: SearchBarProps) {
-  const [search, setSearch] = useQueryState("search", {
-    defaultValue: "",
-    shallow: false,
-  });
+  const [search, setSearch] = useSearch();
 
   return (
     <InputGroup>
