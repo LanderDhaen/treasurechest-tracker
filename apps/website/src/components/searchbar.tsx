@@ -27,6 +27,10 @@ export default function SearchBar({ rows }: SearchBarProps) {
           if (e.key === "Enter") {
             setSearch(e.currentTarget.value);
           }
+
+          if (e.key === "Escape") {
+            setSearch(null);
+          }
         }}
         placeholder="Search..."
       />
