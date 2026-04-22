@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PackagePlus } from "lucide-react";
 import { getServerSession } from "@/queries/auth";
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "@/constants/common";
 
 export default async function Page({
   searchParams,
@@ -72,8 +73,8 @@ export default async function Page({
         <ChestTable chests={chests} totalChests={totalChests} />
         {totalPages > 0 && (
           <Pagination
-            currentPage={page}
-            currentPageSize={pageSize}
+            defaultPage={DEFAULT_PAGE}
+            defaultPageSize={DEFAULT_PAGE_SIZE}
             totalPages={totalPages}
           />
         )}

@@ -14,69 +14,73 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
-import useQueryParams from "@/hooks/use-query-params";
 import { Button } from "./ui/button";
 import { PAGE_SIZES } from "@/constants/common";
+import { parseAsInteger, useQueryState } from "nuqs";
 
 interface PaginationProps {
-  currentPage: number;
-  currentPageSize: number;
+  defaultPage: number;
+  defaultPageSize: number;
   totalPages: number;
 }
 
 export default function Pagination({
-  currentPage,
-  currentPageSize,
+  defaultPage,
+  defaultPageSize,
   totalPages,
 }: PaginationProps) {
+  const [page, setPage] = useQueryState(
+    "page",
+    parseAsInteger.withDefault(defaultPage).withOptions({
+      shallow: false,
+      clearOnDefault: false,
+    }),
+  );
+
+  const [pageSize, setPageSize] = useQueryState(
+    "pageSize",
+    parseAsInteger.withDefault(defaultPageSize).withOptions({
+      shallow: false,
+      clearOnDefault: false,
+    }),
+  );
+
   const paginationButtons = [
     {
       key: "first",
-      disabled: currentPage <= 1,
+      disabled: page <= 1,
       page: 1,
       icon: <ChevronsLeft />,
     },
     {
       key: "prev",
-      disabled: currentPage <= 1,
-      page: currentPage - 1,
+      disabled: page <= 1,
+      page: page - 1,
       icon: <ChevronLeft />,
     },
     {
       key: "next",
-      disabled: currentPage >= totalPages,
-      page: currentPage + 1,
+      disabled: page >= totalPages,
+      page: page + 1,
       icon: <ChevronRight />,
     },
     {
       key: "last",
-      disabled: currentPage >= totalPages,
+      disabled: page >= totalPages,
       page: totalPages,
       icon: <ChevronsRight />,
     },
   ];
-
-  const { searchParams, pushUrl } = useQueryParams();
-
-  const handlePageSizeChange = (pageSize: string) => {
-    searchParams.set("pageSize", pageSize);
-    searchParams.set("page", "1");
-    pushUrl(searchParams);
-  };
-
-  const handlePageChange = (page: number) => {
-    searchParams.set("page", page.toString());
-    pushUrl(searchParams);
-  };
 
   return (
     <div className="flex flex-col items-end md:flex-row md:items-center md:justify-end gap-4">
       <div className="flex items-center gap-2">
         <span>Rows per page:</span>
         <Select
-          value={currentPageSize.toString()}
+          value={pageSize.toString()}
           onValueChange={(pageSize) => {
-            handlePageSizeChange(pageSize);
+            setPage(null);
+            setPageSize(parseInt(pageSize) || defaultPageSize);
           }}
         >
           <SelectTrigger className="w-20">
@@ -95,7 +99,7 @@ export default function Pagination({
       </div>
       <div className="flex items-center gap-4">
         <span>
-          Page {currentPage} of {totalPages}
+          Page {page} of {totalPages}
         </span>
         <div className="flex gap-2">
           {paginationButtons.map((button) => (
@@ -104,7 +108,7 @@ export default function Pagination({
               variant="outline"
               size="icon"
               disabled={button.disabled}
-              onClick={() => handlePageChange(button.page)}
+              onClick={() => setPage(button.page)}
             >
               {button.icon}
             </Button>
