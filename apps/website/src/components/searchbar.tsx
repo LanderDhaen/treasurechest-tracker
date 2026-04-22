@@ -23,6 +23,11 @@ export default function SearchBar({ rows }: SearchBarProps) {
             limitUrlUpdates: debounce(300),
           })
         }
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            setSearch(e.currentTarget.value);
+          }
+        }}
         placeholder="Search..."
       />
       <InputGroupAddon align="inline-start">
