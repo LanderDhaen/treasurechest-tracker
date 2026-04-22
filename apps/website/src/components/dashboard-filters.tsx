@@ -1,22 +1,20 @@
 "use client";
 
-import useQueryParams from "@/hooks/use-query-params";
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
+import { parseAsBoolean, useQueryState } from "nuqs";
 
 export default function DashboardFilters({
-  excludeUntrackedAccounts,
+  defaultExcludeUntrackedAccounts,
 }: {
-  excludeUntrackedAccounts: boolean;
+  defaultExcludeUntrackedAccounts: boolean;
 }) {
-  const { searchParams, pushUrl } = useQueryParams();
-
-  const handleExcludeUntrackedAccountsChange = (
-    checked: boolean | "indeterminate",
-  ) => {
-    searchParams.set("untracked", String(checked));
-    pushUrl(searchParams);
-  };
+  const [exludeUntracked, setExcludeUntracked] = useQueryState(
+    "untracked",
+    parseAsBoolean.withDefault(defaultExcludeUntrackedAccounts).withOptions({
+      shallow: false,
+    }),
+  );
 
   return (
     <div className="flex items-center justify-end gap-2">
@@ -29,8 +27,8 @@ export default function DashboardFilters({
       <Switch
         id="untracked-accounts"
         className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500"
-        checked={excludeUntrackedAccounts}
-        onCheckedChange={handleExcludeUntrackedAccountsChange}
+        checked={exludeUntracked}
+        onCheckedChange={setExcludeUntracked}
       />
     </div>
   );

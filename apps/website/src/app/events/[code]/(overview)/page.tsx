@@ -42,7 +42,7 @@ export default async function Page({
       </AuthGuard>
       <Separator />
       <EventTabs eventCode={code} />
-      <DashboardFilters excludeUntrackedAccounts={untracked} />
+      <DashboardFilters defaultExcludeUntrackedAccounts={false} />
       <Dashboard filters={filters} hideEventCards />
     </div>
   );
