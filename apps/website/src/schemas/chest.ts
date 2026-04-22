@@ -1,6 +1,9 @@
 import * as z from "zod";
 import { paginationSchema, searchSchema } from "./common";
-import { DEFAULT_SORT_DIRECTION, DEFAULT_SORT_OPTION } from "@/constants/chest";
+import {
+  DEFAULT_CHEST_SORT_DIRECTION,
+  DEFAULT_CHEST_SORT_OPTION,
+} from "@/constants/chest";
 import { FIRST_EVENT_START_DATE } from "@/constants/event";
 import { formatDate } from "@/lib/utils";
 
@@ -9,8 +12,8 @@ export const chestSearchParamsSchema = z.object({
   ...paginationSchema.shape,
   sortBy: z
     .enum(["rarity", "reward", "openedAt", "account", "event"])
-    .catch(DEFAULT_SORT_OPTION),
-  direction: z.enum(["asc", "desc"]).catch(DEFAULT_SORT_DIRECTION),
+    .catch(DEFAULT_CHEST_SORT_OPTION),
+  direction: z.enum(["asc", "desc"]).catch(DEFAULT_CHEST_SORT_DIRECTION),
   accounts: z.array(z.string()).optional(),
   events: z.array(z.string()).optional(),
 });

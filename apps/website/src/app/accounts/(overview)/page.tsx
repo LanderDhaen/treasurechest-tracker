@@ -10,7 +10,11 @@ import Pagination from "@/components/pagination";
 import AccountTable from "@/components/account-table";
 import { accountSearchParamsSchema } from "@/schemas/account";
 import SortingMenu from "@/components/sorting-menu";
-import { SORT_OPTIONS } from "@/constants/account";
+import {
+  DEFAULT_ACCOUNT_SORT_OPTION,
+  DEFAULT_ACCOUNT_SORT_DIRECTION,
+  ACCOUNT_SORT_OPTIONS,
+} from "@/constants/account";
 import SearchBar from "@/components/searchbar";
 import AuthGuard from "@/components/auth-guard";
 import { Button } from "@/components/ui/button";
@@ -48,9 +52,9 @@ export default async function Page({
         <div className="flex justify-between gap-2">
           <SearchBar rows={rows} />
           <SortingMenu
-            currentSort={sortBy}
-            currentDirection={direction}
-            sortingOptions={SORT_OPTIONS}
+            defaultSort={DEFAULT_ACCOUNT_SORT_OPTION}
+            defaultDirection={DEFAULT_ACCOUNT_SORT_DIRECTION}
+            sortingOptions={ACCOUNT_SORT_OPTIONS}
           />
           <AuthGuard>
             <Button asChild variant="outline" size="icon">

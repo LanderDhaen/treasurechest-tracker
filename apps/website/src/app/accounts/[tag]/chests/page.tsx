@@ -11,7 +11,11 @@ import Pagination from "@/components/pagination";
 import { chestSearchParamsSchema } from "@/schemas/chest";
 import SearchBar from "@/components/searchbar";
 import SortingMenu from "@/components/sorting-menu";
-import { SORT_OPTIONS } from "@/constants/chest";
+import {
+  CHEST_SORT_OPTIONS,
+  DEFAULT_CHEST_SORT_DIRECTION,
+  DEFAULT_CHEST_SORT_OPTION,
+} from "@/constants/chest";
 import AccountTabs from "@/components/account-tabs";
 import { FilterConfig } from "@/types/common";
 
@@ -62,9 +66,9 @@ export default async function Page({
           <div className="flex justify-between gap-2">
             <SearchBar rows={rows} />
             <SortingMenu
-              currentSort={sortBy}
-              currentDirection={direction}
-              sortingOptions={SORT_OPTIONS}
+              defaultSort={DEFAULT_CHEST_SORT_OPTION}
+              defaultDirection={DEFAULT_CHEST_SORT_DIRECTION}
+              sortingOptions={CHEST_SORT_OPTIONS}
             />
           </div>
           <ChestTable chests={chests} totalChests={totalChests} />

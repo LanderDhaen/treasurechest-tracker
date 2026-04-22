@@ -10,7 +10,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { SORT_OPTIONS } from "@/constants/chest";
+import {
+  CHEST_SORT_OPTIONS,
+  DEFAULT_CHEST_SORT_OPTION,
+  DEFAULT_CHEST_SORT_DIRECTION,
+} from "@/constants/chest";
 import { chestSearchParamsSchema } from "@/schemas/chest";
 import { FilterConfig } from "@/types/common";
 import { Button } from "@/components/ui/button";
@@ -53,9 +57,9 @@ export default async function Page({
         <div className="flex justify-between gap-2">
           <SearchBar rows={rows} />
           <SortingMenu
-            currentSort={sortBy}
-            currentDirection={direction}
-            sortingOptions={SORT_OPTIONS}
+            defaultSort={DEFAULT_CHEST_SORT_OPTION}
+            defaultDirection={DEFAULT_CHEST_SORT_DIRECTION}
+            sortingOptions={CHEST_SORT_OPTIONS}
           />
           {session && (
             <Button asChild variant="outline" size="icon">

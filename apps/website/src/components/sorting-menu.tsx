@@ -10,14 +10,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import useQueryParams from "@/hooks/use-query-params";
 import { ButtonGroup } from "./ui/button-group";
 import { Button } from "./ui/button";
 import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
+import { parseAsInteger, useQueryState } from "nuqs";
 
 interface SortingMenuProps {
-  currentSort: string;
-  currentDirection: "asc" | "desc";
+  defaultSort: string;
+  defaultDirection: "asc" | "desc";
   sortingOptions: {
     label: string;
     value: string;
@@ -25,36 +25,50 @@ interface SortingMenuProps {
 }
 
 export default function SortingMenu({
-  currentSort,
-  currentDirection,
+  defaultSort,
+  defaultDirection,
   sortingOptions,
 }: SortingMenuProps) {
-  const { searchParams, pushUrl } = useQueryParams();
+  const [sort, setSort] = useQueryState("sortBy", {
+    defaultValue: defaultSort,
+    shallow: false,
+    clearOnDefault: false,
+  });
 
-  const isAscending = currentDirection === "asc";
+  const [direction, setDirection] = useQueryState("direction", {
+    defaultValue: defaultDirection,
+    shallow: false,
+    clearOnDefault: false,
+  });
 
-  const handleButtonClick = () => {
-    const newDirection = isAscending ? "desc" : "asc";
-    searchParams.set("sortBy", currentSort);
-    searchParams.set("direction", newDirection);
-    searchParams.set("page", "1");
-    pushUrl(searchParams);
-  };
+  const [, setPage] = useQueryState(
+    "page",
+    parseAsInteger
+      .withDefault(1)
+      .withOptions({ shallow: false, clearOnDefault: false }),
+  );
 
-  const handleValueChange = (value: string) => {
-    searchParams.set("sortBy", value);
-    searchParams.set("direction", currentDirection);
-    searchParams.set("page", "1");
-
-    pushUrl(searchParams);
-  };
+  const isCurrentlyAscending = direction === "asc";
 
   return (
     <ButtonGroup>
-      <Button onClick={handleButtonClick} variant="outline" size="icon">
-        {isAscending ? <ArrowUpNarrowWide /> : <ArrowDownWideNarrow />}
+      <Button
+        onClick={() => {
+          setDirection(isCurrentlyAscending ? "desc" : "asc");
+          setPage(1);
+        }}
+        variant="outline"
+        size="icon"
+      >
+        {isCurrentlyAscending ? <ArrowUpNarrowWide /> : <ArrowDownWideNarrow />}
       </Button>
-      <Select onValueChange={handleValueChange} value={currentSort}>
+      <Select
+        onValueChange={(value) => {
+          setSort(value);
+          setPage(1);
+        }}
+        value={sort}
+      >
         <SelectTrigger className="w-32">
           <SelectValue />
         </SelectTrigger>
