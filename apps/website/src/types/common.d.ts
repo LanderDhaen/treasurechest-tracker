@@ -1,5 +1,5 @@
 export type FilterConfig = {
-  excludeUntrackedAccounts?: boolean;
+  onlyTracked?: boolean;
   accountId?: number;
   eventId?: number;
 };

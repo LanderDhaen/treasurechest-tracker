@@ -179,9 +179,9 @@ export const withFilteredChests = (filters: FilterConfig) => {
     .where("account.isActive", "=", true)
     .where("event.isActive", "=", true);
 
-  const { excludeUntrackedAccounts, accountId, eventId } = filters;
+  const { onlyTracked, accountId, eventId } = filters;
 
-  if (excludeUntrackedAccounts === true) {
+  if (onlyTracked === true) {
     query = query.where("account.isTracked", "=", true);
   }
 

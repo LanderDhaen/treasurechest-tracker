@@ -5,13 +5,13 @@ import { Label } from "./ui/label";
 import { parseAsBoolean, useQueryState } from "nuqs";
 
 export default function DashboardFilters({
-  defaultExcludeUntrackedAccounts,
+  defaultOnlyTracked,
 }: {
-  defaultExcludeUntrackedAccounts: boolean;
+  defaultOnlyTracked: boolean;
 }) {
-  const [exludeUntracked, setExcludeUntracked] = useQueryState(
-    "untracked",
-    parseAsBoolean.withDefault(defaultExcludeUntrackedAccounts).withOptions({
+  const [onlyTracked, setOnlyTracked] = useQueryState(
+    "tracked",
+    parseAsBoolean.withDefault(defaultOnlyTracked).withOptions({
       shallow: false,
     }),
   );
@@ -19,16 +19,16 @@ export default function DashboardFilters({
   return (
     <div className="flex items-center justify-end gap-2">
       <Label
-        htmlFor="untracked-accounts"
+        htmlFor="tracked-accounts"
         className="text-sm text-muted-foreground"
       >
-        Exclude untracked accounts
+        Only show tracked accounts
       </Label>
       <Switch
-        id="untracked-accounts"
+        id="tracked-accounts"
         className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500"
-        checked={exludeUntracked}
-        onCheckedChange={setExcludeUntracked}
+        checked={onlyTracked}
+        onCheckedChange={setOnlyTracked}
       />
     </div>
   );

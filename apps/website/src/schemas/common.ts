@@ -11,5 +11,5 @@ export const paginationSchema = z.object({
 });
 
 export const dashboardFiltersSchema = z.object({
-  untracked: z.stringbool().catch(false),
+  tracked: z.stringbool().catch(false),
 });
