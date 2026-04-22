@@ -51,7 +51,7 @@ export default async function Page({
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="flex justify-between gap-2">
-          <SearchBar currentSearch={search} rows={rows} />
+          <SearchBar rows={rows} />
           <SortingMenu
             currentSort={sortBy}
             currentDirection={direction}

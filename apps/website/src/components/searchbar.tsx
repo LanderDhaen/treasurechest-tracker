@@ -2,38 +2,33 @@
 
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 import { SearchIcon } from "lucide-react";
-import useQueryParams from "@/hooks/use-query-params";
-import { useDebouncedCallback } from "use-debounce";
+import { debounce, useQueryState } from "nuqs";
 
 interface SearchBarProps {
-  currentSearch: string | undefined;
   rows: number;
 }
 
-export default function SearchBar({ currentSearch, rows }: SearchBarProps) {
-  const { searchParams, pushUrl } = useQueryParams();
-
-  const handleChange = useDebouncedCallback((search: string) => {
-    if (search) {
-      searchParams.set("search", search);
-    } else {
-      searchParams.delete("search");
-    }
-    searchParams.set("page", "1");
-    pushUrl(searchParams);
-  }, 300);
+export default function SearchBar({ rows }: SearchBarProps) {
+  const [search, setSearch] = useQueryState("search", {
+    defaultValue: "",
+    shallow: false,
+  });
 
   return (
     <InputGroup>
       <InputGroupInput
-        defaultValue={currentSearch}
-        onChange={(e) => handleChange(e.target.value)}
+        value={search}
+        onChange={(e) =>
+          setSearch(e.target.value, {
+            limitUrlUpdates: debounce(300),
+          })
+        }
         placeholder="Search..."
       />
       <InputGroupAddon align="inline-start">
         <SearchIcon />
       </InputGroupAddon>
-      {currentSearch && (
+      {search && (
         <InputGroupAddon align="inline-end">
           {rows} result{rows !== 1 ? "s" : ""}
         </InputGroupAddon>
