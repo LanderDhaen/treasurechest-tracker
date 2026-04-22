@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import AuthGuard from "@/components/auth-guard";
 import EventActions from "@/components/event-actions";
 import EventTabs from "@/components/event-tabs";
-import { getAllChests } from "@/queries/chest";
+import { getAllChests, getTotalChests } from "@/queries/chest";
 import { Card, CardContent } from "@/components/ui/card";
 import ChestTable from "@/components/chest-table";
 import { chestSearchParamsSchema } from "@/schemas/chest";
@@ -13,6 +13,7 @@ import SearchBar from "@/components/searchbar";
 import SortingMenu from "@/components/sorting-menu";
 import { SORT_OPTIONS } from "@/constants/chest";
 import Pagination from "@/components/pagination";
+import { FilterConfig } from "@/types/common";
 
 export default async function Page({
   params,
@@ -42,6 +43,12 @@ export default async function Page({
     events: [event.code],
   });
 
+  const filters = {
+    eventId: event.id,
+  } satisfies FilterConfig;
+
+  const totalChests = await getTotalChests(filters);
+
   return (
     <div className="flex flex-col gap-4">
       <EventInformationItem event={event} />
@@ -60,7 +67,7 @@ export default async function Page({
               sortingOptions={SORT_OPTIONS}
             />
           </div>
-          <ChestTable chests={chests} />
+          <ChestTable chests={chests} totalChests={totalChests} />
           {totalPages > 0 && (
             <Pagination
               currentPage={page}

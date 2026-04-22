@@ -15,7 +15,7 @@ import { chestSearchParamsSchema } from "@/schemas/chest";
 import { FilterConfig } from "@/types/common";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { PackagePlus } from "lucide-react";
 import { getServerSession } from "@/queries/auth";
 
 export default async function Page({
@@ -37,7 +37,7 @@ export default async function Page({
 
   const filters = {} satisfies FilterConfig;
 
-  const count = await getTotalChests(filters);
+  const totalChests = await getTotalChests(filters);
 
   const session = await getServerSession();
 
@@ -46,7 +46,7 @@ export default async function Page({
       <CardHeader>
         <CardTitle>Treasure Chests</CardTitle>
         <CardDescription>
-          {`Currently ${count} treasure chest${count !== 1 ? "s" : ""} have been opened.`}
+          {`Currently ${totalChests} treasure chest${totalChests !== 1 ? "s" : ""} have been opened.`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
@@ -60,12 +60,12 @@ export default async function Page({
           {session && (
             <Button asChild variant="outline" size="icon">
               <Link href="/chests/add">
-                <Plus />
+                <PackagePlus />
               </Link>
             </Button>
           )}
         </div>
-        <ChestTable chests={chests} />
+        <ChestTable chests={chests} totalChests={totalChests} />
         {totalPages > 0 && (
           <Pagination
             currentPage={page}

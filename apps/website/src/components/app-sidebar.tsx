@@ -2,10 +2,10 @@
 
 import {
   LayoutDashboard,
-  Users,
   ChartNoAxesGantt,
-  Balloon,
-  Box,
+  Package,
+  UsersRound,
+  Calendar,
 } from "lucide-react";
 
 import {
@@ -30,17 +30,17 @@ const data = {
     {
       title: "Treasure Chests",
       url: "/chests",
-      icon: Box,
+      icon: Package,
     },
     {
       title: "Events",
       url: "/events",
-      icon: Balloon,
+      icon: Calendar,
     },
     {
       title: "Accounts",
       url: "/accounts",
-      icon: Users,
+      icon: UsersRound,
     },
   ],
 };

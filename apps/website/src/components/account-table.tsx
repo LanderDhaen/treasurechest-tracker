@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Table,
   TableBody,
@@ -8,8 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { useRouter } from "next/navigation";
-import AccountTrackedBage from "./account-tracked-badge";
+import NoSearchResults from "./no-search-results";
+import NoAccounts from "./no-accounts";
+import AccountTableRow from "./account-table-row";
 
 interface AccountTableProps {
   accounts: {
@@ -23,14 +22,15 @@ interface AccountTableProps {
       tag: string;
     };
   }[];
+  totalAccounts: number;
 }
 
-export default function AccountTable({ accounts }: AccountTableProps) {
-  const router = useRouter();
-
-  const handeClick = (tag: string) => {
-    router.push(`/accounts/${tag}`);
-  };
+export default function AccountTable({
+  accounts,
+  totalAccounts,
+}: AccountTableProps) {
+  const isEmpty = accounts.length === 0;
+  const hasStoredAccounts = totalAccounts > 0;
 
   return (
     <div className="rounded-md border overflow-hidden">
@@ -44,29 +44,16 @@ export default function AccountTable({ accounts }: AccountTableProps) {
             <TableHead className="font-bold">Clan</TableHead>
           </TableRow>
         </TableHeader>
-
         <TableBody>
-          {accounts.length === 0 ? (
-            <TableRow>
-              <TableCell colSpan={5} className="text-center italic">
-                No accounts found.
+          {isEmpty ? (
+            <TableRow className="bg-white hover:bg-white">
+              <TableCell colSpan={5}>
+                {hasStoredAccounts ? <NoSearchResults /> : <NoAccounts />}
               </TableCell>
             </TableRow>
           ) : (
             accounts.map((account) => (
-              <TableRow
-                key={account.tag}
-                onClick={() => handeClick(account.tag)}
-                className="hover:cursor-pointer"
-              >
-                <TableCell>#{account.tag}</TableCell>
-                <TableCell>
-                  <AccountTrackedBage isTracked={account.isTracked} />
-                </TableCell>
-                <TableCell>{account.townhall}</TableCell>
-                <TableCell>{account.name}</TableCell>
-                <TableCell>{account.clan.name}</TableCell>
-              </TableRow>
+              <AccountTableRow key={account.tag} account={account} />
             ))
           )}
         </TableBody>

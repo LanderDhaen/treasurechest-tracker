@@ -1,8 +1,3 @@
-"use client";
-
-import { formatDate } from "@/lib/utils";
-import GiftBadge from "./event-type-badge";
-import StatusBadge from "./event-status-badge";
 import {
   Table,
   TableBody,
@@ -11,10 +6,10 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { useRouter } from "next/navigation";
-import { formatEventName } from "@/lib/event";
 import { EventStatus } from "@/constants/event";
-import EventTypeBadge from "./event-type-badge";
+import NoSearchResults from "./no-search-results";
+import NoEvents from "./no-events";
+import EventTableRow from "./event-table-row";
 
 interface EventTableProps {
   events: {
@@ -27,14 +22,12 @@ interface EventTableProps {
     name: string;
     type: string;
   }[];
+  totalEvents: number;
 }
 
-export default function EventTable({ events }: EventTableProps) {
-  const router = useRouter();
-
-  const handleClick = (eventCode: string) => {
-    router.push(`/events/${eventCode}`);
-  };
+export default function EventTable({ events, totalEvents }: EventTableProps) {
+  const isEmpty = events.length === 0;
+  const hasStoredEvents = totalEvents > 0;
 
   return (
     <div className="rounded-md border overflow-hidden">
@@ -51,37 +44,15 @@ export default function EventTable({ events }: EventTableProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {events.length === 0 ? (
-            <TableRow>
-              <TableCell colSpan={6} className="text-center italic">
-                No events found.
+          {isEmpty ? (
+            <TableRow className="bg-white hover:bg-white">
+              <TableCell colSpan={7}>
+                {hasStoredEvents ? <NoSearchResults /> : <NoEvents />}
               </TableCell>
             </TableRow>
           ) : (
             events.map((event) => (
-              <TableRow
-                key={event.code}
-                onClick={() => handleClick(event.code)}
-                className="hover:cursor-pointer"
-              >
-                <TableCell>#{event.code}</TableCell>
-                <TableCell>
-                  <StatusBadge status={event.status} />
-                </TableCell>
-                <TableCell>
-                  <EventTypeBadge type={event.type} />
-                </TableCell>
-                <TableCell>
-                  {formatEventName(event.name, event.edition)}
-                </TableCell>
-                <TableCell>{formatDate(event.startDate)}</TableCell>
-                <TableCell>{formatDate(event.endDate)}</TableCell>
-                <TableCell>
-                  {event.maxChests == 1
-                    ? "1 Chest"
-                    : `${event.maxChests} Chests`}
-                </TableCell>
-              </TableRow>
+              <EventTableRow key={event.code} event={event} />
             ))
           )}
         </TableBody>

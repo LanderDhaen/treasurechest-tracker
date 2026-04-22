@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import AccountActions from "@/components/account-actions";
 import AuthGuard from "@/components/auth-guard";
 import { Separator } from "@/components/ui/separator";
-import { getAllChests } from "@/queries/chest";
+import { getAllChests, getTotalChests } from "@/queries/chest";
 import ChestTable from "@/components/chest-table";
 import { Card, CardContent } from "@/components/ui/card";
 import Pagination from "@/components/pagination";
@@ -13,6 +13,7 @@ import SearchBar from "@/components/searchbar";
 import SortingMenu from "@/components/sorting-menu";
 import { SORT_OPTIONS } from "@/constants/chest";
 import AccountTabs from "@/components/account-tabs";
+import { FilterConfig } from "@/types/common";
 
 export default async function Page({
   params,
@@ -42,6 +43,12 @@ export default async function Page({
     accounts: [account.tag],
   });
 
+  const filters = {
+    accountId: account.id,
+  } satisfies FilterConfig;
+
+  const totalChests = await getTotalChests(filters);
+
   return (
     <div className="flex flex-col gap-4">
       <AccountInformationItem account={account} />
@@ -60,7 +67,7 @@ export default async function Page({
               sortingOptions={SORT_OPTIONS}
             />
           </div>
-          <ChestTable chests={chests} />
+          <ChestTable chests={chests} totalChests={totalChests} />
           {totalPages > 0 && (
             <Pagination
               currentPage={page}

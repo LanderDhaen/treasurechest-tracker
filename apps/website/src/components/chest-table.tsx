@@ -1,6 +1,3 @@
-"use client";
-
-import { formatDateTime } from "@/lib/utils";
 import {
   Table,
   TableBody,
@@ -9,9 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import RarityBadge from "./rarity-badge";
-import { formatEventName } from "@/lib/event";
-import { formatReward } from "@/lib/chest";
+import NoChests from "./no-chests";
+import NoSearchResults from "./no-search-results";
+import ChestTableRow from "./chest-table-row";
 
 interface ChestTableProps {
   chests: {
@@ -28,9 +25,13 @@ interface ChestTableProps {
       name: string;
     };
   }[];
+  totalChests: number;
 }
 
-export default function ChestTable({ chests }: ChestTableProps) {
+export default function ChestTable({ chests, totalChests }: ChestTableProps) {
+  const isEmpty = chests.length === 0;
+  const hasStoredChests = totalChests > 0;
+
   return (
     <div className="rounded-md border overflow-hidden">
       <Table>
@@ -45,28 +46,15 @@ export default function ChestTable({ chests }: ChestTableProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {chests.length === 0 ? (
-            <TableRow>
-              <TableCell colSpan={6} className="text-center italic">
-                No treasure chests rewards found.
+          {isEmpty ? (
+            <TableRow className="bg-white hover:bg-white">
+              <TableCell colSpan={6}>
+                {hasStoredChests ? <NoSearchResults /> : <NoChests />}
               </TableCell>
             </TableRow>
           ) : (
             chests.map((chest) => (
-              <TableRow key={chest.id}>
-                <TableCell>{chest.id}</TableCell>
-                <TableCell>
-                  <RarityBadge rarity={chest.rarity} />
-                </TableCell>
-                <TableCell>
-                  {formatReward(chest.amount, chest.reward)}
-                </TableCell>
-                <TableCell>{formatDateTime(chest.openedAt)}</TableCell>
-                <TableCell>{chest.account.name}</TableCell>
-                <TableCell>
-                  {formatEventName(chest.event.name, chest.event.edition)}
-                </TableCell>
-              </TableRow>
+              <ChestTableRow key={chest.id} chest={chest} />
             ))
           )}
         </TableBody>
