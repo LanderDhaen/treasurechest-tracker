@@ -13,7 +13,8 @@ import {
 import { ButtonGroup } from "./ui/button-group";
 import { Button } from "./ui/button";
 import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
-import { parseAsInteger, useQueryState } from "nuqs";
+import { useQueryState } from "nuqs";
+import { usePagination } from "@/hooks/use-pagination";
 
 interface SortingMenuProps {
   defaultSort: string;
@@ -32,21 +33,14 @@ export default function SortingMenu({
   const [sort, setSort] = useQueryState("sortBy", {
     defaultValue: defaultSort,
     shallow: false,
-    clearOnDefault: false,
   });
 
   const [direction, setDirection] = useQueryState("direction", {
     defaultValue: defaultDirection,
     shallow: false,
-    clearOnDefault: false,
   });
 
-  const [, setPage] = useQueryState(
-    "page",
-    parseAsInteger
-      .withDefault(1)
-      .withOptions({ shallow: false, clearOnDefault: false }),
-  );
+  const [, setPagination] = usePagination();
 
   const isCurrentlyAscending = direction === "asc";
 
@@ -55,7 +49,7 @@ export default function SortingMenu({
       <Button
         onClick={() => {
           setDirection(isCurrentlyAscending ? "desc" : "asc");
-          setPage(1);
+          setPagination({ page: 1 });
         }}
         variant="outline"
         size="icon"
@@ -65,7 +59,7 @@ export default function SortingMenu({
       <Select
         onValueChange={(value) => {
           setSort(value);
-          setPage(1);
+          setPagination({ page: 1 });
         }}
         value={sort}
       >
