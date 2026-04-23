@@ -11,10 +11,11 @@ export default async function Page({
 }) {
   const rawParams = await searchParams;
   const parsedParams = dashboardFiltersSchema.parse(rawParams);
-  const { tracked } = parsedParams;
+  const { year, tracked } = parsedParams;
 
   const filters = {
     onlyTracked: tracked,
+    year: year,
   } satisfies FilterConfig;
 
   return (

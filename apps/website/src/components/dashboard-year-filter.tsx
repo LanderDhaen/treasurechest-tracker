@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "./ui/select";
 
-import { parseAsInteger, useQueryState } from "nuqs";
+import { parseAsNumberLiteral, useQueryState } from "nuqs";
 
 import { FIRST_EVENT_START_DATE } from "@/constants/event";
 
@@ -24,7 +24,7 @@ const YEARS = Array.from(
 export default function DashboardYearFilter() {
   const [selectedYear, setSelectedYear] = useQueryState(
     "year",
-    parseAsInteger.withOptions({ shallow: false }),
+    parseAsNumberLiteral(YEARS).withOptions({ shallow: false }),
   );
 
   return (

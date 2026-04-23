@@ -1,4 +1,5 @@
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "@/constants/common";
+import { FIRST_EVENT_START_DATE } from "@/constants/event";
 import * as z from "zod";
 
 export const searchSchema = z.object({
@@ -11,5 +12,12 @@ export const paginationSchema = z.object({
 });
 
 export const dashboardFiltersSchema = z.object({
+  year: z.coerce
+    .number()
+    .int()
+    .min(FIRST_EVENT_START_DATE.getFullYear())
+    .max(new Date().getFullYear())
+    .optional()
+    .catch(undefined),
   tracked: z.stringbool().catch(false),
 });
