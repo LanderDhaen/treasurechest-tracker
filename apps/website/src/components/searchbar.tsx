@@ -4,7 +4,6 @@ import { useSearch } from "@/hooks/use-search";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 import { SearchIcon } from "lucide-react";
 import { debounce } from "nuqs";
-import { useClearSearch } from "@/hooks/use-clear-search";
 
 interface SearchBarProps {
   rows: number;
@@ -12,7 +11,6 @@ interface SearchBarProps {
 
 export default function SearchBar({ rows }: SearchBarProps) {
   const [{ search }, setSearch] = useSearch();
-  const handleClearSearch = useClearSearch();
 
   return (
     <InputGroup>
@@ -22,6 +20,7 @@ export default function SearchBar({ rows }: SearchBarProps) {
           setSearch(
             {
               search: e.currentTarget.value,
+              page: 1,
             },
             {
               limitUrlUpdates: debounce(300),
@@ -30,11 +29,11 @@ export default function SearchBar({ rows }: SearchBarProps) {
         }
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            setSearch({ search: e.currentTarget.value });
+            setSearch({ search: e.currentTarget.value, page: 1 });
           }
 
           if (e.key === "Escape") {
-            handleClearSearch();
+            setSearch({ search: null, page: 1 });
           }
         }}
         placeholder="Search..."

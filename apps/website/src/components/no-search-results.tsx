@@ -10,10 +10,10 @@ import {
   EmptyTitle,
 } from "./ui/empty";
 import { Button } from "./ui/button";
-import { useClearSearch } from "@/hooks/use-clear-search";
+import { useSearch } from "@/hooks/use-search";
 
 export default function NoSearchResults() {
-  const handleClearSearch = useClearSearch();
+  const [{ search }, setSearch] = useSearch();
 
   return (
     <Empty>
@@ -21,14 +21,17 @@ export default function NoSearchResults() {
         <EmptyMedia variant="icon">
           <SearchX />
         </EmptyMedia>
-        <EmptyTitle>No matches found</EmptyTitle>
+        <EmptyTitle>No matches found for &quot;{search}&quot;</EmptyTitle>
         <EmptyDescription>
           Try adjusting your search criteria to find what you&apos;re looking
           for.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button variant="outline" onClick={handleClearSearch}>
+        <Button
+          variant="outline"
+          onClick={() => setSearch({ search: null, page: 1 })}
+        >
           <X />
           Clear search
         </Button>
