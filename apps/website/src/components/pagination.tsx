@@ -16,34 +16,14 @@ import {
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { PAGE_SIZES } from "@/constants/common";
-import { parseAsInteger, useQueryState } from "nuqs";
+import { usePagination } from "@/hooks/use-pagination";
 
 interface PaginationProps {
-  defaultPage: number;
-  defaultPageSize: number;
   totalPages: number;
 }
 
-export default function Pagination({
-  defaultPage,
-  defaultPageSize,
-  totalPages,
-}: PaginationProps) {
-  const [page, setPage] = useQueryState(
-    "page",
-    parseAsInteger.withDefault(defaultPage).withOptions({
-      shallow: false,
-      clearOnDefault: false,
-    }),
-  );
-
-  const [pageSize, setPageSize] = useQueryState(
-    "pageSize",
-    parseAsInteger.withDefault(defaultPageSize).withOptions({
-      shallow: false,
-      clearOnDefault: false,
-    }),
-  );
+export default function Pagination({ totalPages }: PaginationProps) {
+  const [{ page, pageSize }, setPagination] = usePagination();
 
   const paginationButtons = [
     {
@@ -79,8 +59,10 @@ export default function Pagination({
         <Select
           value={pageSize.toString()}
           onValueChange={(pageSize) => {
-            setPage(null);
-            setPageSize(parseInt(pageSize) || defaultPageSize);
+            setPagination({
+              page: null,
+              pageSize: parseInt(pageSize),
+            });
           }}
         >
           <SelectTrigger className="w-20">
@@ -108,7 +90,9 @@ export default function Pagination({
               variant="outline"
               size="icon"
               disabled={button.disabled}
-              onClick={() => setPage(button.page)}
+              onClick={() =>
+                setPagination((prev) => ({ ...prev, page: button.page }))
+              }
             >
               {button.icon}
             </Button>
