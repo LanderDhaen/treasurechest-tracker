@@ -27,10 +27,10 @@ export default async function Page({
 
   const rawParams = await searchParams;
   const parsedParams = dashboardFiltersSchema.parse(rawParams);
-  const { untracked } = parsedParams;
+  const { tracked } = parsedParams;
 
   const filters = {
-    excludeUntrackedAccounts: untracked,
+    onlyTracked: tracked,
     eventId: event.id,
   } satisfies FilterConfig;
 
@@ -42,7 +42,7 @@ export default async function Page({
       </AuthGuard>
       <Separator />
       <EventTabs eventCode={code} />
-      <DashboardFilters defaultExcludeUntrackedAccounts={false} />
+      <DashboardFilters defaultOnlyTracked={false} />
       <Dashboard filters={filters} hideEventCards />
     </div>
   );
