@@ -179,7 +179,15 @@ export const withFilteredChests = (filters: FilterConfig) => {
     .where("account.isActive", "=", true)
     .where("event.isActive", "=", true);
 
-  const { onlyTracked, accountId, eventId } = filters;
+  const { year, onlyTracked, accountId, eventId } = filters;
+
+  if (year) {
+    const startDate = new Date(year, 0, 1);
+    const endDate = new Date(year + 1, 0, 1);
+    query = query
+      .where("chest.openedAt", ">=", startDate)
+      .where("chest.openedAt", "<", endDate);
+  }
 
   if (onlyTracked === true) {
     query = query.where("account.isTracked", "=", true);
