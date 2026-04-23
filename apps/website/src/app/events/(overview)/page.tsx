@@ -20,7 +20,6 @@ import { getServerSession } from "@/queries/auth";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CalendarPlus } from "lucide-react";
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "@/constants/common";
 
 export default async function Page({
   searchParams,
@@ -75,13 +74,7 @@ export default async function Page({
           )}
         </div>
         <EventTable events={events} totalEvents={totalEvents} />
-        {totalPages > 0 && (
-          <Pagination
-            defaultPage={DEFAULT_PAGE}
-            defaultPageSize={DEFAULT_PAGE_SIZE}
-            totalPages={totalPages}
-          />
-        )}
+        {totalPages > 0 && <Pagination totalPages={totalPages} />}
       </CardContent>
     </Card>
   );

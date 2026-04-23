@@ -20,7 +20,6 @@ import AuthGuard from "@/components/auth-guard";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { UserRoundPlus } from "lucide-react";
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "@/constants/common";
 
 export default async function Page({
   searchParams,
@@ -71,13 +70,7 @@ export default async function Page({
           </AuthGuard>
         </div>
         <AccountTable accounts={accounts} totalAccounts={totalAccounts} />
-        {totalPages > 0 && (
-          <Pagination
-            defaultPage={DEFAULT_PAGE}
-            defaultPageSize={DEFAULT_PAGE_SIZE}
-            totalPages={totalPages}
-          />
-        )}
+        {totalPages > 0 && <Pagination totalPages={totalPages} />}
       </CardContent>
     </Card>
   );

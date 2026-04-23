@@ -18,7 +18,6 @@ import {
 } from "@/constants/chest";
 import Pagination from "@/components/pagination";
 import { FilterConfig } from "@/types/common";
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "@/constants/common";
 
 export default async function Page({
   params,
@@ -73,13 +72,7 @@ export default async function Page({
             />
           </div>
           <ChestTable chests={chests} totalChests={totalChests} />
-          {totalPages > 0 && (
-            <Pagination
-              defaultPage={DEFAULT_PAGE}
-              defaultPageSize={DEFAULT_PAGE_SIZE}
-              totalPages={totalPages}
-            />
-          )}
+          {totalPages > 0 && <Pagination totalPages={totalPages} />}
         </CardContent>
       </Card>
     </div>
