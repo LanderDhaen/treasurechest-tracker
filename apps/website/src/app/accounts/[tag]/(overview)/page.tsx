@@ -6,13 +6,16 @@ import Dashboard from "@/components/dashboard";
 import AccountActions from "@/components/account-actions";
 import AuthGuard from "@/components/auth-guard";
 import { Separator } from "@/components/ui/separator";
-import { getHighestTownhall } from "@/queries/townhall";
 import AccountTabs from "@/components/account-tabs";
+import DashboardYearFilter from "@/components/dashboard-year-filter";
+import { dashboardFiltersSchema } from "@/schemas/common";
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: Promise<{ tag: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { tag } = await params;
 
@@ -22,14 +25,12 @@ export default async function Page({
     return notFound();
   }
 
-  // Actions
-
-  const highestTownhall = await getHighestTownhall();
-  const isMaxTownhall = account.townhall >= highestTownhall.level;
-
-  // Dashboard
+  const rawParams = await searchParams;
+  const parsedParams = dashboardFiltersSchema.parse(rawParams);
+  const { year } = parsedParams;
 
   const filters = {
+    year: year,
     accountId: account.id,
   } satisfies FilterConfig;
 
@@ -41,6 +42,7 @@ export default async function Page({
       </AuthGuard>
       <Separator />
       <AccountTabs accountTag={account.tag} />
+      <DashboardYearFilter />
       <Dashboard filters={filters} hideAccountCard />
     </div>
   );

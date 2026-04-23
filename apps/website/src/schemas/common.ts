@@ -19,5 +19,5 @@ export const dashboardFiltersSchema = z.object({
     .max(new Date().getFullYear())
     .optional()
     .catch(undefined),
-  tracked: z.stringbool().catch(false),
+  tracked: z.stringbool().optional().catch(false),
 });

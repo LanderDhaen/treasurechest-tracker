@@ -4,7 +4,7 @@ import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import { parseAsBoolean, useQueryState } from "nuqs";
 
-export default function DashboardFilters({
+export default function DashboardTrackedFilter({
   defaultOnlyTracked,
 }: {
   defaultOnlyTracked: boolean;
