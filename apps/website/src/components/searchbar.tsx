@@ -1,41 +1,60 @@
 "use client";
 
-import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
-import { SearchIcon } from "lucide-react";
-import useQueryParams from "@/hooks/use-query-params";
-import { useDebouncedCallback } from "use-debounce";
+import { useSearch } from "@/hooks/use-search";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "./ui/input-group";
+import { SearchIcon, X } from "lucide-react";
+import { debounce } from "nuqs";
 
 interface SearchBarProps {
-  currentSearch: string | undefined;
   rows: number;
 }
 
-export default function SearchBar({ currentSearch, rows }: SearchBarProps) {
-  const { searchParams, pushUrl } = useQueryParams();
-
-  const handleChange = useDebouncedCallback((search: string) => {
-    if (search) {
-      searchParams.set("search", search);
-    } else {
-      searchParams.delete("search");
-    }
-    searchParams.set("page", "1");
-    pushUrl(searchParams);
-  }, 300);
+export default function SearchBar({ rows }: SearchBarProps) {
+  const [{ search }, setSearch] = useSearch();
 
   return (
     <InputGroup>
       <InputGroupInput
-        defaultValue={currentSearch}
-        onChange={(e) => handleChange(e.target.value)}
+        value={search}
+        onChange={(e) =>
+          setSearch(
+            {
+              search: e.currentTarget.value,
+              page: 1,
+            },
+            {
+              limitUrlUpdates: debounce(300),
+            },
+          )
+        }
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            setSearch({ search: e.currentTarget.value, page: 1 });
+          }
+
+          if (e.key === "Escape") {
+            setSearch({ search: null, page: 1 });
+          }
+        }}
         placeholder="Search..."
       />
       <InputGroupAddon align="inline-start">
         <SearchIcon />
       </InputGroupAddon>
-      {currentSearch && (
+      {search && (
         <InputGroupAddon align="inline-end">
           {rows} result{rows !== 1 ? "s" : ""}
+          <InputGroupButton
+            size="icon-xs"
+            onClick={() => setSearch({ search: null, page: 1 })}
+          >
+            <X />
+          </InputGroupButton>
         </InputGroupAddon>
       )}
     </InputGroup>

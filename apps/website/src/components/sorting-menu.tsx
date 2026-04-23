@@ -10,14 +10,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import useQueryParams from "@/hooks/use-query-params";
 import { ButtonGroup } from "./ui/button-group";
 import { Button } from "./ui/button";
 import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
+import { useSorting } from "@/hooks/use-sorting";
 
 interface SortingMenuProps {
-  currentSort: string;
-  currentDirection: "asc" | "desc";
+  defaultSort: string;
+  defaultDirection: "asc" | "desc";
   sortingOptions: {
     label: string;
     value: string;
@@ -25,36 +25,36 @@ interface SortingMenuProps {
 }
 
 export default function SortingMenu({
-  currentSort,
-  currentDirection,
+  defaultSort,
+  defaultDirection,
   sortingOptions,
 }: SortingMenuProps) {
-  const { searchParams, pushUrl } = useQueryParams();
+  const [{ sortBy, direction }, setSorting] = useSorting(
+    defaultSort,
+    defaultDirection,
+  );
 
-  const isAscending = currentDirection === "asc";
-
-  const handleButtonClick = () => {
-    const newDirection = isAscending ? "desc" : "asc";
-    searchParams.set("sortBy", currentSort);
-    searchParams.set("direction", newDirection);
-    searchParams.set("page", "1");
-    pushUrl(searchParams);
-  };
-
-  const handleValueChange = (value: string) => {
-    searchParams.set("sortBy", value);
-    searchParams.set("direction", currentDirection);
-    searchParams.set("page", "1");
-
-    pushUrl(searchParams);
-  };
+  const isCurrentlyAscending = direction === "asc";
+  const nextDirection = isCurrentlyAscending ? "desc" : "asc";
 
   return (
     <ButtonGroup>
-      <Button onClick={handleButtonClick} variant="outline" size="icon">
-        {isAscending ? <ArrowUpNarrowWide /> : <ArrowDownWideNarrow />}
+      <Button
+        onClick={() =>
+          setSorting({
+            direction: nextDirection,
+            page: 1,
+          })
+        }
+        variant="outline"
+        size="icon"
+      >
+        {isCurrentlyAscending ? <ArrowUpNarrowWide /> : <ArrowDownWideNarrow />}
       </Button>
-      <Select onValueChange={handleValueChange} value={currentSort}>
+      <Select
+        onValueChange={(value) => setSorting({ sortBy: value, page: 1 })}
+        value={sortBy}
+      >
         <SelectTrigger className="w-32">
           <SelectValue />
         </SelectTrigger>

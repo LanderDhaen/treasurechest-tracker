@@ -10,7 +10,11 @@ import Pagination from "@/components/pagination";
 import EventTable from "@/components/event-table";
 import { eventSearchParamsSchema } from "@/schemas/event";
 import SortingMenu from "@/components/sorting-menu";
-import { SORT_OPTIONS } from "@/constants/event";
+import {
+  DEFAULT_EVENT_SORT_OPTION,
+  DEFAULT_EVENT_SORT_DIRECTION,
+  EVENT_SORT_OPTIONS,
+} from "@/constants/event";
 import SearchBar from "@/components/searchbar";
 import { getServerSession } from "@/queries/auth";
 import { Button } from "@/components/ui/button";
@@ -48,11 +52,11 @@ export default async function Page({
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="flex justify-between gap-2">
-          <SearchBar currentSearch={search} rows={rows} />
+          <SearchBar rows={rows} />
           <SortingMenu
-            currentSort={sortBy}
-            currentDirection={direction}
-            sortingOptions={SORT_OPTIONS}
+            defaultSort={DEFAULT_EVENT_SORT_OPTION}
+            defaultDirection={DEFAULT_EVENT_SORT_DIRECTION}
+            sortingOptions={EVENT_SORT_OPTIONS}
           />
           {session && (
             <Button asChild variant="outline" size="icon">
@@ -70,13 +74,7 @@ export default async function Page({
           )}
         </div>
         <EventTable events={events} totalEvents={totalEvents} />
-        {totalPages > 0 && (
-          <Pagination
-            currentPage={page}
-            currentPageSize={pageSize}
-            totalPages={totalPages}
-          />
-        )}
+        {totalPages > 0 && <Pagination totalPages={totalPages} />}
       </CardContent>
     </Card>
   );

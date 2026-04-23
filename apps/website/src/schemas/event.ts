@@ -1,6 +1,9 @@
 import * as z from "zod";
 import { paginationSchema, searchSchema } from "./common";
-import { DEFAULT_SORT_DIRECTION, DEFAULT_SORT_OPTION } from "@/constants/event";
+import {
+  DEFAULT_EVENT_SORT_OPTION,
+  DEFAULT_EVENT_SORT_DIRECTION,
+} from "@/constants/event";
 
 export const eventSearchParamsSchema = z.object({
   ...searchSchema.shape,
@@ -15,8 +18,8 @@ export const eventSearchParamsSchema = z.object({
       "endDate",
       "maxChests",
     ])
-    .catch(DEFAULT_SORT_OPTION),
-  direction: z.enum(["asc", "desc"]).catch(DEFAULT_SORT_DIRECTION),
+    .catch(DEFAULT_EVENT_SORT_OPTION),
+  direction: z.enum(["asc", "desc"]).catch(DEFAULT_EVENT_SORT_DIRECTION),
 });
 
 export type EventSearchParams = z.infer<typeof eventSearchParamsSchema>;

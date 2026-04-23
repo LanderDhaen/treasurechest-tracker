@@ -10,15 +10,15 @@ export default async function Page({
 }) {
   const rawParams = await searchParams;
   const parsedParams = dashboardFiltersSchema.parse(rawParams);
-  const { untracked } = parsedParams;
+  const { tracked } = parsedParams;
 
   const filters = {
-    excludeUntrackedAccounts: untracked,
+    onlyTracked: tracked,
   } satisfies FilterConfig;
 
   return (
     <div className="flex flex-col gap-4">
-      <DashboardFilters excludeUntrackedAccounts={untracked} />
+      <DashboardFilters defaultOnlyTracked={false} />
       <Dashboard filters={filters} />
     </div>
   );

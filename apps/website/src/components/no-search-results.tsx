@@ -10,15 +10,10 @@ import {
   EmptyTitle,
 } from "./ui/empty";
 import { Button } from "./ui/button";
-import useQueryParams from "@/hooks/use-query-params";
+import { useSearch } from "@/hooks/use-search";
 
 export default function NoSearchResults() {
-  const { searchParams, replaceUrl } = useQueryParams();
-
-  const handleClearSearch = () => {
-    searchParams.delete("search");
-    replaceUrl(searchParams);
-  };
+  const [, setSearch] = useSearch();
 
   return (
     <Empty>
@@ -33,7 +28,10 @@ export default function NoSearchResults() {
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button variant="outline" onClick={handleClearSearch}>
+        <Button
+          variant="outline"
+          onClick={() => setSearch({ search: null, page: 1 })}
+        >
           <X />
           Clear search
         </Button>

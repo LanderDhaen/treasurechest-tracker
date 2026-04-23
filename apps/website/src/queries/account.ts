@@ -215,9 +215,9 @@ export const withFilteredAccounts = (filters: FilterConfig) => {
 
   let query = eb.selectFrom("account").where("account.isActive", "=", true);
 
-  const { excludeUntrackedAccounts, accountId } = filters;
+  const { onlyTracked, accountId } = filters;
 
-  if (excludeUntrackedAccounts === true) {
+  if (onlyTracked === true) {
     query = query.where("account.isTracked", "=", true);
   }
 

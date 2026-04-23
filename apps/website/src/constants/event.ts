@@ -4,7 +4,7 @@ export enum EventStatus {
   Upcoming = "Upcoming",
 }
 
-export const SORT_OPTIONS = [
+export const EVENT_SORT_OPTIONS = [
   { label: "Code", value: "code" },
   { label: "Status", value: "status" },
   { label: "Type", value: "type" },
@@ -14,7 +14,7 @@ export const SORT_OPTIONS = [
   { label: "Rewards", value: "maxChests" },
 ];
 
-export const DEFAULT_SORT_OPTION = "endDate";
-export const DEFAULT_SORT_DIRECTION = "desc";
+export const DEFAULT_EVENT_SORT_OPTION = "endDate";
+export const DEFAULT_EVENT_SORT_DIRECTION = "desc";
 
 export const FIRST_EVENT_START_DATE = new Date(2024, 8, 19);

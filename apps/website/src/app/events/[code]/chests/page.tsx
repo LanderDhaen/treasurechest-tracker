@@ -11,7 +11,11 @@ import ChestTable from "@/components/chest-table";
 import { chestSearchParamsSchema } from "@/schemas/chest";
 import SearchBar from "@/components/searchbar";
 import SortingMenu from "@/components/sorting-menu";
-import { SORT_OPTIONS } from "@/constants/chest";
+import {
+  DEFAULT_CHEST_SORT_OPTION,
+  DEFAULT_CHEST_SORT_DIRECTION,
+  CHEST_SORT_OPTIONS,
+} from "@/constants/chest";
 import Pagination from "@/components/pagination";
 import { FilterConfig } from "@/types/common";
 
@@ -60,21 +64,15 @@ export default async function Page({
       <Card>
         <CardContent className="flex flex-col gap-4">
           <div className="flex justify-between gap-2">
-            <SearchBar currentSearch={search} rows={rows} />
+            <SearchBar rows={rows} />
             <SortingMenu
-              currentSort={sortBy}
-              currentDirection={direction}
-              sortingOptions={SORT_OPTIONS}
+              defaultSort={DEFAULT_CHEST_SORT_OPTION}
+              defaultDirection={DEFAULT_CHEST_SORT_DIRECTION}
+              sortingOptions={CHEST_SORT_OPTIONS}
             />
           </div>
           <ChestTable chests={chests} totalChests={totalChests} />
-          {totalPages > 0 && (
-            <Pagination
-              currentPage={page}
-              currentPageSize={pageSize}
-              totalPages={totalPages}
-            />
-          )}
+          {totalPages > 0 && <Pagination totalPages={totalPages} />}
         </CardContent>
       </Card>
     </div>
