@@ -17,4 +17,4 @@ export const EVENT_SORT_OPTIONS = [
 export const DEFAULT_EVENT_SORT_OPTION = "endDate";
 export const DEFAULT_EVENT_SORT_DIRECTION = "desc";
 
-export const FIRST_EVENT_START_DATE = new Date(2024, 8, 19);
+export const FIRST_EVENT_START_DATE = new Date(2025, 8, 19);
