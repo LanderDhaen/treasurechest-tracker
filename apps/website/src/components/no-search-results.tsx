@@ -11,9 +11,11 @@ import {
 } from "./ui/empty";
 import { Button } from "./ui/button";
 import { useSearch } from "@/hooks/use-search";
+import { usePagination } from "@/hooks/use-pagination";
 
 export default function NoSearchResults() {
   const [, setSearch] = useSearch();
+  const [, setPagination] = usePagination();
 
   return (
     <Empty>
@@ -28,7 +30,13 @@ export default function NoSearchResults() {
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button variant="outline" onClick={() => setSearch(null)}>
+        <Button
+          variant="outline"
+          onClick={() => {
+            setSearch("");
+            setPagination({ page: 1 });
+          }}
+        >
           <X />
           Clear search
         </Button>
