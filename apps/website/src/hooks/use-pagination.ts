@@ -8,7 +8,7 @@ export function usePagination() {
       pageSize: parseAsInteger.withDefault(DEFAULT_PAGE_SIZE),
     },
     {
-      shallow: true,
+      shallow: false,
       scroll: true,
     },
   );
