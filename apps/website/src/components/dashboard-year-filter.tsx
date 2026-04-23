@@ -12,9 +12,8 @@ import {
 
 import { parseAsNumberLiteral, useQueryState } from "nuqs";
 
-import { FIRST_EVENT_START_DATE } from "@/constants/event";
+import { RELEASE_YEAR } from "@/constants/event";
 
-const RELEASE_YEAR = FIRST_EVENT_START_DATE.getFullYear();
 const CURRENT_YEAR = new Date().getFullYear();
 const YEARS = Array.from(
   { length: CURRENT_YEAR - RELEASE_YEAR + 1 },
