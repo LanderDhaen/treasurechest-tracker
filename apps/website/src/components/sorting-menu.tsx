@@ -15,6 +15,7 @@ import { Button } from "./ui/button";
 import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { usePagination } from "@/hooks/use-pagination";
+import { useSorting } from "@/hooks/use-sorting";
 
 interface SortingMenuProps {
   defaultSort: string;
@@ -30,38 +31,31 @@ export default function SortingMenu({
   defaultDirection,
   sortingOptions,
 }: SortingMenuProps) {
-  const [sort, setSort] = useQueryState("sortBy", {
-    defaultValue: defaultSort,
-    shallow: false,
-  });
-
-  const [direction, setDirection] = useQueryState("direction", {
-    defaultValue: defaultDirection,
-    shallow: false,
-  });
-
-  const [, setPagination] = usePagination();
+  const [{ sortBy, direction }, setSorting] = useSorting(
+    defaultSort,
+    defaultDirection,
+  );
 
   const isCurrentlyAscending = direction === "asc";
+  const nextDirection = isCurrentlyAscending ? "desc" : "asc";
 
   return (
     <ButtonGroup>
       <Button
-        onClick={() => {
-          setDirection(isCurrentlyAscending ? "desc" : "asc");
-          setPagination({ page: 1 });
-        }}
+        onClick={() =>
+          setSorting({
+            direction: nextDirection,
+            page: 1,
+          })
+        }
         variant="outline"
         size="icon"
       >
         {isCurrentlyAscending ? <ArrowUpNarrowWide /> : <ArrowDownWideNarrow />}
       </Button>
       <Select
-        onValueChange={(value) => {
-          setSort(value);
-          setPagination({ page: 1 });
-        }}
-        value={sort}
+        onValueChange={(value) => setSorting({ sortBy: value, page: 1 })}
+        value={sortBy}
       >
         <SelectTrigger className="w-32">
           <SelectValue />
