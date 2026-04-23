@@ -90,9 +90,7 @@ export default function Pagination({ totalPages }: PaginationProps) {
               variant="outline"
               size="icon"
               disabled={button.disabled}
-              onClick={() =>
-                setPagination((prev) => ({ ...prev, page: button.page }))
-              }
+              onClick={() => setPagination({ page: button.page })}
             >
               {button.icon}
             </Button>
