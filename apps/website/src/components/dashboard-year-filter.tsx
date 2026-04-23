@@ -27,35 +27,39 @@ export default function DashboardYearFilter() {
 
   return (
     <ButtonGroup>
-      <Select
-        onValueChange={(value) =>
-          setDashboardFilters({ year: parseInt(value, 10) })
-        }
-        value={year?.toString() || ""}
-      >
-        <SelectTrigger className="w-40 bg-white">
-          <SelectValue placeholder="Filter by year" />
-        </SelectTrigger>
-        <SelectContent position="popper">
-          <SelectGroup>
-            <SelectLabel>Year</SelectLabel>
-            {YEARS.map((year) => (
-              <SelectItem key={year} value={year.toString()}>
-                {year}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-      <Button
-        variant="outline"
-        size="icon"
-        className="bg-white hover:bg-white"
-        onClick={() => setDashboardFilters({ year: null })}
-        disabled={!year}
-      >
-        <X />
-      </Button>
+      <ButtonGroup>
+        <Select
+          onValueChange={(value) =>
+            setDashboardFilters({ year: parseInt(value, 10) })
+          }
+          value={year?.toString() || ""}
+        >
+          <SelectTrigger className="w-40 bg-white shadow-md">
+            <SelectValue placeholder="Filter by year" />
+          </SelectTrigger>
+          <SelectContent position="popper">
+            <SelectGroup>
+              <SelectLabel>Year</SelectLabel>
+              {YEARS.map((year) => (
+                <SelectItem key={year} value={year.toString()}>
+                  {year}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </ButtonGroup>
+      <ButtonGroup>
+        <Button
+          variant="outline"
+          size="icon"
+          className="bg-white shadow-md hover:bg-white"
+          onClick={() => setDashboardFilters({ year: null })}
+          disabled={!year}
+        >
+          <X />
+        </Button>
+      </ButtonGroup>
     </ButtonGroup>
   );
 }
