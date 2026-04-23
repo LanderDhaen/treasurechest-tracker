@@ -1,8 +1,13 @@
 "use client";
 
 import { useSearch } from "@/hooks/use-search";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
-import { SearchIcon } from "lucide-react";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "./ui/input-group";
+import { SearchIcon, X } from "lucide-react";
 import { debounce } from "nuqs";
 
 interface SearchBarProps {
@@ -44,6 +49,12 @@ export default function SearchBar({ rows }: SearchBarProps) {
       {search && (
         <InputGroupAddon align="inline-end">
           {rows} result{rows !== 1 ? "s" : ""}
+          <InputGroupButton
+            size="icon-xs"
+            onClick={() => setSearch({ search: null, page: 1 })}
+          >
+            <X />
+          </InputGroupButton>
         </InputGroupAddon>
       )}
     </InputGroup>

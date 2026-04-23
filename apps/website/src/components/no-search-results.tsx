@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 import { useSearch } from "@/hooks/use-search";
 
 export default function NoSearchResults() {
-  const [{ search }, setSearch] = useSearch();
+  const [, setSearch] = useSearch();
 
   return (
     <Empty>
@@ -21,7 +21,7 @@ export default function NoSearchResults() {
         <EmptyMedia variant="icon">
           <SearchX />
         </EmptyMedia>
-        <EmptyTitle>No matches found for &quot;{search}&quot;</EmptyTitle>
+        <EmptyTitle>No matches found</EmptyTitle>
         <EmptyDescription>
           Try adjusting your search criteria to find what you&apos;re looking
           for.
