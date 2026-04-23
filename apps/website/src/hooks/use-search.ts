@@ -1,8 +1,14 @@
-import { useQueryState } from "nuqs";
+import { DEFAULT_PAGE } from "@/constants/common";
+import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
 
 export function useSearch() {
-  return useQueryState("search", {
-    defaultValue: "",
-    shallow: false,
-  });
+  return useQueryStates(
+    {
+      search: parseAsString.withDefault(""),
+      page: parseAsInteger.withDefault(DEFAULT_PAGE),
+    },
+    {
+      shallow: false,
+    },
+  );
 }

@@ -4,30 +4,37 @@ import { useSearch } from "@/hooks/use-search";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 import { SearchIcon } from "lucide-react";
 import { debounce } from "nuqs";
+import { useClearSearch } from "@/hooks/use-clear-search";
 
 interface SearchBarProps {
   rows: number;
 }
 
 export default function SearchBar({ rows }: SearchBarProps) {
-  const [search, setSearch] = useSearch();
+  const [{ search }, setSearch] = useSearch();
+  const handleClearSearch = useClearSearch();
 
   return (
     <InputGroup>
       <InputGroupInput
         value={search}
         onChange={(e) =>
-          setSearch(e.target.value, {
-            limitUrlUpdates: debounce(300),
-          })
+          setSearch(
+            {
+              search: e.currentTarget.value,
+            },
+            {
+              limitUrlUpdates: debounce(300),
+            },
+          )
         }
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            setSearch(e.currentTarget.value);
+            setSearch({ search: e.currentTarget.value });
           }
 
           if (e.key === "Escape") {
-            setSearch(null);
+            handleClearSearch();
           }
         }}
         placeholder="Search..."
