@@ -3,15 +3,12 @@
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import { parseAsBoolean, useQueryState } from "nuqs";
+import { DEFAULT_ONLY_TRACKED } from "@/constants/dashboard";
 
-export default function DashboardTrackedFilter({
-  defaultOnlyTracked,
-}: {
-  defaultOnlyTracked: boolean;
-}) {
+export default function DashboardTrackedFilter() {
   const [onlyTracked, setOnlyTracked] = useQueryState(
     "tracked",
-    parseAsBoolean.withDefault(defaultOnlyTracked).withOptions({
+    parseAsBoolean.withDefault(DEFAULT_ONLY_TRACKED).withOptions({
       shallow: false,
     }),
   );

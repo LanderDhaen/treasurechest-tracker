@@ -22,7 +22,7 @@ export default async function Page({
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-4">
         <DashboardYearFilter />
-        <DashboardTrackedFilter defaultOnlyTracked={false} />
+        <DashboardTrackedFilter />
       </div>
       <Dashboard filters={filters} />
     </div>

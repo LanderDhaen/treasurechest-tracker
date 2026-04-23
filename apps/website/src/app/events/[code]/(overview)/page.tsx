@@ -43,7 +43,7 @@ export default async function Page({
       <Separator />
       <EventTabs eventCode={code} />
       <div className="flex items-center justify-end">
-        <DashboardTrackedFilter defaultOnlyTracked={false} />
+        <DashboardTrackedFilter />
       </div>
       <Dashboard filters={filters} hideEventCards />
     </div>

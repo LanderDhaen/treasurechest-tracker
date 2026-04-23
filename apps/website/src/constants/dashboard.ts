@@ -1,5 +1,7 @@
 import { ChartConfig } from "@/components/ui/chart";
 
+export const DEFAULT_ONLY_TRACKED = false;
+
 export const chartConfig = {
   common: { label: "Common", color: "#a3a3a3" },
   rare: { label: "Rare", color: "#93c5fd" },
