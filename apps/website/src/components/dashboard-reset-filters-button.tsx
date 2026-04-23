@@ -2,16 +2,10 @@
 
 import { RotateCcw } from "lucide-react";
 import { Button } from "./ui/button";
-import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
+import { useDashboardFilters } from "@/hooks/use-dashboard-filters";
 
 export default function DashboardResetFiltersButton() {
-  const [, setDashboardFilters] = useQueryStates(
-    {
-      year: parseAsInteger,
-      tracked: parseAsString,
-    },
-    { shallow: false },
-  );
+  const [, setDashboardFilters] = useDashboardFilters();
 
   return (
     <Button

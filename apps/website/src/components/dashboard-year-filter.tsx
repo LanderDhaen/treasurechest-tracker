@@ -10,12 +10,11 @@ import {
   SelectValue,
 } from "./ui/select";
 
-import { parseAsNumberLiteral, useQueryState } from "nuqs";
-
 import { RELEASE_YEAR } from "@/constants/event";
 import { ButtonGroup } from "./ui/button-group";
 import { Button } from "./ui/button";
 import { X } from "lucide-react";
+import { useDashboardFilters } from "@/hooks/use-dashboard-filters";
 
 const CURRENT_YEAR = new Date().getFullYear();
 const YEARS = Array.from(
@@ -24,16 +23,15 @@ const YEARS = Array.from(
 );
 
 export default function DashboardYearFilter() {
-  const [selectedYear, setSelectedYear] = useQueryState(
-    "year",
-    parseAsNumberLiteral(YEARS).withOptions({ shallow: false }),
-  );
+  const [{ year }, setDashboardFilters] = useDashboardFilters();
 
   return (
     <ButtonGroup>
       <Select
-        onValueChange={(value) => setSelectedYear(parseInt(value, 10))}
-        value={selectedYear?.toString() || ""}
+        onValueChange={(value) =>
+          setDashboardFilters({ year: parseInt(value, 10) })
+        }
+        value={year?.toString() || ""}
       >
         <SelectTrigger className="w-40 bg-white">
           <SelectValue placeholder="Filter by year" />
@@ -53,8 +51,8 @@ export default function DashboardYearFilter() {
         variant="outline"
         size="icon"
         className="bg-white hover:bg-white"
-        onClick={() => setSelectedYear(null)}
-        disabled={!selectedYear}
+        onClick={() => setDashboardFilters({ year: null })}
+        disabled={!year}
       >
         <X />
       </Button>

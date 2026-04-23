@@ -2,16 +2,10 @@
 
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
-import { parseAsBoolean, useQueryState } from "nuqs";
-import { DEFAULT_ONLY_TRACKED } from "@/constants/dashboard";
+import { useDashboardFilters } from "@/hooks/use-dashboard-filters";
 
 export default function DashboardTrackedFilter() {
-  const [onlyTracked, setOnlyTracked] = useQueryState(
-    "tracked",
-    parseAsBoolean.withDefault(DEFAULT_ONLY_TRACKED).withOptions({
-      shallow: false,
-    }),
-  );
+  const [{ tracked }, setDashboardFilters] = useDashboardFilters();
 
   return (
     <div className="flex items-center justify-end gap-2">
@@ -24,8 +18,8 @@ export default function DashboardTrackedFilter() {
       <Switch
         id="tracked-accounts"
         className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500"
-        checked={onlyTracked}
-        onCheckedChange={setOnlyTracked}
+        checked={tracked}
+        onCheckedChange={(checked) => setDashboardFilters({ tracked: checked })}
       />
     </div>
   );
