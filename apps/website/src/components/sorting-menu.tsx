@@ -13,8 +13,6 @@ import {
 import { ButtonGroup } from "./ui/button-group";
 import { Button } from "./ui/button";
 import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
-import { useQueryState } from "nuqs";
-import { usePagination } from "@/hooks/use-pagination";
 import { useSorting } from "@/hooks/use-sorting";
 
 interface SortingMenuProps {
