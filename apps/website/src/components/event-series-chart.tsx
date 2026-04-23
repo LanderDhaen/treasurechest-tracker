@@ -9,7 +9,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { chartConfig } from "@/constants/common";
+import { chartConfig } from "@/constants/dashboard";
 
 interface SeriesChartProps {
   series: {
