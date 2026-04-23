@@ -1,4 +1,5 @@
 import Dashboard from "@/components/dashboard";
+import DashboardResetFilters from "@/components/dashboard-reset-filters-button";
 import DashboardTrackedFilter from "@/components/dashboard-tracked-filter";
 import DashboardYearFilter from "@/components/dashboard-year-filter";
 import { dashboardFiltersSchema } from "@/schemas/common";
@@ -23,6 +24,7 @@ export default async function Page({
       <div className="flex items-center justify-between gap-4">
         <DashboardYearFilter />
         <DashboardTrackedFilter />
+        <DashboardResetFilters />
       </div>
       <Dashboard filters={filters} />
     </div>
