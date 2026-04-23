@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Select,
   SelectContent,
@@ -7,6 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+
+import { parseAsInteger, useQueryState } from "nuqs";
 
 import { FIRST_EVENT_START_DATE } from "@/constants/event";
 
@@ -18,9 +22,17 @@ const YEARS = Array.from(
 );
 
 export default function DashboardYearFilter() {
+  const [selectedYear, setSelectedYear] = useQueryState(
+    "year",
+    parseAsInteger.withOptions({ shallow: false }),
+  );
+
   return (
-    <Select>
-      <SelectTrigger className="w-32 bg-white">
+    <Select
+      onValueChange={(value) => setSelectedYear(parseInt(value, 10))}
+      value={selectedYear?.toString()}
+    >
+      <SelectTrigger className="w-40 bg-white">
         <SelectValue placeholder="Filter by year" />
       </SelectTrigger>
       <SelectContent position="popper">
