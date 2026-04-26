@@ -9,6 +9,8 @@ import { Separator } from "@/components/ui/separator";
 import AccountTabs from "@/components/account-tabs";
 import DashboardYearFilter from "@/components/dashboard-year-filter";
 import { dashboardFiltersSchema } from "@/schemas/common";
+import DashboardTrackedFilter from "@/components/dashboard-tracked-filter";
+import DashboardResetFiltersButton from "@/components/dashboard-reset-filters-button";
 
 export default async function Page({
   params,
@@ -42,7 +44,10 @@ export default async function Page({
       </AuthGuard>
       <Separator />
       <AccountTabs accountTag={account.tag} />
-      <DashboardYearFilter />
+      <div className="flex flex-col md:flex-row  md:items-center md:justify-between gap-4">
+        <DashboardYearFilter />
+        <DashboardResetFiltersButton />
+      </div>
       <Dashboard filters={filters} hideAccountCard />
     </div>
   );

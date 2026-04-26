@@ -1,5 +1,5 @@
 import Dashboard from "@/components/dashboard";
-import DashboardResetFilters from "@/components/dashboard-reset-filters-button";
+import DashboardResetFiltersButton from "@/components/dashboard-reset-filters-button";
 import DashboardTrackedFilter from "@/components/dashboard-tracked-filter";
 import DashboardYearFilter from "@/components/dashboard-year-filter";
 import { Separator } from "@/components/ui/separator";
@@ -31,7 +31,7 @@ export default async function Page({
           />
           <DashboardTrackedFilter />
         </div>
-        <DashboardResetFilters />
+        <DashboardResetFiltersButton />
       </div>
       <Dashboard filters={filters} />
     </div>
