@@ -7,8 +7,6 @@ import { getAllRarities } from "@/queries/rarity";
 import { chestFormSearchParamsSchema } from "@/schemas/chest";
 import { notFound } from "next/navigation";
 
-const DEFAULT_OPENED_AT = new Date();
-
 export default async function Page({
   searchParams,
 }: {
@@ -35,7 +33,7 @@ export default async function Page({
     raritySlug: rarities[0]?.slug || "",
     amount: 1,
     rewardSlug: "",
-    openedAt: DEFAULT_OPENED_AT,
+    openedAt: new Date(),
   };
 
   return (

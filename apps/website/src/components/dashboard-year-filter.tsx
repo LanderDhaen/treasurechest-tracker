@@ -16,14 +16,14 @@ import { Button } from "./ui/button";
 import { X } from "lucide-react";
 import { useDashboardFilters } from "@/hooks/use-dashboard-filters";
 
-const CURRENT_YEAR = new Date().getFullYear();
-const YEARS = Array.from(
-  { length: CURRENT_YEAR - RELEASE_YEAR + 1 },
-  (_, i) => CURRENT_YEAR - i,
-);
-
 export default function DashboardYearFilter() {
   const [{ year }, setDashboardFilters] = useDashboardFilters();
+
+  const currentYear = new Date().getFullYear();
+  const years = Array.from(
+    { length: currentYear - RELEASE_YEAR + 1 },
+    (_, i) => currentYear - i,
+  );
 
   return (
     <ButtonGroup>
@@ -40,7 +40,7 @@ export default function DashboardYearFilter() {
           <SelectContent position="popper">
             <SelectGroup>
               <SelectLabel>Year</SelectLabel>
-              {YEARS.map((year) => (
+              {years.map((year) => (
                 <SelectItem key={year} value={year.toString()}>
                   {year}
                 </SelectItem>

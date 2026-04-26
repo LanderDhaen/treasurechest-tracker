@@ -86,8 +86,6 @@ interface ChestFormProps {
   defaultValues: ChestFormValues;
 }
 
-const TODAY = new Date();
-
 export default function ChestForm({
   accounts,
   events,
@@ -193,14 +191,16 @@ export default function ChestForm({
   }, [selectedEvent, form]);
 
   const handleDisabledDates = (date: Date) => {
+    const today = new Date();
+
     if (!selectedEvent) {
-      const isOutsideOfEventRange = date < RELEASE_DATE || date > TODAY;
+      const isOutsideOfEventRange = date < RELEASE_DATE || date > today;
       return isOutsideOfEventRange;
     }
 
     const minDate = selectedEvent.startDate;
     const maxDate =
-      selectedEvent.endDate > TODAY ? TODAY : selectedEvent.endDate;
+      selectedEvent.endDate > today ? today : selectedEvent.endDate;
     const isOutsideOfEventRange = date < minDate || date > maxDate;
 
     return isOutsideOfEventRange;

@@ -19,3 +19,5 @@ export const DEFAULT_EVENT_SORT_DIRECTION = "desc";
 
 export const RELEASE_DATE = new Date(2025, 8, 19);
 export const RELEASE_YEAR = RELEASE_DATE.getFullYear();
+
+export const DEFAULT_MAX_CHESTS = 1;
