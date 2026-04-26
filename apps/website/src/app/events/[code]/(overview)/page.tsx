@@ -4,11 +4,13 @@ import { FilterConfig } from "@/types/common";
 import { notFound } from "next/navigation";
 import Dashboard from "@/components/dashboard";
 import { dashboardFiltersSchema } from "@/schemas/common";
-import DashboardFilters from "@/components/dashboard-filters";
 import { Separator } from "@/components/ui/separator";
 import AuthGuard from "@/components/auth-guard";
 import EventActions from "@/components/event-actions";
 import EventTabs from "@/components/event-tabs";
+import DashboardTrackedFilter from "@/components/dashboard-tracked-filter";
+import DashboardYearFilter from "@/components/dashboard-year-filter";
+import DashboardResetFiltersButton from "@/components/dashboard-reset-filters-button";
 
 export default async function Page({
   params,
@@ -42,7 +44,10 @@ export default async function Page({
       </AuthGuard>
       <Separator />
       <EventTabs eventCode={code} />
-      <DashboardFilters defaultOnlyTracked={false} />
+      <div className="flex flex-col md:flex-row  md:items-center md:justify-between gap-4">
+        <DashboardTrackedFilter />
+        <DashboardResetFiltersButton />
+      </div>
       <Dashboard filters={filters} hideEventCards />
     </div>
   );

@@ -4,7 +4,7 @@ import {
   DEFAULT_CHEST_SORT_DIRECTION,
   DEFAULT_CHEST_SORT_OPTION,
 } from "@/constants/chest";
-import { FIRST_EVENT_START_DATE } from "@/constants/event";
+import { RELEASE_DATE } from "@/constants/event";
 import { formatDate } from "@/lib/utils";
 
 export const chestSearchParamsSchema = z.object({
@@ -31,8 +31,8 @@ export const chestFormSchema = z.object({
   openedAt: z
     .date("Opening time must be a valid date")
     .refine(
-      (date) => date >= FIRST_EVENT_START_DATE,
-      `Opening time cannot be before the first event start date ${formatDate(FIRST_EVENT_START_DATE)}`,
+      (date) => date >= RELEASE_DATE,
+      `Opening time cannot be before the release date ${formatDate(RELEASE_DATE)}`,
     )
     .refine(
       (date) => date <= new Date(),

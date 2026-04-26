@@ -9,7 +9,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { chartConfig } from "@/constants/common";
+import { chartConfig } from "@/constants/dashboard";
 
 interface RarityChartProps {
   rarities: {
@@ -26,7 +26,7 @@ export default function RarityChart({ rarities }: RarityChartProps) {
   }));
 
   return (
-    <ChartContainer config={chartConfig} className="min-h-52">
+    <ChartContainer config={chartConfig} className="min-h-52 w-full">
       <PieChart>
         <ChartTooltip
           cursor={false}

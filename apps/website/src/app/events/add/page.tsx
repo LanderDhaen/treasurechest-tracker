@@ -1,13 +1,10 @@
 import EventForm from "@/components/event-form";
+import { DEFAULT_MAX_CHESTS } from "@/constants/event";
 import { getServerSession } from "@/queries/auth";
 import { getAllSeries } from "@/queries/series";
 import { getAllTypes } from "@/queries/type";
 import { eventFormSearchParamsSchema } from "@/schemas/event";
 import { notFound } from "next/navigation";
-
-const DEFAULT_FROM_DATE = new Date();
-const DEFAULT_TO_DATE = new Date();
-const DEFAULT_MAX_CHESTS = 1;
 
 export default async function Page({
   searchParams,
@@ -27,10 +24,12 @@ export default async function Page({
   const series = await getAllSeries();
   const types = await getAllTypes();
 
+  const today = new Date();
+
   const defaultValues = {
     dateRange: {
-      from: DEFAULT_FROM_DATE,
-      to: DEFAULT_TO_DATE,
+      from: today,
+      to: today,
     },
     maxChests: DEFAULT_MAX_CHESTS,
     seriesCode: seriesCode || series[0]?.code || "",

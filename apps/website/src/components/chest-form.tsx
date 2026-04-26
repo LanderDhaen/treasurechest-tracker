@@ -44,7 +44,7 @@ import { formatDate } from "@/lib/utils";
 import { CalendarIcon, CalendarPlus, UserRoundPlus } from "lucide-react";
 import { Calendar } from "./ui/calendar";
 import { createChestAction } from "@/actions/chest";
-import { FIRST_EVENT_START_DATE } from "@/constants/event";
+import { RELEASE_DATE } from "@/constants/event";
 import { ButtonGroup } from "./ui/button-group";
 import Link from "next/link";
 
@@ -85,8 +85,6 @@ interface ChestFormProps {
   }[];
   defaultValues: ChestFormValues;
 }
-
-const TODAY = new Date();
 
 export default function ChestForm({
   accounts,
@@ -193,15 +191,16 @@ export default function ChestForm({
   }, [selectedEvent, form]);
 
   const handleDisabledDates = (date: Date) => {
+    const today = new Date();
+
     if (!selectedEvent) {
-      const isOutsideOfEventRange =
-        date < FIRST_EVENT_START_DATE || date > TODAY;
+      const isOutsideOfEventRange = date < RELEASE_DATE || date > today;
       return isOutsideOfEventRange;
     }
 
     const minDate = selectedEvent.startDate;
     const maxDate =
-      selectedEvent.endDate > TODAY ? TODAY : selectedEvent.endDate;
+      selectedEvent.endDate > today ? today : selectedEvent.endDate;
     const isOutsideOfEventRange = date < minDate || date > maxDate;
 
     return isOutsideOfEventRange;

@@ -43,6 +43,7 @@ import { createEventAction } from "@/actions/event";
 import { formatEventName } from "@/lib/event";
 import { ButtonGroup } from "./ui/button-group";
 import Link from "next/link";
+import { RELEASE_DATE } from "@/constants/event";
 
 interface EventFormProps {
   series: {
@@ -286,6 +287,7 @@ export default function EventForm({
                         }}
                         onSelect={field.onChange}
                         numberOfMonths={2}
+                        disabled={{ before: RELEASE_DATE }}
                       />
                     </PopoverContent>
                   </Popover>
