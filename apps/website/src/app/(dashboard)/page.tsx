@@ -1,4 +1,5 @@
 import Dashboard from "@/components/dashboard";
+import DashboardOngoingFilter from "@/components/dashboard-ongoing-filter";
 import DashboardResetFiltersButton from "@/components/dashboard-reset-filters-button";
 import DashboardTrackedFilter from "@/components/dashboard-tracked-filter";
 import DashboardYearFilter from "@/components/dashboard-year-filter";
@@ -30,6 +31,11 @@ export default async function Page({
             className="data-[orientation=vertical]:h-6 hidden md:block"
           />
           <DashboardTrackedFilter />
+          <Separator
+            orientation="vertical"
+            className="data-[orientation=vertical]:h-6 hidden md:block"
+          />
+          <DashboardOngoingFilter />
         </div>
         <DashboardResetFiltersButton />
       </div>

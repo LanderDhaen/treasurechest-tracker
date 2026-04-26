@@ -1,4 +1,8 @@
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "@/constants/common";
+import {
+  DEFAULT_ONLY_ONGOING,
+  DEFAULT_ONLY_TRACKED,
+} from "@/constants/dashboard";
 import { RELEASE_YEAR } from "@/constants/event";
 import * as z from "zod";
 
@@ -19,5 +23,6 @@ export const dashboardFiltersSchema = z.object({
     .max(new Date().getFullYear())
     .optional()
     .catch(undefined),
-  tracked: z.stringbool().optional().catch(false),
+  tracked: z.stringbool().optional().catch(DEFAULT_ONLY_TRACKED),
+  ongoing: z.stringbool().optional().catch(DEFAULT_ONLY_ONGOING),
 });
