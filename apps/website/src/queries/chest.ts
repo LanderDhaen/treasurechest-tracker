@@ -179,7 +179,7 @@ export const withFilteredChests = (filters: FilterConfig) => {
     .where("account.isActive", "=", true)
     .where("event.isActive", "=", true);
 
-  const { year, onlyTracked, accountId, eventId } = filters;
+  const { year, onlyTracked, onlyOngoing, accountId, eventId } = filters;
 
   if (year) {
     const startDate = new Date(year, 0, 1);
@@ -199,6 +199,13 @@ export const withFilteredChests = (filters: FilterConfig) => {
 
   if (eventId) {
     query = query.where("chest.eventId", "=", eventId);
+  }
+
+  if (onlyOngoing) {
+    const now = new Date();
+    query = query
+      .where("event.startDate", "<=", now)
+      .where("event.endDate", ">=", now);
   }
 
   return query.select([
