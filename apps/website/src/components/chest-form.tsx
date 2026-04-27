@@ -303,7 +303,10 @@ export default function ChestForm({
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor={field.name}>
-                    Townhall<span className="text-red-500 -ml-1">*</span>{" "}
+                    Townhall<span className="text-red-500 -ml-1">*</span>
+                    <span className="text-xs text-muted-foreground">
+                      (max. TH{maxTownhallLevel})
+                    </span>
                   </FieldLabel>
                   <Input
                     {...field}
@@ -319,8 +322,7 @@ export default function ChestForm({
                   />
                   <FieldDescription>
                     Change the townhall level if the chest was opened before the
-                    account reached its current townhall level. Currently TH
-                    {maxTownhallLevel} is the highest townhall level.
+                    account reached its current townhall level.
                   </FieldDescription>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
