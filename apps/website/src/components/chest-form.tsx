@@ -133,6 +133,21 @@ export default function ChestForm({
     setIsLoading(false);
   };
 
+  const selectedAccountTag = useWatch({
+    control: form.control,
+    name: "accountTag",
+  });
+
+  useEffect(() => {
+    const selectedAccount = accounts.find(
+      (account) => account.tag === selectedAccountTag,
+    );
+
+    if (!selectedAccount) return;
+
+    form.setValue("townhallLevel", selectedAccount.townhall);
+  }, [selectedAccountTag, accounts, form]);
+
   const selectTownhallLevel = useWatch({
     control: form.control,
     name: "townhallLevel",
