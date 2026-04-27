@@ -200,8 +200,6 @@ export default function ChestForm({
     if (currentOpenedAt < selectedEvent.startDate) {
       return form.setValue("openedAt", selectedEvent.startDate);
     }
-
-    return form.setValue("openedAt", currentOpenedAt);
   }, [selectedEvent, form]);
 
   const handleDisabledDates = (date: Date) => {
