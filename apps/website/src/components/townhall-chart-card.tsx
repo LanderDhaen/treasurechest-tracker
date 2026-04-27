@@ -2,6 +2,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -29,6 +30,10 @@ export default async function TownhallChartCard({
       <CardContent>
         <TownhallChart townhalls={townhalls} />
       </CardContent>
+      <CardFooter className="text-sm text-muted-foreground">
+        Based on the townhall level of the account at the time of opening the
+        chest.
+      </CardFooter>
     </Card>
   );
 }
