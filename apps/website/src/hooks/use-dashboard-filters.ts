@@ -8,8 +8,9 @@ export function useDashboardFilters() {
   return useQueryStates(
     {
       year: parseAsInteger,
-      tracked: parseAsBoolean.withDefault(DEFAULT_ONLY_TRACKED),
       ongoing: parseAsBoolean.withDefault(DEFAULT_ONLY_ONGOING),
+      townhall: parseAsInteger,
+      tracked: parseAsBoolean.withDefault(DEFAULT_ONLY_TRACKED),
     },
     {
       shallow: false,
