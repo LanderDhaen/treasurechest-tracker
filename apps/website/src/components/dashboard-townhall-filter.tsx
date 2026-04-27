@@ -3,7 +3,12 @@
 import { X } from "lucide-react";
 import { Button } from "./ui/button";
 import { ButtonGroup } from "./ui/button-group";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "./ui/input-group";
 import { useDashboardFilters } from "@/hooks/use-dashboard-filters";
 import { debounce } from "nuqs";
 
@@ -17,48 +22,43 @@ export default function DashboardTownhallFilter({
   const [{ townhall }, setDashboardFilters] = useDashboardFilters();
 
   return (
-    <ButtonGroup>
-      <ButtonGroup>
-        <InputGroup className="w-25 bg-white shadow-md">
-          <InputGroupInput
-            type="number"
-            min={1}
-            max={highestTownhall}
-            value={townhall || ""}
-            onChange={(e) =>
-              setDashboardFilters(
-                { townhall: e.target.valueAsNumber || null },
-                {
-                  limitUrlUpdates: debounce(500),
-                },
-              )
-            }
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                setDashboardFilters({
-                  townhall: e.currentTarget.valueAsNumber || null,
-                });
-              }
+    <InputGroup className="w-30 bg-white shadow-md ">
+      <InputGroupInput
+        className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+        type="number"
+        min={1}
+        max={highestTownhall}
+        value={townhall || ""}
+        onChange={(e) =>
+          setDashboardFilters(
+            { townhall: e.target.valueAsNumber || null },
+            {
+              limitUrlUpdates: debounce(500),
+            },
+          )
+        }
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            setDashboardFilters({
+              townhall: e.currentTarget.valueAsNumber || null,
+            });
+          }
 
-              if (e.key === "Escape") {
-                setDashboardFilters({ townhall: null });
-              }
-            }}
-          />
-          <InputGroupAddon align="inline-start">TH</InputGroupAddon>
-        </InputGroup>
-      </ButtonGroup>
-      <ButtonGroup>
-        <Button
-          variant="outline"
-          size="icon"
-          className="bg-white shadow-md hover:bg-white"
+          if (e.key === "Escape") {
+            setDashboardFilters({ townhall: null });
+          }
+        }}
+      />
+      <InputGroupAddon align="inline-start">TH</InputGroupAddon>
+      <InputGroupAddon align="inline-end">
+        <InputGroupButton
+          size="icon-sm"
           onClick={() => setDashboardFilters({ townhall: null })}
           disabled={!townhall}
         >
           <X />
-        </Button>
-      </ButtonGroup>
-    </ButtonGroup>
+        </InputGroupButton>
+      </InputGroupAddon>
+    </InputGroup>
   );
 }

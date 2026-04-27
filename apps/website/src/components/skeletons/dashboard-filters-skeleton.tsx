@@ -32,8 +32,7 @@ export default function DashboardFiltersSkeleton({
         {!hideAccountFiltersSkeleton && (
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <Skeleton className="w-25 h-9" />
-              <Skeleton className="w-9 h-9" />
+              <Skeleton className="w-30 h-9" />
             </div>
             <DashboardFilterSeparator />
             <div className="flex items-center gap-2">
