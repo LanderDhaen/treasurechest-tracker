@@ -224,6 +224,7 @@ export const createChest = async ({
   openedAt,
   rarityId,
   accountId,
+  townhallId,
   eventId,
   rewardId,
 }: InsertableChest) => {
@@ -234,6 +235,7 @@ export const createChest = async ({
       openedAt,
       rarityId,
       accountId,
+      townhallId,
       eventId,
       rewardId,
     })
