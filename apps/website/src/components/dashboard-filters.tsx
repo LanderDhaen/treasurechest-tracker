@@ -25,11 +25,13 @@ export default function DashboardFilters({
               className="data-[orientation=vertical]:h-6 hidden md:block"
             />
             <DashboardOngoingFilter />
-            <Separator
-              orientation="vertical"
-              className="data-[orientation=vertical]:h-6 hidden md:block"
-            />
           </>
+        )}
+        {!hideAccountFilters && !hideEventFilters && (
+          <Separator
+            orientation="vertical"
+            className="data-[orientation=vertical]:h-6 hidden md:block"
+          />
         )}
         {!hideAccountFilters && (
           <>
