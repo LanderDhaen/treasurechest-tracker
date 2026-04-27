@@ -34,9 +34,9 @@ export default async function Page({
   const { year, ongoing } = parsedParams;
 
   const filters = {
+    accountId: account.id,
     year: year,
     onlyOngoing: ongoing,
-    accountId: account.id,
   } satisfies FilterConfig;
 
   return (

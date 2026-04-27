@@ -1,7 +1,8 @@
 export type FilterConfig = {
-  onlyTracked?: boolean;
-  onlyOngoing?: boolean;
-  year?: number;
   accountId?: number;
   eventId?: number;
+  year?: number;
+  onlyTracked?: boolean;
+  townhall?: number;
+  onlyOngoing?: boolean;
 };

@@ -213,19 +213,32 @@ export const getChestCountPerAccount = async (filters: FilterConfig) => {
 export const withFilteredAccounts = (filters: FilterConfig) => {
   const eb = expressionBuilder<Database>();
 
-  let query = eb.selectFrom("account").where("account.isActive", "=", true);
+  let query = eb
+    .selectFrom("account")
+    .innerJoin("townhall", "account.townhallId", "townhall.id")
+    .where("account.isActive", "=", true);
 
-  const { onlyTracked, accountId } = filters;
-
-  if (onlyTracked === true) {
-    query = query.where("account.isTracked", "=", true);
-  }
+  const { accountId, townhall, onlyTracked } = filters;
 
   if (accountId) {
     query = query.where("account.id", "=", accountId);
   }
 
-  return query.selectAll();
+  if (townhall) {
+    query = query.where("townhall.level", "=", townhall);
+  }
+
+  if (onlyTracked === true) {
+    query = query.where("account.isTracked", "=", true);
+  }
+
+  return query.select([
+    "account.id",
+    "account.name",
+    "account.tag",
+    "account.isTracked",
+    "townhall.level as townhall",
+  ]);
 };
 
 export const createAccount = async ({

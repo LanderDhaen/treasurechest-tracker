@@ -175,23 +175,13 @@ export const withFilteredChests = (filters: FilterConfig) => {
     .selectFrom("chest")
     .innerJoin("account", "chest.accountId", "account.id")
     .innerJoin("event", "chest.eventId", "event.id")
+    .innerJoin("townhall", "chest.townhallId", "townhall.id")
     .where("chest.isActive", "=", true)
     .where("account.isActive", "=", true)
     .where("event.isActive", "=", true);
 
-  const { year, onlyTracked, onlyOngoing, accountId, eventId } = filters;
-
-  if (year) {
-    const startDate = new Date(year, 0, 1);
-    const endDate = new Date(year + 1, 0, 1);
-    query = query
-      .where("chest.openedAt", ">=", startDate)
-      .where("chest.openedAt", "<", endDate);
-  }
-
-  if (onlyTracked === true) {
-    query = query.where("account.isTracked", "=", true);
-  }
+  const { accountId, eventId, year, onlyOngoing, townhall, onlyTracked } =
+    filters;
 
   if (accountId) {
     query = query.where("account.id", "=", accountId);
@@ -201,11 +191,27 @@ export const withFilteredChests = (filters: FilterConfig) => {
     query = query.where("chest.eventId", "=", eventId);
   }
 
+  if (year) {
+    const startDate = new Date(year, 0, 1);
+    const endDate = new Date(year + 1, 0, 1);
+    query = query
+      .where("chest.openedAt", ">=", startDate)
+      .where("chest.openedAt", "<", endDate);
+  }
+
   if (onlyOngoing) {
     const now = new Date();
     query = query
       .where("event.startDate", "<=", now)
       .where("event.endDate", ">=", now);
+  }
+
+  if (townhall) {
+    query = query.where("townhall.level", "=", townhall);
+  }
+
+  if (onlyTracked === true) {
+    query = query.where("account.isTracked", "=", true);
   }
 
   return query.select([
