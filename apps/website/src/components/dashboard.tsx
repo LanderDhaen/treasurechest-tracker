@@ -93,6 +93,7 @@ export default function Dashboard({
               <ChartCardSkeleton
                 title="Townhalls"
                 description="Shows the number of treasure chests opened per townhall"
+                context="at opening"
               />
             }
           >

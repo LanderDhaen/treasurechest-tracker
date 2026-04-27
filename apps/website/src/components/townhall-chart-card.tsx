@@ -25,15 +25,12 @@ export default async function TownhallChartCard({
         <CardTitle>Townhalls</CardTitle>
         <CardDescription>
           Shows the number of treasure chests opened per townhall
+          <span className="italic text-xs"> (at opening)</span>
         </CardDescription>
       </CardHeader>
       <CardContent>
         <TownhallChart townhalls={townhalls} />
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Based on the townhall level of the account at the time of opening the
-        chest.
-      </CardFooter>
     </Card>
   );
 }
