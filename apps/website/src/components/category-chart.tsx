@@ -32,7 +32,7 @@ export default function CategoryChart({ categories }: CategoryChartProps) {
   }));
 
   return (
-    <ChartContainer config={chartConfig} className="min-h-52 w-full">
+    <ChartContainer config={chartConfig} className="min-h-80 w-full">
       <BarChart
         accessibilityLayer
         data={chartData}

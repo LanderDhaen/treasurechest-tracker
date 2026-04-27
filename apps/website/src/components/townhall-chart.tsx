@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/chart";
 import { chartConfig } from "@/constants/dashboard";
 
-interface SeriesChartProps {
-  series: {
-    name: string;
+interface TownhallChartProps {
+  townhalls: {
+    level: number;
     count: number;
     rarities: {
       name: string;
@@ -22,9 +22,9 @@ interface SeriesChartProps {
   }[];
 }
 
-export default function EventSeriesChart({ series }: SeriesChartProps) {
-  const chartData = series.map(({ name, rarities, count }) => ({
-    name,
+export default function TownhallChart({ townhalls }: TownhallChartProps) {
+  const chartData = townhalls.map(({ level, count, rarities }) => ({
+    name: `TH${level}`,
     ...Object.fromEntries(
       rarities.map(({ name, count }) => [name.toLowerCase(), count]),
     ),
@@ -32,7 +32,7 @@ export default function EventSeriesChart({ series }: SeriesChartProps) {
   }));
 
   return (
-    <ChartContainer config={chartConfig} className="min-h-80 w-full">
+    <ChartContainer config={chartConfig} className="min-h-100 w-full">
       <BarChart
         accessibilityLayer
         data={chartData}
@@ -48,13 +48,8 @@ export default function EventSeriesChart({ series }: SeriesChartProps) {
           tickLine={false}
           tickMargin={10}
           axisLine={false}
-          width={110}
+          width={50}
           interval={0}
-          tickFormatter={(value: string) => {
-            if (value.length > 12) {
-              return value.substring(0, 10) + "..";
-            } else return value;
-          }}
         />
         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
         <Bar

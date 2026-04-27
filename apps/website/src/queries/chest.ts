@@ -214,6 +214,7 @@ export const withFilteredChests = (filters: FilterConfig) => {
     "chest.rarityId",
     "chest.rewardId",
     "chest.accountId",
+    "chest.townhallId",
     "chest.eventId",
     "chest.amount",
     "chest.openedAt",
