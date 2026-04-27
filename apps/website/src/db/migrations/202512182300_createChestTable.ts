@@ -21,6 +21,10 @@ export const up = async (db: Kysely<any>) => {
     .addColumn("accountId", "integer", (c) =>
       c.references("account.id").notNull().onDelete("restrict"),
     )
+    .addColumn("townhallId", "integer", (c) =>
+      c.references("townhall.id").notNull().onDelete("restrict"),
+    )
+
     .addColumn("eventId", "integer", (c) =>
       c.references("event.id").notNull().onDelete("restrict"),
     )
