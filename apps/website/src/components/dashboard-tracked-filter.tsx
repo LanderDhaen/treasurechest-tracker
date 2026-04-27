@@ -11,15 +11,15 @@ export default function DashboardTrackedFilter() {
     <div className="flex items-center md:justify-end gap-2">
       <Switch
         id="tracked-accounts"
-        className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500 shadow-md"
+        className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-zinc-300 shadow-md"
         checked={tracked}
         onCheckedChange={(checked) => setDashboardFilters({ tracked: checked })}
-      />{" "}
+      />
       <Label
         htmlFor="tracked-accounts"
         className="text-sm text-muted-foreground"
       >
-        Only show tracked accounts
+        Tracked accounts only
       </Label>
     </div>
   );

@@ -13,7 +13,7 @@ export default function DashboardTownhallFilter() {
   return (
     <ButtonGroup>
       <ButtonGroup>
-        <InputGroup className="w-40 bg-white shadow-md">
+        <InputGroup className="w-25 bg-white shadow-md">
           <InputGroupInput
             type="number"
             value={townhall || ""}
