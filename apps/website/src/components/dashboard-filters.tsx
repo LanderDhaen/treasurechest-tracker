@@ -1,5 +1,6 @@
 import DashboardOngoingFilter from "./dashboard-ongoing-filter";
 import DashboardResetFiltersButton from "./dashboard-reset-filters-button";
+import DashboardTownhallFilter from "./dashboard-townhall-filter";
 import DashboardTrackedFilter from "./dashboard-tracked-filter";
 import DashboardYearFilter from "./dashboard-year-filter";
 import { Separator } from "./ui/separator";
@@ -30,7 +31,16 @@ export default function DashboardFilters({
             />
           </>
         )}
-        {!hideAccountFilters && <DashboardTrackedFilter />}
+        {!hideAccountFilters && (
+          <>
+            <DashboardTownhallFilter />
+            <Separator
+              orientation="vertical"
+              className="data-[orientation=vertical]:h-6 hidden md:block"
+            />
+            <DashboardTrackedFilter />
+          </>
+        )}
       </div>
       <DashboardResetFiltersButton />
     </div>
