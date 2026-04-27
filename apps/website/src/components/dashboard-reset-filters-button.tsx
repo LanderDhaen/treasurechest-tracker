@@ -5,10 +5,10 @@ import { Button } from "./ui/button";
 import { useDashboardFilters } from "@/hooks/use-dashboard-filters";
 
 export default function DashboardResetFiltersButton() {
-  const [{ year, ongoing, townhall, tracked }, setDashboardFilters] =
+  const [{ year, ongoing, tracked }, setDashboardFilters] =
     useDashboardFilters();
 
-  const shouldDisable = !year && !ongoing && !townhall && !tracked;
+  const shouldDisable = !year && !ongoing && !tracked;
 
   return (
     <Button

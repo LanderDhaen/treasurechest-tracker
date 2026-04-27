@@ -218,14 +218,10 @@ export const withFilteredAccounts = (filters: FilterConfig) => {
     .innerJoin("townhall", "account.townhallId", "townhall.id")
     .where("account.isActive", "=", true);
 
-  const { accountId, townhall, onlyTracked } = filters;
+  const { accountId, onlyTracked } = filters;
 
   if (accountId) {
     query = query.where("account.id", "=", accountId);
-  }
-
-  if (townhall) {
-    query = query.where("townhall.level", "=", townhall);
   }
 
   if (onlyTracked === true) {

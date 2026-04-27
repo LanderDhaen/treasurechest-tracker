@@ -3,6 +3,5 @@ export type FilterConfig = {
   eventId?: number;
   year?: number;
   onlyTracked?: boolean;
-  townhall?: number;
   onlyOngoing?: boolean;
 };

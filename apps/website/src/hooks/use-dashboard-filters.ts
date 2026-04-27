@@ -9,7 +9,6 @@ export function useDashboardFilters() {
     {
       year: parseAsInteger,
       ongoing: parseAsBoolean.withDefault(DEFAULT_ONLY_ONGOING),
-      townhall: parseAsInteger,
       tracked: parseAsBoolean.withDefault(DEFAULT_ONLY_TRACKED),
     },
     {

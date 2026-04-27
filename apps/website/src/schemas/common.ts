@@ -24,6 +24,5 @@ export const dashboardFiltersSchema = z.object({
     .optional()
     .catch(undefined),
   ongoing: z.stringbool().optional().catch(DEFAULT_ONLY_ONGOING),
-  townhall: z.coerce.number().int().min(1).optional().catch(undefined),
   tracked: z.stringbool().optional().catch(DEFAULT_ONLY_TRACKED),
 });

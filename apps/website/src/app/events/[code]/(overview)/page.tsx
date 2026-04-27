@@ -27,10 +27,9 @@ export default async function Page({
 
   const rawParams = await searchParams;
   const parsedParams = dashboardFiltersSchema.parse(rawParams);
-  const { tracked, townhall } = parsedParams;
+  const { tracked } = parsedParams;
 
   const filters = {
-    townhall: townhall,
     onlyTracked: tracked,
     eventId: event.id,
   } satisfies FilterConfig;

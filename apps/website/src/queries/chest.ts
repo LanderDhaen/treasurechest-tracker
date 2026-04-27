@@ -180,8 +180,7 @@ export const withFilteredChests = (filters: FilterConfig) => {
     .where("account.isActive", "=", true)
     .where("event.isActive", "=", true);
 
-  const { accountId, eventId, year, onlyOngoing, townhall, onlyTracked } =
-    filters;
+  const { accountId, eventId, year, onlyOngoing, onlyTracked } = filters;
 
   if (accountId) {
     query = query.where("account.id", "=", accountId);
@@ -204,10 +203,6 @@ export const withFilteredChests = (filters: FilterConfig) => {
     query = query
       .where("event.startDate", "<=", now)
       .where("event.endDate", ">=", now);
-  }
-
-  if (townhall) {
-    query = query.where("townhall.level", "=", townhall);
   }
 
   if (onlyTracked === true) {

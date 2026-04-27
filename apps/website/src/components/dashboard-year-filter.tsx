@@ -34,7 +34,7 @@ export default function DashboardYearFilter() {
           }
           value={year?.toString() || ""}
         >
-          <SelectTrigger className="w-25 bg-white shadow-md">
+          <SelectTrigger className="w-40 bg-white shadow-md">
             <SelectValue placeholder="Year" />
           </SelectTrigger>
           <SelectContent position="popper">
