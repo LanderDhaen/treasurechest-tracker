@@ -7,7 +7,13 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 import { useDashboardFilters } from "@/hooks/use-dashboard-filters";
 import { debounce } from "nuqs";
 
-export default function DashboardTownhallFilter() {
+interface DashboardTownhallFilterProps {
+  highestTownhall: number;
+}
+
+export default function DashboardTownhallFilter({
+  highestTownhall,
+}: DashboardTownhallFilterProps) {
   const [{ townhall }, setDashboardFilters] = useDashboardFilters();
 
   return (
@@ -16,6 +22,8 @@ export default function DashboardTownhallFilter() {
         <InputGroup className="w-25 bg-white shadow-md">
           <InputGroupInput
             type="number"
+            min={1}
+            max={highestTownhall}
             value={townhall || ""}
             onChange={(e) =>
               setDashboardFilters(

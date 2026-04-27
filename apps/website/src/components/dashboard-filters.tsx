@@ -1,3 +1,6 @@
+import DashboardAccountFilters from "./dashboard-account-filters";
+import DashboardEventFilters from "./dashboard-event-filters";
+import DashboardFilterSeparator from "./dashboard-filter-separator";
 import DashboardOngoingFilter from "./dashboard-ongoing-filter";
 import DashboardResetFiltersButton from "./dashboard-reset-filters-button";
 import DashboardTownhallFilter from "./dashboard-townhall-filter";
@@ -17,32 +20,11 @@ export default function DashboardFilters({
   return (
     <div className="flex flex-col md:flex-row  md:items-center md:justify-between gap-4">
       <div className="flex flex-col md:flex-row md:items-center gap-4">
-        {!hideEventFilters && (
-          <div className="flex items-center gap-4">
-            <DashboardYearFilter />
-            <Separator
-              orientation="vertical"
-              className="data-[orientation=vertical]:h-6 hidden md:block"
-            />
-            <DashboardOngoingFilter />
-          </div>
-        )}
+        {!hideEventFilters && <DashboardEventFilters />}
         {!hideAccountFilters && !hideEventFilters && (
-          <Separator
-            orientation="vertical"
-            className="data-[orientation=vertical]:h-6 hidden md:block"
-          />
+          <DashboardFilterSeparator />
         )}
-        {!hideAccountFilters && (
-          <div className="flex items-center gap-4">
-            <DashboardTownhallFilter />
-            <Separator
-              orientation="vertical"
-              className="data-[orientation=vertical]:h-6 hidden md:block"
-            />
-            <DashboardTrackedFilter />
-          </div>
-        )}
+        {!hideAccountFilters && <DashboardAccountFilters />}
       </div>
       <DashboardResetFiltersButton />
     </div>
