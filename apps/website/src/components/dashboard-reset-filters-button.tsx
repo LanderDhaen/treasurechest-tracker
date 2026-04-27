@@ -11,13 +11,15 @@ export default function DashboardResetFiltersButton() {
   const shouldDisable = !year && !ongoing && !tracked;
 
   return (
-    <Button
-      variant="outline"
-      className="bg-white shadow-md"
-      onClick={() => setDashboardFilters(null)}
-      disabled={shouldDisable}
-    >
-      <RotateCcw /> Reset
-    </Button>
+    <div className="flex justify-end">
+      <Button
+        variant="outline"
+        className="bg-white shadow-md"
+        onClick={() => setDashboardFilters(null)}
+        disabled={shouldDisable}
+      >
+        <RotateCcw /> Reset
+      </Button>
+    </div>
   );
 }

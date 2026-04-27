@@ -38,7 +38,9 @@ export default function DashboardFiltersSkeleton({
           </div>
         )}
       </div>
-      <Skeleton className="w-22.5 h-9" />
+      <div className="flex justify-end">
+        <Skeleton className="w-22.5 h-9" />
+      </div>
     </div>
   );
 }
