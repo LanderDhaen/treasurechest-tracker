@@ -133,14 +133,10 @@ export default function ChestForm({
     setIsLoading(false);
   };
 
-  const selectedAccountTag = useWatch({
+  const selectTownhallLevel = useWatch({
     control: form.control,
-    name: "accountTag",
+    name: "townhallLevel",
   });
-
-  const selectedAccount = accounts.find(
-    (account) => account.tag === selectedAccountTag,
-  );
 
   const selectedRaritySlug = useWatch({
     control: form.control,
@@ -156,7 +152,7 @@ export default function ChestForm({
       ...category,
       rewards: category.rewards.filter((reward) => {
         const shouldExcludeForTownhallRule =
-          !selectedAccount || reward.minTownhall <= selectedAccount.townhall;
+          !selectTownhallLevel || reward.minTownhall <= selectTownhallLevel;
 
         const shouldExcludeForRarityRule =
           !selectedRarity ||
