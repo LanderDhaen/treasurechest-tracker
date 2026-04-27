@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { FilterConfig } from "@/types/common";
 import { getChestCountPerTownhall } from "@/queries/townhall";
+import TownhallChart from "./townhall-chart";
 
 interface TownhallChartCardProps {
   filters: FilterConfig;
@@ -26,12 +27,7 @@ export default async function TownhallChartCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {townhalls.map((townhall) => (
-          <div key={townhall.level} className="flex justify-between">
-            <span>Townhall {townhall.level}</span>
-            <span>{townhall.count}</span>
-          </div>
-        ))}
+        <TownhallChart townhalls={townhalls} />
       </CardContent>
     </Card>
   );
