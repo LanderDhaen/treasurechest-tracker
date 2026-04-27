@@ -8,9 +8,6 @@ import { Separator } from "@/components/ui/separator";
 import AuthGuard from "@/components/auth-guard";
 import EventActions from "@/components/event-actions";
 import EventTabs from "@/components/event-tabs";
-import DashboardTrackedFilter from "@/components/dashboard-tracked-filter";
-import DashboardYearFilter from "@/components/dashboard-year-filter";
-import DashboardResetFiltersButton from "@/components/dashboard-reset-filters-button";
 import DashboardFilters from "@/components/dashboard-filters";
 
 export default async function Page({

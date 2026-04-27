@@ -7,11 +7,7 @@ import AccountActions from "@/components/account-actions";
 import AuthGuard from "@/components/auth-guard";
 import { Separator } from "@/components/ui/separator";
 import AccountTabs from "@/components/account-tabs";
-import DashboardYearFilter from "@/components/dashboard-year-filter";
 import { dashboardFiltersSchema } from "@/schemas/common";
-import DashboardTrackedFilter from "@/components/dashboard-tracked-filter";
-import DashboardResetFiltersButton from "@/components/dashboard-reset-filters-button";
-import DashboardOngoingFilter from "@/components/dashboard-ongoing-filter";
 import DashboardFilters from "@/components/dashboard-filters";
 
 export default async function Page({

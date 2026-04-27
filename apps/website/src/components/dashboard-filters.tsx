@@ -1,12 +1,7 @@
 import DashboardAccountFilters from "./dashboard-account-filters";
 import DashboardEventFilters from "./dashboard-event-filters";
 import DashboardFilterSeparator from "./dashboard-filter-separator";
-import DashboardOngoingFilter from "./dashboard-ongoing-filter";
 import DashboardResetFiltersButton from "./dashboard-reset-filters-button";
-import DashboardTownhallFilter from "./dashboard-townhall-filter";
-import DashboardTrackedFilter from "./dashboard-tracked-filter";
-import DashboardYearFilter from "./dashboard-year-filter";
-import { Separator } from "./ui/separator";
 
 interface DashboardFiltersProps {
   hideAccountFilters?: boolean;
