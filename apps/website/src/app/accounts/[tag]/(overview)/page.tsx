@@ -12,6 +12,7 @@ import { dashboardFiltersSchema } from "@/schemas/common";
 import DashboardTrackedFilter from "@/components/dashboard-tracked-filter";
 import DashboardResetFiltersButton from "@/components/dashboard-reset-filters-button";
 import DashboardOngoingFilter from "@/components/dashboard-ongoing-filter";
+import DashboardFilters from "@/components/dashboard-filters";
 
 export default async function Page({
   params,
@@ -46,17 +47,7 @@ export default async function Page({
       </AuthGuard>
       <Separator />
       <AccountTabs accountTag={account.tag} />
-      <div className="flex flex-col md:flex-row  md:items-center md:justify-between gap-4">
-        <div className="flex flex-col md:flex-row md:items-center gap-4">
-          <DashboardYearFilter />
-          <Separator
-            orientation="vertical"
-            className="data-[orientation=vertical]:h-6 hidden md:block"
-          />
-          <DashboardOngoingFilter />
-        </div>
-        <DashboardResetFiltersButton />
-      </div>
+      <DashboardFilters hideAccountFilters />
       <Dashboard filters={filters} hideAccountCard />
     </div>
   );
