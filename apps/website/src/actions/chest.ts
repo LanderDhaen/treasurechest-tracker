@@ -36,8 +36,15 @@ export const createChestAction = async (formData: ChestFormValues) => {
     };
   }
 
-  const { accountTag, eventCode, raritySlug, amount, rewardSlug, openedAt } =
-    result.data;
+  const {
+    accountTag,
+    townhallLevel,
+    eventCode,
+    raritySlug,
+    amount,
+    rewardSlug,
+    openedAt,
+  } = result.data;
 
   const account = await getAccountByTag(accountTag);
 
@@ -184,6 +191,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       openedAt,
       rarityId: rarity.id,
       accountId: account.id,
+      townhallId: townhallLevel,
       eventId: event.id,
       rewardId: reward.id,
     });

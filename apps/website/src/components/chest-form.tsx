@@ -84,6 +84,7 @@ interface ChestFormProps {
     }[];
   }[];
   defaultValues: ChestFormValues;
+  maxTownhallLevel: number;
 }
 
 export default function ChestForm({
@@ -92,6 +93,7 @@ export default function ChestForm({
   rarities,
   categories,
   defaultValues,
+  maxTownhallLevel,
 }: ChestFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -99,6 +101,7 @@ export default function ChestForm({
     resolver: zodResolver(chestFormSchema),
     defaultValues: {
       accountTag: defaultValues.accountTag,
+      townhallLevel: defaultValues.townhallLevel,
       eventCode: defaultValues.eventCode,
       raritySlug: defaultValues.raritySlug,
       amount: defaultValues.amount,
@@ -279,6 +282,37 @@ export default function ChestForm({
                       </Button>
                     </ButtonGroup>
                   </ButtonGroup>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <Controller
+              name="townhallLevel"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    Townhall<span className="text-red-500 -ml-1">*</span>{" "}
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id={field.name}
+                    aria-invalid={fieldState.invalid}
+                    type="number"
+                    placeholder="Townhall"
+                    disabled={isLoading}
+                    min={1}
+                    max={maxTownhallLevel}
+                    required
+                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                  />
+                  <FieldDescription>
+                    Change the townhall level if the chest was opened before the
+                    account reached its current townhall level. Currently TH
+                    {maxTownhallLevel} is the highest townhall level.
+                  </FieldDescription>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
