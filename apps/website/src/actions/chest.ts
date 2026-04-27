@@ -8,6 +8,7 @@ import { createChest, getTotalChests } from "@/queries/chest";
 import { getEventByCode } from "@/queries/event";
 import { getRarityBySlug } from "@/queries/rarity";
 import { getRewardBySlug } from "@/queries/reward";
+import { getTownhallByLevel } from "@/queries/townhall";
 import { chestFormSchema, ChestFormValues } from "@/schemas/chest";
 import { DatabaseError } from "pg";
 
@@ -36,8 +37,15 @@ export const createChestAction = async (formData: ChestFormValues) => {
     };
   }
 
-  const { accountTag, eventCode, raritySlug, amount, rewardSlug, openedAt } =
-    result.data;
+  const {
+    accountTag,
+    townhallLevel,
+    eventCode,
+    raritySlug,
+    amount,
+    rewardSlug,
+    openedAt,
+  } = result.data;
 
   const account = await getAccountByTag(accountTag);
 
@@ -59,6 +67,19 @@ export const createChestAction = async (formData: ChestFormValues) => {
         code: "ACCOUNT_NOT_TRACKED",
         field: "accountTag",
         message: "The specified account is not tracked.",
+      },
+    };
+  }
+
+  const townhall = await getTownhallByLevel(townhallLevel);
+
+  if (!townhall) {
+    return {
+      data: null,
+      error: {
+        code: "TOWNHALL_NOT_FOUND",
+        field: "townhallLevel",
+        message: "The specified townhall level was not found.",
       },
     };
   }
@@ -127,14 +148,14 @@ export const createChestAction = async (formData: ChestFormValues) => {
     };
   }
 
-  const isValidTownhall = reward.minTownhall <= account.townhall.level;
+  const isValidTownhall = reward.minTownhall <= townhall.level;
 
   if (!isValidTownhall) {
     return {
       data: null,
       error: {
         code: "TOWNHALL_TOO_LOW",
-        field: "accountTag",
+        field: "townhallLevel",
         message: `The specified reward requires at least TH${reward.minTownhall}.`,
       },
     };
@@ -184,6 +205,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       openedAt,
       rarityId: rarity.id,
       accountId: account.id,
+      townhallId: townhall.id,
       eventId: event.id,
       rewardId: reward.id,
     });
@@ -219,6 +241,8 @@ export const createChestAction = async (formData: ChestFormValues) => {
           },
         };
       } else {
+        console.error("Error creating chest:", error);
+
         return {
           data: null,
           error: {

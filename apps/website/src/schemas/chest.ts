@@ -22,6 +22,7 @@ export type ChestSearchParams = z.infer<typeof chestSearchParamsSchema>;
 
 export const chestFormSchema = z.object({
   accountTag: z.string().min(1, "Account is required"),
+  townhallLevel: z.number().min(1, "Townhall is required"),
   eventCode: z.string().min(1, "Event is required"),
   raritySlug: z.string().min(1, "Rarity is required"),
   amount: z

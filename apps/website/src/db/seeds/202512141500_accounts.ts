@@ -106,7 +106,7 @@ export const seed = async (db: Kysely<any>) => {
         name: "Lvl.10 Lander",
         tag: "L2VP2C2P0",
         isTracked: false,
-        townhallId: 10,
+        townhallId: 8,
         clanId: 4, // DL Mini
       },
       {

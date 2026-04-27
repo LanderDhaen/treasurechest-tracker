@@ -158,7 +158,10 @@ export default function AccountForm({
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor={field.name}>
-                    Townhall<span className="text-red-500 -ml-1">*</span>{" "}
+                    Townhall<span className="text-red-500 -ml-1">*</span>
+                    <span className="text-xs text-muted-foreground">
+                      (max. TH{maxTownhallLevel})
+                    </span>
                   </FieldLabel>
                   <Input
                     {...field}
@@ -172,10 +175,6 @@ export default function AccountForm({
                     required
                     onChange={(e) => field.onChange(e.target.valueAsNumber)}
                   />
-                  <FieldDescription>
-                    Currently TH{maxTownhallLevel} is the highest townhall
-                    level.
-                  </FieldDescription>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}

@@ -250,7 +250,11 @@ export const withFilteredEvents = (filters: FilterConfig) => {
 
   let query = eb.selectFrom("event").where("event.isActive", "=", true);
 
-  const { year, onlyOngoing, eventId } = filters;
+  const { eventId, year, onlyOngoing } = filters;
+
+  if (eventId) {
+    query = query.where("event.id", "=", eventId);
+  }
 
   if (year) {
     const startDate = new Date(year, 0, 1);
@@ -266,10 +270,6 @@ export const withFilteredEvents = (filters: FilterConfig) => {
     query = query
       .where("event.startDate", "<=", now)
       .where("event.endDate", ">=", now);
-  }
-
-  if (eventId) {
-    query = query.where("event.id", "=", eventId);
   }
 
   return query.selectAll();

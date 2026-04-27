@@ -15,6 +15,7 @@ export interface ChestTable {
   openedAt: ColumnType<Date>;
   rarityId: ColumnType<number>;
   accountId: ColumnType<number>;
+  townhallId: ColumnType<number>;
   eventId: ColumnType<number>;
   rewardId: ColumnType<number>;
 }
