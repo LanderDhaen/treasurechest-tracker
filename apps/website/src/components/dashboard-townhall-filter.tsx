@@ -25,6 +25,17 @@ export default function DashboardTownhallFilter() {
                 },
               )
             }
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setDashboardFilters({
+                  townhall: e.currentTarget.valueAsNumber || null,
+                });
+              }
+
+              if (e.key === "Escape") {
+                setDashboardFilters({ townhall: null });
+              }
+            }}
           />
           <InputGroupAddon align="inline-start">TH</InputGroupAddon>
         </InputGroup>
