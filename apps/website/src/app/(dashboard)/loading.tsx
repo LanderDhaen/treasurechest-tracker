@@ -1,3 +1,4 @@
+import DashboardOngoingFilterSkeleton from "@/components/skeletons/dashboard-ongoing-filter-skeleton";
 import DashboardResetFiltersButtonSkeleton from "@/components/skeletons/dashboard-reset-filters-button-skeleton";
 import DashboardSkeleton from "@/components/skeletons/dashboard-skeleton";
 import DashboardTrackedFilterSkeleton from "@/components/skeletons/dashboard-tracked-filter-skeleton";
@@ -15,6 +16,11 @@ export default function Loading() {
             className="data-[orientation=vertical]:h-6 hidden md:block"
           />
           <DashboardTrackedFilterSkeleton />
+          <Separator
+            orientation="vertical"
+            className="data-[orientation=vertical]:h-6 hidden md:block"
+          />
+          <DashboardOngoingFilterSkeleton />
         </div>
         <DashboardResetFiltersButtonSkeleton />
       </div>

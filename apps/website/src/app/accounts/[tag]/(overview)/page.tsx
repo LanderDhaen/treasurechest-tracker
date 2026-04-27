@@ -11,6 +11,8 @@ import DashboardYearFilter from "@/components/dashboard-year-filter";
 import { dashboardFiltersSchema } from "@/schemas/common";
 import DashboardTrackedFilter from "@/components/dashboard-tracked-filter";
 import DashboardResetFiltersButton from "@/components/dashboard-reset-filters-button";
+import DashboardOngoingFilter from "@/components/dashboard-ongoing-filter";
+import DashboardFilters from "@/components/dashboard-filters";
 
 export default async function Page({
   params,
@@ -29,10 +31,11 @@ export default async function Page({
 
   const rawParams = await searchParams;
   const parsedParams = dashboardFiltersSchema.parse(rawParams);
-  const { year } = parsedParams;
+  const { year, ongoing } = parsedParams;
 
   const filters = {
     year: year,
+    onlyOngoing: ongoing,
     accountId: account.id,
   } satisfies FilterConfig;
 
@@ -44,10 +47,7 @@ export default async function Page({
       </AuthGuard>
       <Separator />
       <AccountTabs accountTag={account.tag} />
-      <div className="flex flex-col md:flex-row  md:items-center md:justify-between gap-4">
-        <DashboardYearFilter />
-        <DashboardResetFiltersButton />
-      </div>
+      <DashboardFilters hideAccountFilters />
       <Dashboard filters={filters} hideAccountCard />
     </div>
   );

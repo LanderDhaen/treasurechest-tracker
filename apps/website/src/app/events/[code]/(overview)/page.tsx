@@ -11,6 +11,7 @@ import EventTabs from "@/components/event-tabs";
 import DashboardTrackedFilter from "@/components/dashboard-tracked-filter";
 import DashboardYearFilter from "@/components/dashboard-year-filter";
 import DashboardResetFiltersButton from "@/components/dashboard-reset-filters-button";
+import DashboardFilters from "@/components/dashboard-filters";
 
 export default async function Page({
   params,
@@ -44,10 +45,7 @@ export default async function Page({
       </AuthGuard>
       <Separator />
       <EventTabs eventCode={code} />
-      <div className="flex flex-col md:flex-row  md:items-center md:justify-between gap-4">
-        <DashboardTrackedFilter />
-        <DashboardResetFiltersButton />
-      </div>
+      <DashboardFilters hideEventFilters />
       <Dashboard filters={filters} hideEventCards />
     </div>
   );
