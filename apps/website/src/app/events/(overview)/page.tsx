@@ -16,10 +16,11 @@ import {
   EVENT_SORT_OPTIONS,
 } from "@/constants/event";
 import SearchBar from "@/components/searchbar";
-import { getServerSession } from "@/queries/auth";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CalendarPlus } from "lucide-react";
+import AuthGuard from "@/components/auth-guard";
+import DesktopSeparator from "@/components/desktop-separator";
 
 export default async function Page({
   searchParams,
@@ -40,8 +41,6 @@ export default async function Page({
 
   const totalEvents = await getTotalEvents();
 
-  const session = await getServerSession();
-
   return (
     <Card className="shadow-md">
       <CardHeader>
@@ -51,27 +50,30 @@ export default async function Page({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <div className="flex justify-between gap-2">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
           <SearchBar rows={rows} />
-          <SortingMenu
-            defaultSort={DEFAULT_EVENT_SORT_OPTION}
-            defaultDirection={DEFAULT_EVENT_SORT_DIRECTION}
-            sortingOptions={EVENT_SORT_OPTIONS}
-          />
-          {session && (
-            <Button asChild variant="outline" size="icon">
-              <Link
-                href={{
-                  pathname: "/events/add",
-                  query: {
-                    returnTo: "/events",
-                  },
-                }}
-              >
-                <CalendarPlus />
-              </Link>
-            </Button>
-          )}
+          <DesktopSeparator />
+          <div className="flex gap-2">
+            <SortingMenu
+              defaultSort={DEFAULT_EVENT_SORT_OPTION}
+              defaultDirection={DEFAULT_EVENT_SORT_DIRECTION}
+              sortingOptions={EVENT_SORT_OPTIONS}
+            />
+            <AuthGuard>
+              <Button asChild variant="outline" size="icon">
+                <Link
+                  href={{
+                    pathname: "/events/add",
+                    query: {
+                      returnTo: "/events",
+                    },
+                  }}
+                >
+                  <CalendarPlus />
+                </Link>
+              </Button>
+            </AuthGuard>
+          </div>
         </div>
         <EventTable events={events} totalEvents={totalEvents} />
         {totalPages > 0 && <Pagination totalPages={totalPages} />}

@@ -18,6 +18,7 @@ import {
 } from "@/constants/chest";
 import AccountTabs from "@/components/account-tabs";
 import { FilterConfig } from "@/types/common";
+import DesktopSeparator from "@/components/desktop-separator";
 
 export default async function Page({
   params,
@@ -63,13 +64,16 @@ export default async function Page({
       <AccountTabs accountTag={account.tag} />
       <Card>
         <CardContent className="flex flex-col gap-4">
-          <div className="flex justify-between gap-2">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
             <SearchBar rows={rows} />
-            <SortingMenu
-              defaultSort={DEFAULT_CHEST_SORT_OPTION}
-              defaultDirection={DEFAULT_CHEST_SORT_DIRECTION}
-              sortingOptions={CHEST_SORT_OPTIONS}
-            />
+            <DesktopSeparator />
+            <div className="flex gap-2">
+              <SortingMenu
+                defaultSort={DEFAULT_CHEST_SORT_OPTION}
+                defaultDirection={DEFAULT_CHEST_SORT_DIRECTION}
+                sortingOptions={CHEST_SORT_OPTIONS}
+              />
+            </div>
           </div>
           <ChestTable chests={chests} totalChests={totalChests} />
           {totalPages > 0 && <Pagination totalPages={totalPages} />}

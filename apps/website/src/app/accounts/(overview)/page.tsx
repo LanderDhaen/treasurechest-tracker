@@ -20,6 +20,7 @@ import AuthGuard from "@/components/auth-guard";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { UserRoundPlus } from "lucide-react";
+import DesktopSeparator from "@/components/desktop-separator";
 
 export default async function Page({
   searchParams,
@@ -49,25 +50,28 @@ export default async function Page({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <div className="flex justify-between gap-2">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
           <SearchBar rows={rows} />
-          <SortingMenu
-            defaultSort={DEFAULT_ACCOUNT_SORT_OPTION}
-            defaultDirection={DEFAULT_ACCOUNT_SORT_DIRECTION}
-            sortingOptions={ACCOUNT_SORT_OPTIONS}
-          />
-          <AuthGuard>
-            <Button asChild variant="outline" size="icon">
-              <Link
-                href={{
-                  pathname: "/accounts/add",
-                  query: { returnTo: "/accounts" },
-                }}
-              >
-                <UserRoundPlus />
-              </Link>
-            </Button>
-          </AuthGuard>
+          <DesktopSeparator />
+          <div className="flex gap-2">
+            <SortingMenu
+              defaultSort={DEFAULT_ACCOUNT_SORT_OPTION}
+              defaultDirection={DEFAULT_ACCOUNT_SORT_DIRECTION}
+              sortingOptions={ACCOUNT_SORT_OPTIONS}
+            />
+            <AuthGuard>
+              <Button asChild variant="outline" size="icon">
+                <Link
+                  href={{
+                    pathname: "/accounts/add",
+                    query: { returnTo: "/accounts" },
+                  }}
+                >
+                  <UserRoundPlus />
+                </Link>
+              </Button>
+            </AuthGuard>
+          </div>
         </div>
         <AccountTable accounts={accounts} totalAccounts={totalAccounts} />
         {totalPages > 0 && <Pagination totalPages={totalPages} />}

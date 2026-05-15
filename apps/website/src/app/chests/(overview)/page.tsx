@@ -20,7 +20,8 @@ import { FilterConfig } from "@/types/common";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PackagePlus } from "lucide-react";
-import { getServerSession } from "@/queries/auth";
+import AuthGuard from "@/components/auth-guard";
+import DesktopSeparator from "@/components/desktop-separator";
 
 export default async function Page({
   searchParams,
@@ -43,8 +44,6 @@ export default async function Page({
 
   const totalChests = await getTotalChests(filters);
 
-  const session = await getServerSession();
-
   return (
     <Card className="shadow-md">
       <CardHeader>
@@ -54,20 +53,23 @@ export default async function Page({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <div className="flex justify-between gap-2">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
           <SearchBar rows={rows} />
-          <SortingMenu
-            defaultSort={DEFAULT_CHEST_SORT_OPTION}
-            defaultDirection={DEFAULT_CHEST_SORT_DIRECTION}
-            sortingOptions={CHEST_SORT_OPTIONS}
-          />
-          {session && (
-            <Button asChild variant="outline" size="icon">
-              <Link href="/chests/add">
-                <PackagePlus />
-              </Link>
-            </Button>
-          )}
+          <DesktopSeparator />
+          <div className="flex gap-2">
+            <SortingMenu
+              defaultSort={DEFAULT_CHEST_SORT_OPTION}
+              defaultDirection={DEFAULT_CHEST_SORT_DIRECTION}
+              sortingOptions={CHEST_SORT_OPTIONS}
+            />
+            <AuthGuard>
+              <Button asChild variant="outline" size="icon">
+                <Link href="/chests/add">
+                  <PackagePlus />
+                </Link>
+              </Button>
+            </AuthGuard>
+          </div>
         </div>
         <ChestTable chests={chests} totalChests={totalChests} />
         {totalPages > 0 && <Pagination totalPages={totalPages} />}
