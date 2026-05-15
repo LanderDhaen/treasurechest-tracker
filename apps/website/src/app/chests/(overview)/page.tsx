@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PackagePlus } from "lucide-react";
 import AuthGuard from "@/components/auth-guard";
+import DesktopSeparator from "@/components/desktop-separator";
 
 export default async function Page({
   searchParams,
@@ -54,6 +55,7 @@ export default async function Page({
       <CardContent className="flex flex-col gap-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
           <SearchBar rows={rows} />
+          <DesktopSeparator />
           <div className="flex gap-2">
             <SortingMenu
               defaultSort={DEFAULT_CHEST_SORT_OPTION}
