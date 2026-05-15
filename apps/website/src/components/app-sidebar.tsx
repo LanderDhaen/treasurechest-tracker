@@ -17,6 +17,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 
@@ -46,6 +47,8 @@ const data = {
 };
 
 export function AppSidebar() {
+  const { setOpenMobile } = useSidebar();
+
   return (
     <Sidebar collapsible="offcanvas" className="border-r-0">
       <SidebarHeader>
@@ -62,7 +65,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {data.navMain.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton tooltip={item.title} asChild>
+                  <SidebarMenuButton
+                    tooltip={item.title}
+                    asChild
+                    onClick={() => setOpenMobile(false)}
+                  >
                     <Link href={item.url}>
                       <item.icon /> {item.title}
                     </Link>
