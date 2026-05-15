@@ -15,10 +15,7 @@ export default function DashboardFiltersSkeleton({
       <div className="flex flex-col md:flex-row md:items-center gap-4">
         {!hideEventFiltersSkeleton && (
           <div className="flex flex-col items-start md:flex-row md:items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Skeleton className="w-40 h-9" />
-              <Skeleton className="w-9 h-9" />
-            </div>
+            <Skeleton className="w-40 h-9" />
             <DashboardFilterSeparator />
             <div className="flex items-center gap-2">
               <Skeleton className="w-8 h-5" />
