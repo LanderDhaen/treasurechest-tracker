@@ -124,7 +124,17 @@ export const getAllEvents = async ({
   }
 
   if (sortBy === "type") {
-    query = query.orderBy("type.name", direction);
+    query = query
+      .orderBy("type.name", direction)
+      .orderBy(
+        (eb) =>
+          deriveEventName(
+            eb.ref("event.name"),
+            eb.ref("event.edition"),
+            eb.ref("series.name"),
+          ),
+        direction,
+      );
   }
 
   if (sortBy === "name") {
@@ -140,15 +150,29 @@ export const getAllEvents = async ({
   }
 
   if (sortBy === "startDate") {
-    query = query.orderBy("event.startDate", direction);
+    query = query
+      .orderBy("event.startDate", direction)
+      .orderBy("event.endDate", direction);
   }
 
   if (sortBy === "endDate") {
-    query = query.orderBy("event.endDate", direction);
+    query = query
+      .orderBy("event.endDate", direction)
+      .orderBy("event.startDate", direction);
   }
 
   if (sortBy === "maxChests") {
-    query = query.orderBy("event.maxChests", direction);
+    query = query
+      .orderBy("event.maxChests", direction)
+      .orderBy(
+        (eb) =>
+          deriveEventName(
+            eb.ref("event.name"),
+            eb.ref("event.edition"),
+            eb.ref("series.name"),
+          ),
+        direction,
+      );
   }
 
   query = query.orderBy("event.id", direction);

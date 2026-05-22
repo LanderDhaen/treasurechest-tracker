@@ -254,6 +254,17 @@ export const seed = async (db: Kysely<any>) => {
         createdAt: "2025-12-18T00:00:00Z",
         updatedAt: NOW,
         edition: 2,
+        code: "CR2",
+        startDate: "2026-03-13",
+        endDate: "2026-03-20",
+        maxChests: 15,
+        typeId: 3, // Clan
+        seriesId: 8, // Clan Rush
+      },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        edition: 2,
         code: "GP2",
         startDate: "2026-04-01",
         endDate: "2026-05-01",
@@ -270,7 +281,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2026-04-25",
         endDate: "2026-04-25",
         maxChests: 1,
-        typeId: 2, // Gift
+        typeId: 1, // Gift
         seriesId: 1, // Voucher
       },
       {
@@ -303,7 +314,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2026-05-04",
         endDate: "2026-05-19",
         maxChests: 13,
-        typeId: 3, // Community
+        typeId: 4, // Community
         seriesId: 11, // Clash vs. Skeletons
       },
       {
@@ -315,7 +326,7 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2026-05-16",
         endDate: "2026-05-16",
         maxChests: 1,
-        typeId: 2, // Gift
+        typeId: 1, // Gift
         seriesId: 1, // Voucher
       },
     ])
