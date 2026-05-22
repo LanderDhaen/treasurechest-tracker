@@ -21,9 +21,7 @@ interface ChestTableProps {
       name: string;
     };
     event: {
-      name: string | null;
-      edition: number;
-      series: string;
+      name: string;
     };
   }[];
   totalChests: number;

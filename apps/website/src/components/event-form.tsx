@@ -40,7 +40,6 @@ import { CalendarIcon, PlusIcon } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import { Calendar } from "./ui/calendar";
 import { createEventAction } from "@/actions/event";
-import { formatEventName } from "@/lib/event";
 import { ButtonGroup } from "./ui/button-group";
 import Link from "next/link";
 import { RELEASE_DATE } from "@/constants/event";
@@ -96,9 +95,7 @@ export default function EventForm({
         toast.error(error.message);
       }
     } else {
-      toast.success(
-        `Event "${formatEventName(event.series, event.edition)}" created successfully!`,
-      );
+      toast.success(`Event "${event.name}" created successfully!`);
 
       if (returnTo === "/chests/add") {
         redirect(`/chests/add?event=${event.code}`);

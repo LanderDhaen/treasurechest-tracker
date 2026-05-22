@@ -2,7 +2,6 @@ import { formatReward } from "@/lib/chest";
 import RarityBadge from "./rarity-badge";
 import { TableCell, TableRow } from "./ui/table";
 import { formatDateTime } from "@/lib/utils";
-import { formatEventName } from "@/lib/event";
 
 interface ChestTableRowProps {
   chest: {
@@ -15,9 +14,7 @@ interface ChestTableRowProps {
       name: string;
     };
     event: {
-      name: string | null;
-      edition: number;
-      series: string;
+      name: string;
     };
   };
 }
@@ -32,13 +29,7 @@ export default function ChestTableRow({ chest }: ChestTableRowProps) {
       <TableCell>{formatReward(chest.amount, chest.reward)}</TableCell>
       <TableCell>{formatDateTime(chest.openedAt)}</TableCell>
       <TableCell>{chest.account.name}</TableCell>
-      <TableCell>
-        {formatEventName(
-          chest.event.name,
-          chest.event.edition,
-          chest.event.series,
-        )}
-      </TableCell>
+      <TableCell>{chest.event.name}</TableCell>
     </TableRow>
   );
 }

@@ -4,21 +4,18 @@ import { EventStatus } from "@/constants/event";
 import { TableCell, TableRow } from "./ui/table";
 import { useRouter } from "next/navigation";
 import EventTypeBadge from "./event-type-badge";
-import { formatEventName } from "@/lib/event";
 import { formatDate } from "@/lib/utils";
 import EventStatusBadge from "./event-status-badge";
 
 interface EventTableRowProps {
   event: {
     code: string;
-    name: string | null;
-    edition: number;
+    name: string;
     startDate: Date;
     endDate: Date;
     maxChests: number;
     status: EventStatus;
     type: string;
-    series: string;
   };
 }
 
@@ -41,9 +38,7 @@ export default function EventTableRow({ event }: EventTableRowProps) {
       <TableCell>
         <EventTypeBadge type={event.type} />
       </TableCell>
-      <TableCell>
-        {formatEventName(event.name, event.edition, event.series)}
-      </TableCell>
+      <TableCell>{event.name}</TableCell>
       <TableCell>{formatDate(event.startDate)}</TableCell>
       <TableCell>{formatDate(event.endDate)}</TableCell>
       <TableCell>

@@ -14,14 +14,12 @@ import EventTableRow from "./event-table-row";
 interface EventTableProps {
   events: {
     code: string;
-    name: string | null;
-    edition: number;
+    name: string;
     startDate: Date;
     endDate: Date;
     maxChests: number;
     status: EventStatus;
     type: string;
-    series: string;
   }[];
   totalEvents: number;
 }

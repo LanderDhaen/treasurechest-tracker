@@ -73,6 +73,7 @@ export const createEventAction = async (formData: EventFormValues) => {
   try {
     const event = await createEvent({
       code: code,
+      name: "Testing",
       edition: edition,
       startDate: dateRange.from,
       endDate: dateRange.to,
@@ -84,8 +85,7 @@ export const createEventAction = async (formData: EventFormValues) => {
     return {
       data: {
         code: event.code,
-        series: series.name,
-        edition: event.edition,
+        name: event.name,
       },
       error: null,
     };
@@ -155,9 +155,7 @@ export const changeChestCreationAllowedStatus = async (eventId: number) => {
   return {
     data: {
       name: updatedEvent.name,
-      edition: updatedEvent.edition,
       isChestCreationAllowed: updatedEvent.isChestCreationAllowed,
-      series: updatedEvent.series,
     },
     error: null,
   };
