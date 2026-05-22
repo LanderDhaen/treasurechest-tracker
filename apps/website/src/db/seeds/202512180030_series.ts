@@ -67,6 +67,12 @@ export const seed = async (db: Kysely<any>) => {
         name: "Gold Pass",
         code: "GP",
       },
+      {
+        createdAt: "2025-12-18 00:30:00",
+        updatedAt: "2025-12-18 00:30:00",
+        name: "Clash vs. Skeletons",
+        code: "CVS",
+      },
     ])
     .execute();
 };

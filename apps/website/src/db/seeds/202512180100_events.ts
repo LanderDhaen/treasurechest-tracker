@@ -261,6 +261,63 @@ export const seed = async (db: Kysely<any>) => {
         typeId: 2, // Personal
         seriesId: 10, // Gold Pass
       },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        name: "Clash On | New Guardian, Siege Machine & CWL changes!",
+        edition: 5,
+        code: "V5",
+        startDate: "2026-04-25",
+        endDate: "2026-04-25",
+        maxChests: 1,
+        typeId: 2, // Gift
+        seriesId: 1, // Voucher
+      },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        edition: 9,
+        code: "TH9",
+        startDate: "2026-04-28",
+        endDate: "2026-05-03",
+        maxChests: 20,
+        typeId: 2, // Personal
+        seriesId: 2, // Treasure Hunt
+      },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        edition: 3,
+        code: "GP3",
+        startDate: "2026-05-01",
+        endDate: "2026-06-01",
+        maxChests: 11,
+        typeId: 2, // Personal
+        seriesId: 10, // Gold Pass
+      },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        edition: 1,
+        code: "CVS1",
+        startDate: "2026-05-04",
+        endDate: "2026-05-19",
+        maxChests: 13,
+        typeId: 3, // Community
+        seriesId: 11, // Clash vs. Skeletons
+      },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        name: "Inside The Builder's Hut | Episode 4",
+        edition: 6,
+        code: "V6",
+        startDate: "2026-05-16",
+        endDate: "2026-05-16",
+        maxChests: 1,
+        typeId: 2, // Gift
+        seriesId: 1, // Voucher
+      },
     ])
     .execute();
 
