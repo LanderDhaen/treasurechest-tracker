@@ -10,8 +10,8 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        name: "Treasure Chest Launch",
-        code: "TCL",
+        name: "Voucher",
+        code: "V",
       },
       {
         createdAt: "2025-12-18 00:30:00",
@@ -28,26 +28,8 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18 00:30:00",
         updatedAt: "2025-12-18 00:30:00",
-        name: "Christmas Chest",
-        code: "CC",
-      },
-      {
-        createdAt: "2025-12-18 00:30:00",
-        updatedAt: "2025-12-18 00:30:00",
-        name: "Content Creator Chests",
-        code: "CCC",
-      },
-      {
-        createdAt: "2025-12-18 00:30:00",
-        updatedAt: "2025-12-18 00:30:00",
         name: "Gold Rush",
         code: "GR",
-      },
-      {
-        createdAt: "2025-12-18 00:30:00",
-        updatedAt: "2025-12-18 00:30:00",
-        name: "Friend or Foe",
-        code: "FF",
       },
       {
         createdAt: "2025-12-18 00:30:00",
