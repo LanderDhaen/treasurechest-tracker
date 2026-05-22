@@ -39,7 +39,7 @@ export const createEventAction = async (formData: EventFormValues) => {
     };
   }
 
-  const { dateRange, maxChests, typeSlug, seriesCode } = result.data;
+  const { name, dateRange, maxChests, typeSlug, seriesCode } = result.data;
 
   const type = await getTypeBySlug(typeSlug);
 
@@ -73,7 +73,7 @@ export const createEventAction = async (formData: EventFormValues) => {
   try {
     const event = await createEvent({
       code: code,
-      name: "Testing",
+      name: name,
       edition: edition,
       startDate: dateRange.from,
       endDate: dateRange.to,

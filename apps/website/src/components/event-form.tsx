@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import {
   Field,
+  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -212,6 +213,36 @@ export default function EventForm({
                       </Button>
                     </ButtonGroup>
                   </ButtonGroup>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <Controller
+              name="name"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    Name
+                    <span className="text-xs text-muted-foreground">
+                      (optional)
+                    </span>
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id={field.name}
+                    aria-invalid={fieldState.invalid}
+                    type="text"
+                    placeholder="Name"
+                    value={field.value ?? ""}
+                    disabled={isLoading}
+                  />
+                  <FieldDescription>
+                    An optional name for the event. If not provided, the series
+                    name and edition will be used as the event name.
+                  </FieldDescription>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
