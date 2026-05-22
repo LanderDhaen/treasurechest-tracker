@@ -97,7 +97,7 @@ export default function EventForm({
       }
     } else {
       toast.success(
-        `Event "${formatEventName(event.name, event.edition)}" created successfully!`,
+        `Event "${formatEventName(event.series, event.edition)}" created successfully!`,
       );
 
       if (returnTo === "/chests/add") {

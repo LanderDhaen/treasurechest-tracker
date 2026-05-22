@@ -14,13 +14,14 @@ interface EventInformationItemProps {
   event: {
     id: number;
     code: string;
+    name: string | null;
     edition: number;
     startDate: Date;
     endDate: Date;
     maxChests: number;
     status: EventStatus;
-    name: string;
     type: string;
+    series: string;
   };
 }
 
@@ -31,7 +32,7 @@ export default function EventInformationItem({
     <Item className="p-0">
       <ItemContent>
         <ItemTitle className="text-xl font-bold items-center">
-          {formatEventName(event.name, event.edition)}
+          {formatEventName(event.name, event.edition, event.series)}
           <StatusBadge status={event.status} />
           <EventTypeBadge type={event.type} />
         </ItemTitle>

@@ -117,7 +117,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       error: {
         code: "CHEST_OUTSIDE_EVENT_DURATION",
         field: "openedAt",
-        message: `The opening time must be during ${formatEventName(event.name, event.edition)} (${formatDate(event.startDate)} - ${formatDate(event.endDate)}).`,
+        message: `The opening time must be during ${formatEventName(event.name, event.edition, event.series)} (${formatDate(event.startDate)} - ${formatDate(event.endDate)}).`,
       },
     };
   }
@@ -214,7 +214,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       data: {
         id: chest.id,
         account: account.name,
-        event: formatEventName(event.name, event.edition),
+        event: formatEventName(event.name, event.edition, event.series),
       },
       error: null,
     };

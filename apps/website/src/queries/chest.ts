@@ -116,7 +116,7 @@ export const getAllChests = async ({
         eb
           .selectFrom("event")
           .innerJoin("series", "event.seriesId", "series.id")
-          .select(["event.edition", "series.name"])
+          .select(["event.name", "event.edition", "series.name as series"])
           .whereRef("event.id", "=", "filtered_chest.eventId"),
       )
         .$notNull()

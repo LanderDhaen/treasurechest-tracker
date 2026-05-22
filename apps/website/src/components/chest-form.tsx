@@ -56,10 +56,11 @@ interface ChestFormProps {
   }[];
   events: {
     code: string;
-    name: string;
+    name: string | null;
     edition: number;
     startDate: Date;
     endDate: Date;
+    series: string;
   }[];
   rarities: {
     name: string;
@@ -360,7 +361,11 @@ export default function ChestForm({
                               value={event.code}
                               disabled={isLoading}
                             >
-                              {formatEventName(event.name, event.edition)}
+                              {formatEventName(
+                                event.name,
+                                event.edition,
+                                event.series,
+                              )}
                             </SelectItem>
                           ))}
                         </SelectContent>

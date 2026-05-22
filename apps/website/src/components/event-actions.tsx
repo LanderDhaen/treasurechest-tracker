@@ -30,14 +30,15 @@ interface EventActionsProps {
   event: {
     id: number;
     code: string;
+    name: string | null;
     edition: number;
     startDate: Date;
     endDate: Date;
     maxChests: number;
     isChestCreationAllowed: boolean;
     status: EventStatus;
-    name: string;
     type: string;
+    series: string;
   };
 }
 
@@ -54,8 +55,8 @@ export default function EventActions({ event }: EventActionsProps) {
       toast.error(error.message);
     } else {
       const message = updatedEvent.isChestCreationAllowed
-        ? `${formatEventName(updatedEvent.name, updatedEvent.edition)} is now accepting new treasure chests.`
-        : `${formatEventName(updatedEvent.name, updatedEvent.edition)} is no longer accepting submissions.`;
+        ? `${formatEventName(updatedEvent.name, updatedEvent.edition, updatedEvent.series)} is now accepting new treasure chests.`
+        : `${formatEventName(updatedEvent.name, updatedEvent.edition, updatedEvent.series)} is no longer accepting submissions.`;
 
       toast.success(message);
     }
@@ -74,7 +75,7 @@ export default function EventActions({ event }: EventActionsProps) {
       const { deletedEvent, deletedChestsCount } = data;
 
       toast.success(
-        `${formatEventName(deletedEvent.name, deletedEvent.edition)} and ${deletedChestsCount} treasure chests have been deleted.`,
+        `${formatEventName(deletedEvent.name, deletedEvent.edition, deletedEvent.series)} and ${deletedChestsCount} treasure chests have been deleted.`,
       );
 
       redirect("/events");

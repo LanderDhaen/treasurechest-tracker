@@ -45,10 +45,11 @@ export const getAllAllowedEvents = async () => {
     .innerJoin("series", "series.id", "event.seriesId")
     .select([
       "event.code",
-      "series.name",
+      "event.name",
       "event.edition",
       "event.startDate",
       "event.endDate",
+      "series.name as series",
     ])
     .where("event.isActive", "=", true)
     .where("event.isChestCreationAllowed", "=", true)
@@ -142,6 +143,7 @@ export const getAllEvents = async ({
   const events = await query
     .select((eb) => [
       "event.code",
+      "event.name",
       "event.edition",
       "event.startDate",
       "event.endDate",
@@ -150,7 +152,7 @@ export const getAllEvents = async ({
         "status",
       ),
       "type.name as type",
-      "series.name",
+      "series.name as series",
     ])
     .execute();
 
@@ -173,6 +175,7 @@ export const getEventByCode = async (code: string) => {
       "event.createdAt",
       "event.updatedAt",
       "event.code",
+      "event.name",
       "event.edition",
       "event.startDate",
       "event.endDate",
@@ -181,8 +184,8 @@ export const getEventByCode = async (code: string) => {
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
-      "series.name",
       "type.name as type",
+      "series.name as series",
     ])
     .executeTakeFirst();
 
@@ -331,10 +334,11 @@ export const updateEvent = async (eventId: number, data: UpdateableEvent) => {
     .where("event.id", "=", eventId)
     .returning([
       "event.id",
-      "series.name",
+      "event.name",
       "event.edition",
       "event.code",
       "event.isChestCreationAllowed",
+      "series.name as series",
     ])
     .executeTakeFirst();
 
@@ -351,7 +355,12 @@ export const deleteEvent = async (eventId: number) => {
     .from("series")
     .whereRef("series.id", "=", "event.seriesId")
     .where("event.id", "=", eventId)
-    .returning(["event.id", "series.name", "event.edition"])
+    .returning([
+      "event.id",
+      "event.name",
+      "event.edition",
+      "series.name as series",
+    ])
     .executeTakeFirst();
 
   return deletedEvent;

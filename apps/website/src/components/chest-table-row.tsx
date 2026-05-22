@@ -15,8 +15,9 @@ interface ChestTableRowProps {
       name: string;
     };
     event: {
+      name: string | null;
       edition: number;
-      name: string;
+      series: string;
     };
   };
 }
@@ -32,7 +33,11 @@ export default function ChestTableRow({ chest }: ChestTableRowProps) {
       <TableCell>{formatDateTime(chest.openedAt)}</TableCell>
       <TableCell>{chest.account.name}</TableCell>
       <TableCell>
-        {formatEventName(chest.event.name, chest.event.edition)}
+        {formatEventName(
+          chest.event.name,
+          chest.event.edition,
+          chest.event.series,
+        )}
       </TableCell>
     </TableRow>
   );

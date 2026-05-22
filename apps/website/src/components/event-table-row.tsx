@@ -11,13 +11,14 @@ import EventStatusBadge from "./event-status-badge";
 interface EventTableRowProps {
   event: {
     code: string;
+    name: string | null;
     edition: number;
     startDate: Date;
     endDate: Date;
     maxChests: number;
     status: EventStatus;
-    name: string;
     type: string;
+    series: string;
   };
 }
 
@@ -40,7 +41,9 @@ export default function EventTableRow({ event }: EventTableRowProps) {
       <TableCell>
         <EventTypeBadge type={event.type} />
       </TableCell>
-      <TableCell>{formatEventName(event.name, event.edition)}</TableCell>
+      <TableCell>
+        {formatEventName(event.name, event.edition, event.series)}
+      </TableCell>
       <TableCell>{formatDate(event.startDate)}</TableCell>
       <TableCell>{formatDate(event.endDate)}</TableCell>
       <TableCell>
