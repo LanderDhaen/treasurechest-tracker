@@ -11,6 +11,7 @@ export interface EventTable {
   createdAt: ColumnType<Date, never, never>;
   updatedAt: ColumnType<Date, never, Date>;
   isActive: ColumnType<boolean, never, boolean>;
+  name: ColumnType<string | null>;
   edition: ColumnType<number>;
   code: ColumnType<string>;
   startDate: ColumnType<Date>;
