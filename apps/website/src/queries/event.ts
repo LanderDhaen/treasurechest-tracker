@@ -350,9 +350,9 @@ export const deriveEventStatus = (
 
   return eb
     .case()
-    .when(sql`now()`, ">", endDate)
+    .when(sql`current_date`, ">", endDate)
     .then(EventStatus.Finished)
-    .when(sql`now()`, "<", startDate)
+    .when(sql`current_date`, "<", startDate)
     .then(EventStatus.Upcoming)
     .else(EventStatus.Ongoing)
     .end();
