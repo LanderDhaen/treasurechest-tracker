@@ -43,10 +43,13 @@ export const getAllAllowedEvents = async () => {
   const events = await db
     .selectFrom("event")
     .innerJoin("series", "series.id", "event.seriesId")
-    .select([
+    .select((eb) => [
       "event.code",
-      "series.name",
-      "event.edition",
+      deriveEventName(
+        eb.ref("event.name"),
+        eb.ref("event.edition"),
+        eb.ref("series.name"),
+      ).as("name"),
       "event.startDate",
       "event.endDate",
     ])
@@ -76,9 +79,18 @@ export const getAllEvents = async ({
 
   if (search) {
     query = query.where((eb) =>
-      eb
-        .or([eb("series.name", "ilike", `%${search}%`)])
-        .or(eb("type.name", "ilike", `%${search}%`)),
+      eb.or([
+        eb(
+          deriveEventName(
+            eb.ref("event.name"),
+            eb.ref("event.edition"),
+            eb.ref("series.name"),
+          ),
+          "ilike",
+          `%${search}%`,
+        ),
+        eb("type.name", "ilike", `%${search}%`),
+      ]),
     );
   }
 
@@ -112,25 +124,55 @@ export const getAllEvents = async ({
   }
 
   if (sortBy === "type") {
-    query = query.orderBy("type.name", direction);
+    query = query
+      .orderBy("type.name", direction)
+      .orderBy(
+        (eb) =>
+          deriveEventName(
+            eb.ref("event.name"),
+            eb.ref("event.edition"),
+            eb.ref("series.name"),
+          ),
+        direction,
+      );
   }
 
   if (sortBy === "name") {
-    query = query
-      .orderBy("series.name", direction)
-      .orderBy("event.edition", direction);
+    query = query.orderBy(
+      (eb) =>
+        deriveEventName(
+          eb.ref("event.name"),
+          eb.ref("event.edition"),
+          eb.ref("series.name"),
+        ),
+      direction,
+    );
   }
 
   if (sortBy === "startDate") {
-    query = query.orderBy("event.startDate", direction);
+    query = query
+      .orderBy("event.startDate", direction)
+      .orderBy("event.endDate", direction);
   }
 
   if (sortBy === "endDate") {
-    query = query.orderBy("event.endDate", direction);
+    query = query
+      .orderBy("event.endDate", direction)
+      .orderBy("event.startDate", direction);
   }
 
   if (sortBy === "maxChests") {
-    query = query.orderBy("event.maxChests", direction);
+    query = query
+      .orderBy("event.maxChests", direction)
+      .orderBy(
+        (eb) =>
+          deriveEventName(
+            eb.ref("event.name"),
+            eb.ref("event.edition"),
+            eb.ref("series.name"),
+          ),
+        direction,
+      );
   }
 
   query = query.orderBy("event.id", direction);
@@ -142,6 +184,11 @@ export const getAllEvents = async ({
   const events = await query
     .select((eb) => [
       "event.code",
+      deriveEventName(
+        eb.ref("event.name"),
+        eb.ref("event.edition"),
+        eb.ref("series.name"),
+      ).as("name"),
       "event.edition",
       "event.startDate",
       "event.endDate",
@@ -150,7 +197,6 @@ export const getAllEvents = async ({
         "status",
       ),
       "type.name as type",
-      "series.name",
     ])
     .execute();
 
@@ -173,7 +219,11 @@ export const getEventByCode = async (code: string) => {
       "event.createdAt",
       "event.updatedAt",
       "event.code",
-      "event.edition",
+      deriveEventName(
+        eb.ref("event.name"),
+        eb.ref("event.edition"),
+        eb.ref("series.name"),
+      ).as("name"),
       "event.startDate",
       "event.endDate",
       "event.maxChests",
@@ -181,7 +231,6 @@ export const getEventByCode = async (code: string) => {
       deriveEventStatus(eb.ref("event.startDate"), eb.ref("event.endDate")).as(
         "status",
       ),
-      "series.name",
       "type.name as type",
     ])
     .executeTakeFirst();
@@ -275,6 +324,24 @@ export const withFilteredEvents = (filters: FilterConfig) => {
   return query.selectAll();
 };
 
+export const deriveEventName = (
+  name: Expression<string | null>,
+  edition: Expression<number>,
+  series: Expression<string>,
+) => {
+  const eb = expressionBuilder<Database, never>();
+
+  return eb
+    .case()
+    .when(name, "is not", null)
+    .then(name)
+    .when(edition, ">", 1)
+    .then(eb.fn<string>("concat", [series, sql`' '`, edition]))
+    .else(series)
+    .end()
+    .$notNull(); // Kysely doesn't narrow the type after "is not null" check
+};
+
 export const deriveEventStatus = (
   startDate: Expression<Date>,
   endDate: Expression<Date>,
@@ -283,9 +350,9 @@ export const deriveEventStatus = (
 
   return eb
     .case()
-    .when(sql`now()`, ">", endDate)
+    .when(sql`current_date`, ">", endDate)
     .then(EventStatus.Finished)
-    .when(sql`now()`, "<", startDate)
+    .when(sql`current_date`, "<", startDate)
     .then(EventStatus.Upcoming)
     .else(EventStatus.Ongoing)
     .end();
@@ -293,6 +360,7 @@ export const deriveEventStatus = (
 
 export const createEvent = async ({
   code,
+  name,
   edition,
   startDate,
   endDate,
@@ -301,17 +369,31 @@ export const createEvent = async ({
   seriesId,
 }: InsertableEvent) => {
   const event = await db
-    .insertInto("event")
-    .values({
-      code,
-      edition,
-      startDate,
-      endDate,
-      maxChests,
-      typeId,
-      seriesId,
-    })
-    .returning(["event.id", "event.code", "event.edition"])
+    .with("inserted_event", (eb) =>
+      eb
+        .insertInto("event")
+        .values({
+          code,
+          name,
+          edition,
+          startDate,
+          endDate,
+          maxChests,
+          typeId,
+          seriesId,
+        })
+        .returningAll(),
+    )
+    .selectFrom("inserted_event")
+    .innerJoin("series", "series.id", "inserted_event.seriesId")
+    .select((eb) => [
+      "inserted_event.code",
+      deriveEventName(
+        eb.ref("inserted_event.name"),
+        eb.ref("inserted_event.edition"),
+        eb.ref("series.name"),
+      ).as("name"),
+    ])
     .executeTakeFirstOrThrow();
 
   return event;
@@ -329,10 +411,13 @@ export const updateEvent = async (eventId: number, data: UpdateableEvent) => {
     .from("series")
     .whereRef("series.id", "=", "event.seriesId")
     .where("event.id", "=", eventId)
-    .returning([
+    .returning((eb) => [
       "event.id",
-      "series.name",
-      "event.edition",
+      deriveEventName(
+        eb.ref("event.name"),
+        eb.ref("event.edition"),
+        eb.ref("series.name"),
+      ).as("name"),
       "event.code",
       "event.isChestCreationAllowed",
     ])
@@ -351,7 +436,14 @@ export const deleteEvent = async (eventId: number) => {
     .from("series")
     .whereRef("series.id", "=", "event.seriesId")
     .where("event.id", "=", eventId)
-    .returning(["event.id", "series.name", "event.edition"])
+    .returning((eb) => [
+      "event.id",
+      deriveEventName(
+        eb.ref("event.name"),
+        eb.ref("event.edition"),
+        eb.ref("series.name"),
+      ).as("name"),
+    ])
     .executeTakeFirst();
 
   return deletedEvent;

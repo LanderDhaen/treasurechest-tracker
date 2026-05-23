@@ -21,7 +21,6 @@ interface ChestTableProps {
       name: string;
     };
     event: {
-      edition: number;
       name: string;
     };
   }[];

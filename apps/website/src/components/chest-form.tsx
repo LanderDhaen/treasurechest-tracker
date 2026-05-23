@@ -38,7 +38,6 @@ import {
   SelectValue,
 } from "./ui/select";
 import UnobtainableBadge from "./unobtainable-badge";
-import { formatEventName } from "@/lib/event";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { formatDate } from "@/lib/utils";
 import { CalendarIcon, CalendarPlus, UserRoundPlus } from "lucide-react";
@@ -57,7 +56,6 @@ interface ChestFormProps {
   events: {
     code: string;
     name: string;
-    edition: number;
     startDate: Date;
     endDate: Date;
   }[];
@@ -360,7 +358,7 @@ export default function ChestForm({
                               value={event.code}
                               disabled={isLoading}
                             >
-                              {formatEventName(event.name, event.edition)}
+                              {event.name}
                             </SelectItem>
                           ))}
                         </SelectContent>

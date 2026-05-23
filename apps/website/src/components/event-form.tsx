@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import {
   Field,
+  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -40,7 +41,6 @@ import { CalendarIcon, PlusIcon } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import { Calendar } from "./ui/calendar";
 import { createEventAction } from "@/actions/event";
-import { formatEventName } from "@/lib/event";
 import { ButtonGroup } from "./ui/button-group";
 import Link from "next/link";
 import { RELEASE_DATE } from "@/constants/event";
@@ -96,9 +96,7 @@ export default function EventForm({
         toast.error(error.message);
       }
     } else {
-      toast.success(
-        `Event "${formatEventName(event.name, event.edition)}" created successfully!`,
-      );
+      toast.success(`Event "${event.name}" created successfully!`);
 
       if (returnTo === "/chests/add") {
         redirect(`/chests/add?event=${event.code}`);
@@ -215,6 +213,36 @@ export default function EventForm({
                       </Button>
                     </ButtonGroup>
                   </ButtonGroup>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <Controller
+              name="name"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    Name
+                    <span className="text-xs text-muted-foreground">
+                      (optional)
+                    </span>
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id={field.name}
+                    aria-invalid={fieldState.invalid}
+                    type="text"
+                    placeholder="Name"
+                    value={field.value ?? ""}
+                    disabled={isLoading}
+                  />
+                  <FieldDescription>
+                    An optional name for the event. If not provided, the series
+                    name and edition will be used as the event name.
+                  </FieldDescription>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}

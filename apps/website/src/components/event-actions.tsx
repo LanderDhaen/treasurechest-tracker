@@ -8,7 +8,6 @@ import { EventStatus } from "@/constants/event";
 import { useState } from "react";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
-import { formatEventName } from "@/lib/event";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -30,13 +29,12 @@ interface EventActionsProps {
   event: {
     id: number;
     code: string;
-    edition: number;
+    name: string;
     startDate: Date;
     endDate: Date;
     maxChests: number;
     isChestCreationAllowed: boolean;
     status: EventStatus;
-    name: string;
     type: string;
   };
 }
@@ -54,8 +52,8 @@ export default function EventActions({ event }: EventActionsProps) {
       toast.error(error.message);
     } else {
       const message = updatedEvent.isChestCreationAllowed
-        ? `${formatEventName(updatedEvent.name, updatedEvent.edition)} is now accepting new treasure chests.`
-        : `${formatEventName(updatedEvent.name, updatedEvent.edition)} is no longer accepting submissions.`;
+        ? `${event.name} is now accepting new treasure chests.`
+        : `${event.name} is no longer accepting submissions.`;
 
       toast.success(message);
     }
@@ -74,7 +72,7 @@ export default function EventActions({ event }: EventActionsProps) {
       const { deletedEvent, deletedChestsCount } = data;
 
       toast.success(
-        `${formatEventName(deletedEvent.name, deletedEvent.edition)} and ${deletedChestsCount} treasure chests have been deleted.`,
+        `${deletedEvent.name} and ${deletedChestsCount} treasure chests have been deleted.`,
       );
 
       redirect("/events");

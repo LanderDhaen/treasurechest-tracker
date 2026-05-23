@@ -12,13 +12,14 @@ export const seed = async (db: Kysely<any>) => {
       {
         createdAt: "2025-12-18T0:00:00Z",
         updatedAt: NOW,
+        name: "Treasure Chest Launch",
         edition: 1,
-        code: "TCL1",
+        code: "V1",
         startDate: "2024-09-19",
         endDate: "2024-09-19",
         maxChests: 5,
-        typeId: 1,
-        seriesId: 1,
+        typeId: 1, // Gifted
+        seriesId: 1, // Voucher
         isChestCreationAllowed: false,
       },
       {
@@ -29,8 +30,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2024-09-19",
         endDate: "2024-10-09",
         maxChests: 30,
-        typeId: 2,
-        seriesId: 2,
+        typeId: 2, // Personal
+        seriesId: 2, // Treasure Hunt
         isChestCreationAllowed: false,
       },
       {
@@ -41,32 +42,34 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2024-12-04",
         endDate: "2024-12-30",
         maxChests: 20,
-        typeId: 2,
-        seriesId: 3,
+        typeId: 2, // Personal
+        seriesId: 3, // Controllable Heroes
         isChestCreationAllowed: false,
       },
       {
         createdAt: "2025-12-18T00:00:00Z",
         updatedAt: NOW,
-        edition: 1,
-        code: "CC1",
+        name: "Christmas Chest",
+        edition: 2,
+        code: "V2",
         startDate: "2024-12-25",
         endDate: "2024-12-25",
         maxChests: 1,
-        typeId: 1,
-        seriesId: 4,
+        typeId: 1, // Gifted
+        seriesId: 1, // Voucher
         isChestCreationAllowed: false,
       },
       {
         createdAt: "2025-12-18T00:00:00Z",
         updatedAt: NOW,
-        edition: 1,
-        code: "CCC1",
+        name: "Content Creator Chests",
+        edition: 3,
+        code: "V3",
         startDate: "2025-03-17",
         endDate: "2025-03-17",
         maxChests: 5,
-        typeId: 1,
-        seriesId: 5,
+        typeId: 1, // Gifted
+        seriesId: 1, // Voucher
         isChestCreationAllowed: false,
       },
       {
@@ -77,8 +80,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-03-17",
         endDate: "2025-03-25",
         maxChests: 24,
-        typeId: 2,
-        seriesId: 2,
+        typeId: 2, // Personal
+        seriesId: 2, // Treasure Hunt
         isChestCreationAllowed: false,
       },
       {
@@ -89,20 +92,21 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-04-14",
         endDate: "2025-04-21",
         maxChests: 20,
-        typeId: 3,
-        seriesId: 6,
+        typeId: 3, // Clan
+        seriesId: 4, // Gold Rush
         isChestCreationAllowed: false,
       },
       {
         createdAt: "2025-12-18T00:00:00Z",
         updatedAt: NOW,
-        edition: 1,
-        code: "FF1",
+        name: "Friend or Foe",
+        edition: 4,
+        code: "V4",
         startDate: "2025-04-24",
         endDate: "2025-04-24",
         maxChests: 1,
-        typeId: 1,
-        seriesId: 7,
+        typeId: 1, // Gifted
+        seriesId: 1, // Voucher
         isChestCreationAllowed: false,
       },
       {
@@ -113,8 +117,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-05-17",
         endDate: "2025-05-22",
         maxChests: 20,
-        typeId: 2,
-        seriesId: 2,
+        typeId: 2, // Personal
+        seriesId: 2, // Treasure Hunt
         isChestCreationAllowed: false,
       },
       {
@@ -125,8 +129,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-07-17",
         endDate: "2025-07-21",
         maxChests: 20,
-        typeId: 2,
-        seriesId: 2,
+        typeId: 2, // Personal
+        seriesId: 2, // Treasure Hunt
         isChestCreationAllowed: false,
       },
       {
@@ -137,8 +141,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-08-08",
         endDate: "2025-08-31",
         maxChests: 1,
-        typeId: 2,
-        seriesId: 8,
+        typeId: 2, // Personal
+        seriesId: 5, // Splash Bash
         isChestCreationAllowed: false,
       },
       {
@@ -149,8 +153,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-08-13",
         endDate: "2025-08-20",
         maxChests: 20,
-        typeId: 3,
-        seriesId: 9,
+        typeId: 3, // Clan
+        seriesId: 6, // Hero Rush
         isChestCreationAllowed: false,
       },
       {
@@ -161,8 +165,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-09-28",
         endDate: "2025-10-03",
         maxChests: 20,
-        typeId: 2,
-        seriesId: 2,
+        typeId: 2, // Personal
+        seriesId: 2, // Treasure Hunt
         isChestCreationAllowed: false,
       },
       {
@@ -173,8 +177,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-10-24",
         endDate: "2025-10-28",
         maxChests: 12,
-        typeId: 2,
-        seriesId: 2,
+        typeId: 2, // Personal
+        seriesId: 2, // Treasure Hunt
         isChestCreationAllowed: false,
       },
       {
@@ -185,8 +189,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-10-24",
         endDate: "2025-10-28",
         maxChests: 13,
-        typeId: 4,
-        seriesId: 10,
+        typeId: 4, // Community
+        seriesId: 7, // Meteor Catcher
         isChestCreationAllowed: false,
       },
       {
@@ -197,8 +201,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-11-28",
         endDate: "2025-12-03",
         maxChests: 20,
-        typeId: 2,
-        seriesId: 2,
+        typeId: 2, // Personal
+        seriesId: 2, // Treasure Hunt
         isChestCreationAllowed: false,
       },
       {
@@ -209,8 +213,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2025-12-12",
         endDate: "2025-12-19",
         maxChests: 20,
-        typeId: 3,
-        seriesId: 11,
+        typeId: 3, // Clan
+        seriesId: 8, // Clan Rush
         isChestCreationAllowed: false,
       },
       {
@@ -221,8 +225,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2026-01-28",
         endDate: "2026-02-02",
         maxChests: 20,
-        typeId: 2,
-        seriesId: 2,
+        typeId: 2, // Personal
+        seriesId: 2, // Treasure Hunt
       },
       {
         createdAt: "2025-12-18T00:00:00Z",
@@ -232,8 +236,8 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2026-02-24",
         endDate: "2026-03-01",
         maxChests: 12,
-        typeId: 4,
-        seriesId: 12,
+        typeId: 4, // Community
+        seriesId: 9, // Unleash The Duke
       },
       {
         createdAt: "2025-12-18T00:00:00Z",
@@ -243,8 +247,19 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2026-03-01",
         endDate: "2026-04-01",
         maxChests: 11,
-        typeId: 1,
-        seriesId: 13,
+        typeId: 2, // Personal
+        seriesId: 10, // Gold Pass
+      },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        edition: 2,
+        code: "CR2",
+        startDate: "2026-03-13",
+        endDate: "2026-03-20",
+        maxChests: 15,
+        typeId: 3, // Clan
+        seriesId: 8, // Clan Rush
       },
       {
         createdAt: "2025-12-18T00:00:00Z",
@@ -254,8 +269,65 @@ export const seed = async (db: Kysely<any>) => {
         startDate: "2026-04-01",
         endDate: "2026-05-01",
         maxChests: 11,
-        typeId: 1,
-        seriesId: 13,
+        typeId: 2, // Personal
+        seriesId: 10, // Gold Pass
+      },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        name: "Clash On | New Guardian, Siege Machine & CWL changes!",
+        edition: 5,
+        code: "V5",
+        startDate: "2026-04-25",
+        endDate: "2026-04-25",
+        maxChests: 1,
+        typeId: 1, // Gift
+        seriesId: 1, // Voucher
+      },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        edition: 9,
+        code: "TH9",
+        startDate: "2026-04-28",
+        endDate: "2026-05-03",
+        maxChests: 20,
+        typeId: 2, // Personal
+        seriesId: 2, // Treasure Hunt
+      },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        edition: 3,
+        code: "GP3",
+        startDate: "2026-05-01",
+        endDate: "2026-06-01",
+        maxChests: 11,
+        typeId: 2, // Personal
+        seriesId: 10, // Gold Pass
+      },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        edition: 1,
+        code: "CVS1",
+        startDate: "2026-05-04",
+        endDate: "2026-05-19",
+        maxChests: 13,
+        typeId: 4, // Community
+        seriesId: 11, // Clash vs. Skeletons
+      },
+      {
+        createdAt: "2025-12-18T00:00:00Z",
+        updatedAt: NOW,
+        name: "Inside The Builder's Hut | Episode 4",
+        edition: 6,
+        code: "V6",
+        startDate: "2026-05-16",
+        endDate: "2026-05-16",
+        maxChests: 1,
+        typeId: 1, // Gift
+        seriesId: 1, // Voucher
       },
     ])
     .execute();

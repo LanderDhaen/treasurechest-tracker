@@ -5,6 +5,7 @@ import { ChestSearchParams } from "@/schemas/chest";
 import { FilterConfig } from "@/types/common";
 import { expressionBuilder, sql } from "kysely";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
+import { deriveEventName } from "./event";
 
 export const getTotalChests = async (filters: FilterConfig) => {
   const result = await db
@@ -42,7 +43,15 @@ export const getAllChests = async ({
         eb("rarity.name", "ilike", `%${search}%`),
         eb("reward.name", "ilike", `%${search}%`),
         eb("account.name", "ilike", `%${search}%`),
-        eb("series.name", "ilike", `%${search}%`),
+        eb(
+          deriveEventName(
+            eb.ref("event.name"),
+            eb.ref("event.edition"),
+            eb.ref("series.name"),
+          ),
+          "ilike",
+          `%${search}%`,
+        ),
       ]),
     );
   }
@@ -81,9 +90,15 @@ export const getAllChests = async ({
   }
 
   if (sortBy == "event") {
-    query = query
-      .orderBy("series.name", direction)
-      .orderBy("event.edition", direction);
+    query = query.orderBy(
+      (eb) =>
+        deriveEventName(
+          eb.ref("event.name"),
+          eb.ref("event.edition"),
+          eb.ref("series.name"),
+        ),
+      direction,
+    );
   }
 
   query = query
@@ -116,7 +131,13 @@ export const getAllChests = async ({
         eb
           .selectFrom("event")
           .innerJoin("series", "event.seriesId", "series.id")
-          .select(["event.edition", "series.name"])
+          .select([
+            deriveEventName(
+              eb.ref("event.name"),
+              eb.ref("event.edition"),
+              eb.ref("series.name"),
+            ).as("name"),
+          ])
           .whereRef("event.id", "=", "filtered_chest.eventId"),
       )
         .$notNull()

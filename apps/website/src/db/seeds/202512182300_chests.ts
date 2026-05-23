@@ -2141,6 +2141,849 @@ export const seed = async (db: Kysely<any>) => {
         eventId: 17, // Clan Rush
         rewardId: 54, // King Skin
       },
+
+      {
+        openedAt: "2026-01-28T19:58:00Z",
+        rarityId: 3, // Epic
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 27, // Book of Heroes
+      },
+      {
+        amount: 2,
+        openedAt: "2026-01-28T20:02:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 21, // Wall Ring
+      },
+      {
+        amount: 1030000,
+        openedAt: "2026-01-28T20:26:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 61,
+        openedAt: "2026-01-28T20:30:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        amount: 1220000,
+        openedAt: "2026-01-29T13:51:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 824000,
+        openedAt: "2026-01-29T13:59:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 1630000,
+        openedAt: "2026-01-29T14:39:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 2,
+        openedAt: "2026-01-29T14:56:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 21, // Wall Ring
+      },
+      {
+        amount: 2,
+        openedAt: "2026-01-30T15:25:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 21, // Wall Ring
+      },
+      {
+        amount: 12400,
+        openedAt: "2026-01-30T15:59:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 12300,
+        openedAt: "2026-01-30T16:08:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 1400,
+        openedAt: "2026-01-30T16:50:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 12, // Capital Gold
+      },
+      {
+        openedAt: "2026-01-01T23:59:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        openedAt: "2026-02-02T23:59:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 18, // Clock Tower Potion
+      },
+      {
+        amount: 13300,
+        openedAt: "2026-02-02T00:02:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 1130000,
+        openedAt: "2026-02-02T00:07:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 873000,
+        openedAt: "2026-02-02T00:13:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 1160000,
+        openedAt: "2026-02-02T00:17:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 1190000,
+        openedAt: "2026-02-02T00:23:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-02-02T00:28:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 17, // Research Potion
+      },
+
+      {
+        openedAt: "2026-02-25T17:39:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 3, // Study Soup
+      },
+      {
+        openedAt: "2026-02-25T17:39:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 12600,
+        openedAt: "2026-02-25T17:39:02Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 1750000,
+        openedAt: "2026-02-26T15:15:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-02-26T15:15:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-02-26T15:15:02Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        openedAt: "2026-02-27T15:14:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 957000,
+        openedAt: "2026-02-27T15:14:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 7,
+        openedAt: "2026-02-27T15:14:02Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 41, // Starry Ore
+      },
+
+      {
+        openedAt: "2026-03-21T12:59:00Z",
+        rarityId: 4, // Legendary
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 36, // Rune of Gold
+      },
+      {
+        amount: 1940,
+        openedAt: "2026-03-21T12:59:01Z",
+        rarityId: 3, // Epic
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        openedAt: "2026-03-21T12:59:02Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-03-21T12:59:03Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-03-21T13:00:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 10600,
+        openedAt: "2026-03-21T13:00:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-03-21T13:00:02Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 16, // Power Potion
+      },
+      {
+        openedAt: "2026-03-21T13:00:03Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 14, // Resource Potion
+      },
+      {
+        amount: 841000,
+        openedAt: "2026-03-21T13:01:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 25800,
+        openedAt: "2026-03-21T13:01:01Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 1710000,
+        openedAt: "2026-03-21T13:01:02Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 8, // Elixer
+      },
+
+      {
+        openedAt: "2026-03-21T01:35:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 23, // Pet Potion
+      },
+      {
+        openedAt: "2026-03-21T01:35:01Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 16, // Power Potion
+      },
+      {
+        openedAt: "2026-03-21T01:35:02Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 12300,
+        openedAt: "2026-03-21T01:36:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 3,
+        openedAt: "2026-03-21T01:36:01Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 21, // Wall Ring
+      },
+      {
+        openedAt: "2026-03-21T01:36:02Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 3, // Study Soup
+      },
+      {
+        openedAt: "2026-03-21T01:37:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 17, // Research Potion
+      },
+      {
+        amount: 596000,
+        openedAt: "2026-03-21T01:37:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 13800,
+        openedAt: "2026-03-21T01:37:02Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 14000,
+        openedAt: "2026-03-21T01:38:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 486000,
+        openedAt: "2026-03-21T01:38:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 802000,
+        openedAt: "2026-03-21T01:38:02Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-03-21T01:39:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 20, // Hero Potion
+      },
+      {
+        amount: 2090,
+        openedAt: "2026-03-21T01:39:01Z",
+        rarityId: 3, // Epic
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        amount: 506,
+        openedAt: "2026-03-21T01:39:02Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 39, // Shiny Ore
+      },
+
+      {
+        openedAt: "2026-04-27T15:30:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        openedAt: "2026-04-27T15:30:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 1180000,
+        openedAt: "2026-04-27T15:30:02Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 2020,
+        openedAt: "2026-04-27T15:30:03Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 12, // Capital Gold
+      },
+      {
+        amount: 1370,
+        openedAt: "2026-04-27T15:30:04Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 12, // Capital Gold
+      },
+      {
+        openedAt: "2026-04-27T15:30:05Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 18, // Clock Tower Potion
+      },
+      {
+        amount: 920000,
+        openedAt: "2026-04-27T15:31:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-04-27T15:31:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 3, // Study Soup
+      },
+      {
+        openedAt: "2026-04-27T15:31:02Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 11300,
+        openedAt: "2026-04-27T15:31:03Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 840000,
+        openedAt: "2026-04-27T15:31:04Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 7, // Gold
+      },
+
+      {
+        amount: 973000,
+        openedAt: "2026-04-26T14:33:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 23, // Clash On | New Guardian, Siege Machine & CWL changes!
+        rewardId: 7, // Gold
+      },
+
+      {
+        amount: 1210,
+        openedAt: "2026-04-28T11:18:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 12, // Capital Gold
+      },
+      {
+        openedAt: "2026-04-28T11:23:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 19, // Builder Star Jar
+      },
+      {
+        amount: 556,
+        openedAt: "2026-04-28T11:29:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        amount: 884000,
+        openedAt: "2026-04-28T11:36:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-04-30T15:11:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 1940000,
+        openedAt: "2026-04-30T15:14:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 31,
+        openedAt: "2026-04-30T15:17:00Z",
+        rarityId: 3, // Epic
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 41, // Starry Ore
+      },
+      {
+        amount: 13200,
+        openedAt: "2026-04-30T15:28:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-04-30T15:34:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        openedAt: "2026-04-30T15:43:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 23, // Pet Potion
+      },
+      {
+        openedAt: "2026-04-30T15:49:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 23, // Pet Potion
+      },
+      {
+        amount: 1100000,
+        openedAt: "2026-04-30T15:43:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-05-01T17:57:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-05-01T18:00:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 13400,
+        openedAt: "2026-05-01T18:03:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 25,
+        openedAt: "2026-05-01T18:06:00Z",
+        rarityId: 3, // Epic
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 41, // Starry Ore
+      },
+
+      {
+        amount: 544000,
+        openedAt: "2026-05-17T14:18:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 1090,
+        openedAt: "2026-05-17T14:18:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 12, // Capital Gold
+      },
+      {
+        amount: 2,
+        openedAt: "2026-05-17T14:18:02Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 21, // Wall Ring
+      },
+      {
+        amount: 537000,
+        openedAt: "2026-05-17T14:18:03Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 10, // Builder Gold
+      },
+      {
+        openedAt: "2026-05-17T14:18:04Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 17, // Research Potion
+      },
+      {
+        amount: 2,
+        openedAt: "2026-05-17T14:19:00Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 21, // Wall Ring
+      },
+      {
+        openedAt: "2026-05-17T14:19:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-05-17T14:20:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        openedAt: "2026-05-17T14:20:01Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 1680000,
+        openedAt: "2026-05-17T14:20:02Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 605,
+        openedAt: "2026-05-17T14:20:03Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        openedAt: "2026-05-17T14:20:04Z",
+        rarityId: 2, // Rare
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 18, // Clock Tower Potion
+      },
+      {
+        openedAt: "2026-05-17T14:20:05Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 6, // Mighty Morsel
+      },
+
+      {
+        amount: 10400,
+        openedAt: "2026-05-17T19:41:00Z",
+        rarityId: 1, // Common
+        accountId: 1, // DL✨Lander
+        townhallId: 18, // TH18
+        eventId: 27, // Inside The Builder's Hut | Episode 4
+        rewardId: 9, // Dark Elixer
+      },
     ])
     .execute();
 
@@ -2483,6 +3326,720 @@ export const seed = async (db: Kysely<any>) => {
         townhallId: 17, // TH17
         eventId: 17, // Clan Rush
         rewardId: 8, // Elixer
+      },
+
+      {
+        amount: 1040000,
+        openedAt: "2026-02-02T00:43:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-02-02T00:46:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-02-02T01:15:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 19, // Builder Star Jar
+      },
+      {
+        amount: 7,
+        openedAt: "2026-02-02T01:18:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 41, // Starry Ore
+      },
+      {
+        openedAt: "2026-02-02T02:08:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 933000,
+        openedAt: "2026-02-02T02:12:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-02-02T02:16:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 18, // Clock Tower Potion
+      },
+      {
+        openedAt: "2026-02-02T02:20:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 1100000,
+        openedAt: "2026-02-02T02:22:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 534,
+        openedAt: "2026-02-02T02:25:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        openedAt: "2026-02-02T02:28:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 494000,
+        openedAt: "2026-02-02T02:31:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 13800,
+        openedAt: "2026-02-02T02:33:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-02-02T02:35:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 20, // Hero Potion
+      },
+      {
+        openedAt: "2026-02-02T02:38:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 396000,
+        openedAt: "2026-02-02T02:40:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 11, // Builder Elixer
+      },
+      {
+        amount: 1140000,
+        openedAt: "2026-02-02T02:42:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 13200,
+        openedAt: "2026-02-02T02:44:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-02-02T02:47:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        openedAt: "2026-02-02T02:51:00Z",
+        rarityId: 4, // Legendary
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 54, // King Skin
+      },
+
+      {
+        openedAt: "2026-02-25T17:40:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 3, // Study Soup
+      },
+      {
+        openedAt: "2026-02-25T17:40:01Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-02-25T17:40:02Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 23, // Pet Potion
+      },
+      {
+        openedAt: "2026-02-26T15:16:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 1070000,
+        openedAt: "2026-02-26T15:16:01Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-02-26T15:16:02Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 19, // Builder Star Jar
+      },
+      {
+        openedAt: "2026-02-27T15:15:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 3,
+        openedAt: "2026-02-27T15:15:01Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 21, // Wall Ring
+      },
+      {
+        openedAt: "2026-02-27T15:15:02Z",
+        rarityId: 3, // Epic
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 19, // Unleash The Duke
+        rewardId: 26, // Book of Spells
+      },
+
+      {
+        openedAt: "2026-03-31T13:15:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 22300,
+        openedAt: "2026-03-31T13:15:01Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-03-31T13:15:02Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-03-31T13:15:03Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 446000,
+        openedAt: "2026-03-31T13:16:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 11, // Builder Elixer
+      },
+      {
+        openedAt: "2026-03-31T13:16:01Z",
+        rarityId: 3, // Epic
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 46, // Roof (Trader)
+      },
+      {
+        openedAt: "2026-03-31T13:16:02Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        openedAt: "2026-03-31T13:16:03Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        openedAt: "2026-03-31T13:17:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 58,
+        openedAt: "2026-03-31T13:17:01Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        openedAt: "2026-03-31T13:17:02Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 20, // Gold Pass
+        rewardId: 18, // Clock Tower Potion
+      },
+
+      {
+        amount: 66,
+        openedAt: "2026-03-21T01:40:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        openedAt: "2026-03-21T01:40:01Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 17, // Research Potion
+      },
+      {
+        openedAt: "2026-03-21T01:40:02Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 11, // Builder Elixer
+      },
+      {
+        openedAt: "2026-03-21T01:41:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        openedAt: "2026-03-21T01:41:01Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 554000,
+        openedAt: "2026-03-21T01:41:02Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 1050000,
+        openedAt: "2026-03-21T01:42:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-03-21T01:42:01Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 1070000,
+        openedAt: "2026-03-21T01:42:02Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 1130000,
+        openedAt: "2026-03-21T01:43:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 24100,
+        openedAt: "2026-03-21T01:43:01Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-03-21T01:43:02Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 18, // Clock Tower Potion
+      },
+      {
+        openedAt: "2026-03-21T01:44:00Z",
+        rarityId: 3, // Epic
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 49, // Decoration (Trader)
+      },
+      {
+        openedAt: "2026-03-21T01:44:01Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 14, // Resource Potion
+      },
+      {
+        openedAt: "2026-03-21T01:44:02Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 21, // Clan Rush 2
+        rewardId: 3, // Study Soup
+      },
+
+      {
+        openedAt: "2026-04-28T20:45:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 20, // Hero Potion
+      },
+      {
+        openedAt: "2026-04-28T20:45:01Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        openedAt: "2026-04-28T20:45:02Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        openedAt: "2026-04-28T20:45:03Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 2,
+        openedAt: "2026-04-28T20:45:04Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 21, // Wall Ring
+      },
+      {
+        openedAt: "2026-04-28T20:45:05Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 17, // Research Potion
+      },
+      {
+        amount: 2240,
+        openedAt: "2026-04-28T20:46:00Z",
+        rarityId: 3, // Epic
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        amount: 1070000,
+        openedAt: "2026-04-28T20:46:01Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-04-28T20:46:02Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 34,
+        openedAt: "2026-04-28T20:46:03Z",
+        rarityId: 3, // Epic
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 41, // Starry Ore
+      },
+      {
+        amount: 1020000,
+        openedAt: "2026-04-28T20:46:04Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 22, // Gold Pass 2
+        rewardId: 8, // Elixer
+      },
+
+      {
+        openedAt: "2026-04-28T20:49:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 23, // Clash On | New Guardian, Siege Machine & CWL changes!
+        rewardId: 20, // Hero Potion
+      },
+
+      {
+        amount: 592000,
+        openedAt: "2026-04-28T21:30:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 10, // Builder Gold
+      },
+      {
+        openedAt: "2026-04-28T21:33:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 19, // Builder Star Jar
+      },
+      {
+        amount: 2130000,
+        openedAt: "2026-04-28T21:36:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 896000,
+        openedAt: "2026-04-28T21:39:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 24, // Treasure Hunt 9
+        rewardId: 7, // Gold
+      },
+
+      {
+        openedAt: "2026-05-19T09:23:00Z",
+        rarityId: 3, // Epic
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 35, // Shovel of Obstacle
+      },
+      {
+        amount: 10400,
+        openedAt: "2026-05-19T09:23:01Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-05-19T09:23:02Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 18, // Clock Tower Potion
+      },
+      {
+        amount: 9650,
+        openedAt: "2026-05-19T09:23:03Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-05-19T09:23:04Z",
+        rarityId: 4, // Legendary
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 27, // Book of Everything
+      },
+      {
+        openedAt: "2026-05-19T09:24:00Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 1150000,
+        openedAt: "2026-05-19T09:24:01Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-05-19T09:25:00Z",
+        rarityId: 2, // Rare
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 19, // Builder Star Jar
+      },
+      {
+        amount: 969000,
+        openedAt: "2026-05-19T09:25:01Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-05-19T09:25:02Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 928000,
+        openedAt: "2026-05-19T09:25:03Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-05-19T09:25:04Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 3, // Study Soup
+      },
+      {
+        openedAt: "2026-05-19T09:25:05Z",
+        rarityId: 1, // Common
+        accountId: 2, // DL✨Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 5, // Clan Castle Cake
       },
     ])
     .execute();
@@ -3871,6 +5428,695 @@ export const seed = async (db: Kysely<any>) => {
         townhallId: 17, // TH17
         eventId: 17, // Clan Rush
         rewardId: 6, // Mighty Morsel
+      },
+
+      {
+        amount: 11500,
+        openedAt: "2026-02-02T02:11:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 9480,
+        openedAt: "2026-02-02T03:13:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 10100,
+        openedAt: "2026-02-02T03:14:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-02-02T03:15:00Z",
+        rarityId: 3, // Epic
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 25, // Book of Fighting
+      },
+      {
+        amount: 1030000,
+        openedAt: "2026-02-02T03:17:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-02-02T03:18:00Z",
+        rarityId: 4, // Legendary
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 55, // Warden Skin
+      },
+      {
+        amount: 1060000,
+        openedAt: "2026-02-02T03:19:00Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 11, // Builder Elixer
+      },
+      {
+        amount: 10800,
+        openedAt: "2026-02-02T03:21:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 10600,
+        openedAt: "2026-02-02T03:22:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-02-02T03:24:00Z",
+        rarityId: 3, // Epic
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 38, // Rune of Builder Gold
+      },
+      {
+        openedAt: "2026-02-02T03:25:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        openedAt: "2026-02-02T03:25:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        openedAt: "2026-02-02T03:27:00Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 19, // Builder Star Jar
+      },
+      {
+        amount: 1540,
+        openedAt: "2026-02-02T03:27:01Z",
+        rarityId: 3, // Epic
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        amount: 861000,
+        openedAt: "2026-02-02T03:28:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 605,
+        openedAt: "2026-02-02T03:28:01Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        openedAt: "2026-02-02T03:30:00Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 15, // Super Potion
+      },
+      {
+        amount: 2,
+        openedAt: "2026-02-02T03:30:01Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 21, // Wall Ring
+      },
+      {
+        amount: 13300,
+        openedAt: "2026-02-02T03:31:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-02-02T03:32:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 3, // Study Soup
+      },
+
+      {
+        openedAt: "2026-02-25T17:41:00Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 14, // Resource Potion
+      },
+      {
+        amount: 406000,
+        openedAt: "2026-02-25T17:41:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 10100,
+        openedAt: "2026-02-25T17:41:02Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-02-26T15:17:00Z",
+        rarityId: 3, // Epic
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 43, // Home Village (Limited)
+      },
+      {
+        amount: 10900,
+        openedAt: "2026-02-26T15:17:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 12200,
+        openedAt: "2026-02-26T15:17:02Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-02-27T15:16:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 1250,
+        openedAt: "2026-02-27T15:16:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 12, // Capital Gold
+      },
+      {
+        amount: 6,
+        openedAt: "2026-02-27T15:16:02Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 41, // Starry Ore
+      },
+
+      {
+        openedAt: "2026-04-01T12:44:00Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 14, // Resource Potion
+      },
+      {
+        amount: 892000,
+        openedAt: "2026-04-01T12:44:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-04-01T12:44:02Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 2420,
+        openedAt: "2026-04-01T12:44:03Z",
+        rarityId: 3, // Epic
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        amount: 11400,
+        openedAt: "2026-04-01T12:45:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 11200,
+        openedAt: "2026-04-01T12:45:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-04-01T12:45:02Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 1990000,
+        openedAt: "2026-04-01T12:45:03Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-04-01T12:46:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 708,
+        openedAt: "2026-04-01T12:46:01Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        openedAt: "2026-04-01T12:46:02Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 3, // Study Soup
+      },
+
+      {
+        openedAt: "2026-03-21T01:45:00Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 22, // Builder Potion
+      },
+      {
+        openedAt: "2026-03-21T01:45:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 3, // Study Soup
+      },
+      {
+        openedAt: "2026-03-21T01:45:02Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 25700,
+        openedAt: "2026-03-21T01:46:00Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-03-21T01:46:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        openedAt: "2026-03-21T01:46:02Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 10, // Builder Gold
+      },
+      {
+        openedAt: "2026-03-21T01:47:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 995000,
+        openedAt: "2026-03-21T01:47:01Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 2140000,
+        openedAt: "2026-03-21T01:47:02Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 858000,
+        openedAt: "2026-03-21T01:48:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-03-21T01:48:01Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 22, // Builder Potion
+      },
+      {
+        openedAt: "2026-03-21T01:48:02Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        openedAt: "2026-03-21T01:49:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-03-21T01:49:01Z",
+        rarityId: 4, // Legendary
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 27, // Book of Everything
+      },
+      {
+        amount: 1030000,
+        openedAt: "2026-03-21T01:49:02Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 7, // Gold
+      },
+
+      {
+        amount: 13100,
+        openedAt: "2026-04-28T20:50:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-04-28T20:50:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 23400,
+        openedAt: "2026-04-28T20:50:02Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-04-28T20:50:03Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 23, // Pet Potion
+      },
+      {
+        amount: 2,
+        openedAt: "2026-04-28T20:50:04Z",
+        rarityId: 3, // Epic
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 22, // Builder Potion
+      },
+      {
+        openedAt: "2026-04-28T20:51:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        openedAt: "2026-04-28T20:51:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 22700,
+        openedAt: "2026-04-28T20:51:02Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 6,
+        openedAt: "2026-04-28T20:51:03Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 41, // Starry Ore
+      },
+      {
+        amount: 2,
+        openedAt: "2026-04-28T20:52:00Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 21, // Wall Ring
+      },
+      {
+        amount: 542000,
+        openedAt: "2026-04-28T20:52:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 11, // Builder Elixer
+      },
+
+      {
+        openedAt: "2026-04-28T20:52:02Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 23, // Clash On | New Guardian, Siege Machine & CWL changes!
+        rewardId: 6, // Mighty Morsel
+      },
+
+      {
+        amount: 52,
+        openedAt: "2026-05-19T09:57:00Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        openedAt: "2026-05-19T09:57:01Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 3, // Study Soup
+      },
+      {
+        openedAt: "2026-05-19T09:57:02Z",
+        rarityId: 3, // Epic
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 46, // Roof (Trader)
+      },
+      {
+        openedAt: "2026-05-19T09:57:03Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 2160,
+        openedAt: "2026-05-19T09:57:04Z",
+        rarityId: 3, // Epic
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        amount: 1100000,
+        openedAt: "2026-05-19T09:58:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-05-19T09:58:01Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 14, // Resource Potion
+      },
+      {
+        openedAt: "2026-05-19T09:59:00Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        openedAt: "2026-05-19T09:59:01Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 16, // Power Potion
+      },
+      {
+        amount: 1120,
+        openedAt: "2026-05-19T09:59:02Z",
+        rarityId: 2, // Rare
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        openedAt: "2026-05-19T09:59:03Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 442000,
+        openedAt: "2026-05-19T09:59:04Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 400000,
+        openedAt: "2026-05-19T09:59:05Z",
+        rarityId: 1, // Common
+        accountId: 3, // DL✨Lander™
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 11, // Builder Elixer
       },
     ])
     .execute();
@@ -5411,6 +7657,672 @@ export const seed = async (db: Kysely<any>) => {
         eventId: 17, // Clan Rush
         rewardId: 23, // Pet Potion
       },
+
+      {
+        openedAt: "2026-02-02T03:33:00Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 20, // Hero Potion
+      },
+      {
+        openedAt: "2026-02-02T03:34:00Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 16, // Power Potion
+      },
+      {
+        openedAt: "2026-02-02T03:35:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 12, // Capital Gold
+      },
+      {
+        openedAt: "2026-02-02T03:36:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 2260,
+        openedAt: "2026-02-02T03:38:00Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 12, // Capital Gold
+      },
+      {
+        amount: 10200,
+        openedAt: "2026-02-02T03:39:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 153,
+        openedAt: "2026-02-02T03:40:00Z",
+        rarityId: 3, // Epic
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        amount: 13200,
+        openedAt: "2026-02-02T03:41:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-02-02T03:42:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 1180000,
+        openedAt: "2026-02-02T03:44:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 774000,
+        openedAt: "2026-02-02T03:45:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-02-02T03:47:00Z",
+        rarityId: 4, // Legendary
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 56, // Royal Champion Skin
+      },
+      {
+        openedAt: "2026-02-02T03:50:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 1170000,
+        openedAt: "2026-02-02T03:51:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 846000,
+        openedAt: "2026-02-02T03:52:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 596000,
+        openedAt: "2026-02-02T03:55:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 10, // Builder Gold
+      },
+      {
+        openedAt: "2026-02-02T03:55:01Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 1150000,
+        openedAt: "2026-02-02T03:56:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+
+      {
+        openedAt: "2026-02-25T17:42:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        openedAt: "2026-02-25T17:42:01Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        openedAt: "2026-02-25T17:42:02Z",
+        rarityId: 3, // Epic
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 25, // Book of Building
+      },
+      {
+        openedAt: "2026-02-26T15:18:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 627,
+        openedAt: "2026-02-26T15:18:01Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        amount: 1120000,
+        openedAt: "2026-02-26T15:18:02Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-02-27T15:17:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 208,
+        openedAt: "2026-02-27T15:17:01Z",
+        rarityId: 3, // Epic
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        amount: 1220,
+        openedAt: "2026-02-27T15:17:02Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 12, // Capital Gold
+      },
+
+      {
+        amount: 1130000,
+        openedAt: "2026-04-01T12:40:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 2,
+        openedAt: "2026-04-01T12:40:01Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 21, // Wall Ring
+      },
+      {
+        amount: 648,
+        openedAt: "2026-04-01T12:40:02Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        amount: 1250,
+        openedAt: "2026-04-01T12:40:03Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 12, // Capital Gold
+      },
+      {
+        amount: 13700,
+        openedAt: "2026-04-01T12:41:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-04-01T12:41:01Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 15, // Super Potion
+      },
+      {
+        openedAt: "2026-04-01T12:41:02Z",
+        rarityId: 3, // Epic
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 46, // Roof (Trader)
+      },
+      {
+        openedAt: "2026-04-01T12:41:03Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 23, // Pet Potion
+      },
+      {
+        openedAt: "2026-04-01T12:41:04Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 17, // Research Potion
+      },
+      {
+        openedAt: "2026-04-01T12:42:00Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 14, // Resource Potion
+      },
+      {
+        amount: 903000,
+        openedAt: "2026-04-01T12:42:01Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 7, // Gold
+      },
+
+      {
+        openedAt: "2026-03-21T01:50:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 3, // Study Soup
+      },
+      {
+        openedAt: "2026-03-21T01:50:01Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        openedAt: "2026-03-21T01:50:02Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 19, // Builder Star Jar
+      },
+      {
+        amount: 2,
+        openedAt: "2026-03-21T01:51:00Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 21, // Wall Ring
+      },
+      {
+        openedAt: "2026-03-21T01:51:01Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        openedAt: "2026-03-21T01:51:02Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 16, // Power Potion
+      },
+      {
+        openedAt: "2026-03-21T01:52:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-03-21T01:52:01Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        openedAt: "2026-03-21T01:52:02Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 1100000,
+        openedAt: "2026-03-21T01:53:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-03-21T01:53:01Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 3, // Study Soup
+      },
+      {
+        openedAt: "2026-03-21T01:53:02Z",
+        rarityId: 3, // Epic
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 47, // Walls (Trader)
+      },
+      {
+        amount: 1090000,
+        openedAt: "2026-03-21T01:54:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-03-21T01:54:01Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 14, // Resource Potion
+      },
+      {
+        amount: 2,
+        openedAt: "2026-03-21T01:54:02Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 21, // Wall Ring
+      },
+
+      {
+        openedAt: "2026-04-28T20:53:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-04-28T20:53:01Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-04-28T20:53:02Z",
+        rarityId: 4, // Legendary
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 30, // Rune of Dark Elixer
+      },
+      {
+        openedAt: "2026-04-28T20:53:03Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        openedAt: "2026-04-28T20:53:04Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-04-28T20:54:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 624000,
+        openedAt: "2026-04-28T20:54:01Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 59,
+        openedAt: "2026-04-28T20:54:02Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        amount: 1091000,
+        openedAt: "2026-04-28T20:54:03Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-04-28T20:55:00Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 14, // Resource Potion
+      },
+      {
+        openedAt: "2026-04-28T20:55:01Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 22, // Builder Potion
+      },
+
+      {
+        amount: 908000,
+        openedAt: "2026-04-28T20:56:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 23, // Clash On | New Guardian, Siege Machine & CWL changes!
+        rewardId: 7, // Gold
+      },
+
+      {
+        amount: 68,
+        openedAt: "2026-05-19T09:49:00Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        openedAt: "2026-05-19T09:49:01Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 65,
+        openedAt: "2026-05-19T09:49:02Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        openedAt: "2026-05-19T09:49:03Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 9510,
+        openedAt: "2026-05-19T09:49:04Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-05-19T09:50:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 18800,
+        openedAt: "2026-05-19T09:50:01Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 1090000,
+        openedAt: "2026-05-19T09:51:00Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 58,
+        openedAt: "2026-05-19T09:51:01Z",
+        rarityId: 2, // Rare
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        openedAt: "2026-05-19T09:51:02Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        openedAt: "2026-05-19T09:51:03Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 1120000,
+        openedAt: "2026-05-19T09:51:04Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-05-19T09:51:05Z",
+        rarityId: 1, // Common
+        accountId: 4, // Lander
+        townhallId: 17, // TH17
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 6, // Mighty Morsel
+      },
     ])
     .execute();
 
@@ -5759,6 +8671,703 @@ export const seed = async (db: Kysely<any>) => {
         accountId: 5, // Lander.
         townhallId: 17, // TH17
         eventId: 17, // Clan Rush
+        rewardId: 8, // Elixer
+      },
+
+      {
+        amount: 804000,
+        openedAt: "2026-02-02T01:22:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 11200,
+        openedAt: "2026-02-02T01:25:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-02-02T01:28:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 16, // Power Potion
+      },
+      {
+        openedAt: "2026-02-02T01:35:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        openedAt: "2026-02-02T01:37:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 20, // Hero Potion
+      },
+      {
+        openedAt: "2026-02-02T01:38:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 16, // Power Potion
+      },
+      {
+        amount: 1110000,
+        openedAt: "2026-02-02T01:41:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 13400,
+        openedAt: "2026-02-02T01:42:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 1840000,
+        openedAt: "2026-02-02T01:46:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 61,
+        openedAt: "2026-02-02T01:47:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        openedAt: "2026-02-02T01:49:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 13300,
+        openedAt: "2026-02-02T01:51:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 53,
+        openedAt: "2026-02-02T01:53:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        amount: 1130,
+        openedAt: "2026-02-02T01:54:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 12, // Capital Gold
+      },
+      {
+        amount: 1870000,
+        openedAt: "2026-02-02T01:55:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 10000,
+        openedAt: "2026-02-02T01:56:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 20000,
+        openedAt: "2026-02-02T01:57:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 2010000,
+        openedAt: "2026-02-02T01:59:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-02-02T02:00:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 1080000,
+        openedAt: "2026-02-02T02:01:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 18, // Treasure Hunt 8
+        rewardId: 7, // Gold
+      },
+
+      {
+        openedAt: "2026-02-25T17:43:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 23400,
+        openedAt: "2026-02-25T17:43:01Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 12700,
+        openedAt: "2026-02-25T17:43:02Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-02-26T15:19:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 7,
+        openedAt: "2026-02-26T15:19:01Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 41, // Starry Ore
+      },
+      {
+        openedAt: "2026-02-26T15:19:02Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 4, // Power Pancakes
+      },
+      {
+        amount: 12900,
+        openedAt: "2026-02-27T15:18:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 1080000,
+        openedAt: "2026-02-27T15:18:01Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-02-27T15:18:02Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 19, // Unleash The Duke
+        rewardId: 5, // Clan Castle Cake
+      },
+
+      {
+        openedAt: "2026-04-01T12:35:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 23, // Pet Potion
+      },
+      {
+        openedAt: "2026-04-01T12:35:01Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 13300,
+        openedAt: "2026-04-01T12:35:02Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-04-01T12:36:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 54,
+        openedAt: "2026-04-01T12:36:01Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 40, // Glowy Ore
+      },
+      {
+        amount: 389000,
+        openedAt: "2026-04-01T12:36:02Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 11, // Builder Elixer
+      },
+      {
+        openedAt: "2026-04-01T12:36:03Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 20, // Hero Potion
+      },
+      {
+        amount: 935000,
+        openedAt: "2026-04-01T12:37:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-04-01T12:37:01Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 19, // Builder Star Jar
+      },
+      {
+        openedAt: "2026-04-01T12:37:02Z",
+        rarityId: 3, // Epic
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 25, // Book of Building
+      },
+      {
+        amount: 903000,
+        openedAt: "2026-04-01T12:37:03Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 20, // Gold Pass
+        rewardId: 8, // Elixer
+      },
+
+      {
+        openedAt: "2026-03-21T01:55:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 9340,
+        openedAt: "2026-03-21T01:55:01Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 1060000,
+        openedAt: "2026-03-21T01:55:02Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 934000,
+        openedAt: "2026-03-21T01:56:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-03-21T01:56:01Z",
+        rarityId: 3, // Epic
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 25, // Book of Building
+      },
+      {
+        amount: 2,
+        openedAt: "2026-03-21T01:56:02Z",
+        rarityId: 3, // Epic
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 22, // Builder Potion
+      },
+      {
+        amount: 7,
+        openedAt: "2026-03-21T01:57:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 41, // Starry Ore
+      },
+      {
+        openedAt: "2026-03-21T01:57:01Z",
+        rarityId: 3, // Epic
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 31, // Rune of Builder Elixer
+      },
+      {
+        amount: 10700,
+        openedAt: "2026-03-21T01:57:02Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 657,
+        openedAt: "2026-03-21T01:58:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        openedAt: "2026-03-21T01:58:01Z",
+        rarityId: 4, // Legendary
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 32, // Rune of Gold
+      },
+      {
+        amount: 1940000,
+        openedAt: "2026-03-21T01:58:02Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-03-21T01:59:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 17, // Research Potion
+      },
+      {
+        amount: 1100,
+        openedAt: "2026-03-21T01:59:01Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 12, // Capitol Gold
+      },
+      {
+        amount: 803000,
+        openedAt: "2026-03-21T01:59:02Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 21, // Clan Rush 2
+        rewardId: 8, // Elixer
+      },
+
+      {
+        amount: 9990,
+        openedAt: "2026-05-01T08:06:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 1040000,
+        openedAt: "2026-05-01T08:06:01Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 510000,
+        openedAt: "2026-05-01T08:06:02Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 11, // Builder Elixer
+      },
+      {
+        openedAt: "2026-05-01T08:06:03Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 23, // Pet Potion
+      },
+      {
+        amount: 1150000,
+        openedAt: "2026-05-01T08:06:04Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 908000,
+        openedAt: "2026-05-01T08:06:05Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 506000,
+        openedAt: "2026-05-01T08:07:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 1920000,
+        openedAt: "2026-05-01T08:07:01Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 767000,
+        openedAt: "2026-05-01T08:07:02Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-05-01T08:07:03Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 22200,
+        openedAt: "2026-05-01T08:07:04Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 22, // Gold Pass 2
+        rewardId: 9, // Dark Elixer
+      },
+
+      {
+        amount: 11800,
+        openedAt: "2026-05-01T12:14:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 17, // TH17
+        eventId: 23, // Clash On | New Guardian, Siege Machine & CWL changes!
+        rewardId: 9, // Dark Elixer
+      },
+
+      {
+        amount: 2200000,
+        openedAt: "2026-05-19T09:28:00Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 1920,
+        openedAt: "2026-05-19T09:28:01Z",
+        rarityId: 3, // Epic
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 42, // Shiny
+      },
+      {
+        amount: 10300,
+        openedAt: "2026-05-19T09:28:02Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        openedAt: "2026-05-19T09:28:03Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        openedAt: "2026-05-19T09:28:04Z",
+        rarityId: 4, // Legendary
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 33, // Hammer of Fighting
+      },
+      {
+        openedAt: "2026-05-19T09:29:00Z",
+        rarityId: 3, // Epic
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 43, // Roof (Trader)
+      },
+      {
+        openedAt: "2026-05-19T09:29:01Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 15, // Super Potion
+      },
+      {
+        openedAt: "2026-05-19T09:30:00Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 1250,
+        openedAt: "2026-05-19T09:30:01Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 12, // Capital Gold
+      },
+      {
+        openedAt: "2026-05-19T09:30:02Z",
+        rarityId: 2, // Rare
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 22, // Builder Potion
+      },
+      {
+        openedAt: "2026-05-19T09:30:03Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 8, // Elixer
+      },
+      {
+        amount: 997000,
+        openedAt: "2026-05-19T09:30:04Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 1170000,
+        openedAt: "2026-05-19T09:30:05Z",
+        rarityId: 1, // Common
+        accountId: 5, // Lander.
+        townhallId: 18, // TH18
+        eventId: 26, // Clash vs. Skeletons
         rewardId: 8, // Elixer
       },
     ])
@@ -6442,6 +10051,136 @@ export const seed = async (db: Kysely<any>) => {
         eventId: 17, // Clan Rush
         rewardId: 41, // Starry Ore
       },
+
+      {
+        openedAt: "2026-03-21T02:00:00Z",
+        rarityId: 1, // Common
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 6, // Mighty Morsel
+      },
+      {
+        amount: 770000,
+        openedAt: "2026-03-21T02:00:01Z",
+        rarityId: 1, // Common
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 7, // Gold
+      },
+      {
+        amount: 1020000,
+        openedAt: "2026-03-21T02:00:02Z",
+        rarityId: 1, // Common
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-03-21T02:01:00Z",
+        rarityId: 1, // Common
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 2, // Builder Bite
+      },
+      {
+        openedAt: "2026-03-21T02:01:01Z",
+        rarityId: 1, // Common
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 5, // Clan Castle Cake
+      },
+      {
+        amount: 6,
+        openedAt: "2026-03-21T02:01:02Z",
+        rarityId: 2, // Rare
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 41, // Starry Ore
+      },
+      {
+        amount: 2190,
+        openedAt: "2026-03-21T02:02:00Z",
+        rarityId: 2, // Rare
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 12, // Capitol Gold
+      },
+      {
+        amount: 11400,
+        openedAt: "2026-03-21T02:02:01Z",
+        rarityId: 1, // Common
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 1010000,
+        openedAt: "2026-03-21T02:02:02Z",
+        rarityId: 2, // Rare
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 10, // Builder Gold
+      },
+      {
+        amount: 976000,
+        openedAt: "2026-03-21T02:03:00Z",
+        rarityId: 1, // Common
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 8, // Elixer
+      },
+      {
+        openedAt: "2026-03-21T02:03:01Z",
+        rarityId: 2, // Rare
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 23, // Pet Potion
+      },
+      {
+        amount: 575000,
+        openedAt: "2026-03-21T02:03:02Z",
+        rarityId: 1, // Common
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 11, // Builder Elixer
+      },
+      {
+        openedAt: "2026-03-21T02:04:00Z",
+        rarityId: 2, // Rare
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 20, // Hero Potion
+      },
+      {
+        amount: 811000,
+        openedAt: "2026-03-21T02:04:01Z",
+        rarityId: 1, // Common
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 7, // Gold
+      },
+      {
+        openedAt: "2026-03-21T02:04:02Z",
+        rarityId: 1, // Common
+        accountId: 7, // Synx_Viiper
+        townhallId: 15, // TH15
+        eventId: 21, // Clan Rush 2
+        rewardId: 6, // Mighty Morsel
+      },
     ])
     .execute();
 
@@ -7124,6 +10863,136 @@ export const seed = async (db: Kysely<any>) => {
         townhallId: 14, // TH14
         eventId: 17, // Clan Rush
         rewardId: 6, // Mighty Morsel
+      },
+
+      {
+        amount: 12200,
+        openedAt: "2026-03-21T02:05:00Z",
+        rarityId: 1, // Common
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 500000,
+        openedAt: "2026-03-21T02:05:01Z",
+        rarityId: 1, // Common
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 10, // Builder Gold
+      },
+      {
+        openedAt: "2026-03-21T02:05:02Z",
+        rarityId: 2, // Rare
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 14, // Resource Potion
+      },
+      {
+        openedAt: "2026-03-21T02:06:00Z",
+        rarityId: 3, // Epic
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 26, // Book of Spells
+      },
+      {
+        amount: 10200,
+        openedAt: "2026-03-21T02:06:01Z",
+        rarityId: 1, // Common
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 2,
+        openedAt: "2026-03-21T02:06:02Z",
+        rarityId: 3, // Epic
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 22, // Builder Potion
+      },
+      {
+        openedAt: "2026-03-21T02:07:00Z",
+        rarityId: 2, // Rare
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 16, // Power Potion
+      },
+      {
+        openedAt: "2026-03-21T02:07:01Z",
+        rarityId: 1, // Common
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 3, // Study Soup
+      },
+      {
+        amount: 3,
+        openedAt: "2026-03-21T02:07:02Z",
+        rarityId: 2, // Rare
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 21, // Wall Ring
+      },
+      {
+        openedAt: "2026-03-21T02:08:00Z",
+        rarityId: 1, // Common
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 2, // Builder Bite
+      },
+      {
+        amount: 527,
+        openedAt: "2026-03-21T02:08:01Z",
+        rarityId: 2, // Rare
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 39, // Shiny Ore
+      },
+      {
+        openedAt: "2026-03-21T02:08:02Z",
+        rarityId: 2, // Rare
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 17, // Research Potion
+      },
+      {
+        amount: 498000,
+        openedAt: "2026-03-21T02:09:00Z",
+        rarityId: 1, // Common
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 11, // Builder Elixer
+      },
+      {
+        amount: 8940,
+        openedAt: "2026-03-21T02:09:01Z",
+        rarityId: 1, // Common
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 9, // Dark Elixer
+      },
+      {
+        amount: 655000,
+        openedAt: "2026-03-21T02:09:02Z",
+        rarityId: 1, // Common
+        accountId: 8, // DL Lander
+        townhallId: 14, // TH14
+        eventId: 21, // Clan Rush 2
+        rewardId: 8, // Elixer
       },
     ])
     .execute();

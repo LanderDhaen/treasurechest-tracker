@@ -1,6 +1,5 @@
 "use server";
 
-import { formatEventName } from "@/lib/event";
 import { formatDate } from "@/lib/utils";
 import { getAccountByTag } from "@/queries/account";
 import { getServerSession } from "@/queries/auth";
@@ -117,7 +116,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       error: {
         code: "CHEST_OUTSIDE_EVENT_DURATION",
         field: "openedAt",
-        message: `The opening time must be during ${formatEventName(event.name, event.edition)} (${formatDate(event.startDate)} - ${formatDate(event.endDate)}).`,
+        message: `The opening time must be during ${event.name} (${formatDate(event.startDate)} - ${formatDate(event.endDate)}).`,
       },
     };
   }
@@ -214,7 +213,7 @@ export const createChestAction = async (formData: ChestFormValues) => {
       data: {
         id: chest.id,
         account: account.name,
-        event: formatEventName(event.name, event.edition),
+        event: event.name,
       },
       error: null,
     };

@@ -39,7 +39,7 @@ export const createEventAction = async (formData: EventFormValues) => {
     };
   }
 
-  const { dateRange, maxChests, typeSlug, seriesCode } = result.data;
+  const { name, dateRange, maxChests, typeSlug, seriesCode } = result.data;
 
   const type = await getTypeBySlug(typeSlug);
 
@@ -73,6 +73,7 @@ export const createEventAction = async (formData: EventFormValues) => {
   try {
     const event = await createEvent({
       code: code,
+      name: name,
       edition: edition,
       startDate: dateRange.from,
       endDate: dateRange.to,
@@ -84,8 +85,7 @@ export const createEventAction = async (formData: EventFormValues) => {
     return {
       data: {
         code: event.code,
-        name: series.name,
-        edition: event.edition,
+        name: event.name,
       },
       error: null,
     };
@@ -155,7 +155,6 @@ export const changeChestCreationAllowedStatus = async (eventId: number) => {
   return {
     data: {
       name: updatedEvent.name,
-      edition: updatedEvent.edition,
       isChestCreationAllowed: updatedEvent.isChestCreationAllowed,
     },
     error: null,

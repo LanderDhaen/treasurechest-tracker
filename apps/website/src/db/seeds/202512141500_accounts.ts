@@ -63,6 +63,7 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: NOW,
         name: "SyNx_Viiper",
         tag: "ULP0Y98C",
+        isTracked: false,
         townhallId: 15,
         clanId: 3, // Dutch Legion 4
       },
@@ -71,6 +72,7 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: NOW,
         name: "DL Lander",
         tag: "G2V990J",
+        isTracked: false,
         townhallId: 14,
         clanId: 3, // Dutch Legion 4
       },
@@ -79,6 +81,7 @@ export const seed = async (db: Kysely<any>) => {
         updatedAt: NOW,
         name: "Lvl.1 Lander",
         tag: "G2P0LP0LL",
+        isTracked: false,
         townhallId: 12,
         clanId: 3, // Dutch Legion 4
       },

@@ -25,6 +25,7 @@ export const eventSearchParamsSchema = z.object({
 export type EventSearchParams = z.infer<typeof eventSearchParamsSchema>;
 
 export const eventFormSchema = z.object({
+  name: z.string().optional(),
   dateRange: z.object({
     from: z.date("Start date is required"),
     to: z.date("End date is required"),
