@@ -4166,7 +4166,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:10:00Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 21, // Wall Ring
       },
@@ -4174,7 +4174,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:10:01Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 16, // Power Potion
       },
@@ -4182,7 +4182,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:10:02Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 20, // Hero Potion
       },
@@ -4190,7 +4190,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:10:03Z",
         rarityId: 3, // Epic
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 27, // Book of Heroes
       },
@@ -4198,7 +4198,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:10:04Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 2, // Builder Bite
       },
@@ -4206,7 +4206,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:11:00Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 14, // Resource Potion
       },
@@ -4214,7 +4214,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:11:01Z",
         rarityId: 2, // Rare
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 16, // Power Potion
       },
@@ -4222,7 +4222,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:11:02Z",
         rarityId: 3, // Epic
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 26, // Book of Spells
       },
@@ -4231,7 +4231,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:11:03Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 11, // Builder Elixer
       },
@@ -4240,7 +4240,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:11:04Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 7, // Gold
       },
@@ -4248,7 +4248,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:12:00Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 4, // Power Pancakes
       },
@@ -4257,7 +4257,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:12:01Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 7, // Gold
       },
@@ -4265,7 +4265,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:12:02Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 3, // Study Soup
       },
@@ -4273,7 +4273,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:12:03Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 2, // Builder Bite
       },
@@ -4281,7 +4281,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:12:04Z",
         rarityId: 3, // Epic
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 42, // Home Village (Shop)
       },
@@ -4290,7 +4290,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:13:00Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 9, // Dark Elixer
       },
@@ -4298,7 +4298,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:13:01Z",
         rarityId: 4, // Legendary
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 31, // Book of Everything
       },
@@ -4306,7 +4306,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:13:02Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 2, // Builder Bite
       },
@@ -4314,7 +4314,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:13:03Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 3, // Study Soup
       },
@@ -4322,7 +4322,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-04-16T21:13:04Z",
         rarityId: 1, // Common
         accountId: 3, // DL✨Lander™
-        townhallId: 17, // TH17
+        townhallId: 16, // TH16
         eventId: 7, // Gold Rush
         rewardId: 4, // Power Pancakes
       },
@@ -6131,7 +6131,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-19T12:30:00Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 1, // Treasure Chest Launch
         rewardId: 8, // Elixer
       },
@@ -6140,7 +6140,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-19T12:30:01Z",
         rarityId: 2, // Rare
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 1, // Treasure Chest Launch
         rewardId: 39, // Shiny Ore
       },
@@ -6149,7 +6149,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-19T12:30:02Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 1, // Treasure Chest Launch
         rewardId: 9, // Dark Elixer
       },
@@ -6157,7 +6157,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-19T12:30:03Z",
         rarityId: 2, // Rare
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 1, // Treasure Chest Launch
         rewardId: 18, // Clock Tower Potion
       },
@@ -6165,7 +6165,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-19T12:30:04Z",
         rarityId: 2, // Rare
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 1, // Treasure Chest Launch
         rewardId: 18, // Clock Tower Potion
       },
@@ -6175,7 +6175,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-19T12:50:00Z",
         rarityId: 3, // Epic
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 2, // Treasure Hunt 1
         rewardId: 39, // Shiny Ore
       },
@@ -6183,7 +6183,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-20T16:20:00Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 2, // Treasure Hunt 1
         rewardId: 6, // Mighty Morsel
       },
@@ -6192,7 +6192,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-21T01:47:00Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 2, // Treasure Hunt 1
         rewardId: 9, // Dark Elixer
       },
@@ -6200,7 +6200,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-21T11:36:00Z",
         rarityId: 2, // Rare
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 2, // Treasure Hunt 1
         rewardId: 16, // Power Potion
       },
@@ -6209,7 +6209,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-22T18:13:00Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 2, // Treasure Hunt 1
         rewardId: 9, // Dark Elixer
       },
@@ -6217,7 +6217,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-23T00:54:00Z",
         rarityId: 3, // Epic
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 2, // Treasure Hunt 1
         rewardId: 27, // Book of Heroes
       },
@@ -6225,7 +6225,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-23T10:26:00Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 2, // Treasure Hunt 1
         rewardId: 4, // Power Pancakes
       },
@@ -6234,7 +6234,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-24T10:26:00Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 2, // Treasure Hunt 1
         rewardId: 9, // Dark Elixer
       },
@@ -6242,7 +6242,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2024-09-24T17:14:00Z",
         rarityId: 1, // Common
         accountId: 4, // Lander
-        townhallId: 16, // TH16
+        townhallId: 15, // TH15
         eventId: 2, // Treasure Hunt 1
         rewardId: 3, // Study Soup
       },
@@ -10424,7 +10424,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:27:00Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 8, // Elixer
       },
@@ -10433,7 +10433,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:27:01Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 7, // Gold
       },
@@ -10441,7 +10441,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:27:02Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 5, // Clan Castle Cake
       },
@@ -10450,7 +10450,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:27:03Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 41, // Starry Ore
       },
@@ -10458,7 +10458,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:27:04Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 3, // Study Soup
       },
@@ -10467,7 +10467,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:28:00Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 9, // Dark Elixer
       },
@@ -10476,7 +10476,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:28:01Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 7, // Gold
       },
@@ -10484,7 +10484,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:28:02Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 14, // Resource Potion
       },
@@ -10492,7 +10492,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:28:03Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 3, // Study Soup
       },
@@ -10500,7 +10500,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:28:04Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 2, // Builder Bite
       },
@@ -10508,7 +10508,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:29:00Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 4, // Power Pancakes
       },
@@ -10517,7 +10517,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:29:01Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 9, // Dark Elixer
       },
@@ -10526,7 +10526,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:29:02Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 7, // Gold
       },
@@ -10535,7 +10535,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:29:03Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 9, // Dark Elixer
       },
@@ -10544,7 +10544,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:29:04Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 9, // Dark Elixer
       },
@@ -10552,7 +10552,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:30:00Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 6, // Mighty Morsel
       },
@@ -10561,7 +10561,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:30:01Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 39, // Shiny Ore
       },
@@ -10569,7 +10569,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:30:02Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 3, // Study Soup
       },
@@ -10578,7 +10578,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:30:03Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 8, // Elixer
       },
@@ -10586,7 +10586,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-08-19T22:30:04Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 12, // Hero Rush
         rewardId: 16, // Power Potion
       },
@@ -10596,7 +10596,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:31:00Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 12, // Capital Gold
       },
@@ -10604,7 +10604,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:31:01Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 5, // Clan Castle Cake
       },
@@ -10613,7 +10613,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:32:00Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 12, // Capital Gold
       },
@@ -10622,7 +10622,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:33:00Z",
         rarityId: 3, // Epic
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 15, // Builder Potion
       },
@@ -10631,7 +10631,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:33:01Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 7, // Gold
       },
@@ -10639,7 +10639,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:34:00Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 4, // Power Pancakes
       },
@@ -10648,7 +10648,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:34:01Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 12, // Capital Gold
       },
@@ -10656,7 +10656,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:35:00Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 17, // Research Potion
       },
@@ -10665,7 +10665,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:35:01Z",
         rarityId: 3, // Epic
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 39, // Shiny Ore
       },
@@ -10673,7 +10673,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:37:00Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 3, // Study Soup
       },
@@ -10681,7 +10681,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:37:01Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 4, // Power Pancakes
       },
@@ -10689,7 +10689,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-10-28T15:39:00Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 14, // Treasure Hunt 6
         rewardId: 2, // Builder Bite
       },
@@ -10699,7 +10699,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:26:00Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 8, // Elixer
       },
@@ -10707,7 +10707,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:26:01Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 20, // Hero Potion
       },
@@ -10716,7 +10716,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:26:02Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 7, // Gold
       },
@@ -10725,7 +10725,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:26:03Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 40, // Glowy Ore
       },
@@ -10733,7 +10733,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:26:04Z",
         rarityId: 3, // Epic
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 24, // Book of Building
       },
@@ -10741,7 +10741,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:27:00Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 6, // Mighty Morsel
       },
@@ -10749,7 +10749,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:27:01Z",
         rarityId: 3, // Epic
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 46, // Roof (Trader)
       },
@@ -10758,7 +10758,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:27:02Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 7, // Gold
       },
@@ -10767,7 +10767,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:27:03Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 7, // Gold
       },
@@ -10775,7 +10775,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:27:04Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 2, // Builder Bite
       },
@@ -10783,7 +10783,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:28:00Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 5, // Clan Castle Cake
       },
@@ -10791,7 +10791,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:28:01Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 19, // Builder Star Jar
       },
@@ -10800,7 +10800,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:28:02Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 9, // Dark Elixer
       },
@@ -10809,7 +10809,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:28:03Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 7, // Gold
       },
@@ -10818,7 +10818,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:28:04Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 10, // Builder Gold
       },
@@ -10826,7 +10826,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:29:00Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 5, // Clan Castle Cake
       },
@@ -10835,7 +10835,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:29:01Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 8, // Elixer
       },
@@ -10843,7 +10843,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:29:02Z",
         rarityId: 2, // Rare
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 16, // Power Potion
       },
@@ -10852,7 +10852,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:29:03Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 8, // Elixer
       },
@@ -10860,7 +10860,7 @@ export const seed = async (db: Kysely<any>) => {
         openedAt: "2025-12-19T01:29:04Z",
         rarityId: 1, // Common
         accountId: 8, // DL Lander
-        townhallId: 14, // TH14
+        townhallId: 13, // TH13
         eventId: 17, // Clan Rush
         rewardId: 6, // Mighty Morsel
       },

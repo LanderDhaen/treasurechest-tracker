@@ -109,8 +109,8 @@ export default async function Page({
             <TimelineItem key={index} {...item} />
           ))}
           <TimelineItem
-            title="Started tracking"
-            description={`account with tag #${account.tag}`}
+            title="Account added"
+            description={`with tag #${account.tag}`}
             date={account.createdAt}
             icon={UserRoundPlus}
             isLast
