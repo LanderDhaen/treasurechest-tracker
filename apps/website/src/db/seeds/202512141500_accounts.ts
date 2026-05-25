@@ -1,7 +1,7 @@
 import { Kysely } from "kysely";
+import { RELEASE_DATE } from "@/constants/event";
 
 const NOW = new Date();
-const RELEASE_DATE = new Date("2024-09-19T10:00:00Z");
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const seed = async (db: Kysely<any>) => {
@@ -12,7 +12,7 @@ export const seed = async (db: Kysely<any>) => {
     .values([
       {
         createdAt: RELEASE_DATE,
-        updatedAt: NOW,
+        updatedAt: "2025-11-17T14:00:00Z",
         name: "DL✨Lander",
         tag: "8RRG0LJR2",
         townhallId: 18,
@@ -168,37 +168,17 @@ export const seed = async (db: Kysely<any>) => {
     .values([
       {
         validFrom: RELEASE_DATE,
-        validTo: NOW,
-        name: "DL✨Lander",
-        tag: "8RRG0LJR2",
-        isTracked: false,
-        townhallId: 18,
-        clanId: 1, // Dutch Legion 3
-        accountId: 1, // DL✨Lander
-      },
-      {
-        validFrom: "2026-01-18 21:12:58",
-        validTo: "2026-01-24 18:04:31",
-        name: "DL✨Lander",
-        tag: "8RRG0LJR2",
-        isTracked: false,
-        townhallId: 17,
-        clanId: 1, // Dutch Legion 3
-        accountId: 1, // DL✨Lander
-      },
-      {
-        validFrom: "2026-01-11 12:27:43",
-        validTo: "2026-01-18 21:12:58",
-        name: "DL✨Lander",
+        validTo: "2024-11-25T13:30:00Z",
+        name: "Lander",
         tag: "8RRG0LJR2",
         isTracked: true,
-        townhallId: 17,
+        townhallId: 16,
         clanId: 1, // Dutch Legion 3
         accountId: 1, // DL✨Lander
       },
       {
-        validFrom: "2026-01-02 09:44:23",
-        validTo: "2026-01-11 12:27:43",
+        validFrom: "2024-11-25T13:30:00Z",
+        validTo: "2025-01-12T20:07:00Z",
         name: "Lander",
         tag: "8RRG0LJR2",
         isTracked: true,
@@ -207,13 +187,13 @@ export const seed = async (db: Kysely<any>) => {
         accountId: 1, // DL✨Lander
       },
       {
-        validFrom: "2025-12-14 15:00:00",
-        validTo: "2026-01-02 09:44:23",
-        name: "Lander",
+        validFrom: "2025-01-12T20:07:00Z",
+        validTo: "2025-11-17T14:00:00Z",
+        name: "DL✨Lander",
         tag: "8RRG0LJR2",
         isTracked: true,
         townhallId: 17,
-        clanId: 2, // Dutch Legion CW
+        clanId: 1, // Dutch Legion 3
         accountId: 1, // DL✨Lander
       },
     ])
