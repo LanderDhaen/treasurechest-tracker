@@ -1,8 +1,6 @@
 import { Kysely } from "kysely";
 import { RELEASE_DATE } from "../../constants/event";
 
-const NOW = new Date();
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const seed = async (db: Kysely<any>) => {
   await db.deleteFrom("account").execute();
