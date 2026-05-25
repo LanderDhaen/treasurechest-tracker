@@ -1,6 +1,7 @@
 import { Kysely } from "kysely";
 
 const NOW = new Date();
+const RELEASE_DATE = new Date("2024-09-19T10:00:00Z");
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const seed = async (db: Kysely<any>) => {
@@ -10,7 +11,7 @@ export const seed = async (db: Kysely<any>) => {
     .insertInto("account")
     .values([
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "DL✨Lander",
         tag: "8RRG0LJR2",
@@ -18,7 +19,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 1, // Dutch Legion 3
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: "2025-12-03T02:30:00Z",
         updatedAt: NOW,
         name: "DL✨Lander.",
         tag: "L00PRVC",
@@ -26,7 +27,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 2, // Dutch Legion CW
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "DL✨Lander™",
         tag: "PVPV2U0JG",
@@ -34,7 +35,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 3, // Dutch Legion 4
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "Lander",
         tag: "9UQGJYLCV",
@@ -42,7 +43,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 3, // Dutch Legion 4
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: "2025-12-03T02:30:00Z",
         updatedAt: NOW,
         name: "Lander.",
         tag: "YVCLRY98U",
@@ -50,7 +51,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 3, // Dutch Legion 4
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "Lander™",
         tag: "8UQ9LGYQ",
@@ -59,7 +60,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 4, // DL Mini
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "SyNx_Viiper",
         tag: "ULP0Y98C",
@@ -68,7 +69,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 3, // Dutch Legion 4
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "DL Lander",
         tag: "G2V990J",
@@ -77,16 +78,16 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 3, // Dutch Legion 4
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
-        name: "Lvl.1 Lander",
+        name: "Lvl.12 Lander",
         tag: "G2P0LP0LL",
         isTracked: false,
         townhallId: 12,
         clanId: 3, // Dutch Legion 4
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "FC Gods",
         tag: "PULUP0L9",
@@ -95,7 +96,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 4, // DL Mini
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "EXP Flickzie",
         tag: "88G9UPCU",
@@ -104,7 +105,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 4, // DL Mini
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "Lvl.10 Lander",
         tag: "L2VP2C2P0",
@@ -113,7 +114,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 4, // DL Mini
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "Peace",
         tag: "28U8RUVL",
@@ -122,7 +123,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 4, // DL Mini
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "Lvl.9 Lander",
         tag: "PUCV28QP9",
@@ -131,7 +132,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 4, // DL Mini
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "Lander - TH8",
         tag: "YGJL820VP",
@@ -140,7 +141,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 4, // DL Mini
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "Lvl.8 Lander",
         tag: "QY0RVPYQ",
@@ -149,7 +150,7 @@ export const seed = async (db: Kysely<any>) => {
         clanId: 4, // DL Mini
       },
       {
-        createdAt: "2025-12-14 15:00:00",
+        createdAt: RELEASE_DATE,
         updatedAt: NOW,
         name: "Lvl.7 Lander",
         tag: "LYC0RRUUL",
@@ -166,8 +167,8 @@ export const seed = async (db: Kysely<any>) => {
     .insertInto("account_history")
     .values([
       {
-        validFrom: "2026-01-24 18:04:31",
-        validTo: new Date(),
+        validFrom: RELEASE_DATE,
+        validTo: NOW,
         name: "DL✨Lander",
         tag: "8RRG0LJR2",
         isTracked: false,
