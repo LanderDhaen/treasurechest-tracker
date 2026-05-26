@@ -1,4 +1,8 @@
-import { getEventByCode, getEventHistory } from "@/queries/event";
+import {
+  getChestCountPerEvent,
+  getEventByCode,
+  getEventHistory,
+} from "@/queries/event";
 import EventInformationItem from "@/components/event-information-item";
 import { notFound } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
@@ -18,7 +22,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import TimelineItem from "@/components/timeline-item";
 import { formatDate } from "@/lib/utils";
-import { EventStatus } from "@/constants/event";
+import { getTotalChests } from "@/queries/chest";
 
 export interface TimelineItem {
   title: string;
@@ -41,6 +45,11 @@ export default async function Page({
   }
 
   const history = await getEventHistory(event.id);
+  const actualChestCount = await getTotalChests({
+    eventId: event.id,
+  });
+
+  console.log(actualChestCount);
 
   const fullHistory = [
     {
@@ -110,6 +119,7 @@ export default async function Page({
 
   timeline.push({
     title: "Event ended",
+    description: `with ${actualChestCount} chest${actualChestCount > 1 ? "s" : ""} opened`,
     date: event.endDate,
     icon: BadgeCheck,
   });

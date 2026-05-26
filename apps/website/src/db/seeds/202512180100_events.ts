@@ -14,7 +14,7 @@ export const seed = async (db: Kysely<any>) => {
         edition: 1,
         code: "V1",
         startDate: "2024-09-19",
-        endDate: "2024-09-19",
+        endDate: "2024-09-22",
         maxChests: 5,
         typeId: 1, // Gifted
         seriesId: 1, // Voucher
@@ -51,7 +51,7 @@ export const seed = async (db: Kysely<any>) => {
         edition: 2,
         code: "V2",
         startDate: "2024-12-25",
-        endDate: "2024-12-25",
+        endDate: "2024-12-28",
         maxChests: 1,
         typeId: 1, // Gifted
         seriesId: 1, // Voucher
@@ -64,7 +64,7 @@ export const seed = async (db: Kysely<any>) => {
         edition: 3,
         code: "V3",
         startDate: "2025-03-17",
-        endDate: "2025-03-17",
+        endDate: "2025-03-20",
         maxChests: 5,
         typeId: 1, // Gifted
         seriesId: 1, // Voucher
@@ -101,7 +101,7 @@ export const seed = async (db: Kysely<any>) => {
         edition: 4,
         code: "V4",
         startDate: "2025-04-24",
-        endDate: "2025-04-24",
+        endDate: "2025-04-27",
         maxChests: 1,
         typeId: 1, // Gifted
         seriesId: 1, // Voucher
@@ -277,7 +277,7 @@ export const seed = async (db: Kysely<any>) => {
         edition: 5,
         code: "V5",
         startDate: "2026-04-25",
-        endDate: "2026-04-25",
+        endDate: "2026-04-28",
         maxChests: 1,
         typeId: 1, // Gift
         seriesId: 1, // Voucher
@@ -322,7 +322,7 @@ export const seed = async (db: Kysely<any>) => {
         edition: 6,
         code: "V6",
         startDate: "2026-05-16",
-        endDate: "2026-05-16",
+        endDate: "2026-05-19",
         maxChests: 1,
         typeId: 1, // Gift
         seriesId: 1, // Voucher
