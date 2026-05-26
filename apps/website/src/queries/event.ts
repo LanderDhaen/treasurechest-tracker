@@ -454,31 +454,22 @@ export const deleteEvent = async (eventId: number) => {
 export const getEventHistory = async (eventId: number) => {
   const history = await db
     .selectFrom("event_history")
+    .innerJoin("series", "series.id", "event_history.seriesId")
+    .innerJoin("type", "type.id", "event_history.typeId")
     .select((eb) => [
       "event_history.validFrom",
       "event_history.validTo",
-      "event_history.edition",
       "event_history.code",
+      deriveEventName(
+        eb.ref("event_history.name"),
+        eb.ref("event_history.edition"),
+        eb.ref("series.name"),
+      ).as("name"),
       "event_history.startDate",
       "event_history.endDate",
       "event_history.maxChests",
       "event_history.isChestCreationAllowed",
-      jsonObjectFrom(
-        eb
-          .selectFrom("type")
-          .select(["type.name"])
-          .whereRef("type.id", "=", "event_history.typeId"),
-      )
-        .$notNull()
-        .as("type"),
-      jsonObjectFrom(
-        eb
-          .selectFrom("series")
-          .select(["series.name"])
-          .whereRef("series.id", "=", "event_history.seriesId"),
-      )
-        .$notNull()
-        .as("series"),
+      "type.name as type",
     ])
     .where("event_history.eventId", "=", eventId)
     .orderBy("event_history.validFrom", "desc")

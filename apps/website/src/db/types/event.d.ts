@@ -30,6 +30,7 @@ export interface EventHistoryTable {
   id: Generated<number>;
   validFrom: ColumnType<Date>;
   validTo: ColumnType<Date>;
+  name: ColumnType<string | null>;
   edition: ColumnType<number>;
   code: ColumnType<string>;
   startDate: ColumnType<Date>;

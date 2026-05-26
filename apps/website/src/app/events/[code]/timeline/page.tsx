@@ -13,6 +13,7 @@ import {
   LucideIcon,
   PackageMinus,
   PackagePlus,
+  SquarePen,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import TimelineItem from "@/components/timeline-item";
@@ -45,18 +46,13 @@ export default async function Page({
     {
       validFrom: event.updatedAt,
       validTo: new Date(),
-      edition: event.edition,
+      name: event.name,
       code: event.code,
       startDate: event.startDate,
       endDate: event.endDate,
       maxChests: event.maxChests,
       isChestCreationAllowed: event.isChestCreationAllowed,
-      type: {
-        name: event.type,
-      },
-      series: {
-        name: event.name,
-      },
+      type: event.type,
     },
     ...history,
   ];
@@ -67,6 +63,15 @@ export default async function Page({
     const current = fullHistory[i];
     const prev = fullHistory[i + 1];
 
+    if (current.endDate.getTime() !== prev.endDate.getTime()) {
+      timeline.push({
+        title: "End date changed",
+        description: `from ${formatDate(prev.endDate)} to ${formatDate(current.endDate)}`,
+        date: current.validFrom,
+        icon: CalendarSync,
+      });
+    }
+
     if (current.startDate.getTime() !== prev.startDate.getTime()) {
       timeline.push({
         title: "Start date changed",
@@ -76,12 +81,12 @@ export default async function Page({
       });
     }
 
-    if (current.endDate.getTime() !== prev.endDate.getTime()) {
+    if (current.name !== prev.name) {
       timeline.push({
-        title: "End date changed",
-        description: `from ${formatDate(prev.endDate)} to ${formatDate(current.endDate)}`,
+        title: "Name changed",
+        description: `from ${prev.name} to ${current.name}`,
         date: current.validFrom,
-        icon: CalendarSync,
+        icon: SquarePen,
       });
     }
 
@@ -94,24 +99,6 @@ export default async function Page({
       });
     }
   }
-
-  timeline.push({
-    title: "Status changed",
-    description: `from ${EventStatus.Upcoming.toLowerCase()} to ${EventStatus.Ongoing.toLowerCase()}`,
-    date: event.startDate,
-    icon: Loader2,
-  });
-
-  if (event.endDate < new Date()) {
-    timeline.push({
-      title: "Status changed",
-      description: `from ${EventStatus.Ongoing.toLowerCase()} to ${EventStatus.Finished.toLowerCase()}`,
-      date: event.endDate,
-      icon: BadgeCheck,
-    });
-  }
-
-  timeline.sort((a, b) => b.date.getTime() - a.date.getTime());
 
   return (
     <div className="flex flex-col gap-4">
@@ -127,7 +114,7 @@ export default async function Page({
             <TimelineItem key={index} {...item} />
           ))}
           <TimelineItem
-            title="Event created"
+            title="Event added"
             description={`with code #${event.code}`}
             date={event.createdAt}
             icon={CalendarPlus}

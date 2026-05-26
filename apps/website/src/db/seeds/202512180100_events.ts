@@ -1,7 +1,5 @@
 import { Kysely } from "kysely";
 
-const NOW = new Date();
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const seed = async (db: Kysely<any>) => {
   await db.deleteFrom("event").execute();
@@ -10,8 +8,8 @@ export const seed = async (db: Kysely<any>) => {
     .insertInto("event")
     .values([
       {
-        createdAt: "2025-12-18T0:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2024-09-19T10:00:00Z",
+        updatedAt: "2024-09-19T10:00:00Z",
         name: "Treasure Chest Launch",
         edition: 1,
         code: "V1",
@@ -23,8 +21,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2024-09-10T10:00:00Z",
+        updatedAt: "2024-09-10T10:00:00Z",
         edition: 1,
         code: "TH1",
         startDate: "2024-09-19",
@@ -35,8 +33,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2024-12-04T10:00:00Z",
+        updatedAt: "2024-12-04T10:00:00Z",
         edition: 1,
         code: "CH",
         startDate: "2024-12-04",
@@ -47,8 +45,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2024-12-25T10:00:00Z",
+        updatedAt: "2024-12-25T10:00:00Z",
         name: "Christmas Chest",
         edition: 2,
         code: "V2",
@@ -60,8 +58,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-03-17T10:00:00Z",
+        updatedAt: "2025-03-17T10:00:00Z",
         name: "Content Creator Chests",
         edition: 3,
         code: "V3",
@@ -73,8 +71,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-03-17T10:00:00Z",
+        updatedAt: "2025-03-17T10:00:00Z",
         edition: 2,
         code: "TH2",
         startDate: "2025-03-17",
@@ -85,8 +83,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-04-14T10:00:00Z",
+        updatedAt: "2025-04-14T10:00:00Z",
         edition: 1,
         code: "GR1",
         startDate: "2025-04-14",
@@ -97,8 +95,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-04-24T10:00:00Z",
+        updatedAt: "2025-04-24T10:00:00Z",
         name: "Friend or Foe",
         edition: 4,
         code: "V4",
@@ -110,8 +108,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-05-17T10:00:00Z",
+        updatedAt: "2025-05-17T10:00:00Z",
         edition: 3,
         code: "TH3",
         startDate: "2025-05-17",
@@ -122,8 +120,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-07-17T10:00:00Z",
+        updatedAt: "2025-07-17T10:00:00Z",
         edition: 4,
         code: "TH4",
         startDate: "2025-07-17",
@@ -134,8 +132,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-08-08T10:00:00Z",
+        updatedAt: "2025-08-08T10:00:00Z",
         edition: 1,
         code: "SB1",
         startDate: "2025-08-08",
@@ -146,8 +144,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-08-13T10:00:00Z",
+        updatedAt: "2025-08-13T10:00:00Z",
         edition: 1,
         code: "HR1",
         startDate: "2025-08-13",
@@ -158,8 +156,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-09-28T10:00:00Z",
+        updatedAt: "2025-09-28T10:00:00Z",
         edition: 5,
         code: "TH5",
         startDate: "2025-09-28",
@@ -170,8 +168,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-10-24T10:00:00Z",
+        updatedAt: "2025-10-24T10:00:00Z",
         edition: 6,
         code: "TH6",
         startDate: "2025-10-24",
@@ -182,8 +180,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-10-24T10:00:00Z",
+        updatedAt: "2025-10-24T10:00:00Z",
         edition: 1,
         code: "MC1",
         startDate: "2025-10-24",
@@ -194,8 +192,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-11-28T10:00:00Z",
+        updatedAt: "2025-11-28T10:00:00Z",
         edition: 7,
         code: "TH7",
         startDate: "2025-11-28",
@@ -206,8 +204,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2025-12-12T10:00:00Z",
+        updatedAt: "2025-12-12T10:00:00Z",
         edition: 1,
         code: "CR1",
         startDate: "2025-12-12",
@@ -218,8 +216,8 @@ export const seed = async (db: Kysely<any>) => {
         isChestCreationAllowed: false,
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2026-01-28T10:00:00Z",
+        updatedAt: "2026-01-28T10:00:00Z",
         edition: 8,
         code: "TH8",
         startDate: "2026-01-28",
@@ -229,8 +227,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 2, // Treasure Hunt
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2026-02-24T10:00:00Z",
+        updatedAt: "2026-02-24T10:00:00Z",
         edition: 1,
         code: "UTD1",
         startDate: "2026-02-24",
@@ -240,8 +238,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 9, // Unleash The Duke
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2026-03-01T10:00:00Z",
+        updatedAt: "2026-03-01T10:00:00Z",
         edition: 1,
         code: "GP1",
         startDate: "2026-03-01",
@@ -251,8 +249,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 10, // Gold Pass
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2026-03-13T10:00:00Z",
+        updatedAt: "2026-03-13T10:00:00Z",
         edition: 2,
         code: "CR2",
         startDate: "2026-03-13",
@@ -262,8 +260,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 8, // Clan Rush
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2026-04-01T10:00:00Z",
+        updatedAt: "2026-04-01T10:00:00Z",
         edition: 2,
         code: "GP2",
         startDate: "2026-04-01",
@@ -273,8 +271,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 10, // Gold Pass
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2026-04-25T10:00:00Z",
+        updatedAt: "2026-04-25T10:00:00Z",
         name: "Clash On | New Guardian, Siege Machine & CWL changes!",
         edition: 5,
         code: "V5",
@@ -285,8 +283,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 1, // Voucher
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2026-04-28T10:00:00Z",
+        updatedAt: "2026-04-28T10:00:00Z",
         edition: 9,
         code: "TH9",
         startDate: "2026-04-28",
@@ -296,8 +294,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 2, // Treasure Hunt
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2026-05-01T10:00:00Z",
+        updatedAt: "2026-05-01T10:00:00Z",
         edition: 3,
         code: "GP3",
         startDate: "2026-05-01",
@@ -307,8 +305,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 10, // Gold Pass
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2026-05-04T10:00:00Z",
+        updatedAt: "2026-05-04T10:00:00Z",
         edition: 1,
         code: "CVS1",
         startDate: "2026-05-04",
@@ -318,8 +316,8 @@ export const seed = async (db: Kysely<any>) => {
         seriesId: 11, // Clash vs. Skeletons
       },
       {
-        createdAt: "2025-12-18T00:00:00Z",
-        updatedAt: NOW,
+        createdAt: "2026-05-16T10:00:00Z",
+        updatedAt: "2026-05-16T10:00:00Z",
         name: "Inside The Builder's Hut | Episode 4",
         edition: 6,
         code: "V6",
@@ -328,52 +326,6 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 1,
         typeId: 1, // Gift
         seriesId: 1, // Voucher
-      },
-    ])
-    .execute();
-
-  // History
-
-  db.insertInto("event_history")
-    .values([
-      {
-        validFrom: "2026-01-17T10:47:20Z",
-        validTo: NOW,
-        edition: 1,
-        code: "TH1",
-        startDate: "2024-09-19",
-        endDate: "2024-10-09",
-        maxChests: 30,
-        typeId: 2,
-        seriesId: 2,
-        isChestCreationAllowed: false,
-        eventId: 2,
-      },
-      {
-        validFrom: "2026-01-02T22:17:09Z",
-        validTo: "2026-01-17T10:47:20Z",
-        edition: 1,
-        code: "TH1",
-        startDate: "2024-09-19",
-        endDate: "2024-10-09",
-        maxChests: 20,
-        typeId: 2,
-        seriesId: 2,
-        isChestCreationAllowed: false,
-        eventId: 2,
-      },
-      {
-        validFrom: "2025-12-18T00:00:00Z",
-        validTo: "2026-01-02T22:17:09Z",
-        edition: 1,
-        code: "TH1",
-        startDate: "2024-09-11",
-        endDate: "2024-09-30",
-        maxChests: 20,
-        typeId: 2,
-        seriesId: 2,
-        isChestCreationAllowed: false,
-        eventId: 2,
       },
     ])
     .execute();
