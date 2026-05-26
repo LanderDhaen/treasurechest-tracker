@@ -1,5 +1,4 @@
 import {
-  getChestCountPerEvent,
   getEventByCode,
   getEventHistory,
   getPossibleChestCount,
@@ -15,7 +14,6 @@ import {
   CalendarPlus,
   CalendarSync,
   Loader2,
-  LucideIcon,
   PackageMinus,
   PackagePlus,
   SquarePen,
@@ -24,13 +22,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import TimelineItem from "@/components/timeline-item";
 import { formatDate } from "@/lib/utils";
 import { getTotalChests } from "@/queries/chest";
-
-export interface TimelineItem {
-  title: string;
-  description?: string;
-  date: Date;
-  icon: LucideIcon;
-}
+import { HistoryEntry } from "@/types/common";
 
 export default async function Page({
   params,
@@ -68,7 +60,7 @@ export default async function Page({
     ...history,
   ];
 
-  const timeline: TimelineItem[] = [];
+  const timeline: HistoryEntry[] = [];
 
   for (let i = 0; i < fullHistory.length - 1; i++) {
     const current = fullHistory[i];

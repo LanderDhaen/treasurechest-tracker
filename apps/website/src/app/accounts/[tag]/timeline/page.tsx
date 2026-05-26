@@ -9,20 +9,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   LoaderCircle,
   SquarePen,
-  LucideIcon,
   CircleFadingArrowUp,
   XCircle,
   ArrowLeftRight,
   UserRoundPlus,
 } from "lucide-react";
 import TimelineItem from "@/components/timeline-item";
-
-export interface TimelineItem {
-  title: string;
-  description?: string;
-  date: Date;
-  icon: LucideIcon;
-}
+import { HistoryEntry } from "@/types/common";
 
 export default async function Page({
   params,
@@ -52,7 +45,7 @@ export default async function Page({
     ...history,
   ];
 
-  const timeline: TimelineItem[] = [];
+  const timeline: HistoryEntry[] = [];
 
   for (let i = 0; i < fullHistory.length - 1; i++) {
     const current = fullHistory[i];

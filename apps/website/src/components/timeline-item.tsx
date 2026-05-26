@@ -1,11 +1,7 @@
 import { formatDateTime } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import { HistoryEntry } from "@/types/common";
 
-interface TimelineItemProps {
-  title: string;
-  description?: string;
-  date: Date;
-  icon: LucideIcon;
+interface TimelineItemProps extends HistoryEntry {
   isLast?: boolean;
 }
 
