@@ -2,6 +2,7 @@ import {
   getChestCountPerEvent,
   getEventByCode,
   getEventHistory,
+  getPossibleChestCount,
 } from "@/queries/event";
 import EventInformationItem from "@/components/event-information-item";
 import { notFound } from "next/navigation";
@@ -45,11 +46,12 @@ export default async function Page({
   }
 
   const history = await getEventHistory(event.id);
+  const possibleChestCount = await getPossibleChestCount({
+    eventId: event.id,
+  });
   const actualChestCount = await getTotalChests({
     eventId: event.id,
   });
-
-  console.log(actualChestCount);
 
   const fullHistory = [
     {
@@ -113,6 +115,7 @@ export default async function Page({
 
   timeline.push({
     title: "Event started",
+    description: `with ${possibleChestCount} possible chest${possibleChestCount > 1 ? "s" : ""}`,
     date: event.startDate,
     icon: Loader2,
   });
