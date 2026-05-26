@@ -1,4 +1,8 @@
-import { getEventByCode, getEventHistory } from "@/queries/event";
+import {
+  getEventByCode,
+  getEventHistory,
+  getPossibleChestCount,
+} from "@/queries/event";
 import EventInformationItem from "@/components/event-information-item";
 import { notFound } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
@@ -10,21 +14,15 @@ import {
   CalendarPlus,
   CalendarSync,
   Loader2,
-  LucideIcon,
   PackageMinus,
   PackagePlus,
+  SquarePen,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import TimelineItem from "@/components/timeline-item";
 import { formatDate } from "@/lib/utils";
-import { EventStatus } from "@/constants/event";
-
-export interface TimelineItem {
-  title: string;
-  description: string;
-  date: Date;
-  icon: LucideIcon;
-}
+import { getTotalChests } from "@/queries/chest";
+import { HistoryEntry } from "@/types/common";
 
 export default async function Page({
   params,
@@ -40,41 +38,33 @@ export default async function Page({
   }
 
   const history = await getEventHistory(event.id);
+  const possibleChestCount = await getPossibleChestCount({
+    eventId: event.id,
+  });
+  const actualChestCount = await getTotalChests({
+    eventId: event.id,
+  });
 
   const fullHistory = [
     {
       validFrom: event.updatedAt,
       validTo: new Date(),
-      edition: event.edition,
+      name: event.name,
       code: event.code,
       startDate: event.startDate,
       endDate: event.endDate,
       maxChests: event.maxChests,
       isChestCreationAllowed: event.isChestCreationAllowed,
-      type: {
-        name: event.type,
-      },
-      series: {
-        name: event.name,
-      },
+      type: event.type,
     },
     ...history,
   ];
 
-  const timeline: TimelineItem[] = [];
+  const timeline: HistoryEntry[] = [];
 
   for (let i = 0; i < fullHistory.length - 1; i++) {
     const current = fullHistory[i];
     const prev = fullHistory[i + 1];
-
-    if (current.startDate.getTime() !== prev.startDate.getTime()) {
-      timeline.push({
-        title: "Start date changed",
-        description: `from ${formatDate(prev.startDate)} to ${formatDate(current.startDate)}`,
-        date: current.validFrom,
-        icon: CalendarSync,
-      });
-    }
 
     if (current.endDate.getTime() !== prev.endDate.getTime()) {
       timeline.push({
@@ -85,28 +75,48 @@ export default async function Page({
       });
     }
 
-    if (current.maxChests !== prev.maxChests) {
+    if (current.startDate.getTime() !== prev.startDate.getTime()) {
       timeline.push({
-        title: "Rewards changed",
+        title: "Start date changed",
+        description: `from ${formatDate(prev.startDate)} to ${formatDate(current.startDate)}`,
+        date: current.validFrom,
+        icon: CalendarSync,
+      });
+    }
+
+    if (current.name !== prev.name) {
+      timeline.push({
+        title: "Name changed",
+        description: `from ${prev.name} to ${current.name}`,
+        date: current.validFrom,
+        icon: SquarePen,
+      });
+    }
+
+    if (current.maxChests !== prev.maxChests) {
+      const isMore = current.maxChests > prev.maxChests;
+
+      timeline.push({
+        title: `Rewards ${isMore ? "increased" : "decreased"}`,
         description: `from ${prev.maxChests} to ${current.maxChests === 1 ? "1 chest" : `${current.maxChests} chests`}`,
         date: current.validFrom,
-        icon: current.maxChests > prev.maxChests ? PackagePlus : PackageMinus,
+        icon: isMore ? PackagePlus : PackageMinus,
       });
     }
   }
 
   timeline.push({
-    title: "Status changed",
-    description: `from ${EventStatus.Upcoming.toLowerCase()} to ${EventStatus.Ongoing.toLowerCase()}`,
-    date: event.startDate,
+    title: "Event started",
+    description: `with ${possibleChestCount} possible chest${possibleChestCount > 1 ? "s" : ""}`,
+    date: new Date(event.startDate.setHours(10)),
     icon: Loader2,
   });
 
   if (event.endDate < new Date()) {
     timeline.push({
-      title: "Status changed",
-      description: `from ${EventStatus.Ongoing.toLowerCase()} to ${EventStatus.Finished.toLowerCase()}`,
-      date: event.endDate,
+      title: "Event ended",
+      description: `with ${actualChestCount} chest${actualChestCount > 1 ? "s" : ""} opened`,
+      date: new Date(event.endDate.setHours(10)),
       icon: BadgeCheck,
     });
   }
@@ -127,7 +137,7 @@ export default async function Page({
             <TimelineItem key={index} {...item} />
           ))}
           <TimelineItem
-            title="Event created"
+            title="Event added"
             description={`with code #${event.code}`}
             date={event.createdAt}
             icon={CalendarPlus}

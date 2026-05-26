@@ -1,11 +1,7 @@
 import { formatDateTime } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import { HistoryEntry } from "@/types/common";
 
-interface TimelineItemProps {
-  title: string;
-  description: string;
-  date: Date;
-  icon: LucideIcon;
+interface TimelineItemProps extends HistoryEntry {
   isLast?: boolean;
 }
 
@@ -32,7 +28,9 @@ export default function TimelineItem({
           {formatDateTime(date)}
         </div>
         <div className="text-sm">{title}</div>
-        <div className="text-sm text-muted-foreground">{description}</div>
+        {description && (
+          <div className="text-sm text-muted-foreground">{description}</div>
+        )}
       </div>
     </div>
   );

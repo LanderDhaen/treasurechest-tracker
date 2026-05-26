@@ -299,7 +299,6 @@ export const getAccountHistory = async (accountId: number) => {
     .selectFrom("account_history")
     .innerJoin("townhall", "account_history.townhallId", "townhall.id")
     .select((eb) => [
-      "account_history.id",
       "account_history.validFrom",
       "account_history.validTo",
       "account_history.name",
