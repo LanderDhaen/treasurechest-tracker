@@ -19,7 +19,7 @@ import TimelineItem from "@/components/timeline-item";
 
 export interface TimelineItem {
   title: string;
-  description: string;
+  description?: string;
   date: Date;
   icon: LucideIcon;
 }
@@ -78,7 +78,7 @@ export default async function Page({
 
     if (current.townhall.id !== prev.townhall.id) {
       timeline.push({
-        title: "Townhall changed",
+        title: "Townhall upgraded",
         description: `from level ${prev.townhall.level} to level ${current.townhall.level}`,
         date: current.validFrom,
         icon: CircleFadingArrowUp,

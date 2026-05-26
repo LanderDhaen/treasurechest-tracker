@@ -306,7 +306,7 @@ export const seed = async (db: Kysely<any>) => {
       },
       {
         createdAt: "2026-05-04T10:00:00Z",
-        updatedAt: "2026-05-04T10:00:00Z",
+        updatedAt: "2026-05-18T08:57:00Z",
         edition: 1,
         code: "CVS1",
         startDate: "2026-05-04",
@@ -326,6 +326,26 @@ export const seed = async (db: Kysely<any>) => {
         maxChests: 1,
         typeId: 1, // Gift
         seriesId: 1, // Voucher
+      },
+    ])
+    .execute();
+
+  // History
+
+  db.insertInto("event_history")
+    .values([
+      {
+        validFrom: "2026-05-04T10:00:00Z",
+        validTo: "2026-05-18T08:57:00Z",
+        edition: 1,
+        code: "CVS1",
+        startDate: "2026-05-04",
+        endDate: "2026-05-18",
+        maxChests: 13,
+        isChestCreationAllowed: true,
+        typeId: 4, // Community
+        seriesId: 11, // Clash vs. Skeletons
+        eventId: 26, // Clash vs. Skeletons 1
       },
     ])
     .execute();

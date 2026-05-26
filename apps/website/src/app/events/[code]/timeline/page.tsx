@@ -22,7 +22,7 @@ import { EventStatus } from "@/constants/event";
 
 export interface TimelineItem {
   title: string;
-  description: string;
+  description?: string;
   date: Date;
   icon: LucideIcon;
 }
@@ -91,14 +91,30 @@ export default async function Page({
     }
 
     if (current.maxChests !== prev.maxChests) {
+      const isMore = current.maxChests > prev.maxChests;
+
       timeline.push({
-        title: "Rewards changed",
+        title: `Rewards ${isMore ? "increased" : "decreased"}`,
         description: `from ${prev.maxChests} to ${current.maxChests === 1 ? "1 chest" : `${current.maxChests} chests`}`,
         date: current.validFrom,
-        icon: current.maxChests > prev.maxChests ? PackagePlus : PackageMinus,
+        icon: isMore ? PackagePlus : PackageMinus,
       });
     }
   }
+
+  timeline.push({
+    title: "Event started",
+    date: event.startDate,
+    icon: Loader2,
+  });
+
+  timeline.push({
+    title: "Event ended",
+    date: event.endDate,
+    icon: BadgeCheck,
+  });
+
+  timeline.sort((a, b) => b.date.getTime() - a.date.getTime());
 
   return (
     <div className="flex flex-col gap-4">
