@@ -108,16 +108,18 @@ export default async function Page({
   timeline.push({
     title: "Event started",
     description: `with ${possibleChestCount} possible chest${possibleChestCount > 1 ? "s" : ""}`,
-    date: event.startDate,
+    date: new Date(event.startDate.setHours(10)),
     icon: Loader2,
   });
 
-  timeline.push({
-    title: "Event ended",
-    description: `with ${actualChestCount} chest${actualChestCount > 1 ? "s" : ""} opened`,
-    date: event.endDate,
-    icon: BadgeCheck,
-  });
+  if (event.endDate < new Date()) {
+    timeline.push({
+      title: "Event ended",
+      description: `with ${actualChestCount} chest${actualChestCount > 1 ? "s" : ""} opened`,
+      date: new Date(event.endDate.setHours(10)),
+      icon: BadgeCheck,
+    });
+  }
 
   timeline.sort((a, b) => b.date.getTime() - a.date.getTime());
 
