@@ -31,9 +31,10 @@ export const getChestCountPerRarity = async (filters: FilterConfig) => {
     .leftJoin("filtered_chest", "filtered_chest.rarityId", "rarity.id")
     .select((eb) => [
       "rarity.name",
+      "rarity.chance",
       eb.fn.count<number>("filtered_chest.id").as("count"),
     ])
-    .groupBy(["rarity.name", "rarity.rank"])
+    .groupBy(["rarity.name", "rarity.chance", "rarity.rank"])
     .orderBy("rarity.rank", "asc")
     .execute();
 
