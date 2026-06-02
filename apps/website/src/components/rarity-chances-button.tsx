@@ -32,7 +32,7 @@ export default function RarityChancesButton({
         </Button>
       </PopoverTrigger>
       <PopoverContent align="end">
-        <div className="rounded-md border overflow-hidden">
+        <div className="rounded-sm border overflow-hidden">
           <Table>
             <TableHeader className="bg-muted">
               <TableRow>
