@@ -1,13 +1,6 @@
 import { Percent } from "lucide-react";
 import { Button } from "./ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverDescription,
-  PopoverHeader,
-  PopoverTitle,
-  PopoverTrigger,
-} from "./ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { calculatePercentage } from "@/lib/utils";
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "./ui/table";
 
