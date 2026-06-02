@@ -11,6 +11,9 @@ export const auth = betterAuth({
     modelName: "profile",
   },
   plugins: [nextCookies()],
+  baseUrl: {
+    allowedHosts: ["*.vercel.app"],
+  },
 
   // Providers
 

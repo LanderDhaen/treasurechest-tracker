@@ -26,7 +26,10 @@ export const getPossibleChestCount = async (filters: FilterConfig) => {
     .selectFrom("filtered_event")
     .select((eb) =>
       eb(
-        eb.fn.sum<number>("filtered_event.maxChests"),
+        eb.fn.coalesce(
+          eb.fn.sum<number>("filtered_event.maxChests"),
+          eb.val(0),
+        ),
         "*",
         eb
           .selectFrom("filtered_account")

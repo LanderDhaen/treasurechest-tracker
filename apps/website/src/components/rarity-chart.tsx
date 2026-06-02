@@ -14,6 +14,7 @@ import { chartConfig } from "@/constants/dashboard";
 interface RarityChartProps {
   rarities: {
     name: string;
+    chance: number;
     count: number;
   }[];
 }
