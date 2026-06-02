@@ -8,11 +8,7 @@ types.setTypeParser(20, (val) => {
 
 export const dialect = new PostgresDialect({
   pool: new Pool({
-    host: process.env.DATABASE_HOST,
-    port: Number(process.env.DATABASE_PORT),
-    user: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
+    connectionString: process.env.DATABASE_URL,
   }),
 });
 
