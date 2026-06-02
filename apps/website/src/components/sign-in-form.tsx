@@ -1,0 +1,141 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldSeparator,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import { LoginFormValues, loginSchema } from "@/schemas/auth";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { Spinner } from "./ui/spinner";
+import { redirect } from "next/navigation";
+import { toast } from "sonner";
+
+export default function SignInForm() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = async (formData: LoginFormValues) => {
+    setIsLoading(true);
+
+    const { data, error } = await authClient.signIn.email({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    if (error) {
+      const isInvalidCredentials = error.code === "INVALID_EMAIL_OR_PASSWORD";
+
+      const message = isInvalidCredentials
+        ? "That combination of credentials is not valid."
+        : "An unexpected error occurred. Please try again later.";
+
+      toast.error(message);
+      setIsLoading(false);
+    } else {
+      toast.success(`Welcome back, ${data.user.name}!`);
+      redirect("/");
+    }
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-center">Sign in to your account</CardTitle>
+        <CardDescription className="text-center">
+          Enter your credentials below to sign in
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FieldGroup>
+            <Controller
+              name="email"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                  <Input
+                    {...field}
+                    id={field.name}
+                    aria-invalid={fieldState.invalid}
+                    type="email"
+                    placeholder="m@example.com"
+                    disabled={isLoading}
+                    required
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <Controller
+              name="password"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                  <Input
+                    {...field}
+                    id={field.name}
+                    aria-invalid={fieldState.invalid}
+                    type="password"
+                    required
+                    disabled={isLoading}
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <FieldSeparator />
+            <Field>
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Spinner data-icon="inline-start" />
+                    Signing in...
+                  </>
+                ) : (
+                  "Sign In"
+                )}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => form.reset()}
+                disabled={isLoading}
+              >
+                Reset
+              </Button>
+            </Field>
+          </FieldGroup>
+        </form>
+      </CardContent>
+    </Card>
+  );
+}

@@ -1,0 +1,34 @@
+import * as z from "zod";
+import { paginationSchema, searchSchema } from "./common";
+import {
+  DEFAULT_ACCOUNT_SORT_OPTION,
+  DEFAULT_ACCOUNT_SORT_DIRECTION,
+} from "@/constants/account";
+
+export const accountSearchParamsSchema = z.object({
+  ...searchSchema.shape,
+  ...paginationSchema.shape,
+  sortBy: z
+    .enum(["townhall", "name", "clan"])
+    .catch(DEFAULT_ACCOUNT_SORT_OPTION),
+  direction: z.enum(["asc", "desc"]).catch(DEFAULT_ACCOUNT_SORT_DIRECTION),
+});
+
+export type AccountSearchParams = z.infer<typeof accountSearchParamsSchema>;
+
+export const accountFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  tag: z.string().min(1, "Tag is required"),
+  townhallLevel: z.number().min(1, "Townhall is required"),
+  clanTag: z.string().min(1, "Clan is required"),
+});
+
+export type AccountFormValues = z.infer<typeof accountFormSchema>;
+
+export const accountFormSearchParamsSchema = z.object({
+  returnTo: z.enum(["/accounts", "/chests/add"]).catch("/accounts"),
+});
+
+export type AccountFormSearchParams = z.infer<
+  typeof accountFormSearchParamsSchema
+>;

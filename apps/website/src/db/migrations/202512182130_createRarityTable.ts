@@ -1,0 +1,21 @@
+import { Kysely } from "kysely";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const up = async (db: Kysely<any>) => {
+  await db.schema
+    .createTable("rarity")
+    .addColumn("id", "serial", (c) => c.primaryKey())
+    .addColumn("createdAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
+    .addColumn("updatedAt", "timestamp", (c) => c.notNull().defaultTo("now()"))
+    .addColumn("isActive", "boolean", (c) => c.notNull().defaultTo(true))
+    .addColumn("name", "varchar", (c) => c.notNull().unique())
+    .addColumn("slug", "varchar", (c) => c.notNull().unique())
+    .addColumn("chance", "smallint", (c) => c.notNull())
+    .addColumn("rank", "smallint", (c) => c.notNull().unique())
+    .execute();
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const down = async (db: Kysely<any>) => {
+  await db.schema.dropTable("rarity").execute();
+};

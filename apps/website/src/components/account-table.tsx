@@ -1,0 +1,63 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./ui/table";
+import NoSearchResults from "./no-search-results";
+import NoAccounts from "./no-accounts";
+import AccountTableRow from "./account-table-row";
+
+interface AccountTableProps {
+  accounts: {
+    name: string;
+    tag: string;
+    isTracked: boolean;
+    townhall: number;
+    clan: {
+      id: number;
+      name: string;
+      tag: string;
+    };
+  }[];
+  totalAccounts: number;
+}
+
+export default function AccountTable({
+  accounts,
+  totalAccounts,
+}: AccountTableProps) {
+  const isEmpty = accounts.length === 0;
+  const hasStoredAccounts = totalAccounts > 0;
+
+  return (
+    <div className="rounded-md border overflow-hidden">
+      <Table>
+        <TableHeader className="bg-muted">
+          <TableRow>
+            <TableHead className="font-bold w-36">Tag</TableHead>
+            <TableHead className="font-bold w-24">Status</TableHead>
+            <TableHead className="font-bold w-24">Townhall</TableHead>
+            <TableHead className="font-bold">Name</TableHead>
+            <TableHead className="font-bold">Clan</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {isEmpty ? (
+            <TableRow className="bg-white hover:bg-white">
+              <TableCell colSpan={5}>
+                {hasStoredAccounts ? <NoSearchResults /> : <NoAccounts />}
+              </TableCell>
+            </TableRow>
+          ) : (
+            accounts.map((account) => (
+              <AccountTableRow key={account.tag} account={account} />
+            ))
+          )}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}

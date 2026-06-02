@@ -1,0 +1,83 @@
+import { db } from "@/db";
+import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
+import { withFilteredChests } from "./chest";
+import { FilterConfig } from "@/types/common";
+import { InsertableSeries } from "@/db/types/series";
+
+export const getAllSeries = async () => {
+  const series = await db
+    .selectFrom("series")
+    .select(["series.code", "series.name"])
+    .where("series.isActive", "=", true)
+    .orderBy("series.name", "asc")
+    .execute();
+
+  return series;
+};
+
+export const getSeriesByCode = async (code: string) => {
+  const series = await db
+    .selectFrom("series")
+    .select((eb) => [
+      "series.id",
+      "series.code",
+      "series.name",
+      jsonObjectFrom(
+        eb
+          .selectFrom("event")
+          .select(["event.edition"])
+          .where("event.isActive", "=", true)
+          .whereRef("event.seriesId", "=", "series.id")
+          .orderBy("event.edition", "desc")
+          .limit(1),
+      ).as("latestEvent"),
+    ])
+    .where("series.code", "=", code)
+    .executeTakeFirst();
+
+  return series;
+};
+
+export const getChestCountPerSeries = async (filters: FilterConfig) => {
+  const series = await db
+    .with("filtered_chest", () => withFilteredChests(filters))
+    .selectFrom("series")
+    .leftJoin("event", "event.seriesId", "series.id")
+    .leftJoin("filtered_chest", "filtered_chest.eventId", "event.id")
+    .select((eb) => [
+      "series.name",
+      eb.fn.count<number>("filtered_chest.id").as("count"),
+      jsonArrayFrom(
+        eb
+          .selectFrom("rarity")
+          .innerJoin("filtered_chest", "filtered_chest.rarityId", "rarity.id")
+          .innerJoin("event", "filtered_chest.eventId", "event.id")
+          .select((eb) => [
+            "rarity.name",
+            eb.fn.count<number>("filtered_chest.id").as("count"),
+          ])
+          .whereRef("event.seriesId", "=", "series.id")
+          .groupBy(["rarity.id", "rarity.name"])
+          .orderBy("rarity.rank", "asc"),
+      ).as("rarities"),
+    ])
+    .groupBy(["series.id", "series.name"])
+    .orderBy("count", "desc")
+    .orderBy("series.name", "asc")
+    .execute();
+
+  return series;
+};
+
+export const createSeries = async ({ name, code }: InsertableSeries) => {
+  const series = await db
+    .insertInto("series")
+    .values({
+      name,
+      code,
+    })
+    .returning(["series.name", "series.code"])
+    .executeTakeFirstOrThrow();
+
+  return series;
+};
